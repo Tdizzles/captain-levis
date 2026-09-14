@@ -150,10 +150,10 @@ h1{
 
 /* ---------- Stats bar ---------- */
 .stats-bar{position:relative;overflow:hidden;background:linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 55%,var(--navy) 100%);}
-.stats-bar-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;}
+.stats-bar-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 56%;transform:scaleX(-1);}
 .stats-bar-scrim{
   position:absolute;inset:0;
-  background:linear-gradient(90deg, var(--navy-2) 0%, var(--navy-2) 42%, rgba(0,28,59,.6) 64%, rgba(0,28,59,0) 90%);
+  background:linear-gradient(90deg, rgba(0,28,59,.94) 0%, rgba(0,28,59,.86) 30%, rgba(0,28,59,.5) 62%, rgba(0,28,59,.15) 100%);
 }
 .stats-inner{
   position:relative;z-index:2;
