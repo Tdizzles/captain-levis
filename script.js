@@ -19,4 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
   dots.forEach((dot, i) => dot.addEventListener('click', () => setActive(i)));
   prev?.addEventListener('click', () => setActive(active - 1));
   next?.addEventListener('click', () => setActive(active + 1));
+
+  const contactForm = document.getElementById('contact-form');
+  contactForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      return;
+    }
+    contactForm.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
+    contactForm.querySelector('.form-success').hidden = false;
+  });
 });
