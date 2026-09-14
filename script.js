@@ -78,4 +78,121 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.querySelectorAll('input, select, textarea, button').forEach(el => el.disabled = true);
     contactForm.querySelector('.form-success').hidden = false;
   });
+
+  const chatWidget = document.getElementById('chat-widget');
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatPanel = document.getElementById('chat-panel');
+  const chatClose = document.getElementById('chat-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+  const chatChips = document.querySelectorAll('.chat-chip');
+
+  if (chatWidget && chatToggle && chatPanel) {
+    const openChat = () => {
+      chatPanel.hidden = false;
+      chatWidget.classList.add('open');
+      chatToggle.setAttribute('aria-expanded', 'true');
+      chatInput?.focus();
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+    const closeChat = () => {
+      chatPanel.hidden = true;
+      chatWidget.classList.remove('open');
+      chatToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    chatToggle.addEventListener('click', () => {
+      chatPanel.hidden ? openChat() : closeChat();
+    });
+    chatClose?.addEventListener('click', closeChat);
+
+    const addMessage = (text, from) => {
+      const msg = document.createElement('div');
+      msg.className = `chat-msg chat-msg-${from}`;
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+
+    const replyFor = (text) => {
+      const q = text.toLowerCase();
+      if (/(quote|price|cost|estimate)/.test(q)) {
+        return 'Happy to get you a free quote — fill out the form below with a few details about your boat, or call/text 727-391-7639 and we’ll take care of you.';
+      }
+      if (/(fiberglass)/.test(q)) {
+        return 'We repair cracks, blisters and structural fiberglass damage with professional-grade materials. Want a free quote on your repair?';
+      }
+      if (/(gelcoat|color match|scratch)/.test(q)) {
+        return 'Gelcoat repair is one of our specialties — precise color matching for a seamless finish. Send us a photo through the contact form and we’ll take a look.';
+      }
+      if (/(detail|shine|wax|buff|oxidiz|oxidis)/.test(q)) {
+        return 'Our detailing service brings back that showroom shine — wash, buff, wax and oxidation removal. Want a free quote?';
+      }
+      if (/(restor)/.test(q)) {
+        return 'Full restorations are our bread and butter — from oxidized hulls to complete cosmetic overhauls. Tell me a bit about your boat and I’ll point you to the right service.';
+      }
+      if (/(structural|hull|crack|blister|damage)/.test(q)) {
+        return 'Structural fiberglass repairs are done right, with strength and safety front of mind. Fill out the quote form and we’ll assess it properly.';
+      }
+      if (/(yard|storage|lift|haul)/.test(q)) {
+        return 'Our boat yard handles repairs, maintenance and custom work all in one place, right here in Largo, FL.';
+      }
+      if (/(hour|open|close|time)/.test(q)) {
+        return 'We’re open Monday–Saturday, 8:00 AM – 5:00 PM, by appointment or walk-in.';
+      }
+      if (/(where|location|address|find you)/.test(q)) {
+        return 'You’ll find us at 11600 66th St N, Largo, FL 33773 — and we do mobile service around Tampa Bay too.';
+      }
+      if (/(phone|call|number|text)/.test(q)) {
+        return 'Give us a call or text anytime at 727-391-7639 — that’s the fastest way to reach us.';
+      }
+      if (/(email)/.test(q)) {
+        return 'You can reach us at captainlevis@yahoo.com — or use the contact form below.';
+      }
+      if (/(mobile|come to (me|my dock)|dock)/.test(q)) {
+        return 'Yes — we offer mobile service and can come right to your dock for many repairs.';
+      }
+      if (/(hi|hello|hey|ahoy)/.test(q)) {
+        return 'Ahoy there! What can I help you with — fiberglass repair, gelcoat, detailing, or a free quote?';
+      }
+      if (/(thank)/.test(q)) {
+        return 'Anytime! Fair winds — let us know if anything else comes up.';
+      }
+      return 'Good question — for specifics on that, the best move is to call/text us at 727-391-7639 or fill out the quote form below and we’ll get right back to you.';
+    };
+
+    const showTyping = () => {
+      const typing = document.createElement('div');
+      typing.className = 'chat-msg-typing';
+      typing.id = 'chat-typing';
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      chatMessages.appendChild(typing);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+    const hideTyping = () => {
+      document.getElementById('chat-typing')?.remove();
+    };
+
+    const sendUserText = (text) => {
+      text = text.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      showTyping();
+      window.setTimeout(() => {
+        hideTyping();
+        addMessage(replyFor(text), 'bot');
+      }, 550 + Math.random() * 400);
+    };
+
+    chatForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      sendUserText(chatInput.value);
+      chatInput.value = '';
+    });
+
+    chatChips.forEach((chip) => {
+      chip.addEventListener('click', () => sendUserText(chip.dataset.q || chip.textContent));
+    });
+  }
 });
