@@ -1,0 +1,543 @@
+/* ==========================================================================
+   Structural Fiberglass Repair — page-specific styles.
+   Loads after styles.css and reuses its tokens, buttons, eyebrows, header
+   and footer. Everything here is prefixed .sfr- so the homepage is untouched.
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.sfr-hero{
+  position:relative;
+  overflow:hidden;
+  background:var(--navy-2);
+}
+.sfr-hero-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  /* Biased right so the boat survives the crop on tall/narrow viewports. */
+  object-position:60% center;
+}
+.sfr-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.93) 0%,
+      rgba(0,22,46,.84) 24%,
+      rgba(0,22,46,.46) 47%,
+      rgba(0,22,46,.08) 66%,
+      rgba(0,22,46,0) 80%),
+    linear-gradient(180deg, rgba(0,22,46,.38) 0%, rgba(0,22,46,0) 45%);
+}
+.sfr-hero-inner{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  column-gap:clamp(24px,3vw,56px);
+  padding-top:clamp(52px,6vw,96px);
+  padding-bottom:clamp(52px,6vw,96px);
+}
+.sfr-hero-content{max-width:640px;}
+.sfr-hero-eyebrow{margin-bottom:16px;}
+.sfr-hero h1{
+  font-size:clamp(32px,4.3vw,54px);
+  letter-spacing:-1.2px;
+  color:#fff;
+  margin-bottom:20px;
+}
+.sfr-hero-sub{
+  color:rgba(255,255,255,.87);
+  font-size:17px;
+  line-height:1.62;
+  max-width:540px;
+  margin-bottom:32px;
+}
+.sfr-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-outline-light .btn-ico{display:block;}
+.sfr-hero-script{
+  color:#fff;
+  font-size:clamp(26px,2.4vw,38px);
+  line-height:1.12;
+  text-align:center;
+  transform:rotate(-7deg) translateY(-26%);
+  white-space:nowrap;
+  /* Sits over the photo, so it carries its own contrast. */
+  text-shadow:0 2px 16px rgba(0,22,46,.8), 0 1px 4px rgba(0,22,46,.65);
+}
+.sfr-hero-script::after{
+  width:86%;
+  margin-left:auto;
+  height:8px;
+  margin-top:-2px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath d='M2 8c20-10 40 8 60 0s40-8 60 0 40 8 60 0' fill='none' stroke='%23ffffff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* ---------- Section head (shared by the light sections) ---------- */
+.sfr-section-head{
+  text-align:center;
+  max-width:860px;
+  margin-inline:auto;
+  padding-top:clamp(44px,4.6vw,68px);
+  padding-bottom:clamp(24px,2.6vw,36px);
+}
+.sfr-section-head .eyebrow{justify-content:center;margin-bottom:14px;}
+.sfr-section-head h2{
+  font-size:clamp(28px,3.4vw,42px);
+  letter-spacing:-.9px;
+  margin-bottom:14px;
+}
+.sfr-section-head p{
+  font-size:16.5px;
+  line-height:1.6;
+  color:var(--gray-text);
+  max-width:760px;
+  margin-inline:auto;
+}
+
+/* ---------- Repair services grid ---------- */
+.sfr-services{background:var(--light-bg);overflow:hidden;}
+
+/* ---------- Process band ---------- */
+.sfr-process{
+  position:relative;
+  background:linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 62%,#003463 100%);
+  display:grid;
+  grid-template-columns:minmax(260px,27%) minmax(0,1fr);
+  align-items:stretch;
+}
+.sfr-process-photo{
+  position:relative;
+  min-height:100%;
+  /* Chevron notch on the trailing edge, as in the comp. */
+  clip-path:polygon(0 0, calc(100% - 38px) 0, 100% 50%, calc(100% - 38px) 100%, 0 100%);
+}
+.sfr-process-photo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  /* Keeps the lettering and the painted-on quote inside the crop. */
+  object-position:10% center;
+}
+.sfr-process-body{
+  display:grid;
+  grid-template-columns:minmax(260px,31%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(24px,2.8vw,48px);
+  padding:clamp(34px,3.8vw,56px) clamp(20px,3.4vw,60px) clamp(34px,3.8vw,56px) clamp(18px,2.2vw,34px);
+}
+.sfr-process-copy .eyebrow{margin-bottom:14px;}
+.sfr-process-copy h2{
+  color:#fff;
+  font-size:clamp(24px,2.2vw,31px);
+  letter-spacing:-.8px;
+  margin-bottom:14px;
+}
+.sfr-process-copy p{
+  color:rgba(255,255,255,.72);
+  font-size:15px;
+  line-height:1.62;
+  max-width:420px;
+}
+.sfr-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(12px,1.2vw,20px);
+  margin-top:16px;
+}
+.sfr-step{
+  position:relative;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.17);
+  border-radius:13px;
+  padding:34px 16px 20px;
+}
+.sfr-step-num{
+  position:absolute;top:-15px;left:16px;
+  width:30px;height:30px;
+  border-radius:50%;
+  background:var(--accent-btn);
+  color:var(--navy-2);
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.sfr-step-icon{
+  position:absolute;top:-14px;left:58px;
+  width:30px;height:30px;
+  border-radius:9px;
+  background:rgba(2,26,52,.75);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+}
+.sfr-step h3{
+  color:#fff;
+  font-size:15.5px;
+  letter-spacing:-.2px;
+  margin-bottom:7px;
+}
+.sfr-step p{
+  color:rgba(255,255,255,.68);
+  font-size:13.5px;
+  line-height:1.5;
+}
+
+/* ---------- Before & after ---------- */
+.sfr-results{background:#fff;}
+.sfr-results-inner{
+  display:grid;
+  grid-template-columns:minmax(240px,26%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(28px,3.2vw,56px);
+  padding-block:clamp(44px,4.6vw,72px);
+}
+.sfr-results-copy .eyebrow{margin-bottom:14px;}
+.sfr-results-copy h2{
+  font-size:clamp(24px,2.3vw,30px);
+  letter-spacing:-.8px;
+  margin-bottom:12px;
+}
+.sfr-results-copy p{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--gray-text);
+  margin-bottom:22px;
+}
+.sfr-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.5vw,22px);
+}
+.sfr-ba{
+  position:relative;
+  aspect-ratio:2/1;
+  border-radius:13px;
+  overflow:hidden;
+  box-shadow:0 16px 36px -22px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:3px;margin-left:-1.5px;
+  background:#fff;
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:34px;height:34px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.32);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:10px;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:10.5px;
+  letter-spacing:1.3px;
+  padding:5px 11px;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:10px;background:rgba(0,22,46,.86);color:#fff;}
+.sfr-ba-tag-after{right:10px;background:var(--accent-btn);color:var(--navy-2);}
+
+/* ---------- Why boaters choose us ---------- */
+.sfr-why{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+}
+.sfr-why-inner{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:minmax(260px,29%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(26px,3vw,56px);
+  padding-block:clamp(40px,4.2vw,64px);
+  padding-right:clamp(200px,20vw,380px);
+}
+.sfr-why-copy .eyebrow{margin-bottom:14px;}
+/* Desktop only: this is the longest label on the page and the column it sits
+   in is narrow, so it gets tightened to hold one line. Below the breakpoint
+   the copy goes full width and the normal eyebrow sizing fits again. */
+@media (min-width:1025px){
+  .sfr-why-copy .eyebrow{font-size:11px;letter-spacing:1.3px;gap:10px;}
+  .sfr-why-copy .eyebrow i{width:22px;flex:none;}
+  .sfr-why-copy .eyebrow span{white-space:nowrap;}
+}
+.sfr-why-copy h2{
+  font-size:clamp(25px,2.6vw,35px);
+  letter-spacing:-.8px;
+  margin-bottom:12px;
+}
+.sfr-why-copy p{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--gray-text);
+}
+.sfr-why-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(14px,1.6vw,26px);
+}
+.sfr-why-item{text-align:center;}
+.sfr-why-icon{
+  width:50px;height:50px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+}
+.sfr-why-item h3{
+  font-size:15px;
+  letter-spacing:-.2px;
+  margin-bottom:6px;
+}
+.sfr-why-item p{
+  font-size:13.5px;
+  line-height:1.5;
+  color:var(--gray-text);
+}
+.sfr-why-photo{
+  position:absolute;top:0;right:0;bottom:0;
+  width:clamp(190px,20vw,380px);
+  z-index:1;
+}
+.sfr-why-photo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+/* ---------- Tampa Bay & beyond ---------- */
+.sfr-areas{
+  position:relative;
+  overflow:hidden;
+  background:var(--navy-2);
+}
+.sfr-areas-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 72%;
+}
+.sfr-areas-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,22,46,.96) 0%,
+    rgba(0,22,46,.9) 42%,
+    rgba(0,28,59,.8) 72%,
+    rgba(0,28,59,.72) 100%);
+}
+.sfr-areas-inner{
+  position:relative;z-index:2;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto minmax(340px,1fr);
+  align-items:center;
+  column-gap:clamp(20px,2vw,32px);
+  padding-block:clamp(38px,4vw,60px);
+}
+.sfr-areas-copy .eyebrow{margin-bottom:14px;}
+.sfr-areas-copy h2{
+  color:#fff;
+  font-size:clamp(25px,2.6vw,36px);
+  letter-spacing:-.8px;
+  margin-bottom:12px;
+}
+.sfr-areas-copy p{
+  color:rgba(255,255,255,.72);
+  font-size:14.5px;
+  line-height:1.6;
+  max-width:400px;
+}
+.sfr-pins{
+  display:grid;
+  grid-template-columns:repeat(2,auto);
+  column-gap:clamp(20px,2.4vw,44px);
+  row-gap:11px;
+}
+.sfr-pins li{
+  display:flex;align-items:center;gap:9px;
+  color:rgba(255,255,255,.9);
+  font-size:14px;
+  white-space:nowrap;
+}
+.sfr-pins svg{flex:none;color:var(--accent);}
+.sfr-areas-script{
+  position:relative;
+  text-align:center;
+  color:#fff;
+  font-size:clamp(20px,1.7vw,27px);
+  line-height:1.15;
+  transform:rotate(-6deg);
+  white-space:nowrap;
+  padding-right:14px;
+}
+.sfr-areas-script::after{
+  width:80%;
+  margin-left:auto;
+  height:7px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12'%3E%3Cpath d='M2 8c20-10 40 8 60 0s40-8 60 0 40 8 60 0' fill='none' stroke='%235ECDFA' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+.sfr-areas-dot{
+  position:absolute;
+  right:-16px;bottom:-4px;
+  width:11px;height:11px;
+  border-radius:50%;
+  background:var(--accent);
+  box-shadow:0 0 0 6px rgba(94,205,250,.28), 0 0 0 13px rgba(94,205,250,.13);
+}
+.sfr-cta-card{
+  background:#fff;
+  border-radius:14px;
+  padding:clamp(16px,1.5vw,22px) clamp(16px,1.5vw,24px);
+  box-shadow:0 26px 50px -26px rgba(0,0,0,.6);
+}
+.sfr-cta-card h3{
+  font-size:clamp(18px,1.5vw,23px);
+  letter-spacing:-.5px;
+  margin-bottom:7px;
+}
+.sfr-cta-card p{
+  font-size:14px;
+  line-height:1.5;
+  color:var(--gray-text);
+  margin-bottom:16px;
+}
+.sfr-cta-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.sfr-cta-actions .btn{
+  flex:1 1 auto;
+  justify-content:center;
+  font-size:13.5px;
+  padding:11px 15px;
+  gap:8px;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width:1400px){
+  .sfr-areas-inner{
+    grid-template-columns:minmax(0,1fr) auto minmax(320px,.95fr);
+    row-gap:26px;
+  }
+  .sfr-areas-script{grid-column:2;justify-self:center;}
+  .sfr-areas-dot{display:none;}
+}
+
+@media (max-width:1240px){
+  .sfr-process{grid-template-columns:minmax(220px,32%) minmax(0,1fr);}
+  .sfr-process-body{grid-template-columns:minmax(0,1fr);row-gap:24px;}
+  .sfr-process-copy p{max-width:none;}
+  .sfr-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px;}
+  .sfr-results-inner{grid-template-columns:minmax(0,1fr);row-gap:28px;}
+  .sfr-why-inner{
+    grid-template-columns:minmax(0,1fr);
+    row-gap:28px;
+    padding-right:clamp(160px,17vw,300px);
+  }
+}
+
+@media (max-width:1100px){
+  .sfr-hero-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .sfr-hero-script{justify-self:start;transform:rotate(-6deg);transform-origin:left center;}
+}
+
+@media (max-width:1024px){
+  .sfr-process{grid-template-columns:minmax(0,1fr);}
+  .sfr-process-photo{
+    clip-path:none;
+    aspect-ratio:816/260;
+  }
+  .sfr-process-photo img{object-position:center;}
+  .sfr-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .sfr-why-inner{padding-right:var(--pad);}
+  .sfr-why-photo{
+    position:static;
+    width:100%;
+    aspect-ratio:746/300;
+    margin-top:4px;
+  }
+  .sfr-areas-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;justify-items:start;}
+  .sfr-areas-script{grid-column:auto;justify-self:start;transform-origin:left center;}
+  .sfr-cta-card{width:100%;max-width:520px;}
+}
+
+@media (max-width:820px){
+  .sfr-hero-sub{font-size:16px;}
+  .sfr-section-head p{font-size:15.5px;}
+  .sfr-why-grid{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px;}
+}
+
+@media (max-width:640px){
+  .sfr-hero-inner{
+    padding-top:40px;
+    padding-bottom:40px;
+  }
+  .sfr-hero h1{font-size:clamp(27px,7.4vw,34px);letter-spacing:-.7px;margin-bottom:14px;}
+  .sfr-hero-sub{font-size:15px;line-height:1.55;margin-bottom:22px;}
+  .sfr-hero-actions{gap:10px;}
+  .sfr-hero-actions .btn{flex:1 1 100%;justify-content:center;}
+  .sfr-hero-script{font-size:23px;}
+  .sfr-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.78) 55%, rgba(0,22,46,.6) 100%);
+  }
+
+  .sfr-section-head{padding-top:32px;padding-bottom:18px;}
+  .sfr-section-head h2{font-size:clamp(22px,6vw,28px);margin-bottom:10px;}
+  .sfr-section-head p{font-size:14.5px;}
+
+  .sfr-process-photo{aspect-ratio:816/230;}
+  .sfr-process-body{padding:28px var(--pad) 30px;}
+  .sfr-process-copy h2{font-size:23px;}
+  .sfr-process-copy p{font-size:14px;}
+  .sfr-steps{grid-template-columns:minmax(0,1fr);row-gap:26px;margin-top:10px;}
+  .sfr-step{padding:30px 15px 17px;}
+
+  .sfr-results-inner{padding-block:30px;row-gap:22px;}
+  .sfr-results-copy h2{font-size:23px;}
+  .sfr-results-copy p{font-size:14px;margin-bottom:16px;}
+  .sfr-ba-grid{grid-template-columns:minmax(0,1fr);gap:14px;}
+  .sfr-ba{aspect-ratio:2/1;}
+  .sfr-ba-handle{width:30px;height:30px;}
+
+  .sfr-why-inner{padding-block:30px;row-gap:22px;}
+  .sfr-why-copy h2{font-size:23px;}
+  .sfr-why-copy p{font-size:14px;}
+  .sfr-why-grid{gap:16px 12px;}
+  .sfr-why-icon{width:44px;height:44px;margin-bottom:9px;}
+  .sfr-why-icon svg{width:22px;height:22px;}
+  .sfr-why-item h3{font-size:14px;}
+  .sfr-why-item p{font-size:12.5px;}
+
+  .sfr-areas-inner{padding-block:30px;row-gap:20px;}
+  .sfr-areas-copy h2{font-size:23px;}
+  .sfr-areas-copy p{font-size:14px;}
+  .sfr-pins{column-gap:16px;row-gap:9px;}
+  .sfr-pins li{font-size:13.5px;}
+  .sfr-areas-script{font-size:20px;}
+  .sfr-cta-card{max-width:none;}
+  .sfr-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+}
+
+@media (max-width:400px){
+  .sfr-pins{grid-template-columns:auto;}
+}

@@ -6,6 +6,39 @@ document.addEventListener('DOMContentLoaded', () => {
     navToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
+  // --- Services dropdown -------------------------------------------------
+  // Desktop opens on hover via CSS; this adds click/keyboard control and
+  // drives the inline accordion in the stacked mobile nav.
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach((item) => {
+    const trigger = item.querySelector('.nav-dropdown');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (e) => {
+      // Below the nav breakpoint the trigger only opens the submenu; above it
+      // the label stays a real link to the services overview.
+      const isStacked = window.matchMedia('(max-width:1024px)').matches;
+      if (!isStacked && !item.classList.contains('open')) return;
+      e.preventDefault();
+      const isOpen = item.classList.toggle('open');
+      trigger.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+
+  const closeNavMenus = () => {
+    navItems.forEach((item) => {
+      item.classList.remove('open');
+      item.querySelector('.nav-dropdown')?.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-item')) closeNavMenus();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeNavMenus();
+  });
+
   const dots = document.querySelectorAll('.carousel-dots .dot');
   const prev = document.querySelector('.carousel-arrow[aria-label="Previous testimonial"]');
   const next = document.querySelector('.carousel-arrow[aria-label="Next testimonial"]');
@@ -195,4 +228,55 @@ document.addEventListener('DOMContentLoaded', () => {
       chip.addEventListener('click', () => sendUserText(chip.dataset.q || chip.textContent));
     });
   }
+
+  // --- Before / after comparison sliders (service pages) -----------------
+  document.querySelectorAll('.sfr-ba').forEach((root) => {
+    const after = root.querySelector('.sfr-ba-after');
+    const line = root.querySelector('.sfr-ba-line');
+    const handle = root.querySelector('.sfr-ba-handle');
+    if (!after || !line || !handle) return;
+
+    let dragging = false;
+    let pos = 50;
+
+    const setPos = (percent) => {
+      pos = Math.min(100, Math.max(0, percent));
+      after.style.clipPath = `inset(0 0 0 ${pos}%)`;
+      line.style.left = pos + '%';
+      handle.style.left = pos + '%';
+      root.setAttribute('aria-valuenow', String(Math.round(pos)));
+    };
+
+    const percentFromEvent = (e) => {
+      const rect = root.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      return ((clientX - rect.left) / rect.width) * 100;
+    };
+
+    const onDown = (e) => {
+      dragging = true;
+      setPos(percentFromEvent(e));
+      e.preventDefault();
+    };
+    const onMove = (e) => {
+      if (!dragging) return;
+      setPos(percentFromEvent(e));
+    };
+    const onUp = () => { dragging = false; };
+
+    root.addEventListener('mousedown', onDown);
+    root.addEventListener('touchstart', onDown, { passive: false });
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onMove, { passive: false });
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchend', onUp);
+
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { setPos(pos - 5); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { setPos(pos + 5); e.preventDefault(); }
+    });
+
+    setPos(50);
+  });
+
 });

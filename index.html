@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20260915-mobile-opt">
+<link rel="stylesheet" href="styles.css?v=20260923-sfr">
 </head>
 <body>
 
@@ -20,9 +20,19 @@
       <a href="#" class="logo"><img src="assets/logo.png" alt="Captain Levi's" width="266" height="56"></a>
     </div>
     <nav class="main-nav" id="main-nav">
-      <a href="#" class="nav-dropdown">Services
-        <svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+      <div class="nav-item">
+        <a href="#services" class="nav-dropdown" aria-haspopup="true" aria-expanded="false">Services
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="nav-menu">
+          <a href="structural-fiberglass-repair.html">Structural Fiberglass Repair<small>Hulls, decks, transoms &amp; stringers</small></a>
+          <a href="#services">Gelcoat Repair<small>Scratches, chips &amp; color matching</small></a>
+          <a href="detailing.html">Boat Detailing<small>Wash, buff, wax &amp; oxidation removal</small></a>
+          <a href="boat-yard.html">Boat Yard<small>Repairs, storage &amp; haul-out in Largo</small></a>
+          <hr>
+          <a href="#services">View All Services</a>
+        </div>
+      </div>
       <a href="#">Boat Yard</a>
       <a href="#">Detailing</a>
       <a href="#">About</a>
@@ -103,7 +113,7 @@
       <div class="fg-card-body">
         <h3>Structural Fiberglass</h3>
         <p>Expert laminate and structural repairs for long-term strength.</p>
-        <a href="services.html#structural-fiberglass" class="fg-card-link">Learn More
+        <a href="structural-fiberglass-repair.html" class="fg-card-link">Learn More
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -614,7 +624,7 @@
       <ul class="footer-links">
         <li><a href="services.html#fiberglass-repair">Fiberglass Repair</a></li>
         <li><a href="services.html#gelcoat-repair">Gelcoat Repair</a></li>
-        <li><a href="services.html#structural-fiberglass">Structural Repairs</a></li>
+        <li><a href="structural-fiberglass-repair.html">Structural Repairs</a></li>
         <li><a href="services.html#collision-repair">Collision Repair</a></li>
         <li><a href="detailing.html">Boat Detailing</a></li>
         <li><a href="services.html#bottom-repair">Bottom Repair</a></li>
@@ -703,6 +713,6 @@
   </button>
 </div>
 
-<script src="script.js?v=20260914-results"></script>
+<script src="script.js?v=20260923-sfr"></script>
 </body>
 </html>

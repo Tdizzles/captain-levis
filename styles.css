@@ -1517,3 +1517,94 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
   .stats-inner,.areas-bar-inner,.contact-perks,.footer-top{grid-template-columns:minmax(0,1fr);}
   .footer-brand{grid-column:auto;}
 }
+
+/* ==========================================================================
+   Services dropdown (header + footer) — shared by every page.
+   ========================================================================== */
+.nav-item{position:relative;display:flex;align-items:center;}
+.nav-dropdown svg{transition:transform .18s ease;}
+.nav-item.open > .nav-dropdown svg{transform:rotate(180deg);}
+
+.nav-menu{
+  position:absolute;
+  top:100%;left:-18px;
+  min-width:268px;
+  background:#fff;
+  border:1px solid #E6EEF6;
+  border-radius:14px;
+  box-shadow:0 26px 48px -24px rgba(0,38,75,.5);
+  padding:8px;
+  margin-top:10px;
+  z-index:130;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(6px);
+  transition:opacity .16s ease, transform .16s ease, visibility .16s;
+}
+/* Bridges the gap between the trigger and the panel so hover doesn't drop. */
+.nav-menu::before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:-12px;
+  height:12px;
+}
+.nav-item:hover .nav-menu,
+.nav-item:focus-within .nav-menu,
+.nav-item.open .nav-menu{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+.nav-menu a{
+  display:block;
+  padding:9px 12px;
+  border-radius:9px;
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:14.5px;
+  color:var(--navy);
+  line-height:1.35;
+  transition:background .14s ease, color .14s ease;
+}
+.nav-menu a small{
+  display:block;
+  font-family:var(--font-body);
+  font-weight:400;
+  font-size:12.5px;
+  color:var(--gray-text);
+  margin-top:2px;
+}
+.nav-menu a:hover,.nav-menu a:focus-visible{background:var(--light-bg);color:var(--icon-blue);}
+.nav-menu a[aria-current="page"]{background:var(--icon-bg);color:var(--icon-blue);}
+.nav-menu hr{
+  border:none;
+  border-top:1px solid #EDF3F8;
+  margin:6px 10px;
+}
+
+@media (max-width:1024px){
+  /* Inside the stacked mobile nav the panel becomes an inline accordion. */
+  .nav-item{display:block;width:100%;}
+  .nav-item > .nav-dropdown{justify-content:space-between;}
+  .nav-menu{
+    position:static;
+    min-width:0;
+    width:100%;
+    margin:0 0 6px;
+    padding:4px 0 4px 12px;
+    border:none;
+    border-left:2px solid var(--icon-bg);
+    border-radius:0;
+    box-shadow:none;
+    opacity:1;
+    visibility:visible;
+    transform:none;
+    display:none;
+  }
+  .nav-menu::before{display:none;}
+  .nav-item:hover .nav-menu,
+  .nav-item:focus-within .nav-menu{display:none;}
+  .nav-item.open .nav-menu{display:block;}
+  .nav-menu a{padding:10px 10px;min-height:44px;}
+  .nav-menu a small{display:none;}
+}
