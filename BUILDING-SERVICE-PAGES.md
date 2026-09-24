@@ -469,11 +469,15 @@ node --check script.js
   404. The six sub-repair pages linked from the structural page's "Learn More"
   buttons are the ones being built next. The nav dropdown deliberately links
   only to pages that exist, so the global nav never 404s — keep it that way.
-- **`index.html` still has `services.html#…` links** across seven anchors
-  (`fiberglass-repair` ×2, `gelcoat-repair` ×2, `collision-repair`,
-  `collision-damage`, `bottom-repair`, `hull-deck-repair`, `transom-stringers`).
+- **`index.html` still has `services.html#…` links** across six anchors
+  (`fiberglass-repair` ×2, `collision-repair`, `collision-damage`,
+  `bottom-repair`, `hull-deck-repair`, `transom-stringers`).
   Re-point these as each real page lands (`custom-fiberglass` now points at
-  `custom-fabrication.html`).
+  `custom-fabrication.html`; both `gelcoat-repair` links point at
+  `gelcoat-repair.html`).
+- **`gelcoat-repair.html` copy to confirm:** the comp's CTA says "talk directly
+  with Captain Dave", and its pin list had Tampa twice (the second is now
+  Dunedin). Check both with the owner.
 - **Two of the three before/after pairs are placeholders** — a damage photo
   paired with a different finished photo, flagged with HTML comments in the
   markup. Only the third (`before-after.jpg`) is a genuine pair. Swap in real
