@@ -193,14 +193,62 @@ bottom-left and bottom-right; **omit them when the source image already has
 labels burned in** (`before-after.jpg` does).
 
 ### Why band
-Full-bleed photo pinned to the right edge, content padded to clear it:
+Three real grid columns — copy | feature cards | photo — where the photo is a
+cell that bleeds to the viewport's right edge. **Do not** position the photo
+absolutely and reserve space for it with `padding-right`: that padding has to
+track the photo width *and* the container's centring margin, and the two move in
+opposite directions as the viewport grows. The first build did that and the
+maths never held.
+
 ```css
-.XXX-why-inner{ padding-right:clamp(200px,20vw,380px); }
-.XXX-why-photo{ position:absolute; top:0; right:0; bottom:0;
-                width:clamp(190px,20vw,380px); }
+.XXX-why-inner{
+  --why-pad:clamp(44px,7vw,110px);
+  display:grid;
+  grid-template-columns:minmax(300px,24%) minmax(0,1fr) clamp(200px,30%,560px);
+  align-items:center;
+  column-gap:clamp(20px,2.2vw,38px);
+  padding-block:var(--why-pad);
+  /* Reproduces .container's content edge so the copy still lines up with
+     every other section, while the photo runs to the viewport edge. */
+  padding-left:max(var(--pad), calc((100% - var(--container)) / 2 + var(--pad)));
+  padding-right:0;
+}
+.XXX-why-photo{
+  align-self:stretch;
+  margin-block:calc(-1 * var(--why-pad));   /* bleed past the band padding */
+  clip-path:polygon(34% 0, 100% 0, 100% 100%, 6% 100%);
+}
 ```
-At `≤1024px` the photo goes `position:static; width:100%` with a fixed
-`aspect-ratio` and the padding reverts to `var(--pad)`.
+
+**That `padding-left` expression is the reusable bit.** A percentage inside
+`calc()` in padding resolves against the containing block — here the full-width
+section — so it evaluates to exactly where `.container`'s content starts, and
+`max()` handles viewports narrower than `--container`. Use it any time a section
+needs container-aligned text but full-bleed edges.
+
+The `clip-path` gives the diagonal leading edge, narrower at the top than the
+bottom. Drop it when the section stacks.
+
+Background is three layers: a `radial-gradient` + `linear-gradient` on the
+section, then one absolutely positioned `<svg class="XXX-why-deco">` with
+`preserveAspectRatio="none"` carrying the faint topographic contour lines and
+the wave at the bottom-left. One stretched SVG is simpler than two and
+guarantees the wave hugs the bottom edge; contour lines are abstract enough that
+non-uniform scaling doesn't read as wrong.
+
+Feature cards: `align-items:stretch` so they share a height, translucent white
+fill over the gradient, `border-radius:16px`, soft shadow, pale-blue icon circle
+with a **navy** icon (not `--icon-blue` — the icons are heavier here than
+elsewhere on the page).
+
+**Width budget — this section is the tightest on the page.** Copy needs ~335px
+to keep "Experience You" on one line, and each card needs ~140px to keep its
+title on two. Four cards plus copy plus photo only fit above ~1500px, so that is
+where the three-column layout ends, not 1240.
+
+At `≤1024px` the whole band stacks and the photo becomes a full-width banner:
+`clip-path:none`, a fixed `aspect-ratio`, and negative inline margins to cancel
+the side padding that comes back at that breakpoint.
 
 ### Areas band
 `grid-template-columns: minmax(0,1fr) auto auto minmax(340px,1fr)` —
@@ -244,24 +292,30 @@ plus `loading="lazy" decoding="async"` on everything below the fold.
 
 ## 7. Responsive ladder
 
-`structural.css` uses: **1400, 1240, 1100, 1024, 820, 640, 400** (all
+`structural.css` uses: **1500, 1400, 1240, 1100, 1024, 820, 640, 400** (all
 `max-width`), plus one `min-width:1025px` for a desktop-only type tweak.
 
 What changes where:
 
+- **1500** — why band drops from 3 columns to 2; the copy moves above the
+  cards so they keep a usable width
 - **1400** — areas band drops from 4 columns to 3
 - **1240** — process body stacks; steps go 4→2; results stack; why stacks
 - **1100** — hero script moves below the copy
 - **1024** — the nav breakpoint. Header collapses to hamburger; process photo
   loses its notch and becomes a banner; sliders 3→2; why photo goes static;
   areas band fully stacks
-- **820** — why features 4→2; type eases down
+- **820** — why cards 4→2; type eases down
 - **640** — phone. Everything single-column, buttons full width, padding and
   type step down hard
 - **400** — pin list 2→1 column
 
 **1024 is the hinge.** Anything tied to the desktop nav layout belongs on one
 side or the other of it.
+
+**Order the `max-width` blocks widest-first.** At 900px both `max-width:1500px`
+and `max-width:1024px` match, and equal specificity means the later block wins —
+so a narrower breakpoint placed above a wider one silently loses.
 
 ### Gotcha: desktop-only type tricks must be scoped
 
