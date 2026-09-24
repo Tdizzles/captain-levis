@@ -188,17 +188,25 @@
   line-height:1.5;
 }
 
-/* ---------- Under your deck + before & after ---------- */
+/* ---------- Under your deck + before & after ----------
+   Like the card grid, these two bands run wider than .container (the comp
+   packs two sections side by side here), so they share .fg-grid's width. */
 .dr-results{background:#fff;}
+.dr-wide{
+  --wide-pad:clamp(18px,2.6vw,44px);
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:var(--wide-pad);
+}
 .dr-results-inner{
   display:grid;
-  grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
   align-items:center;
   padding-block:clamp(40px,4.2vw,64px);
 }
 .dr-layers{
   display:grid;
-  grid-template-columns:minmax(260px,.9fr) minmax(0,1.1fr);
+  grid-template-columns:minmax(250px,.72fr) minmax(0,1.28fr);
   align-items:center;
   column-gap:clamp(18px,1.8vw,30px);
   padding-right:clamp(20px,2.4vw,40px);
@@ -320,9 +328,10 @@
 }
 .dr-info-inner{
   display:grid;
-  grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr) clamp(180px,20%,380px);
+  --wide-pad:clamp(18px,2.6vw,44px);
+  grid-template-columns:minmax(0,1.3fr) minmax(0,.85fr) clamp(180px,19%,380px);
   align-items:center;
-  padding-left:max(var(--pad), calc((100% - var(--container)) / 2 + var(--pad)));
+  padding-left:max(var(--wide-pad), calc((100% - 1760px) / 2 + var(--wide-pad)));
   padding-right:0;
 }
 .dr-signs{padding-block:clamp(34px,3.4vw,52px);padding-right:clamp(20px,2.4vw,40px);}
@@ -336,18 +345,18 @@
 .dr-signs-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:20px 18px;
-  align-items:center;
+  gap:18px 16px;
+  align-items:start;
 }
 .dr-signs-grid > li:not(.dr-signs-note){
-  display:flex;align-items:center;gap:11px;
-  font-size:13px;
+  display:flex;align-items:center;gap:10px;
+  font-size:12.5px;
   line-height:1.45;
   color:var(--navy);
 }
 .dr-sign-icon{
   flex:none;
-  width:40px;height:40px;
+  width:36px;height:36px;
   border-radius:50%;
   background:var(--icon-bg);
   color:var(--icon-blue);
@@ -469,7 +478,7 @@
 @media (max-width:1500px){
   .dr-info-inner{grid-template-columns:minmax(0,1fr) minmax(0,.85fr);}
   .dr-map{display:none;}
-  .dr-areas{padding-right:var(--pad);}
+  .dr-areas{padding-right:var(--wide-pad);}
   .dr-signs-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
   .dr-signs-note{grid-column:2 / span 2;grid-row:auto;}
 }
@@ -490,7 +499,7 @@
   .dr-process-copy p{max-width:none;}
   .dr-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:34px;}
   .dr-step:nth-child(2)::after{display:none;}
-  .dr-info-inner{grid-template-columns:minmax(0,1fr);padding-right:var(--pad);}
+  .dr-info-inner{grid-template-columns:minmax(0,1fr);padding-right:var(--wide-pad);}
   .dr-signs{padding-right:0;padding-bottom:10px;}
   .dr-areas{border-left:0;border-top:1px solid #E1ECF5;padding:28px 0 clamp(34px,3.4vw,52px);}
   .dr-signs-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
