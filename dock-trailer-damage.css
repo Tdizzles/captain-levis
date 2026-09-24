@@ -1,0 +1,491 @@
+/* ==========================================================================
+   Dock & Trailer Damage Repair — page-specific styles (a gelcoat sub-page).
+   Loads after styles.css and reuses its tokens, buttons, eyebrows, card grid,
+   header and footer. Everything here is prefixed .dtd- so no other page moves.
+   (.sfr-ba slider rules are repeated below because structural.css belongs to
+   the structural page; script.js binds to the .sfr-ba class.)
+   ========================================================================== */
+
+/* Shared wide frame: the comp runs these bands at the card grid's width
+   (.fg-grid), wider than .container. */
+.dtd-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,2.6vw,44px);
+}
+.dtd-eyebrow{
+  color:var(--icon-blue);
+  font-size:11.5px;
+  letter-spacing:1.8px;
+  margin-bottom:10px;
+}
+.dtd-eyebrow i{background:var(--icon-blue);width:32px;}
+.dtd-wide h2 .accent,.dtd-services-head h2 .accent{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   dtd-hero.jpg is the boat on its trailer with "Same Boats. New Beginnings."
+   baked in on the right. It covers the right ~60% of the hero, anchored right
+   so the tagline survives, and feathers left into the navy behind the copy. */
+.dtd-hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 38% 30%, rgba(28,110,180,.35), transparent 60%),
+    linear-gradient(100deg,#001A36 0%,var(--navy-2) 38%,#0B3A66 100%);
+}
+.dtd-hero-img{
+  position:absolute;top:0;right:0;
+  width:62%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+}
+.dtd-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.88) 0%,
+      rgba(0,22,46,.7) 34%,
+      rgba(0,22,46,.18) 50%,
+      rgba(0,22,46,0) 60%),
+    linear-gradient(0deg, rgba(0,22,46,.72) 0%, rgba(0,22,46,0) 30%);
+}
+.dtd-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(34px,3.2vw,56px);
+  padding-bottom:clamp(22px,1.8vw,30px);
+}
+.dtd-hero-content{max-width:680px;}
+.dtd-hero-eyebrow{margin-bottom:14px;font-size:12.5px;letter-spacing:2px;}
+.dtd-hero h1{
+  font-size:clamp(32px,3.2vw,52px);
+  letter-spacing:-1.2px;
+  line-height:1.05;
+  color:#fff;
+  margin-bottom:16px;
+}
+.dtd-hero h1 .accent{color:var(--accent);}
+.dtd-hero-sub{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(15px,1.15vw,17px);
+  line-height:1.5;
+  max-width:600px;
+  margin-bottom:24px;
+}
+.dtd-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.dtd-hero-actions .btn{padding-block:14px;}
+
+.dtd-trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(16px,2.2vw,40px);
+  margin-top:clamp(20px,1.8vw,30px);
+}
+.dtd-trust li{display:flex;align-items:center;gap:10px;color:#fff;}
+.dtd-trust-icon{
+  flex:none;
+  width:40px;height:40px;
+  border-radius:50%;
+  background:rgba(0,38,75,.85);
+  border:1px solid rgba(94,205,250,.35);
+  color:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+}
+.dtd-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
+.dtd-trust small{display:block;font-size:12px;color:rgba(255,255,255,.78);}
+
+/* ---------- Services ----------
+   Reuses .fg-grid / .fg-card, five-up instead of six. The comp's cards have no
+   overlapping icon badge, so the body padding drops back to normal. */
+.dtd-services{background:var(--light-bg);overflow:hidden;}
+.dtd-services-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,440px);
+  align-items:end;
+  column-gap:clamp(24px,3vw,56px);
+  padding-top:clamp(30px,2.6vw,44px);
+  padding-bottom:clamp(16px,1.4vw,22px);
+}
+.dtd-services-head > div{padding-left:clamp(0px,.4vw,8px);}
+.dtd-services-head h2{
+  font-size:clamp(24px,2.1vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+}
+.dtd-services-head > p{font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+
+.dtd-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
+.dtd-grid .fg-card{border:1px solid #E6EFF7;}
+.dtd-grid .fg-card-media img{aspect-ratio:217/90;}
+.dtd-grid .fg-card-body{padding:14px 16px 16px;}
+.dtd-grid .fg-card-body h3{font-size:15px;margin-bottom:6px;}
+.dtd-grid .fg-card-body p{font-size:13px;line-height:1.5;margin-bottom:12px;}
+.dtd-grid .fg-card-link{font-size:13px;}
+
+/* ---------- Why repair it ----------
+   copy | four benefits | photo bleeding to the viewport's right edge (see the
+   recipe's why band: padding-left reproduces the wide frame's content edge). */
+.dtd-why{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(94,205,250,.14), transparent 60%),
+    linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+  border-top:1px solid #E6EFF7;
+}
+.dtd-why-inner{
+  --why-pad:clamp(26px,2.4vw,40px);
+  display:grid;
+  grid-template-columns:minmax(300px,27%) minmax(0,1fr) clamp(220px,30%,560px);
+  align-items:center;
+  column-gap:clamp(20px,2.2vw,38px);
+  padding-block:var(--why-pad);
+  padding-left:max(clamp(18px,2.6vw,44px), calc((100% - 1760px) / 2 + clamp(18px,2.6vw,44px)));
+  padding-right:0;
+}
+.dtd-why-copy h2{
+  font-size:clamp(23px,1.95vw,34px);
+  letter-spacing:-.7px;
+  line-height:1.08;
+  margin-bottom:12px;
+}
+.dtd-why-copy p{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+@media (min-width:1025px){
+  .dtd-why-copy .eyebrow span{white-space:nowrap;}
+}
+.dtd-benefits{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.dtd-benefits li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(8px,1vw,18px);
+}
+.dtd-benefits li + li{border-left:1px solid #DCE8F3;}
+.dtd-benefit-icon{
+  width:50px;height:50px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.dtd-benefits strong{font-family:var(--font-head);font-size:14px;line-height:1.25;color:var(--navy);margin-bottom:8px;max-width:130px;}
+.dtd-benefits small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:150px;}
+.dtd-why-photo{
+  align-self:stretch;
+  position:relative;
+  margin-block:calc(-1 * var(--why-pad));
+  min-height:220px;
+  /* The comp's white band pokes into the photo as a chevron at mid-height. */
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 3% 100%, 14% 50%);
+}
+.dtd-why-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+}
+
+/* ---------- Process band ---------- */
+.dtd-process{
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.18), transparent 60%),
+    linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 62%,#003463 100%);
+}
+.dtd-process-inner{
+  display:grid;
+  grid-template-columns:minmax(260px,28%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(24px,2.6vw,48px);
+  padding-block:clamp(30px,2.6vw,44px);
+}
+.dtd-process-copy{padding-left:clamp(0px,.4vw,8px);}
+.dtd-process-copy .eyebrow{margin-bottom:10px;font-size:11.5px;letter-spacing:1.8px;}
+.dtd-process-copy h2{
+  color:#fff;
+  font-size:clamp(24px,2.1vw,36px);
+  letter-spacing:-.8px;
+  margin-bottom:12px;
+}
+.dtd-process-copy h2 .accent{color:var(--accent);}
+.dtd-process-copy p{color:rgba(255,255,255,.84);font-size:14px;line-height:1.6;max-width:380px;}
+.dtd-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:clamp(22px,2.4vw,40px);
+}
+.dtd-step{position:relative;}
+/* Chevron between steps, sitting in the column gap beside the photo. */
+.dtd-step + .dtd-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * clamp(22px,2.4vw,40px) / 2 - 6px);
+  top:clamp(28px,2.4vw,44px);
+  width:12px;height:22px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 22' fill='none'%3E%3Cpath d='M2 2l8 9-8 9' stroke='%235ECDFA' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.dtd-step-media{position:relative;margin-bottom:12px;}
+.dtd-step-media img{
+  width:100%;
+  aspect-ratio:147/57;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+}
+.dtd-step-num{
+  position:absolute;top:-14px;left:-12px;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:#1C9BEA;
+  color:#fff;
+  border:2px solid #fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:17px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.dtd-step h3{color:#fff;font-size:15px;letter-spacing:-.2px;margin-bottom:5px;}
+.dtd-step p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.5;}
+
+/* ---------- Before & after ---------- */
+.dtd-results{background:linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);}
+.dtd-results-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,24%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(20px,2.4vw,44px);
+  padding-block:clamp(26px,2.4vw,40px);
+}
+.dtd-results-copy{padding-left:clamp(0px,.4vw,8px);}
+.dtd-results-copy h2{
+  font-size:clamp(23px,1.85vw,32px);
+  letter-spacing:-.7px;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.dtd-results-copy p{font-size:13px;line-height:1.55;color:var(--gray-text);margin-bottom:16px;}
+.dtd-results-copy .btn{font-size:13px;padding:9px 18px;}
+.dtd-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,1.4vw,22px);
+}
+
+.sfr-ba{
+  position:relative;
+  aspect-ratio:268/115;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 16px 36px -22px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:3px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:3px;margin-left:-1.5px;
+  background:#fff;
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:34px;height:34px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.32);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:10px;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:10.5px;
+  letter-spacing:1.3px;
+  padding:5px 14px;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:10px;background:#0B2240;color:#fff;}
+.sfr-ba-tag-after{right:10px;background:#1C9BEA;color:#fff;padding-inline:22px;}
+
+/* ---------- Why choose us + CTA ----------
+   copy | four features | marina photo (diagonal leading edge) carrying the
+   CTA card, bleeding to the viewport's right edge like the why band. */
+.dtd-choose{background:#fff;border-top:1px solid #E6EFF7;overflow:hidden;}
+.dtd-choose-inner{
+  --choose-pad:clamp(20px,1.8vw,30px);
+  display:grid;
+  grid-template-columns:minmax(240px,19%) minmax(0,1fr) clamp(380px,36%,660px);
+  align-items:center;
+  column-gap:clamp(16px,1.8vw,32px);
+  padding-block:var(--choose-pad);
+  padding-left:max(clamp(18px,2.6vw,44px), calc((100% - 1760px) / 2 + clamp(18px,2.6vw,44px)));
+  padding-right:0;
+}
+.dtd-choose-copy{padding-left:clamp(0px,.4vw,8px);}
+.dtd-choose-copy h2{
+  font-size:clamp(22px,1.85vw,32px);
+  letter-spacing:-.7px;
+  line-height:1.08;
+}
+@media (min-width:1025px){
+  .dtd-choose-copy .eyebrow span{white-space:nowrap;font-size:11px;letter-spacing:1.3px;}
+  .dtd-choose-copy .eyebrow i{width:22px;}
+}
+.dtd-features{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border-left:1px solid #DCE8F3;
+}
+.dtd-features li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(6px,.8vw,14px);
+}
+.dtd-features li + li{border-left:1px solid #DCE8F3;}
+.dtd-feature-icon{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:9px;
+}
+.dtd-features strong{font-family:var(--font-head);font-size:12.5px;line-height:1.25;color:var(--navy);margin-bottom:4px;}
+.dtd-features small{font-size:11.5px;line-height:1.4;color:var(--gray-text);max-width:150px;}
+.dtd-choose-photo{
+  align-self:stretch;
+  position:relative;
+  margin-block:calc(-1 * var(--choose-pad));
+  min-height:180px;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:clamp(18px,1.6vw,26px) clamp(18px,3.2vw,56px) clamp(18px,1.6vw,26px) clamp(70px,7vw,120px);
+  clip-path:polygon(9% 0, 100% 0, 100% 100%, 0 100%);
+}
+.dtd-choose-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+}
+.dtd-cta-card{
+  position:relative;
+  width:100%;
+  max-width:420px;
+  background:#fff;
+  border-radius:14px;
+  padding:clamp(14px,1.3vw,20px) clamp(16px,1.6vw,26px);
+  text-align:center;
+  box-shadow:0 20px 40px -24px rgba(0,0,0,.7);
+}
+.dtd-cta-card h2{font-size:clamp(17px,1.35vw,22px);letter-spacing:-.4px;margin-bottom:4px;}
+.dtd-cta-card p{font-size:12.5px;color:var(--gray-text);margin-bottom:12px;}
+.dtd-cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.dtd-cta-actions .btn{font-size:13.5px;padding:11px 20px;}
+
+/* ==========================================================================
+   Responsive — widest first (see the recipe: equal specificity, later wins)
+   ========================================================================== */
+
+@media (max-width:1500px){
+  /* Why band: copy moves above the benefits so they keep a usable width. */
+  .dtd-why-inner{grid-template-columns:minmax(0,1fr) clamp(220px,32%,480px);row-gap:22px;}
+  .dtd-why-copy{grid-column:1;grid-row:1;}
+  .dtd-benefits{grid-column:1;grid-row:2;}
+  .dtd-why-photo{grid-column:2;grid-row:1 / span 2;}
+  /* Choose band: same move — copy over the features, photo keeps its column. */
+  .dtd-choose-inner{grid-template-columns:minmax(0,1fr) clamp(380px,40%,560px);row-gap:18px;}
+  .dtd-choose-copy{grid-column:1;grid-row:1;}
+  .dtd-features{grid-column:1;grid-row:2;border-left:0;}
+  .dtd-choose-photo{grid-column:2;grid-row:1 / span 2;}
+  .dtd-choose-copy h2 br{display:none;}
+}
+
+@media (max-width:1400px){
+  .dtd-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+
+@media (max-width:1240px){
+  .dtd-services-head{grid-template-columns:minmax(0,1fr);row-gap:10px;}
+  .dtd-process-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .dtd-process-copy{padding-left:0;}
+  .dtd-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:30px;}
+  .dtd-step:nth-child(3)::before{display:none;}
+  .dtd-results-inner{grid-template-columns:minmax(0,1fr);row-gap:22px;}
+  .dtd-results-copy{max-width:560px;padding-left:0;}
+}
+
+@media (max-width:1024px){
+  .dtd-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:70% center;}
+  .dtd-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.95) 0%, rgba(0,22,46,.85) 55%, rgba(0,22,46,.55) 100%);
+  }
+  .dtd-why-inner,.dtd-choose-inner{grid-template-columns:minmax(0,1fr);padding-inline:var(--pad);}
+  .dtd-why-copy,.dtd-benefits,.dtd-choose-copy,.dtd-features{grid-column:auto;grid-row:auto;}
+  .dtd-why-photo{
+    grid-column:auto;grid-row:auto;
+    clip-path:none;
+    aspect-ratio:342/180;min-height:0;
+    margin-block:0 calc(-1 * var(--why-pad));
+    margin-inline:calc(-1 * var(--pad));
+  }
+  .dtd-benefits{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .dtd-benefits li:nth-child(3){border-left:0;}
+  .dtd-choose-photo{
+    grid-column:auto;grid-row:auto;
+    clip-path:none;
+    justify-content:center;
+    padding:clamp(28px,5vw,48px) var(--pad);
+    margin-block:6px calc(-1 * var(--choose-pad));
+    margin-inline:calc(-1 * var(--pad));
+  }
+  .dtd-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:820px){
+  .dtd-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .dtd-features{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px;}
+  .dtd-features li:nth-child(3){border-left:0;}
+}
+
+@media (max-width:640px){
+  .dtd-hero-inner{padding-top:34px;padding-bottom:30px;}
+  .dtd-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .dtd-hero h1 br{display:none;}
+  .dtd-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .dtd-hero-actions{gap:10px;}
+  .dtd-hero-actions .btn,.dtd-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .dtd-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.7) 100%);
+  }
+  .dtd-trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+  .dtd-why-copy h2 br{display:none;}
+  .dtd-grid .fg-card-body{padding:12px 12px 14px;}
+  .dtd-grid .fg-card-body h3{font-size:14px;}
+  .dtd-steps{grid-template-columns:minmax(0,1fr);}
+  .dtd-step + .dtd-step::before{display:none;}
+  .dtd-step-num{left:8px;}
+  .dtd-ba-grid{grid-template-columns:minmax(0,1fr);max-width:480px;}
+  .sfr-ba{aspect-ratio:2/1;}
+}
+
+@media (max-width:400px){
+  .dtd-grid{grid-template-columns:minmax(0,1fr);}
+  .dtd-trust{grid-template-columns:minmax(0,1fr);}
+  .dtd-benefits,.dtd-features{grid-template-columns:minmax(0,1fr);}
+  .dtd-benefits li + li,.dtd-features li + li{border-left:0;}
+}
