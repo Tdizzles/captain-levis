@@ -1,0 +1,493 @@
+/* ==========================================================================
+   Scratch & Gouge Repair — page-specific styles (a sub-page of Gelcoat Repair).
+   Loads after styles.css and reuses its tokens, buttons, eyebrows, card grid,
+   header and footer. Everything here is prefixed .sg- so no other page moves;
+   the only unprefixed rules are the .sfr-ba slider styles, which every page
+   that uses the shared slider redefines for itself (see hull/transom).
+   ========================================================================== */
+
+/* Shared wide frame: the comp runs these bands at the card grid's width. */
+.sg-wide{
+  --wide-pad:clamp(18px,2.6vw,44px);
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:var(--wide-pad);
+}
+/* Same content edge as .sg-wide, but for bands whose last cell bleeds to the
+   viewport's right edge (the recipe's why-band padding-left trick). */
+.sg-bleed{
+  padding-left:max(clamp(18px,2.6vw,44px), calc((100% - 1760px) / 2 + clamp(18px,2.6vw,44px)));
+  padding-right:0;
+}
+.sg-eyebrow{
+  color:var(--icon-blue);
+  font-size:11.5px;
+  letter-spacing:1.8px;
+  margin-bottom:10px;
+}
+.sg-eyebrow i{background:var(--icon-blue);width:32px;}
+.sg-services h2 .accent{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   One photo (sg-hero.jpg, "Same Boats. New Beginnings." baked in at its right
+   edge). It covers the right of the band and stays anchored right so the
+   tagline always survives the crop; its left edge feathers into the navy. */
+.sg-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.sg-hero-img{
+  position:absolute;top:0;right:0;
+  width:66%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 26%);
+}
+.sg-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.88) 0%,
+      rgba(0,22,46,.66) 34%,
+      rgba(0,22,46,.18) 50%,
+      rgba(0,22,46,0) 60%),
+    linear-gradient(0deg, rgba(0,22,46,.45) 0%, rgba(0,22,46,0) 30%);
+}
+.sg-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(36px,3.6vw,62px);
+  padding-bottom:clamp(30px,2.8vw,48px);
+}
+.sg-hero-content{max-width:660px;}
+.sg-hero-eyebrow{margin-bottom:14px;font-size:12px;letter-spacing:2px;}
+.sg-hero h1{
+  font-size:clamp(32px,3.3vw,54px);
+  letter-spacing:-1.2px;
+  line-height:1.02;
+  color:#fff;
+  margin-bottom:16px;
+}
+.sg-hero h1 .accent{color:var(--accent);}
+.sg-hero-sub{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(15px,1.1vw,17px);
+  line-height:1.5;
+  max-width:520px;
+  margin-bottom:24px;
+}
+.sg-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.sg-trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(18px,2.2vw,36px);
+  margin-top:clamp(22px,2vw,32px);
+}
+.sg-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
+.sg-trust-icon{color:var(--accent);display:flex;}
+.sg-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
+.sg-trust small{display:block;font-size:12px;color:rgba(255,255,255,.78);}
+
+/* ---------- Services ----------
+   Reuses .fg-grid / .fg-card, five-up. No overlapping icon badge in the comp,
+   so the card body padding drops back to normal (as on the gelcoat page). */
+.sg-services{background:var(--light-bg);overflow:hidden;}
+.sg-services-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(300px,640px);
+  align-items:end;
+  column-gap:clamp(24px,3vw,56px);
+  padding-top:clamp(30px,2.6vw,44px);
+  padding-bottom:clamp(16px,1.4vw,22px);
+}
+.sg-services-head > div{padding-left:clamp(0px,1.4vw,28px);}
+.sg-services-head h2{
+  font-size:clamp(24px,1.9vw,35px);
+  letter-spacing:-.7px;
+  line-height:1.15;
+}
+.sg-services-head > p{font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+
+.sg-grid{grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:clamp(26px,2.4vw,40px);}
+.sg-grid .fg-card{border:1px solid #E6EFF7;}
+.sg-grid .fg-card-media img{aspect-ratio:266/73;}
+.sg-grid .fg-card-body{padding:14px 18px 16px;}
+.sg-grid .fg-card-body h3{font-size:15.5px;margin-bottom:6px;}
+.sg-grid .fg-card-body p{font-size:13px;line-height:1.5;margin-bottom:12px;}
+.sg-grid .fg-card-link{font-size:13px;}
+
+/* ---------- Why repair ----------
+   copy | four benefits | photo bleeding to the viewport's right edge. */
+.sg-why{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(94,205,250,.14), transparent 60%),
+    linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+  border-top:1px solid #E6EFF7;
+}
+.sg-why-inner{
+  --why-pad:clamp(24px,2.2vw,36px);
+  display:grid;
+  grid-template-columns:minmax(340px,29%) minmax(0,1fr) clamp(220px,29%,560px);
+  align-items:center;
+  column-gap:clamp(20px,2.2vw,38px);
+  padding-block:var(--why-pad);
+}
+.sg-why-copy{padding-left:clamp(0px,1.4vw,28px);}
+.sg-why-copy h2{
+  font-size:clamp(23px,1.75vw,32px);
+  letter-spacing:-.7px;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.sg-why-copy p{font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+.sg-benefits{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.sg-benefits li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(8px,1vw,18px);
+}
+.sg-benefits li + li{border-left:1px solid #DCE8F3;}
+.sg-benefit-icon{
+  width:50px;height:50px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.sg-benefits strong{font-family:var(--font-head);font-size:14px;line-height:1.2;color:var(--navy);margin-bottom:8px;}
+.sg-benefits small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:150px;}
+.sg-why-photo{
+  align-self:stretch;
+  position:relative;
+  margin-block:calc(-1 * var(--why-pad));
+  min-height:180px;
+  /* The comp's notch: the band's white pokes into the photo's left edge. */
+  clip-path:polygon(0 0, 100% 0, 100% 100%, 0 100%, 6% 50%);
+}
+.sg-why-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:right center;   /* tagline is baked into the right half */
+}
+
+/* ---------- Process band ---------- */
+.sg-process{
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.18), transparent 60%),
+    linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 62%,#003463 100%);
+}
+.sg-process-inner{
+  display:grid;
+  grid-template-columns:minmax(340px,28%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(24px,2.6vw,48px);
+  padding-block:clamp(30px,2.6vw,44px);
+}
+.sg-process-copy{padding-left:clamp(0px,1.4vw,28px);}
+.sg-process-copy .eyebrow{margin-bottom:10px;font-size:11.5px;letter-spacing:1.8px;}
+.sg-process-copy h2{
+  color:#fff;
+  font-size:clamp(24px,1.85vw,34px);
+  letter-spacing:-.8px;
+  margin-bottom:12px;
+}
+.sg-process-copy .accent{color:var(--accent);}
+.sg-process-copy p{color:rgba(255,255,255,.86);font-size:14px;line-height:1.55;max-width:400px;}
+.sg-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:clamp(22px,2.4vw,40px);
+}
+.sg-step{position:relative;}
+/* Chevron between steps, sitting in the column gap beside the photo. */
+.sg-step + .sg-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * clamp(22px,2.4vw,40px) / 2 - 6px);
+  top:clamp(26px,2.2vw,40px);
+  width:12px;height:22px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 22' fill='none'%3E%3Cpath d='M2 2l8 9-8 9' stroke='%235ECDFA' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.sg-step-media{position:relative;margin-bottom:12px;}
+.sg-step-media img{
+  width:100%;
+  aspect-ratio:200/56;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+}
+.sg-step-num{
+  position:absolute;top:-12px;left:-10px;
+  width:34px;height:34px;
+  border-radius:50%;
+  background:var(--icon-blue);
+  color:#fff;
+  border:2px solid #fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.sg-step h3{color:#fff;font-size:15px;letter-spacing:-.2px;margin-bottom:5px;}
+.sg-step p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.5;}
+
+/* ---------- Before & after ----------
+   copy | three sliders | boat photo bleeding to the right edge. */
+.sg-results{background:#fff;overflow:hidden;}
+.sg-results-inner{
+  display:grid;
+  grid-template-columns:minmax(320px,27%) minmax(0,1fr) clamp(140px,11%,240px);
+  align-items:center;
+  column-gap:clamp(18px,2vw,36px);
+}
+.sg-results-copy{padding-left:clamp(0px,1.4vw,28px);padding-block:clamp(24px,2.2vw,36px);}
+.sg-results-copy h2{
+  font-size:clamp(22px,1.55vw,29px);
+  letter-spacing:-.6px;
+  line-height:1.12;
+  margin-bottom:8px;
+}
+.sg-results-copy p{font-size:13px;line-height:1.55;color:var(--gray-text);margin-bottom:14px;max-width:360px;}
+.sg-results-copy .btn{font-size:13px;padding:9px 18px;}
+.sg-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,1.4vw,24px);
+}
+.sg-results-photo{
+  align-self:stretch;
+  position:relative;
+  min-height:160px;
+  clip-path:polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+}
+.sg-results-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+
+/* The shared slider (script.js binds every .sfr-ba). The comp's pairs are wide
+   strips; each half is ~2:1, so cover crops a little top and bottom. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:278/89;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:32px;height:32px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:8px;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:10px;
+  letter-spacing:1.1px;
+  padding:4px 14px;
+  border-radius:4px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:8px;background:rgba(0,22,46,.88);color:#fff;}
+.sfr-ba-tag-after{right:8px;background:var(--icon-blue);color:#fff;}
+
+/* ---------- Why boaters choose us ----------
+   copy | four features | CTA card over a marina photo bleeding right. */
+.sg-choose{background:var(--light-bg);border-top:1px solid #E6EFF7;overflow:hidden;}
+.sg-choose-inner{
+  display:grid;
+  grid-template-columns:minmax(300px,24%) minmax(0,1fr) clamp(380px,29%,560px);
+  align-items:center;
+  column-gap:clamp(18px,2vw,36px);
+}
+.sg-choose-copy{padding-left:clamp(0px,1.4vw,28px);padding-block:clamp(22px,2vw,32px);}
+.sg-choose-copy h2{
+  font-size:clamp(21px,1.6vw,29px);
+  letter-spacing:-.6px;
+  line-height:1.1;
+  margin-bottom:8px;
+}
+.sg-choose-copy p{font-size:13px;line-height:1.5;color:var(--gray-text);max-width:360px;}
+@media (min-width:1025px){
+  .sg-choose-copy .eyebrow span,.sg-why-copy .eyebrow span{white-space:nowrap;}
+}
+.sg-features{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.sg-features li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(6px,.9vw,16px);
+}
+.sg-features li + li{border-left:1px solid #DCE8F3;}
+.sg-feature-icon{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:9px;
+}
+.sg-features strong{font-family:var(--font-head);font-size:13px;line-height:1.25;color:var(--navy);margin-bottom:4px;}
+.sg-features small{font-size:11.5px;line-height:1.4;color:var(--gray-text);max-width:170px;}
+
+.sg-cta{
+  align-self:stretch;
+  position:relative;
+  display:flex;align-items:center;
+  padding:clamp(12px,1vw,16px) clamp(20px,3vw,56px) clamp(12px,1vw,16px) clamp(34px,3.4vw,60px);
+  clip-path:polygon(9% 0, 100% 0, 100% 100%, 0 100%);
+}
+.sg-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 60%;
+}
+.sg-cta-card{
+  position:relative;
+  width:100%;
+  background:#fff;
+  border-radius:12px;
+  padding:clamp(14px,1.2vw,20px) clamp(16px,1.4vw,24px);
+  text-align:center;
+  box-shadow:0 20px 40px -24px rgba(0,0,0,.7);
+}
+.sg-cta-card h2{font-size:clamp(18px,1.3vw,22px);letter-spacing:-.4px;margin-bottom:3px;}
+.sg-cta-card p{font-size:12.5px;color:var(--gray-text);margin-bottom:12px;}
+.sg-cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.sg-cta-actions .btn{font-size:13.5px;padding:11px 20px;}
+
+/* ==========================================================================
+   Responsive — widest first (see the recipe: equal specificity, later wins)
+   ========================================================================== */
+
+@media (max-width:1500px){
+  /* Why band: copy moves above the benefits so they keep a usable width. */
+  .sg-why-inner{grid-template-columns:minmax(0,1fr) clamp(220px,34%,500px);row-gap:22px;}
+  .sg-why-copy{grid-column:1;grid-row:1;}
+  .sg-benefits{grid-column:1;grid-row:2;}
+  .sg-why-photo{grid-column:2;grid-row:1 / span 2;}
+  /* Results: the boat photo is the first thing to give way. */
+  .sg-results-inner{grid-template-columns:minmax(350px,30%) minmax(0,1fr);padding-right:var(--wide-pad,clamp(18px,2.6vw,44px));}
+  .sg-results-photo{display:none;}
+  /* Choose: copy above the features, CTA on the right. */
+  .sg-choose-inner{grid-template-columns:minmax(0,1fr) clamp(380px,38%,540px);}
+  .sg-choose-copy{grid-column:1;grid-row:1;padding-bottom:12px;}
+  .sg-features{grid-column:1;grid-row:2;padding-bottom:clamp(22px,2vw,32px);}
+  .sg-cta{grid-column:2;grid-row:1 / span 2;}
+}
+
+@media (max-width:1240px){
+  .sg-services-head{grid-template-columns:minmax(0,1fr);row-gap:10px;}
+  .sg-services-head > div{padding-left:0;}
+  .sg-process-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .sg-process-copy{padding-left:0;}
+  .sg-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px;}
+  .sg-step:nth-child(3)::before{display:none;}
+  .sg-results-inner{grid-template-columns:minmax(0,1fr);}
+  .sg-results-copy{padding-bottom:0;}
+  .sg-ba-grid{padding-bottom:clamp(24px,2.2vw,36px);}
+  .sg-results-copy p{max-width:560px;}
+}
+
+@media (max-width:1100px){
+  .sg-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+
+@media (max-width:1024px){
+  .sg-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:80% center;}
+  .sg-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.94) 0%, rgba(0,22,46,.84) 55%, rgba(0,22,46,.5) 100%);
+  }
+  .sg-why-inner,.sg-choose-inner{grid-template-columns:minmax(0,1fr);padding-inline:var(--pad);}
+  .sg-why-copy,.sg-benefits,.sg-choose-copy,.sg-features{grid-column:auto;grid-row:auto;padding-left:0;}
+  .sg-why-photo{
+    grid-column:auto;grid-row:auto;
+    clip-path:none;
+    aspect-ratio:494/135;min-height:0;
+    margin-block:0 calc(-1 * var(--why-pad));
+    margin-inline:calc(-1 * var(--pad));
+  }
+  .sg-benefits{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .sg-benefits li:nth-child(3){border-left:0;}
+  .sg-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .sg-choose-copy{padding-bottom:0;}
+  .sg-features{padding-bottom:0;}
+  .sg-cta{
+    grid-column:auto;grid-row:auto;
+    clip-path:none;
+    margin-inline:calc(-1 * var(--pad));
+    padding:clamp(28px,5vw,48px) var(--pad);
+    justify-content:center;
+  }
+  .sg-cta-card{max-width:520px;}
+}
+
+@media (max-width:820px){
+  .sg-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .sg-features{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px;}
+  .sg-features li:nth-child(3){border-left:0;}
+}
+
+@media (max-width:640px){
+  .sg-hero-inner{padding-top:34px;padding-bottom:30px;}
+  .sg-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .sg-hero h1 br{display:none;}
+  .sg-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .sg-hero-actions{gap:10px;}
+  .sg-hero-actions .btn,.sg-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .sg-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.72) 100%);
+  }
+  .sg-trust{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;}
+  .sg-why-copy h2 br,.sg-choose-copy h2 br{display:none;}
+  .sg-grid .fg-card-body{padding:12px 12px 14px;}
+  .sg-grid .fg-card-body h3{font-size:14px;}
+  .sg-steps{grid-template-columns:minmax(0,1fr);}
+  .sg-step + .sg-step::before{display:none;}
+  .sg-step-num{left:8px;}
+  .sg-ba-grid{grid-template-columns:minmax(0,1fr);max-width:480px;}
+  .sfr-ba{aspect-ratio:2/1;}
+}
+
+@media (max-width:400px){
+  .sg-grid{grid-template-columns:minmax(0,1fr);}
+  .sg-benefits,.sg-features{grid-template-columns:minmax(0,1fr);}
+  .sg-benefits li + li,.sg-features li + li{border-left:0;}
+}

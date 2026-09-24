@@ -478,6 +478,10 @@ node --check script.js
 - **`gelcoat-repair.html` copy to confirm:** the comp's CTA says "talk directly
   with Captain Dave", and its pin list had Tampa twice (the second is now
   Dunedin). Check both with the owner.
+- **`scratch-gouge-repair.html`** (sub-page of Gelcoat, `.sg-` prefix, linked
+  from the gelcoat page's Scratch & Gouge card) is not in the nav dropdown.
+  All three of its before/after pairs are halves cropped from the comp and are
+  not the same boat. Its CTA repeats "Captain Dave" from the comp.
 - **Two of the three before/after pairs are placeholders** — a damage photo
   paired with a different finished photo, flagged with HTML comments in the
   markup. Only the third (`before-after.jpg`) is a genuine pair. Swap in real
