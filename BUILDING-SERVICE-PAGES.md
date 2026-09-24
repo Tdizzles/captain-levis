@@ -490,3 +490,12 @@ node --check script.js
 - **The contact form does not submit anywhere.** `script.js` blocks submit,
   disables the fields and reveals `.form-success`. The reCAPTCHA checkbox is
   decorative markup, not real reCAPTCHA. Wire both up before launch.
+- **Hull repair sub-pages share one stylesheet.** The six pages linked from
+  `hull-repairs.html`'s card grid (`hull-crack-repair`, `impact-collision-damage`,
+  `soft-spots-delamination`, `keel-bottom-repair`, `hull-blister-osmosis-repair`,
+  `structural-hull-rebuilds`) are one template, so they share `hull-subpage.css`
+  (`.hs-` prefix). Only `hull-crack-repair.html` has its own comp; its `hcr-*`
+  images are cropped from that comp at 2× (source is 889px wide, so they are
+  soft). The other five reuse existing hull/deck/stringer photos. Every
+  before/after pair on the five is a placeholder (flagged in the markup), and
+  several pairs repeat across pages. None of the six are in the nav dropdown.
