@@ -1,0 +1,454 @@
+/* ==========================================================================
+   Oxidation & Fading Restoration — page-specific styles.
+   Loads after styles.css and reuses its tokens, buttons, eyebrows, card grid,
+   header and footer. Everything here is prefixed .ox- so no other page moves.
+   ========================================================================== */
+
+/* Shared wide frame: the comp runs these bands at the card grid's width
+   (.fg-grid), wider than .container. */
+.ox-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,2.6vw,44px);
+}
+.ox-eyebrow{
+  color:var(--icon-blue);
+  font-size:11.5px;
+  letter-spacing:1.8px;
+  margin-bottom:10px;
+}
+.ox-eyebrow i{background:var(--icon-blue);width:32px;}
+.ox-wide h2 .accent{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   Copy over a darkened marina on the left; the comp's BEFORE / AFTER pair on
+   the right (chips and "Same Boats. New Beginnings." baked into the crops).
+   The pair starts at 46% of the viewport or 600px past the copy's left edge,
+   whichever is further right, so it never runs under the headline. */
+.ox-hero{
+  position:relative;
+  overflow:hidden;
+  background:var(--navy-2);
+}
+.ox-hero-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+}
+.ox-hero-photos{
+  position:absolute;top:0;bottom:0;right:0;
+  left:max(46%, calc((100% - var(--container)) / 2 + var(--pad) + 600px));
+  display:grid;
+  grid-template-columns:41fr 59fr;
+}
+.ox-hero-photos img{width:100%;height:100%;object-fit:cover;display:block;}
+.ox-hero-before{
+  object-position:60% center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 34%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 34%);
+}
+/* Keeps both the AFTER chip (20–40% of the crop) and the tagline (52–90%). */
+.ox-hero-after{object-position:72% center;border-left:3px solid #fff;}
+.ox-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.92) 0%,
+      rgba(0,22,46,.82) 32%,
+      rgba(0,22,46,.35) 46%,
+      rgba(0,22,46,0) 56%),
+    linear-gradient(0deg, rgba(0,22,46,.75) 0%, rgba(0,22,46,0) 24%);
+}
+.ox-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(34px,3.4vw,58px);
+  padding-bottom:clamp(22px,2vw,32px);
+}
+.ox-hero-content{max-width:580px;}
+.ox-hero-eyebrow{margin-bottom:14px;font-size:12px;letter-spacing:1.8px;}
+.ox-hero h1{
+  font-size:clamp(30px,2.75vw,46px);
+  letter-spacing:-1.1px;
+  line-height:1.06;
+  color:#fff;
+  margin-bottom:16px;
+}
+.ox-hero h1 .accent{color:var(--accent);}
+.ox-hero-lead{
+  color:rgba(255,255,255,.88);
+  font-size:15px;
+  line-height:1.55;
+  margin-bottom:22px;
+}
+.ox-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+.ox-trust{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px clamp(18px,2.2vw,40px);
+  margin-top:clamp(20px,2vw,30px);
+}
+.ox-trust li{display:flex;align-items:center;gap:10px;color:#fff;}
+.ox-trust-icon{
+  width:38px;height:38px;flex:none;
+  border-radius:50%;
+  background:rgba(94,205,250,.14);
+  color:var(--accent);
+  display:flex;align-items:center;justify-content:center;
+}
+.ox-trust strong{display:block;font-family:var(--font-head);font-size:13px;line-height:1.25;}
+.ox-trust small{display:block;font-size:11.5px;color:rgba(255,255,255,.78);}
+
+/* ---------- Services ----------
+   Reuses .fg-grid / .fg-card, five-up. No overlapping icon badge in the comp,
+   so the body padding drops back to normal. */
+.ox-services{background:var(--light-bg);overflow:hidden;}
+.ox-services-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(280px,540px);
+  align-items:end;
+  column-gap:clamp(24px,3vw,56px);
+  padding-top:clamp(30px,2.6vw,44px);
+  padding-bottom:clamp(16px,1.4vw,22px);
+}
+.ox-services-head h2{
+  font-size:clamp(23px,1.9vw,34px);
+  letter-spacing:-.7px;
+  line-height:1.15;
+}
+.ox-services-head > p{font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+
+.ox-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
+.ox-grid .fg-card{border:1px solid #E6EFF7;}
+.ox-grid .fg-card-media img{aspect-ratio:262/70;}
+.ox-grid .fg-card-body{padding:14px 18px 16px;}
+.ox-grid .fg-card-body h3{font-size:15.5px;margin-bottom:6px;}
+.ox-grid .fg-card-body p{font-size:13px;line-height:1.5;margin-bottom:12px;}
+.ox-grid .fg-card-link{font-size:13px;}
+
+/* ---------- Why boats oxidize ----------
+   copy | four causes | photo bleeding to the viewport's right edge (the
+   recipe's why band: padding-left reproduces the wide frame's content edge). */
+.ox-why{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(94,205,250,.14), transparent 60%),
+    linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+  border-top:1px solid #E6EFF7;
+}
+.ox-why-inner{
+  --why-pad:clamp(24px,2.2vw,36px);
+  display:grid;
+  grid-template-columns:minmax(300px,28%) minmax(0,1fr) clamp(220px,30%,560px);
+  align-items:center;
+  column-gap:clamp(20px,2.2vw,38px);
+  padding-block:var(--why-pad);
+  padding-left:max(clamp(18px,2.6vw,44px), calc((100% - 1760px) / 2 + clamp(18px,2.6vw,44px)));
+  padding-right:0;
+}
+.ox-why-copy h2{
+  font-size:clamp(22px,1.75vw,31px);
+  letter-spacing:-.7px;
+  line-height:1.12;
+  margin-bottom:10px;
+}
+.ox-why-copy p{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+@media (min-width:1025px){
+  .ox-why-copy h2{white-space:nowrap;}
+}
+.ox-causes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.ox-causes li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(8px,1vw,18px);
+}
+.ox-causes li + li{border-left:1px solid #DCE8F3;}
+.ox-cause-icon{
+  width:48px;height:48px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:10px;
+}
+.ox-causes strong{font-family:var(--font-head);font-size:14px;color:var(--navy);margin-bottom:5px;}
+.ox-causes small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:160px;}
+.ox-why-photo{
+  align-self:stretch;
+  position:relative;
+  margin-block:calc(-1 * var(--why-pad));
+  min-height:170px;
+  clip-path:polygon(9% 0, 100% 0, 100% 100%, 0 100%);
+}
+.ox-why-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  /* The tagline is baked into the right half. */
+  object-position:right center;
+}
+
+/* ---------- Process band ---------- */
+.ox-process{
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.18), transparent 60%),
+    linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 62%,#003463 100%);
+}
+.ox-process-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,26%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(24px,2.6vw,48px);
+  padding-block:clamp(30px,2.6vw,44px);
+}
+.ox-process-copy{padding-left:clamp(0px,1.4vw,28px);}
+.ox-process-copy .eyebrow{margin-bottom:10px;font-size:11.5px;letter-spacing:1.8px;}
+.ox-process-copy h2{
+  color:#fff;
+  font-size:clamp(24px,2vw,34px);
+  letter-spacing:-.8px;
+  margin-bottom:12px;
+}
+@media (min-width:1025px){
+  .ox-process-copy h2{white-space:nowrap;}
+}
+.ox-process-copy h2 .accent{color:var(--accent);}
+.ox-process-copy p{color:rgba(255,255,255,.82);font-size:14px;line-height:1.6;max-width:380px;}
+.ox-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:clamp(22px,2.6vw,44px);
+}
+.ox-step{position:relative;}
+/* Chevron between steps, sitting in the column gap beside the photo. */
+.ox-step + .ox-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * clamp(22px,2.6vw,44px) / 2 - 6px);
+  top:clamp(40px,3.2vw,56px);
+  width:12px;height:26px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 22' fill='none'%3E%3Cpath d='M2 2l8 9-8 9' stroke='%235ECDFA' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.ox-step-media{position:relative;margin-bottom:12px;}
+.ox-step-media img{
+  width:100%;
+  aspect-ratio:4/1;
+  object-fit:cover;
+  border-radius:8px;
+  display:block;
+}
+.ox-step-num{
+  position:absolute;top:-12px;left:-10px;
+  width:34px;height:34px;
+  border-radius:50%;
+  background:var(--accent-btn);
+  color:var(--navy-2);
+  border:2px solid #fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:16px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.ox-step h3{color:#fff;font-size:15px;letter-spacing:-.2px;margin-bottom:5px;}
+.ox-step p{color:rgba(255,255,255,.76);font-size:13px;line-height:1.5;}
+
+/* ---------- Before & after results ---------- */
+.ox-results{background:#fff;}
+.ox-results-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,22%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(20px,2.6vw,48px);
+  padding-block:clamp(24px,2.2vw,36px);
+}
+.ox-results-copy{padding-left:clamp(0px,1.4vw,28px);}
+.ox-results-copy h2{
+  font-size:clamp(22px,1.7vw,30px);
+  letter-spacing:-.6px;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.ox-results-copy p{font-size:13px;line-height:1.55;color:var(--gray-text);margin-bottom:14px;}
+.ox-results-copy .btn{font-size:13px;padding:9px 18px;}
+.ox-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(10px,1.2vw,20px);
+}
+.ox-ba-pair{
+  margin:0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:3px;
+  aspect-ratio:2.6/1;
+  background:#fff;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+}
+.ox-ba-pair img{width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block;}
+
+/* ---------- Why choose us + CTA ----------
+   copy | four features | marina photo with the CTA card, bleeding to the
+   viewport's right edge like the why band. */
+.ox-choose{background:var(--light-bg);border-top:1px solid #E6EFF7;overflow:hidden;}
+.ox-choose-inner{
+  --choose-pad:clamp(20px,1.8vw,30px);
+  display:grid;
+  grid-template-columns:minmax(260px,19%) minmax(0,1fr) clamp(360px,33%,620px);
+  align-items:center;
+  column-gap:clamp(18px,2vw,36px);
+  padding-block:var(--choose-pad);
+  padding-left:max(clamp(18px,2.6vw,44px), calc((100% - 1760px) / 2 + clamp(18px,2.6vw,44px)));
+  padding-right:0;
+}
+.ox-choose-copy{padding-left:clamp(0px,1.4vw,28px);}
+.ox-choose-copy h2{
+  font-size:clamp(22px,1.75vw,31px);
+  letter-spacing:-.7px;
+  line-height:1.08;
+}
+@media (min-width:1025px){
+  .ox-choose-copy .eyebrow span{white-space:nowrap;}
+}
+.ox-features{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.ox-features li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(8px,1vw,16px);
+}
+.ox-features li + li{border-left:1px solid #DCE8F3;}
+.ox-feature-icon{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:9px;
+}
+.ox-features strong{font-family:var(--font-head);font-size:13px;line-height:1.25;color:var(--navy);margin-bottom:4px;}
+.ox-features small{font-size:11.5px;line-height:1.4;color:var(--gray-text);max-width:170px;}
+.ox-cta{
+  align-self:stretch;
+  position:relative;
+  margin-block:calc(-1 * var(--choose-pad));
+  display:flex;align-items:center;justify-content:center;
+  padding:18px clamp(16px,2vw,36px) 18px clamp(40px,5vw,90px);
+  clip-path:polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  background:var(--navy);
+}
+.ox-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 55%;
+}
+.ox-cta-card{
+  position:relative;
+  background:#fff;
+  border-radius:12px;
+  padding:clamp(14px,1.2vw,20px) clamp(16px,1.6vw,26px);
+  text-align:center;
+  box-shadow:0 20px 40px -20px rgba(0,0,0,.7);
+}
+.ox-cta-card h2{font-size:clamp(18px,1.3vw,22px);letter-spacing:-.4px;margin-bottom:4px;}
+.ox-cta-card p{font-size:13px;color:var(--gray-text);margin-bottom:12px;}
+.ox-cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.ox-cta-actions .btn{font-size:13.5px;padding:10px 20px;}
+
+/* ==========================================================================
+   Responsive — widest first (see the recipe: equal specificity, later wins)
+   ========================================================================== */
+
+@media (max-width:1500px){
+  /* Why + choose bands: copy moves above the row so the columns keep a usable width. */
+  .ox-why-inner{grid-template-columns:minmax(0,1fr) clamp(220px,32%,480px);row-gap:20px;}
+  .ox-why-copy{grid-column:1;grid-row:1;}
+  .ox-causes{grid-column:1;grid-row:2;}
+  .ox-why-photo{grid-column:2;grid-row:1 / span 2;}
+  .ox-choose-inner{grid-template-columns:minmax(0,1fr) clamp(360px,38%,560px);row-gap:18px;}
+  .ox-choose-copy{grid-column:1;grid-row:1;}
+  .ox-features{grid-column:1;grid-row:2;}
+  .ox-cta{grid-column:2;grid-row:1 / span 2;}
+}
+
+@media (max-width:1400px){
+  .ox-results-inner{grid-template-columns:minmax(0,1fr);row-gap:20px;}
+  .ox-results-copy{padding-left:0;}
+  .ox-results-copy h2 br{display:none;}
+}
+
+@media (max-width:1240px){
+  .ox-services-head{grid-template-columns:minmax(0,1fr);row-gap:10px;}
+  .ox-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .ox-process-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .ox-process-copy{padding-left:0;}
+  .ox-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px;}
+  .ox-step:nth-child(3)::before{display:none;}
+}
+
+@media (max-width:1024px){
+  /* Hero: the pair drops out of the background and becomes a banner under the copy. */
+  .ox-hero{display:flex;flex-direction:column;}
+  .ox-hero-inner{order:1;}
+  .ox-hero-photos{
+    order:2;
+    position:relative;z-index:2;
+    left:auto;
+    aspect-ratio:2.4/1;
+    grid-template-columns:40fr 60fr;
+  }
+  .ox-hero-before{-webkit-mask-image:none;mask-image:none;object-position:70% center;}
+  .ox-hero-after{object-position:50% center;}
+  .ox-hero-scrim{background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 100%);}
+  .ox-why-inner,.ox-choose-inner{grid-template-columns:minmax(0,1fr);padding-inline:var(--pad);}
+  .ox-why-copy,.ox-causes,.ox-why-photo,
+  .ox-choose-copy,.ox-features,.ox-cta{grid-column:auto;grid-row:auto;}
+  .ox-choose-copy{padding-left:0;}
+  .ox-why-photo{
+    clip-path:none;
+    aspect-ratio:436/113;min-height:0;
+    margin-block:0 calc(-1 * var(--why-pad));
+    margin-inline:calc(-1 * var(--pad));
+  }
+  .ox-cta{
+    clip-path:none;
+    margin-block:0 calc(-1 * var(--choose-pad));
+    margin-inline:calc(-1 * var(--pad));
+    padding:clamp(28px,5vw,44px) var(--pad);
+  }
+  .ox-causes{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .ox-causes li:nth-child(3){border-left:0;}
+  .ox-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:820px){
+  .ox-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .ox-features{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px;}
+  .ox-features li:nth-child(3){border-left:0;}
+}
+
+@media (max-width:640px){
+  .ox-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .ox-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .ox-hero h1 br{display:none;}
+  .ox-hero-lead{font-size:14.5px;}
+  .ox-hero-actions{gap:10px;}
+  .ox-hero-actions .btn,.ox-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .ox-trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+  .ox-choose-copy h2 br{display:none;}
+  .ox-grid .fg-card-body{padding:12px 12px 14px;}
+  .ox-grid .fg-card-body h3{font-size:14px;}
+  .ox-steps{grid-template-columns:minmax(0,1fr);}
+  .ox-step + .ox-step::before{display:none;}
+  .ox-step-num{left:8px;}
+  .ox-ba-grid{grid-template-columns:minmax(0,1fr);max-width:480px;}
+  .ox-cta-card{flex:1;}
+}
+
+@media (max-width:400px){
+  .ox-grid{grid-template-columns:minmax(0,1fr);}
+  .ox-causes,.ox-features,.ox-trust{grid-template-columns:minmax(0,1fr);}
+  .ox-causes li + li,.ox-features li + li{border-left:0;}
+}
