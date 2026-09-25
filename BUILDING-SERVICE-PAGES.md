@@ -499,6 +499,15 @@ node --check script.js
   soft). The other five reuse existing hull/deck/stringer photos. Every
   before/after pair on the five is a placeholder (flagged in the markup), and
   several pairs repeat across pages. None of the six are in the nav dropdown.
+- **`surface-scratch-repair.html`** (sub-page of Scratch & Gouge, `.ss-`
+  prefix, linked from its Surface Scratches card) is not in the nav dropdown.
+  Its comp is only 1024px wide, so every `ss-*` image is a 2× upscale and
+  soft. All four before/after pairs are placeholders: each image is one half
+  of the comp's pair plus a mirrored copy, so the slider matches the comp at
+  rest but shows the mirror when dragged. `ss-cta-bg.jpg` is the comp's CTA
+  band with the baked-in copy painted out (bow left, mirrored skyline right).
+  The CTA repeats "Captain Dave", and the FAQ answers are drafted copy. Check
+  both with the owner.
 - **`dock-rash-scuff-repair.html`** (sub-page of Scratch & Gouge, `.drs-`
   prefix, linked from its Dock Rash & Scuffs card) is not in the nav dropdown.
   Its `drs-*` images are cropped from a 1024px comp and saved at 2×, so they
