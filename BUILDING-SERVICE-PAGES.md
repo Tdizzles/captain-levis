@@ -610,3 +610,22 @@ node --check script.js
   shows decimal markers in the gaps. The results copy says "real examples"
   although the pairs are placeholders, the CTA repeats "Captain Dave", and the
   FAQ answers are drafted copy. Check all three with the owner.
+- **`stress-crack-repair.html`** (sub-page of Crack Repair, `.stc-` prefix,
+  linked from its Stress Crack Repair card and from the Stress Cracks card on
+  `hull-crack-repair.html`) is not in the nav dropdown. Its comp is 1024px
+  wide, so every `stc-*` image is a 2× upscale (the type thumbnails 3×) and
+  soft. The two diagrams, the cutaway (`stc-layers.jpg`) and the boat
+  (`stc-boat.jpg`), had their callouts, leader lines and pins painted out of
+  the comp with OpenCV inpainting (a throwaway install, not a repo
+  dependency). The cards, lines and pins are live markup placed in % of each
+  photo and sized with container query units. The fill under the cutaway's
+  three cards is rough, so those cards stay overlaid at every width (titles
+  only once the figure is under 560px). On phones the boat's labels become a
+  numbered list. All three before/after pairs are placeholders built like the
+  surface scratch page's (one comp half plus its mirror, tags and handle
+  painted out). The comp's CTA skyline sits behind its buttons, so the band
+  uses the faded end of `results-marina.jpg` instead. In the Types list,
+  Surface Spider Cracks links to the parent's `#spider-crack-repair` card and
+  Stress Cracks Around Fittings to `#quote`. The trust strip keeps the comp's
+  people icon beside "Marine-Grade Materials". The CTA repeats "Captain
+  Dave", and the FAQ answers are drafted copy. Check both with the owner.
