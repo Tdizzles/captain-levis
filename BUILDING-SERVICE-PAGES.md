@@ -533,3 +533,14 @@ node --check script.js
   photos. The comp's CTA skyline is dropped: the band is navy with the comp's
   boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
   drafted copy. Check both with the owner.
+- **`edge-rub-rail-repair.html`** (sub-page of Gelcoat Chip Repair, `.err-`
+  prefix, linked from its Edge & Rub Rail Damage card) is not in the nav
+  dropdown. Its comp is 1024px wide, so every `err-*` image is a 2× upscale
+  and soft. All four before/after pairs are placeholders built like the
+  surface scratch page's (one comp half plus its mirror, cropped above the
+  comp's baked-in tags), so they match the comp at rest but show the mirror
+  when dragged. The hero photo stops above the trust strip because the
+  tagline is baked into its bottom-right corner. The five damage cards' Learn
+  More links go to `#quote`. The results copy says "real examples" although
+  the pairs are placeholders, the CTA repeats "Captain Dave", and the FAQ
+  answers are drafted copy. Check all three with the owner.
