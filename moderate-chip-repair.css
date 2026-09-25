@@ -200,6 +200,7 @@
 .mcr-steps{
   --step-gap:clamp(24px,1.95vw,32px);
   display:grid;
+  list-style:none;   /* styles.css only resets ul; this is an ol */
   grid-template-columns:repeat(4,minmax(0,1fr));
   column-gap:var(--step-gap);
 }
