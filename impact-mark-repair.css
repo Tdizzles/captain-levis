@@ -1,0 +1,581 @@
+/* ==========================================================================
+   Impact Mark Repair — page-specific styles (a sub-page of Gelcoat Repair,
+   linked from the Impact Marks card on scratch-gouge-repair.html).
+   Loads after styles.css and reuses its tokens, buttons, eyebrows, card, header
+   and footer. Everything here is prefixed .imr- so no other page moves; the
+   only unprefixed rules are the .sfr-ba slider styles, which every page that
+   uses the shared slider redefines for itself (see hull/transom/scratch).
+   ========================================================================== */
+
+/* Shared wide frame: the comp runs every band at ~90% of the viewport, wider
+   than .container. */
+.imr-wide{
+  --wide-pad:clamp(18px,4.4vw,96px);
+  max-width:1920px;
+  margin-inline:auto;
+  padding-inline:var(--wide-pad);
+}
+.imr-eyebrow{
+  color:var(--icon-blue);
+  font-size:12.5px;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+.imr-eyebrow i{background:var(--icon-blue);width:44px;}
+.imr-blue{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   One photo (imr-hero.jpg, "Same Boats. New Beginnings." baked in at its right
+   edge). It covers the right of the band and stays anchored right so the
+   tagline always survives the crop; its left edge feathers into the navy. */
+.imr-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.imr-hero-img{
+  position:absolute;top:0;right:0;
+  width:62%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 30%);
+}
+.imr-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.9) 0%,
+      rgba(0,22,46,.7) 36%,
+      rgba(0,22,46,.2) 52%,
+      rgba(0,22,46,0) 62%),
+    linear-gradient(0deg, rgba(0,22,46,.55) 0%, rgba(0,22,46,0) 26%);
+}
+.imr-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(30px,2.2vw,44px);
+  padding-bottom:clamp(18px,1.2vw,24px);
+}
+.imr-hero-content,
+.imr-trust{padding-left:clamp(0px,4.4vw,92px);}
+.imr-hero-content{max-width:calc(760px + clamp(0px,4.4vw,92px));}
+.imr-hero-eyebrow{margin-bottom:16px;font-size:12.5px;letter-spacing:2.2px;}
+.imr-hero h1{
+  font-size:clamp(34px,2.95vw,57px);
+  letter-spacing:-1.3px;
+  line-height:1.06;
+  color:#fff;
+  margin-bottom:18px;
+}
+.imr-hero h1 .accent{color:var(--accent);}
+.imr-hero-sub{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(15px,1vw,19px);
+  line-height:1.45;
+  max-width:610px;
+  margin-bottom:26px;
+}
+.imr-hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.imr-hero-actions .btn,
+.imr-cta-actions .btn{font-size:16px;padding:18px 36px;}
+.imr-trust{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:18px clamp(20px,2.4vw,44px);
+  max-width:calc(1500px + clamp(0px,4.4vw,92px));
+  margin-top:clamp(26px,2.2vw,42px);
+}
+.imr-trust li{display:flex;align-items:center;gap:14px;color:#fff;}
+.imr-trust-icon{color:var(--accent);display:flex;}
+.imr-trust strong{display:block;font-family:var(--font-head);font-size:16.5px;line-height:1.3;}
+.imr-trust small{display:block;font-size:14px;color:rgba(255,255,255,.78);}
+@media (min-width:1025px){
+  /* The rule hangs left of the copy, as in the comp. */
+  .imr-hero-eyebrow{margin-left:-58px;}
+}
+
+/* ---------- The service: copy + points | feature slider ---------- */
+.imr-intro{
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(94,205,250,.12), transparent 55%),
+    linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+}
+.imr-intro-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.04fr);
+  align-items:center;
+  column-gap:clamp(28px,3vw,104px);
+  padding-block:clamp(30px,2vw,40px);
+}
+.imr-intro-copy h2{
+  font-size:clamp(27px,2.4vw,46px);
+  letter-spacing:-1.1px;
+  line-height:1.12;
+  margin-bottom:16px;
+}
+.imr-intro-copy > p{
+  font-size:clamp(15px,1.02vw,19.5px);
+  line-height:1.6;
+  color:var(--gray-text);
+  max-width:820px;
+}
+.imr-points{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(22px,1.8vw,34px);
+}
+.imr-points li,
+.imr-risks li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(8px,1vw,20px);
+}
+.imr-points li + li,
+.imr-risks li + li{border-left:1px solid #DCE8F3;}
+.imr-point-icon,
+.imr-risk-icon{
+  width:clamp(54px,4.2vw,80px);height:clamp(54px,4.2vw,80px);
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.imr-points strong,
+.imr-risks strong{font-family:var(--font-head);font-size:clamp(14.5px,.86vw,16.5px);line-height:1.25;color:var(--navy);margin-bottom:6px;}
+.imr-points small,
+.imr-risks small{font-size:clamp(13px,.76vw,14.5px);line-height:1.45;color:var(--gray-text);max-width:180px;}
+
+/* ---------- Process band: photo (notched) | head + four step cards ---------- */
+.imr-process{
+  display:grid;
+  grid-template-columns:minmax(280px,35%) minmax(0,1fr);
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.18), transparent 60%),
+    linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 62%,#003463 100%);
+}
+.imr-process-photo{
+  position:relative;
+  min-height:300px;
+  clip-path:polygon(0 0, calc(100% - clamp(40px,4.4vw,88px)) 0, 100% 50%, calc(100% - clamp(40px,4.4vw,88px)) 100%, 0 100%);
+}
+.imr-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:30% center;
+}
+.imr-process-body{
+  padding-top:clamp(22px,1.6vw,32px);
+  padding-bottom:clamp(16px,1vw,20px);
+  padding-left:clamp(16px,1.2vw,28px);
+  /* Right edge lines up with .imr-wide's content edge. */
+  padding-right:max(clamp(18px,4.4vw,96px), calc((100vw - 1920px) / 2 + 96px));
+}
+.imr-process-head .eyebrow{margin-bottom:12px;font-size:12.5px;letter-spacing:2.2px;}
+.imr-process-head h2{
+  color:#fff;
+  font-size:clamp(25px,1.95vw,38px);
+  letter-spacing:-.8px;
+  margin-bottom:10px;
+}
+.imr-process-head p{color:rgba(255,255,255,.86);font-size:15px;line-height:1.55;max-width:560px;}
+.imr-steps{
+  --step-gap:clamp(26px,2.2vw,42px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:var(--step-gap);
+  margin-top:clamp(16px,1.2vw,24px);
+}
+.imr-step{
+  position:relative;
+  padding:clamp(12px,.8vw,16px) clamp(14px,1.1vw,22px) clamp(14px,.9vw,18px);
+  border-radius:10px;
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+  border:1px solid rgba(94,205,250,.2);
+}
+/* Arrow between cards, centred in the column gap. */
+.imr-step + .imr-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * var(--step-gap) / 2 - 8px);
+  top:50%;
+  width:16px;height:24px;
+  margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 24' fill='none'%3E%3Cpath d='M1 12h13M8 5l7 7-7 7' stroke='%23ffffff' stroke-opacity='.8' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.imr-step-top{display:flex;align-items:center;gap:clamp(14px,1.4vw,26px);margin-bottom:10px;color:#fff;}
+.imr-step-num{
+  width:clamp(36px,2.3vw,44px);height:clamp(36px,2.3vw,44px);
+  border-radius:50%;
+  background:var(--icon-blue);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:17px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.imr-step h3{color:#fff;font-size:clamp(15px,.9vw,17px);letter-spacing:-.2px;margin-bottom:8px;}
+.imr-step p{color:rgba(255,255,255,.8);font-size:clamp(13px,.76vw,14.5px);line-height:1.5;}
+
+/* ---------- Before & after ---------- */
+.imr-results{
+  background:linear-gradient(180deg,var(--light-bg) 0%,#fff 100%);
+  padding-block:clamp(26px,1.8vw,36px);
+}
+.imr-results-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px 32px;
+  margin-bottom:clamp(12px,.9vw,18px);
+}
+.imr-results-head h2{
+  font-size:clamp(24px,1.85vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.15;
+  margin-bottom:6px;
+}
+.imr-results-head p{font-size:clamp(14px,.85vw,16px);color:var(--gray-text);}
+.imr-results-head .btn{font-size:15px;padding:15px 30px;margin-top:4px;}
+.imr-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,2vw,40px);
+}
+
+/* The shared slider (script.js binds every .sfr-ba). The comp's pairs are wide
+   strips; each half is cropped from the comp, so cover trims top and bottom. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:293/103;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(34px,2.5vw,48px);height:clamp(34px,2.5vw,48px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(8px,.9vw,18px);
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(10.5px,.72vw,13.5px);
+  letter-spacing:.8px;
+  padding:clamp(5px,.5vw,10px) clamp(14px,1.3vw,26px);
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:clamp(8px,1.1vw,22px);background:rgba(0,22,46,.9);color:#fff;}
+.sfr-ba-tag-after{right:clamp(8px,1.1vw,22px);background:#2A9BF5;color:#fff;}
+
+/* The feature slider beside the intro copy is taller, with bigger chips. */
+.imr-ba-feature{aspect-ratio:443/255;border-radius:14px;}
+.imr-ba-feature .sfr-ba-before{background-position:center 75%;}
+.imr-ba-feature .sfr-ba-handle{width:clamp(40px,3vw,58px);height:clamp(40px,3vw,58px);}
+.imr-ba-feature .sfr-ba-tag{
+  font-size:clamp(12px,.95vw,17px);
+  padding:clamp(7px,.65vw,12px) clamp(18px,1.9vw,36px);
+  bottom:clamp(10px,1.1vw,22px);
+  border-radius:7px;
+}
+.imr-ba-feature .sfr-ba-tag-before{left:clamp(10px,1.1vw,22px);}
+.imr-ba-feature .sfr-ba-tag-after{right:clamp(10px,1.1vw,22px);}
+
+/* ---------- Why repair: copy | four risks ---------- */
+.imr-why{
+  background:
+    radial-gradient(ellipse at 90% 0%, rgba(94,205,250,.1), transparent 55%),
+    var(--light-bg);
+  border-top:1px solid #E3EDF6;
+}
+.imr-why-inner{
+  display:grid;
+  grid-template-columns:minmax(300px,32%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(24px,2vw,40px);
+  padding-block:clamp(20px,1.3vw,28px);
+}
+.imr-why-copy h2,
+.imr-related-copy h2,
+.imr-trustfaq-copy h2{
+  font-size:clamp(24px,1.8vw,34px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+  margin-bottom:10px;
+}
+.imr-why-copy p,
+.imr-related-copy p,
+.imr-trustfaq-copy p{font-size:clamp(14px,.82vw,15.5px);line-height:1.55;color:var(--gray-text);}
+.imr-risks{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.imr-risks strong{font-size:16px;margin-bottom:8px;}
+.imr-risks small{font-size:14px;max-width:200px;}
+
+/* ---------- Related gelcoat services: copy | 4 cards + help card ---------- */
+.imr-related{background:#fff;border-top:1px solid #E3EDF6;}
+.imr-related-inner{
+  display:grid;
+  grid-template-columns:minmax(300px,30%) minmax(0,1fr);
+  align-items:center;
+  padding-block:clamp(18px,1.2vw,24px);
+}
+.imr-related-copy{padding-right:clamp(20px,1.6vw,32px);}
+.imr-rel-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.88fr);
+  gap:clamp(12px,.9vw,18px);
+  padding-left:clamp(20px,1.6vw,32px);
+  border-left:1px solid #DCE8F3;
+}
+.imr-rel-card{position:relative;border:1px solid #E6EFF7;}
+.imr-rel-card .fg-card-media img{aspect-ratio:228/90;}
+.imr-rel-card .fg-card-body{padding:14px 16px 16px;}
+.imr-rel-card h3{font-size:clamp(14.5px,.86vw,16px);letter-spacing:-.2px;margin-bottom:6px;width:100%;}
+.imr-rel-card h3 a{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.imr-rel-card h3 svg{color:var(--icon-blue);flex-shrink:0;transition:transform .15s ease;}
+.imr-rel-card:hover h3 svg{transform:translateX(3px);}
+/* Whole card is the link. */
+.imr-rel-card h3 a::after{content:"";position:absolute;inset:0;}
+.imr-rel-card h3 a:focus-visible{outline:none;}
+.imr-rel-card:focus-within{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.imr-rel-card p{font-size:13px;line-height:1.5;color:var(--gray-text);}
+.imr-rel-help{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:18px 14px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#E7F3FD 0%,#DCEEFC 100%);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.imr-rel-help:hover{transform:translateY(-3px);box-shadow:0 20px 40px -24px rgba(0,38,75,.5);}
+.imr-rel-help:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.imr-rel-help-icon{
+  width:48px;height:48px;border-radius:50%;
+  background:#fff;color:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:10px;
+}
+.imr-rel-help strong{font-family:var(--font-head);font-size:15px;line-height:1.25;color:var(--navy);margin-bottom:8px;}
+.imr-rel-help small{font-size:12.5px;line-height:1.45;color:var(--gray-text);}
+
+/* ---------- Why boaters choose us | checklist | FAQ ---------- */
+.imr-trustfaq{
+  background:linear-gradient(180deg,var(--light-bg) 0%,#fff 100%);
+  border-top:1px solid #E3EDF6;
+}
+.imr-trustfaq-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1.22fr);
+  align-items:center;
+  column-gap:clamp(24px,2vw,40px);
+  padding-block:clamp(18px,1.1vw,24px);
+}
+.imr-checks li{
+  position:relative;
+  padding-left:38px;
+  font-size:clamp(14.5px,.86vw,16px);
+  line-height:1.4;
+  color:#3E5870;
+}
+.imr-checks li + li{margin-top:clamp(10px,.8vw,15px);}
+.imr-checks li::before{
+  content:"";
+  position:absolute;left:0;top:50%;
+  width:24px;height:24px;margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%231C94DC'/%3E%3Cpath d='M7 12.4l3.2 3.1L17 8.8' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.imr-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-left:clamp(20px,2vw,40px);
+  border-left:1px solid #DCE8F3;
+}
+.imr-faq h2{font-size:clamp(21px,1.4vw,27px);letter-spacing:-.5px;margin-bottom:10px;}
+.imr-faq details{
+  background:#fff;
+  border:1px solid #D6E6F4;
+  border-radius:6px;
+}
+.imr-faq details + details{margin-top:6px;}
+.imr-faq summary{
+  position:relative;
+  list-style:none;
+  cursor:pointer;
+  padding:7px 48px 7px 16px;
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:14.5px;
+  line-height:1.4;
+  color:var(--navy);
+}
+.imr-faq summary::-webkit-details-marker{display:none;}
+.imr-faq summary::after{
+  content:"";
+  position:absolute;right:16px;top:50%;
+  width:14px;height:14px;margin-top:-7px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center / 14px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center / 2px 14px no-repeat;
+  transition:transform .2s ease;
+}
+.imr-faq details[open] summary::after{transform:rotate(45deg);}
+.imr-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.imr-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- CTA band: boat photo | copy | buttons over faded marina ---------- */
+.imr-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy) 55%,#0B3A66 100%);
+}
+.imr-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+  opacity:.3;
+  /* Only the skyline end shows; the copy sits on plain navy water. */
+  -webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 85%);
+          mask-image:linear-gradient(90deg,transparent 30%,#000 85%);
+}
+.imr-cta-boat{
+  position:absolute;top:0;bottom:0;left:0;
+  width:clamp(220px,23vw,460px);
+  -webkit-mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+}
+.imr-cta-boat img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:left center;
+}
+.imr-cta-inner{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px 32px;
+  min-height:clamp(150px,9vw,176px);
+  padding-block:24px;
+  padding-left:calc(clamp(220px,23vw,460px) + 8px);
+}
+.imr-cta-copy h2{
+  color:#fff;
+  font-size:clamp(24px,1.95vw,38px);
+  letter-spacing:-.8px;
+  line-height:1.15;
+  margin-bottom:6px;
+}
+.imr-cta-copy p{color:rgba(255,255,255,.88);font-size:clamp(15px,.9vw,17px);}
+.imr-cta-actions{display:flex;gap:16px;flex-wrap:wrap;}
+
+/* ==========================================================================
+   Responsive — widest first (see the recipe: equal specificity, later wins)
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* Related: copy moves above the cards so all five keep a usable width. */
+  .imr-related-inner{grid-template-columns:minmax(0,1fr);row-gap:18px;}
+  .imr-related-copy{padding-right:0;max-width:720px;}
+  .imr-rel-grid{padding-left:0;border-left:0;}
+  /* Trust/FAQ: copy and checklist side by side, FAQ full width below. */
+  .imr-trustfaq-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:26px;}
+  .imr-faq{grid-column:1 / -1;padding-left:0;border-left:0;}
+}
+
+@media (max-width:1240px){
+  .imr-intro-inner{grid-template-columns:minmax(0,1fr);row-gap:28px;}
+  .imr-ba-feature{max-width:760px;width:100%;justify-self:center;}
+  .imr-process{grid-template-columns:minmax(240px,30%) minmax(0,1fr);}
+  .imr-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px;}
+  .imr-step:nth-child(3)::before{display:none;}
+  .imr-why-inner{grid-template-columns:minmax(0,1fr);row-gap:24px;}
+  .imr-why-copy{max-width:720px;}
+}
+
+@media (max-width:1100px){
+  .imr-rel-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+
+@media (max-width:1024px){
+  .imr-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:80% center;}
+  .imr-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.94) 0%, rgba(0,22,46,.84) 55%, rgba(0,22,46,.5) 100%);
+  }
+  .imr-hero-content,.imr-trust{padding-left:0;}
+  .imr-trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+  /* Process: the photo becomes a banner above the band. */
+  .imr-process{grid-template-columns:minmax(0,1fr);}
+  .imr-process-photo{clip-path:none;min-height:0;aspect-ratio:5/2;}
+  .imr-process-photo img{object-position:30% 30%;}
+  .imr-process-body{padding-inline:var(--pad);padding-block:clamp(28px,5vw,40px);}
+  .imr-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .imr-cta-boat{display:none;}
+  .imr-cta-inner{flex-direction:column;justify-content:center;text-align:center;padding:clamp(30px,5vw,44px) var(--wide-pad);}
+  .imr-cta-actions{justify-content:center;}
+}
+
+@media (max-width:820px){
+  .imr-points,.imr-risks{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .imr-points li:nth-child(3),.imr-risks li:nth-child(3){border-left:0;}
+  .imr-rel-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .imr-trustfaq-inner{grid-template-columns:minmax(0,1fr);}
+  .imr-results-head{flex-direction:column;}
+}
+
+@media (max-width:640px){
+  .imr-hero-inner{padding-top:34px;padding-bottom:30px;}
+  .imr-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .imr-hero h1 br{display:none;}
+  .imr-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .imr-hero-actions{gap:10px;}
+  .imr-hero-actions .btn,.imr-cta-actions .btn{flex:1 1 100%;justify-content:center;padding:14px 22px;}
+  .imr-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.72) 100%);
+  }
+  .imr-trust{grid-template-columns:minmax(0,1fr);gap:14px;}
+  .imr-intro-copy h2 br,.imr-why-copy h2 br,.imr-related-copy h2 br,.imr-trustfaq-copy h2 br{display:none;}
+  .imr-process-photo{aspect-ratio:2/1;}
+  .imr-steps{grid-template-columns:minmax(0,1fr);}
+  .imr-step + .imr-step::before{display:none;}
+  .imr-ba-grid{grid-template-columns:minmax(0,1fr);}
+  .sfr-ba{aspect-ratio:2/1;}
+  .imr-ba-feature{aspect-ratio:4/3;}
+  .imr-results-head .btn{width:100%;justify-content:center;}
+}
+
+@media (max-width:400px){
+  .imr-points,.imr-risks{grid-template-columns:minmax(0,1fr);}
+  .imr-points li + li,.imr-risks li + li{border-left:0;}
+  .imr-rel-grid{grid-template-columns:minmax(0,1fr);}
+}

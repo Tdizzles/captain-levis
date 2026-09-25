@@ -516,3 +516,11 @@ node --check script.js
   comp's CTA skyline is dropped; the band is navy over a strip of the comp's
   water. The CTA repeats "Captain Dave", and the FAQ answers are drafted copy.
   Check both with the owner.
+- **`impact-mark-repair.html`** (sub-page of Scratch & Gouge, `.imr-` prefix,
+  linked from its Impact Marks card) is not in the nav dropdown. Its `imr-*`
+  images are cropped from a 1024px comp and saved at 2×, so they are soft.
+  All four before/after pairs are placeholders: the halves are cropped from
+  the comp and are not the same boat (flagged in the markup). The CTA band's
+  skyline is the faded right end of `results-marina.jpg`, not the comp's. The
+  CTA repeats "Captain Dave", and the FAQ answers are drafted copy. Check both
+  with the owner.
