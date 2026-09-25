@@ -581,3 +581,16 @@ node --check script.js
   looking for?". The results copy says "real examples" although the pairs are
   placeholders, "Most small chips repaired the same day" is the comp's claim,
   and the FAQ answers are drafted copy. Check all three with the owner.
+- **`multiple-chips-pitting-repair.html`** (sub-page of Gelcoat Chip Repair,
+  `.mcp-` prefix, linked from its Multiple Chips & Pitting card) is not in the
+  nav dropdown. Its stylesheet started as a copy of `moderate-chip-repair.css`,
+  whose comp shares the layout. Its `mcp-*` images are cropped from a 1024px
+  comp and saved at 2×, so they are soft. All four before/after pairs are
+  placeholders built like the surface scratch page's (one comp half plus its
+  mirror, with the burned-in tags and handles cloned or interpolated out), so
+  they match the comp at rest but show the mirror when dragged. The
+  Widespread, Transom and Hull Side Pitting cards link to its own `#repairs`;
+  Waterline Pitting goes to `waterline-chip-repair.html` and High-Wear Areas
+  to `edge-rub-rail-repair.html`. The results copy says "real examples"
+  although the pairs are placeholders, the CTA repeats "Captain Dave", and
+  the FAQ answers are drafted copy. Check all three with the owner.
