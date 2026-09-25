@@ -629,3 +629,21 @@ node --check script.js
   Stress Cracks Around Fittings to `#quote`. The trust strip keeps the comp's
   people icon beside "Marine-Grade Materials". The CTA repeats "Captain
   Dave", and the FAQ answers are drafted copy. Check both with the owner.
+- **`waterline-stain-removal.html`** (sub-page of Oxidation & Fading
+  Restoration, `.wsr-` prefix, linked from its Waterline Stain Removal card)
+  is not in the nav dropdown. Its stylesheet started as a copy of
+  `dock-rash-scuff-repair.css`, whose comp shares most of the layout. Its
+  comp is 1024px wide, so every `wsr-*` image is a 2× upscale and soft. The
+  "What Causes Waterline Stains?" figure is one image (`wsr-cause.jpg`) with
+  the comp's label text and BEFORE/AFTER chips painted out and its leader
+  lines and dots kept. The labels and chips are live markup placed in % of
+  the figure with `cqw` type, so re-crop the image only together with those
+  positions. On phones the labels drop below the figure as a list and the
+  figure crops off its empty left third. All three before/after pairs are
+  placeholders built like the surface scratch page's (one comp half plus its
+  mirror, tags and handle painted out). The comp's first "after" half is
+  still covered in algae, so pair 1 borrows the third pair's after half,
+  mirrored. The comp's related row shows Compound & Polish twice, so the page
+  has four cards; Compound & Polish links to the parent's `#compound-polish`
+  card until that page exists. The CTA repeats "Captain Dave", and the FAQ
+  answers are drafted copy. Check both with the owner.
