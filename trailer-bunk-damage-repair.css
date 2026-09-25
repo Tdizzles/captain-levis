@@ -1,0 +1,677 @@
+/* ==========================================================================
+   Trailer Bunk Damage Repair — page-specific styles (a sub-page of Dock &
+   Trailer Damage, linked from its Trailer Bunk Damage card). Loads after
+   styles.css and reuses its tokens, buttons, eyebrows, cards, header,
+   footer and contact form. Everything here is prefixed .tbd-; the only
+   unprefixed rules are the shared .sfr-ba slider styles, which every page
+   that uses the slider defines for itself. Started as a copy of
+   stress-crack-repair.css, whose comp shares the hero, diagram, process,
+   results, why and CTA bands; the related row follows
+   waterline-chip-repair.css.
+   ========================================================================== */
+
+/* The comp runs its bands nearly edge to edge, like the other gelcoat
+   sub-pages: a 1760px frame, not .container. --tbd-edge is that frame's
+   content edge, for bands that bleed a photo to the viewport instead. */
+.tbd-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,2.6vw,44px);
+}
+.tbd-intro,.tbd-process{
+  --tbd-gutter:clamp(18px,2.6vw,44px);
+  --tbd-edge:max(var(--tbd-gutter), calc((100% - 1760px) / 2 + var(--tbd-gutter)));
+}
+.tbd-eyebrow{
+  color:var(--icon-blue);
+  font-size:11.5px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.tbd-eyebrow i{background:var(--icon-blue);width:32px;}
+
+/* ---------- Hero ----------
+   tbd-hero.jpg ("Same Boats. New Beginnings." baked in at its top right)
+   covers the right of the band, feathered into the navy on its left. It
+   stops above the trust strip, which sits on the navy. The copy is indented
+   past the eyebrow's rule, as in the comp. */
+.tbd-hero{
+  --tbd-indent:50px;                /* eyebrow rule (36px) + its gap (14px) */
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 38%,#0B3A66 100%);
+}
+.tbd-hero-main{position:relative;overflow:hidden;}
+.tbd-hero-img{
+  position:absolute;top:0;right:0;
+  width:58%;height:100%;
+  object-fit:cover;
+  object-position:right 30%;        /* keeps the tagline (top right) in frame */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 22%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 22%);
+}
+.tbd-hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,22,46,.74) 0%,
+    rgba(0,22,46,.5) 40%,
+    rgba(0,22,46,0) 58%);
+}
+.tbd-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(22px,1.4vw,30px);
+  padding-bottom:clamp(20px,1.4vw,28px);
+}
+.tbd-hero-content{max-width:820px;padding-left:var(--tbd-indent);}
+.tbd-hero-eyebrow{
+  margin-left:calc(-1 * var(--tbd-indent));
+  margin-bottom:14px;
+  font-size:12px;
+  letter-spacing:2.2px;
+}
+.tbd-hero-eyebrow i{width:36px;}
+.tbd-hero h1{
+  font-size:clamp(30px,3.05vw,56px);
+  letter-spacing:-1.2px;
+  line-height:1.03;
+  color:#fff;
+  margin-bottom:14px;
+}
+.tbd-hero h1 .accent{color:var(--accent);}
+.tbd-hero-sub{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(14.5px,1.04vw,18px);
+  line-height:1.4;
+  max-width:520px;
+  margin-bottom:18px;
+}
+.tbd-hero-sub strong{color:#fff;font-weight:700;}
+.tbd-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+.tbd-trust-bar{
+  background:linear-gradient(180deg,rgba(0,26,54,.8) 0%,rgba(0,20,42,.94) 100%);
+  border-top:1px solid rgba(94,205,250,.14);
+}
+.tbd-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:14px 24px;
+  padding-block:clamp(14px,1.35vw,24px);
+  padding-left:var(--pad);
+}
+.tbd-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
+.tbd-trust-icon{flex:none;display:flex;color:var(--accent);}
+.tbd-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
+.tbd-trust small{display:block;font-size:12px;line-height:1.3;color:rgba(255,255,255,.75);}
+
+/* ---------- Intro: copy | diagram bleeding to the right edge ----------
+   The copy keeps the frame's content edge; the photo is a grid cell that
+   runs to the viewport edge and sets the band's height. */
+.tbd-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) min(56.5%, 1080px);
+  align-items:center;
+  column-gap:clamp(20px,2.2vw,40px);
+  padding-left:calc(var(--tbd-edge) + clamp(0px,1.4vw,28px));
+  background:var(--light-bg);
+}
+.tbd-intro-copy{padding-block:clamp(20px,1.6vw,30px);}
+.tbd-intro h2{
+  font-size:clamp(24px,2.34vw,42px);
+  letter-spacing:-.9px;
+  line-height:1.12;
+  margin-bottom:10px;
+}
+.tbd-intro-copy > p{
+  font-size:clamp(14.5px,1.14vw,20px);
+  line-height:1.36;
+  color:var(--gray-text);
+  max-width:600px;
+  margin-bottom:clamp(16px,1.3vw,24px);
+}
+
+/* Diagram: the painted-out photo plus live markup. Leader lines are an SVG
+   in the photo's own pixel space (viewBox = the comp crop); pins and cards
+   are placed with % of the photo, and the cards' type is sized in container
+   query units, so the whole diagram scales as one. */
+.tbd-diagram{
+  position:relative;
+  container-type:inline-size;
+  margin:0;
+}
+.tbd-diagram > img{
+  display:block;width:100%;height:auto;
+  /* The photo already fades to the band's ground on its left; finish it. */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%);
+          mask-image:linear-gradient(90deg,transparent,#000 5%);
+}
+.tbd-leaders{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  overflow:visible;
+  pointer-events:none;
+}
+.tbd-leaders path{
+  fill:none;
+  stroke:#fff;
+  stroke-width:2;
+  vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 1px rgba(0,38,75,.35));
+}
+.tbd-pin{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  width:clamp(12px,2.2cqw,20px);aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#2C99FB;
+  box-shadow:0 0 0 clamp(2px,.36cqw,3px) #fff, 0 2px 8px rgba(0,38,75,.45);
+}
+.tbd-callouts{list-style:none;margin:0;padding:0;}
+/* Cards sit over the comp's (painted-out) cards: left/top/width and
+   min-height in % of the photo, a little larger than the originals so the
+   rough fill underneath never shows. */
+.tbd-callout{
+  position:absolute;
+  background:#fff;
+  border-radius:clamp(5px,.8cqw,8px);
+  box-shadow:0 12px 26px -14px rgba(0,38,75,.45);
+  padding:1.3cqw 1.4cqw 1.3cqw 2cqw;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.tbd-co-scratches{left:4.84%; top:7.21%; width:24.39%;min-height:26.58%;}
+.tbd-co-gouges   {left:69.55%;top:8.11%; width:25.09%;min-height:26.58%;}
+.tbd-co-exposure {left:7.79%; top:62.61%;width:25.61%;min-height:32.43%;}
+.tbd-co-contact  {left:68.17%;top:72.52%;width:26.47%;min-height:27.03%;}
+.tbd-callout strong{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(9.5px,1.62cqw,17px);
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:.2em;
+}
+.tbd-callout small{
+  display:block;
+  font-size:clamp(8.5px,1.42cqw,15px);
+  line-height:1.3;
+  color:var(--gray-text);
+}
+@container (max-width:600px){
+  /* Too small for the descriptions to fit their cards; the titles stay. */
+  .tbd-callout{padding:4px 6px 4px 8px;}
+  .tbd-callout small{display:none;}
+  .tbd-callout strong{margin:0;font-size:clamp(9.5px,2.6cqw,13px);}
+}
+
+/* ---------- Common examples: five fg-cards without links ---------- */
+.tbd-examples{background:linear-gradient(180deg,#F4FAFE 0%,#F9FBFE 100%);border-top:1px solid #E6EFF7;}
+.tbd-examples .tbd-wide{padding-block:clamp(14px,1.2vw,22px) clamp(16px,1.3vw,24px);}
+.tbd-examples-eyebrow{margin-left:clamp(0px,1.4vw,26px);}
+.tbd-ex-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(12px,1.4vw,24px);
+  margin-top:clamp(2px,.3vw,6px);
+}
+.tbd-ex{border-radius:8px;}
+.tbd-ex:hover{transform:none;}
+.tbd-ex .fg-card-media img{aspect-ratio:173/82;}
+.tbd-ex .fg-card-body{padding:clamp(12px,.85vw,16px) clamp(14px,1.3vw,24px) clamp(12px,.95vw,18px);}
+.tbd-ex .fg-card-body h3{font-size:clamp(14.5px,1.02vw,19px);letter-spacing:-.3px;margin-bottom:clamp(3px,.25vw,5px);}
+.tbd-ex .fg-card-body p{font-size:clamp(13px,.86vw,15.5px);line-height:1.38;margin-bottom:0;}
+
+/* ---------- Shared slider (script.js binds every .sfr-ba) ----------
+   Each image is one half of the comp's pair plus its mirror, so at rest the
+   seam sits on the handle and the frame matches the comp. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:286/79;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(34px,2.6vw,44px);height:clamp(34px,2.6vw,44px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(8px,.75vw,13px);
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(11px,.8vw,13.5px);
+  letter-spacing:1.1px;
+  padding:clamp(5px,.5vw,9px) clamp(18px,2vw,36px);
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:clamp(8px,.9vw,15px);background:rgba(0,22,46,.9);color:#fff;}
+.sfr-ba-tag-after{right:clamp(8px,.9vw,15px);background:#1E9BF0;color:#fff;}
+
+/* ---------- Process band ----------
+   Worker photo bleeding off the left edge with a chevron on its trailing side
+   (a thin accent rule follows the chevron), then copy and four step cards.
+   The section's right padding reproduces .tbd-wide's content edge. */
+.tbd-process{
+  --chev:clamp(28px,3.9vw,60px);
+  display:grid;
+  grid-template-columns:clamp(260px,33.4%,640px) minmax(0,1fr);
+  padding-right:var(--tbd-edge);
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(28,148,220,.16), transparent 60%),
+    linear-gradient(100deg,var(--navy) 0%,#062F5A 55%,var(--navy-2) 100%);
+}
+.tbd-process-photo{
+  position:relative;
+  background:rgba(94,205,250,.85);
+  clip-path:polygon(0 0, calc(100% - var(--chev)) 0, 100% 50%, calc(100% - var(--chev)) 100%, 0 100%);
+}
+.tbd-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:40% 35%;
+  clip-path:polygon(0 0, calc(100% - var(--chev) - 2px) 0, calc(100% - 2px) 50%, calc(100% - var(--chev) - 2px) 100%, 0 100%);
+}
+.tbd-process-body{
+  padding:clamp(16px,1.2vw,24px) 0 clamp(16px,1.2vw,24px) clamp(18px,1.6vw,32px);
+}
+.tbd-process-eyebrow{
+  color:rgba(255,255,255,.88);
+  font-size:11.5px;
+  letter-spacing:2.2px;
+  margin-bottom:10px;
+  margin-left:clamp(0px,1.6vw,30px);
+}
+.tbd-process h2{
+  color:#fff;
+  font-size:clamp(22px,2.24vw,40px);
+  letter-spacing:-.9px;
+  margin-bottom:6px;
+  margin-left:clamp(0px,1.6vw,30px);
+}
+.tbd-process h2 .accent{color:var(--accent);}
+.tbd-process-lead{
+  color:rgba(255,255,255,.88);
+  font-size:clamp(14px,1.08vw,19px);
+  line-height:1.38;
+  max-width:560px;
+  margin-bottom:clamp(14px,1.1vw,20px);
+  margin-left:clamp(0px,1.6vw,30px);
+}
+.tbd-process-lead .accent{color:var(--accent);}
+.tbd-steps{
+  --step-gap:clamp(24px,2.3vw,44px);
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px var(--step-gap);
+}
+.tbd-step{
+  position:relative;
+  padding:clamp(10px,.75vw,14px) clamp(14px,1.05vw,20px) clamp(10px,.85vw,16px);
+  border:1px solid rgba(94,205,250,.2);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 100%);
+}
+/* Arrow between cards, centred in the gap. */
+.tbd-step + .tbd-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-.5 * var(--step-gap) - 12px);
+  top:50%;
+  width:24px;height:24px;
+  margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity:.9;
+}
+.tbd-step-top{display:flex;align-items:center;gap:18px;margin-bottom:8px;}
+.tbd-step-num{
+  flex:none;
+  width:clamp(34px,2.5vw,42px);height:clamp(34px,2.5vw,42px);
+  border-radius:50%;
+  background:#1E8BF0;
+  box-shadow:0 0 0 4px rgba(28,148,220,.22);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(16px,1.2vw,20px);
+  display:flex;align-items:center;justify-content:center;
+}
+.tbd-step-icon{display:flex;color:#fff;}
+.tbd-step h3{color:#fff;font-size:clamp(14.5px,1.05vw,18px);letter-spacing:-.2px;margin-bottom:4px;}
+.tbd-step p{color:rgba(255,255,255,.8);font-size:clamp(13px,.85vw,15px);line-height:1.36;}
+
+/* ---------- Before & after ---------- */
+.tbd-results{
+  background:linear-gradient(180deg,#F8FBFE 0%,var(--light-bg) 100%);
+}
+.tbd-results-inner{padding-block:clamp(12px,.75vw,16px) clamp(14px,.9vw,18px);}
+.tbd-results-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:16px 40px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(10px,.7vw,14px);
+  padding-inline:clamp(0px,1.4vw,28px);
+}
+.tbd-results h2{
+  font-size:clamp(23px,2.05vw,37px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+  margin-bottom:4px;
+}
+.tbd-results-copy p{
+  font-size:clamp(14px,1.02vw,17px);
+  line-height:1.5;
+  color:var(--gray-text);
+  max-width:840px;
+}
+.tbd-results-head .btn{align-self:flex-start;margin-top:clamp(6px,.6vw,10px);}
+.tbd-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,2.1vw,36px);
+  padding-inline:clamp(0px,1.4vw,28px);
+}
+
+/* ---------- Other dock & trailer repairs ----------
+   copy | four fg-cards + a "can't find it" card. */
+.tbd-related{background:linear-gradient(180deg,#F6FBFD 0%,#F3F9FE 100%);border-top:1px solid #E6EFF7;}
+.tbd-related-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,27%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(20px,2.3vw,40px);
+  padding-block:clamp(16px,1.3vw,26px);
+}
+.tbd-related h2{
+  font-size:clamp(22px,1.66vw,30px);
+  letter-spacing:-.04em;
+  line-height:1.14;
+  margin-bottom:clamp(8px,.7vw,12px);
+}
+.tbd-related-copy p{font-size:clamp(13.5px,.92vw,16px);line-height:1.45;color:var(--gray-text);}
+.tbd-related-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(10px,1.2vw,20px);
+}
+.tbd-rel-card{border:1px solid #E6EFF7;border-radius:8px;}
+.tbd-rel-card .fg-card-media img{aspect-ratio:2.05/1;}
+.tbd-rel-card .fg-card-body{padding:clamp(10px,.85vw,16px) clamp(10px,.82vw,15px) clamp(10px,.8vw,15px);}
+.tbd-rel-card .fg-card-body h3{font-size:clamp(12.5px,.8vw,14.5px);letter-spacing:-.35px;margin-bottom:5px;}
+.tbd-rel-card .fg-card-body p{font-size:clamp(11.5px,.76vw,13.5px);line-height:1.35;margin-bottom:clamp(8px,.7vw,12px);}
+.tbd-rel-card .fg-card-link{font-size:clamp(12px,.8vw,14.5px);}
+.tbd-rel-help{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  gap:clamp(4px,.35vw,6px);
+  padding:clamp(12px,.9vw,16px) clamp(10px,.8vw,14px);
+  border-radius:10px;
+  background:#EDF6FE;
+}
+.tbd-rel-help-icon{
+  width:clamp(40px,2.9vw,54px);height:clamp(40px,2.9vw,54px);
+  border-radius:50%;
+  background:#fff;
+  color:#1E8BF0;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:2px;
+}
+.tbd-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(13px,.98vw,17px);line-height:1.15;letter-spacing:-.2px;color:var(--navy);}
+.tbd-rel-help p{font-size:clamp(11.5px,.76vw,13.5px);line-height:1.35;color:var(--gray-text);}
+.tbd-rel-help-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(12px,.8vw,14.5px);
+  color:var(--icon-blue);
+}
+.tbd-rel-help-link svg{transition:transform .15s ease;}
+.tbd-rel-help-link:hover svg{transform:translateX(3px);}
+
+/* ---------- Why choose us + FAQ ----------
+   copy | checklist | FAQ, each set off by a rule. Questions use native
+   <details>, so they work without script. */
+.tbd-why{background:#fff;border-top:1px solid #E6EFF7;}
+.tbd-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,30%) minmax(0,1fr) minmax(0,37%);
+  align-items:center;
+  padding-block:clamp(12px,.9vw,18px) clamp(14px,1vw,20px);
+}
+.tbd-why-copy{padding-inline:clamp(0px,1.4vw,28px) clamp(20px,2.6vw,48px);}
+.tbd-why h2{
+  font-size:clamp(23px,1.95vw,35px);
+  letter-spacing:-.8px;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.tbd-why-copy p{font-size:clamp(14px,.98vw,16.5px);line-height:1.5;color:var(--gray-text);}
+.tbd-checks{
+  align-self:stretch;
+  display:grid;align-content:center;
+  gap:clamp(9px,.66vw,12px);
+  padding-inline:clamp(20px,2.6vw,48px);
+  border-left:1px solid #DCE7F1;
+}
+.tbd-checks li{display:flex;align-items:center;gap:12px;font-size:clamp(14px,.92vw,15.5px);line-height:1.35;color:#2A4560;}
+.tbd-checks li::before{
+  content:"";flex:none;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:#0E9AFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") no-repeat center/13px;
+}
+.tbd-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-left:clamp(20px,2.6vw,48px);
+  padding-right:clamp(0px,1.4vw,28px);
+  border-left:1px solid #DCE7F1;
+}
+.tbd-faq h2{font-size:clamp(19px,1.45vw,26px);letter-spacing:-.5px;margin-bottom:8px;}
+.tbd-faq-list{display:grid;gap:6px;}
+.tbd-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;}
+.tbd-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:clamp(6px,.5vw,9px) 14px;
+  font-size:clamp(13.5px,.9vw,15px);
+  font-weight:500;
+  color:var(--navy);
+  cursor:pointer;
+  list-style:none;
+}
+.tbd-faq summary::-webkit-details-marker{display:none;}
+.tbd-faq summary::after{
+  content:"";flex:none;
+  width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.tbd-faq details[open] summary::after{transform:rotate(45deg);}
+.tbd-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.tbd-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ----------
+   The comp's boat at the left edge, feathered into the navy; the skyline is
+   the faded right end of results-marina.jpg (the comp's sits behind its
+   buttons and can't be recovered). Copy | two buttons. */
+.tbd-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy) 55%,#0B3A66 100%);
+}
+.tbd-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+  opacity:.3;
+  -webkit-mask-image:linear-gradient(90deg,transparent 30%,#000 85%);
+          mask-image:linear-gradient(90deg,transparent 30%,#000 85%);
+}
+.tbd-cta-boat{
+  position:absolute;top:0;bottom:0;left:0;
+  width:clamp(200px,23vw,440px);
+  -webkit-mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+}
+.tbd-cta-boat img{width:100%;height:100%;object-fit:cover;object-position:left center;}
+.tbd-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px clamp(24px,3vw,56px);
+  flex-wrap:wrap;
+  min-height:clamp(120px,9.4vw,180px);
+  padding-block:clamp(20px,1.8vw,32px);
+  /* Clear the boat even though this frame is centred: % padding resolves
+     against the full-width section. */
+  padding-left:max(clamp(18px,2.6vw,44px), clamp(200px,23vw,440px) + 8px - max(0px, (100% - 1760px) / 2));
+}
+.tbd-cta h2{color:#fff;font-size:clamp(21px,1.82vw,34px);letter-spacing:-.6px;line-height:1.15;margin-bottom:6px;}
+.tbd-cta p{font-size:clamp(14px,1.02vw,17.5px);color:rgba(255,255,255,.9);}
+.tbd-cta-actions{display:flex;gap:clamp(10px,1vw,18px);flex-wrap:wrap;}
+.tbd-cta-actions .btn{padding:clamp(13px,1.1vw,19px) clamp(24px,2.3vw,42px);}
+.tbd-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, so the later block wins).
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* Related: the copy moves above the five cards so they keep their width. */
+  .tbd-related-inner{grid-template-columns:minmax(0,1fr);row-gap:16px;}
+  .tbd-related-copy{padding-inline:clamp(0px,1.4vw,28px);}
+  .tbd-related-copy p{max-width:52em;}
+}
+
+@media (max-width:1240px){
+  .tbd-ex-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .tbd-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .tbd-step:nth-child(3)::before{display:none;}
+  /* Why: copy | checklist on top, the FAQ full width below. */
+  .tbd-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:24px;}
+  .tbd-faq{
+    grid-column:1 / -1;
+    border-left:0;border-top:1px solid #DCE7F1;
+    padding:22px clamp(0px,1.4vw,28px) 0;
+  }
+}
+
+@media (max-width:1100px){
+  /* Intro stacks: the diagram becomes a full-width row under the copy so its
+     callouts keep room for their descriptions. */
+  .tbd-intro{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .tbd-intro-copy{padding:clamp(28px,4vw,40px) var(--tbd-edge) 8px;}
+  .tbd-diagram{width:100%;max-width:900px;justify-self:end;}
+  /* The "can't find it" card becomes a strip under the four service cards. */
+  .tbd-related-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .tbd-rel-help{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    grid-template-areas:"icon title link" "icon copy link";
+    align-items:center;
+    column-gap:16px;row-gap:2px;
+    text-align:left;
+    padding:14px 20px;
+  }
+  .tbd-rel-help-icon{grid-area:icon;margin:0;}
+  .tbd-rel-help strong{grid-area:title;}
+  .tbd-rel-help p{grid-area:copy;}
+  .tbd-rel-help-link{grid-area:link;}
+}
+
+@media (max-width:1024px){
+  .tbd-hero-img{width:100%;object-position:72% center;-webkit-mask-image:none;mask-image:none;}
+  .tbd-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.74) 60%, rgba(0,22,46,.45) 100%);
+  }
+  .tbd-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:clamp(24px,6vw,64px);}
+  .tbd-process{grid-template-columns:minmax(0,1fr);padding-right:0;}
+  .tbd-process-photo{clip-path:none;background:none;aspect-ratio:2.4/1;}
+  .tbd-process-photo img{clip-path:none;object-position:40% 30%;}
+  .tbd-process-body{padding:clamp(24px,4vw,36px) var(--pad) clamp(26px,4vw,40px);}
+  .tbd-process-eyebrow,.tbd-process h2,.tbd-process-lead{margin-left:0;}
+  .tbd-cta-boat{width:34%;opacity:.5;}
+  .tbd-cta-inner{padding-left:clamp(18px,2.6vw,44px);}
+}
+
+@media (max-width:820px){
+  .tbd-ex-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .tbd-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  /* Two-up cards are wide enough for body-size type again. */
+  .tbd-rel-card .fg-card-body{padding:14px 16px 14px;}
+  .tbd-rel-card .fg-card-body h3{font-size:15px;}
+  .tbd-rel-card .fg-card-body p{font-size:13.5px;}
+  .tbd-rel-card .fg-card-link{font-size:14px;}
+  .tbd-why-inner{grid-template-columns:minmax(0,1fr);}
+  .tbd-why-copy{padding-inline:0;}
+  .tbd-checks{border-left:0;padding-inline:0;}
+  .tbd-faq{padding-inline:0;}
+  .tbd-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .tbd-hero{--tbd-indent:0px;}
+  .tbd-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .tbd-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .tbd-hero-eyebrow i{width:24px;}
+  .tbd-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .tbd-hero h1 br{display:none;}
+  .tbd-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  /* Show the gouges beside the bunk rather than the tagline, which would sit
+     under the copy. */
+  .tbd-hero-img{object-position:45% center;}
+  .tbd-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
+  }
+  .tbd-hero-actions,.tbd-cta-actions{width:100%;gap:10px;}
+  .tbd-hero-actions .btn,.tbd-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .tbd-trust{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;}
+  .tbd-intro-copy .btn{width:100%;justify-content:center;}
+  .tbd-examples-eyebrow{margin-left:0;}
+  .tbd-ex-grid{grid-template-columns:minmax(0,1fr);}
+  .tbd-steps{grid-template-columns:minmax(0,1fr);}
+  .tbd-step + .tbd-step::before{display:none;}
+  .tbd-results-head{padding-inline:0;}
+  .tbd-results-head .btn{width:100%;justify-content:center;margin-top:0;}
+  .tbd-ba-grid{grid-template-columns:minmax(0,1fr);padding-inline:0;max-width:520px;}
+  .sfr-ba{aspect-ratio:2.6/1;}
+  .tbd-related-copy{padding-inline:0;}
+  .tbd-why h2 br{display:none;}
+  .tbd-rel-help{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon title" "icon copy" "icon link";}
+  .tbd-cta-boat{width:60%;opacity:.3;}
+}
+
+@media (max-width:400px){
+  .tbd-trust{grid-template-columns:minmax(0,1fr);}
+  .tbd-related-grid{grid-template-columns:minmax(0,1fr);}
+}

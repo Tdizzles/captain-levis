@@ -726,3 +726,25 @@ node --check script.js
   form follows the FAQ. The results band says "Real Results" although the
   pairs are placeholders, and the FAQ answers are drafted copy. Check both
   with the owner.
+- **`trailer-bunk-damage-repair.html`** (sub-page of Dock & Trailer Damage,
+  `.tbd-` prefix, linked from its Trailer Bunk Damage card) is not in the nav
+  dropdown. Its stylesheet started as a copy of `stress-crack-repair.css`;
+  the related row follows `waterline-chip-repair.css`. Its `tbd-*` images are
+  cropped from a 1024px comp and saved at 2×, so they are soft. The diagram
+  (`tbd-diagram.jpg`) had its four callout cards, pins and leader lines
+  painted out with OpenCV inpainting (a throwaway install, not a repo
+  dependency). The lines are an SVG in the crop's own 578×222 coordinates,
+  and the pins and cards are HTML in % with `cqw` type, so re-crop the image
+  only together with those coordinates. The fill under the cards is rough,
+  so the cards stay overlaid at every width (titles only once the figure is
+  under 600px). The photo bleeds to the viewport's right edge and sets the
+  intro band's height. All three before/after pairs are placeholders built
+  like the surface scratch page's (one comp half plus its mirror, tags and
+  handle painted out, each half filled only from its own side), so they
+  match the comp at rest but show the mirror when dragged. The five example
+  cards have no links, as in the comp. In the related row, Dock Rash Repair
+  links to `dock-rash-repair.html`; the other three go to the parent's card
+  anchors until those sub-pages exist. The CTA band's skyline is the faded
+  right end of `results-marina.jpg`. The results band says "Real Results"
+  although the pairs are placeholders, the CTA repeats "Captain Dave", and
+  the FAQ answers are drafted copy. Check all three with the owner.
