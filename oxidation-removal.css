@@ -1,0 +1,652 @@
+/* ==========================================================================
+   Oxidation Removal — page-specific styles (a sub-page of Oxidation & Fading
+   Restoration, under Gelcoat Repair). Loads after styles.css and reuses its
+   tokens, buttons, eyebrows, header and footer. Everything here is prefixed
+   .oxr- so no other page moves; the only unprefixed rules are the .sfr-ba
+   slider styles, which every page that uses the shared slider redefines for
+   itself (see scratch-gouge-repair.css).
+
+   The comp is drawn 1024px wide: one comp pixel is ~0.0977vw, so most clamp()
+   middles below are "comp px x 0.0977" and the maxima are the 1920px value.
+   ========================================================================== */
+
+/* Shared frame. The comp's content runs from x=43 to ~x=1002, so the right
+   gutter is about half the left one. */
+.oxr-wide{
+  --wide-pad:clamp(18px,4.2vw,76px);
+  --wide-pad-r:clamp(18px,2.15vw,42px);
+  max-width:1920px;
+  margin-inline:auto;
+  padding-left:var(--wide-pad);
+  padding-right:var(--wide-pad-r);
+}
+.oxr-eyebrow{
+  gap:clamp(8px,.8vw,15px);
+  color:var(--icon-blue);
+  font-size:clamp(11px,.77vw,14.8px);
+  letter-spacing:.14em;
+  margin-bottom:clamp(4px,.3vw,6px);
+}
+.oxr-eyebrow i{background:var(--icon-blue);width:clamp(22px,2.35vw,45px);}
+/* The hero eyebrow hangs its rule in the margin so the label lines up with
+   the heading (desktop only: on phones it would run off-screen). */
+.oxr-hang{
+  --rule:clamp(22px,2.54vw,48px);
+  --rule-gap:clamp(8px,1.07vw,20px);
+  gap:var(--rule-gap);
+}
+.oxr-hang i{width:var(--rule);}
+@media (min-width:1025px){
+  .oxr-hang{margin-left:calc(-1 * (var(--rule) + var(--rule-gap)));}
+}
+.oxr-intro h2 .accent{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   oxr-hero.jpg (the comp right of the copy) covers the right 56% of the band;
+   its left edge feathers into navy over a faint skyline. The comp's trust
+   row was painted out of the photo; a bottom wash carries the HTML one. */
+.oxr-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#01183A 0%,#022248 45%,#0A3A66 100%);
+}
+.oxr-hero-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+  opacity:.3;
+}
+.oxr-hero-img{
+  position:absolute;top:0;right:0;
+  width:56.25%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 9%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 9%);
+}
+.oxr-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(1,22,48,.9) 0%,
+      rgba(1,22,48,.82) 34%,
+      rgba(1,22,48,.4) 44%,
+      rgba(1,22,48,0) 54%),
+    linear-gradient(0deg, rgba(0,24,52,.88) 0%, rgba(0,24,52,.55) 11%, rgba(0,24,52,0) 24%);
+}
+.oxr-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(28px,2.05vw,40px);
+  padding-bottom:clamp(12px,.68vw,13px);
+}
+.oxr-hero-content,.oxr-trust{margin-left:clamp(0px,5.27vw,101px);}
+.oxr-hero-content{max-width:clamp(300px,34.5vw,662px);}
+.oxr-hero-sub{max-width:clamp(300px,33.8vw,649px);}
+.oxr-hero-eyebrow{
+  font-size:clamp(11px,.81vw,15.5px);
+  letter-spacing:.12em;
+  margin-bottom:clamp(4px,.1vw,2px);
+}
+.oxr-hero h1{
+  font-size:clamp(32px,2.81vw,54px);
+  letter-spacing:-.03em;
+  line-height:.9;
+  color:#fff;
+  margin-bottom:clamp(12px,.75vw,14px);
+}
+.oxr-hero h1 .accent{color:var(--accent);}
+.oxr-hero-sub{
+  color:rgba(255,255,255,.93);
+  font-size:clamp(15px,1.1vw,21px);
+  line-height:1.33;
+  margin-bottom:clamp(16px,1.35vw,26px);
+}
+.oxr-hero-actions{display:flex;gap:clamp(10px,1.07vw,20px);flex-wrap:wrap;}
+.oxr-hero-actions .btn,.oxr-cta-actions .btn{
+  justify-content:center;
+  font-size:clamp(14px,.98vw,18.8px);
+  padding:0 clamp(18px,1.95vw,37px);
+  height:clamp(44px,3.03vw,58px);
+}
+.oxr-hero-actions .btn-accent{min-width:clamp(150px,13.7vw,262px);}
+.oxr-hero-actions .btn-outline-light{min-width:clamp(170px,15.2vw,292px);}
+.oxr-trust{
+  display:grid;
+  grid-template-columns:repeat(4,max-content);
+  justify-content:space-between;
+  max-width:72.5vw;
+  column-gap:20px;
+  row-gap:14px;
+  margin-top:clamp(20px,1.5vw,29px);
+}
+.oxr-trust li{display:flex;align-items:center;gap:clamp(10px,1.07vw,20px);color:#fff;}
+.oxr-trust-icon{color:var(--accent);display:flex;flex:none;}
+.oxr-trust-icon svg{width:clamp(22px,2.05vw,39px);height:auto;}
+.oxr-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13px,.98vw,18.8px);line-height:1.2;}
+.oxr-trust small{display:block;font-size:clamp(11.5px,.9vw,17.3px);line-height:1.25;color:rgba(255,255,255,.8);}
+
+/* ---------- Overview ----------
+   copy | four benefits with rules between them. */
+.oxr-intro{background:linear-gradient(180deg,#F7FAFE 0%,#F4F8FD 100%);}
+.oxr-intro-inner{
+  display:grid;
+  grid-template-columns:minmax(0,468fr) minmax(0,474fr);
+  align-items:center;
+  column-gap:clamp(20px,1.46vw,28px);
+  padding-block:clamp(22px,1.6vw,31px) clamp(22px,2.1vw,40px);
+}
+.oxr-intro-copy{padding-left:clamp(0px,1.07vw,21px);}
+.oxr-intro h2{
+  font-size:clamp(25px,2.055vw,39.5px);
+  letter-spacing:-.035em;
+  line-height:1.1;
+  margin-bottom:clamp(8px,.75vw,14px);
+}
+.oxr-intro-copy p{
+  font-size:clamp(14.5px,1.029vw,19.8px);
+  line-height:1.33;
+  color:#4B6178;
+}
+.oxr-benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.oxr-benefits li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(4px,.5vw,10px);
+}
+.oxr-benefits li + li{border-left:1px solid #DCE8F3;}
+.oxr-benefit-icon{
+  width:clamp(44px,4.4vw,84px);height:clamp(44px,4.4vw,84px);
+  border-radius:50%;
+  background:#DDEFFC;
+  box-shadow:0 0 0 clamp(3px,.35vw,7px) rgba(221,239,252,.5);
+  color:#1F8FE5;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:clamp(6px,.55vw,11px);
+}
+.oxr-benefit-icon svg{width:48%;height:auto;}
+.oxr-benefits strong{
+  font-family:var(--font-head);
+  font-size:clamp(13px,1.12vw,21.5px);
+  letter-spacing:-.01em;
+  line-height:1.15;
+  color:var(--navy);
+  margin-bottom:clamp(2px,.2vw,4px);
+}
+.oxr-benefits small{font-size:clamp(12px,.99vw,19px);line-height:1.27;color:#56708A;}
+
+/* ---------- Oxidized vs restored + process card ----------
+   The panel bleeds off the left edge like the comp; the card sits on the
+   frame's right gutter. */
+.oxr-compare{background:#FBFCFE;}
+.oxr-compare-inner{
+  max-width:1920px;
+  margin-inline:auto;
+  display:grid;
+  grid-template-columns:minmax(0,706fr) minmax(0,274fr);
+  column-gap:clamp(18px,2.25vw,43px);
+  padding-right:clamp(18px,2.05vw,40px);
+}
+.oxr-cmp{
+  display:flex;
+  gap:clamp(2px,.29vw,6px);
+  background:#E6F4FA;
+  border-radius:0 clamp(6px,.6vw,12px) clamp(6px,.6vw,12px) 0;
+  overflow:hidden;
+  align-self:start;
+}
+.oxr-cmp-half{position:relative;container-type:inline-size;}
+.oxr-cmp-before{--cw:333;flex:333 1 0;}
+.oxr-cmp-after{--cw:370;flex:370 1 0;}
+.oxr-cmp-half img{width:100%;}
+/* Labels sit exactly over the comp's baked-in ones (sizes in comp px / the
+   half's comp width, so they track the photo at every size). */
+.oxr-cmp-title,.oxr-cmp-chip{
+  position:absolute;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;
+  white-space:nowrap;
+  pointer-events:none;
+}
+.oxr-cmp-title{
+  border-radius:999px;
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:calc(100cqw * 13.5 / var(--cw));
+  letter-spacing:.02em;
+  text-transform:uppercase;
+}
+.oxr-cmp-chip{
+  height:6.69%;
+  border-radius:calc(100cqw * 5 / var(--cw));
+  font-weight:500;
+  font-size:calc(100cqw * 11 / var(--cw));
+  letter-spacing:-.01em;
+}
+.oxr-cmp-before .oxr-cmp-title{background:#001F43;}
+.oxr-cmp-before .oxr-cmp-chip{background:#3C4A5E;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);}
+.oxr-cmp-after .oxr-cmp-title{background:#0B67D0;}
+.oxr-cmp-after .oxr-cmp-chip{background:#0763C8;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);}
+
+.oxr-process-card{
+  align-self:start;
+  margin-top:clamp(0px,.88vw,17px);
+  background:#fff;
+  border:1px solid #E4EDF6;
+  border-radius:clamp(10px,1vw,19px);
+  box-shadow:0 18px 40px -26px rgba(0,38,75,.35);
+  padding:clamp(18px,1.3vw,25px) clamp(18px,1.3vw,25px) clamp(18px,2.4vw,46px) clamp(14px,1.3vw,25px);
+}
+.oxr-process-card h2{
+  font-size:clamp(18px,1.36vw,26px);
+  letter-spacing:-.025em;
+  line-height:1.15;
+  margin-bottom:clamp(8px,.85vw,16px);
+}
+.oxr-steps{list-style:none;}
+.oxr-steps li{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(12px,1.5vw,29px);
+}
+.oxr-step-num{
+  width:clamp(34px,3.1vw,60px);height:clamp(34px,3.1vw,60px);
+  margin-left:clamp(0px,.2vw,4px);
+  border-radius:50%;
+  background:#DDEFFC;
+  box-shadow:0 0 0 clamp(3px,.3vw,6px) rgba(221,239,252,.55);
+  color:#1F8FE5;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(16px,1.6vw,31px);
+}
+/* Short connector between one badge and the next. */
+.oxr-steps li + li::before{
+  content:"";
+  position:absolute;
+  left:calc(clamp(0px,.2vw,4px) + clamp(34px,3.1vw,60px) / 2 - .5px);
+  top:calc(-1 * clamp(8px,.9vw,17px));
+  height:clamp(16px,1.8vw,34px);
+  width:1px;
+  background:#C9DDEE;
+}
+.oxr-steps li > div{padding-block:clamp(10px,1.3vw,25px);border-bottom:1px solid #E4EDF6;}
+.oxr-steps li:first-child > div{padding-top:clamp(4px,.55vw,10px);}
+.oxr-steps li:last-child > div{border-bottom:0;}
+.oxr-steps h3{font-size:clamp(14px,.92vw,17.7px);letter-spacing:-.01em;line-height:1.2;margin-bottom:clamp(2px,.15vw,3px);}
+.oxr-steps p{font-size:clamp(13px,.84vw,16.1px);line-height:1.3;color:#56708A;}
+
+/* ---------- Before & after ---------- */
+.oxr-results{background:#F6F9FE;}
+.oxr-results .oxr-wide{padding-block:clamp(22px,.9vw,17px) clamp(18px,1.25vw,24px);}
+.oxr-results-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:14px 30px;
+  margin-inline:clamp(0px,.98vw,19px) clamp(0px,2.9vw,56px);
+  margin-bottom:clamp(12px,1.1vw,21px);
+}
+.oxr-results h2{
+  font-size:clamp(25px,1.95vw,37.5px);
+  letter-spacing:-.035em;
+  line-height:1;
+}
+.oxr-results-head p{font-size:clamp(14px,1.02vw,19.6px);line-height:1.25;color:#4B6178;}
+.oxr-results-head .btn{
+  font-size:clamp(13.5px,.98vw,18.8px);
+  height:clamp(42px,2.5vw,48px);
+  padding:0 clamp(20px,1.85vw,36px);
+}
+.oxr-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(12px,1.56vw,30px);
+  margin-left:calc(-1 * clamp(0px,.3vw,6px));
+  margin-right:clamp(0px,1.66vw,32px);
+}
+
+/* The shared slider (script.js binds every .sfr-ba). Each pair is a size
+   container, so its tags and handle are sized in cqw from the comp (pair =
+   228 comp px wide) and cover the same spot at every width. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:228/134;
+  border-radius:clamp(6px,.6vw,11px);
+  overflow:hidden;
+  container-type:inline-size;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 6px rgba(0,0,0,.25);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:49%;left:50%;
+  transform:translate(-50%,-50%);
+  width:12.3cqw;height:12.3cqw;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;width:44%;height:auto;}
+.sfr-ba-tag{
+  position:absolute;bottom:3.3cqw;
+  width:27.6cqw;
+  padding:1.9cqw 0;
+  text-align:center;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:3.75cqw;
+  line-height:1.2;
+  letter-spacing:.03em;
+  border-radius:1.6cqw;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:4.8cqw;background:#051C38;color:#fff;}
+.sfr-ba-tag-after{right:4.8cqw;background:#1E97F2;color:#fff;}
+
+/* ---------- What causes oxidation + why choose us ----------
+   copy | layer diagram with labels | checklist card. The copy's line ends run
+   over the diagram's faded left edge, as in the comp. */
+.oxr-causes{background:#FCFDFE;}
+.oxr-causes-inner{
+  display:grid;
+  grid-template-columns:minmax(0,227fr) minmax(0,435fr) minmax(0,297fr);
+  align-items:center;
+  padding-block:clamp(8px,.5vw,10px) 0;
+  position:relative;
+}
+.oxr-causes-inner::before{
+  content:"";
+  position:absolute;top:0;
+  left:var(--wide-pad);right:var(--wide-pad-r);
+  height:1px;
+  background:#E6EFF7;
+}
+/* Top-aligned (not centred) so the copy's line ends cross the diagram's pale
+   streaks, as in the comp, rather than the blue base slab. */
+.oxr-causes-copy{position:relative;z-index:1;align-self:start;margin-top:clamp(0px,2.15vw,41px);margin-right:calc(-1 * clamp(0px,8.4vw,161px));}
+.oxr-choose{margin-left:clamp(0px,4.4vw,84px);}
+.oxr-causes h2,.oxr-related h2{
+  font-size:clamp(23px,1.8vw,34.6px);
+  letter-spacing:-.03em;
+  line-height:1.1;
+  margin-bottom:clamp(6px,.6vw,12px);
+}
+.oxr-causes-copy p,.oxr-related-copy p{
+  font-size:clamp(13px,.85vw,16.3px);
+  line-height:1.5;
+  color:#4B6178;
+}
+.oxr-causes-copy p{font-size:clamp(12.5px,.8vw,15.4px);line-height:1.55;max-width:clamp(280px,30.5vw,586px);}
+.oxr-layers{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,278fr) minmax(0,157fr);
+}
+.oxr-layers img{width:100%;}
+.oxr-layer-labels li{
+  position:absolute;
+  left:calc(278 / 435 * 100% + clamp(2px,.25vw,5px));
+  right:0;
+}
+.oxr-layer-uv{top:9.2%;}
+.oxr-layer-ox{top:30.2%;}
+.oxr-layer-gel{top:55%;}
+.oxr-layer-labels strong{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(12.5px,.98vw,18.8px);
+  letter-spacing:-.02em;
+  line-height:1.25;
+  color:var(--navy);
+}
+.oxr-layer-labels span{display:block;font-size:clamp(12px,.87vw,16.7px);line-height:1.3;color:#56708A;}
+
+.oxr-choose{
+  background:#EAF4FD;
+  border-radius:clamp(10px,1vw,19px);
+  padding:clamp(18px,1.3vw,25px) clamp(14px,1.27vw,24px) clamp(18px,1.65vw,32px) clamp(18px,1.8vw,35px);
+}
+.oxr-choose h2{
+  font-size:clamp(18px,1.3vw,25px);
+  letter-spacing:-.025em;
+  margin-bottom:clamp(10px,1.1vw,21px);
+}
+.oxr-checks{display:grid;gap:clamp(8px,.88vw,17px);}
+.oxr-checks li{
+  display:flex;align-items:center;gap:clamp(10px,.9vw,17px);
+  font-size:clamp(13.5px,.9vw,17.3px);
+  line-height:1.2;
+  color:#34506A;
+}
+.oxr-checks li::before{
+  content:"";flex:none;
+  width:clamp(14px,1.17vw,22.5px);height:clamp(14px,1.17vw,22.5px);
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M3.5 12.5l5.6 5.5L20.5 6' stroke='%231F8FE5' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+/* ---------- Related services ----------
+   copy | four linked cards. */
+.oxr-related{background:#FCFDFE;}
+.oxr-related-inner{
+  display:grid;
+  grid-template-columns:minmax(0,272fr) minmax(0,655fr);
+  align-items:start;
+  column-gap:clamp(18px,1.8vw,35px);
+  padding-block:clamp(14px,1.07vw,21px) clamp(12px,.65vw,13px);
+}
+/* The comp runs a faint rule from the label to the column's edge. */
+.oxr-rule-eyebrow::after{content:"";flex:1;height:1px;background:#DCE8F3;margin-left:clamp(0px,.2vw,4px);}
+.oxr-related-copy .oxr-eyebrow{margin-bottom:clamp(8px,1vw,19px);}
+.oxr-related-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(10px,1.1vw,21px);
+}
+.oxr-rel-card{
+  display:flex;flex-direction:column;
+  background:#fff;
+  border:1px solid #E3ECF5;
+  border-radius:clamp(6px,.6vw,12px);
+  overflow:hidden;
+  box-shadow:0 12px 26px -20px rgba(0,38,75,.4);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.oxr-rel-card:hover{transform:translateY(-3px);box-shadow:0 18px 32px -20px rgba(0,38,75,.5);}
+.oxr-rel-card:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.oxr-rel-card img{width:100%;aspect-ratio:157/50;object-fit:cover;}
+.oxr-rel-body{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"title title" "sub arrow";
+  align-items:center;
+  column-gap:8px;
+  padding:clamp(10px,.95vw,18px) clamp(12px,1.4vw,27px) clamp(12px,1.35vw,26px) clamp(12px,.9vw,17px);
+}
+.oxr-rel-body strong{
+  grid-area:title;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(13.5px,1.01vw,19.4px);
+  letter-spacing:-.02em;
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:clamp(2px,.3vw,6px);
+}
+.oxr-rel-body small{grid-area:sub;font-size:clamp(12.5px,.9vw,17.3px);line-height:1.3;color:#56708A;}
+.oxr-rel-body svg{grid-area:arrow;color:#1F8FE5;width:clamp(14px,1.27vw,24px);height:auto;transition:transform .15s ease;}
+.oxr-rel-card:hover .oxr-rel-body svg{transform:translateX(3px);}
+
+/* ---------- Closing CTA ----------
+   A strip of water and hull, a bright rule, then the navy band with water
+   texture at its left edge. */
+.oxr-cta{background:#FCFDFE;padding-top:clamp(8px,.8vw,15px);}
+.oxr-cta-strip{
+  width:100%;
+  height:clamp(34px,4.1vw,79px);
+  object-fit:cover;
+  object-position:center 60%;
+}
+.oxr-cta-band{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#011A3A 0%,#001C3E 55%,#032A53 100%);
+  color:#fff;
+  border-top:2px solid rgba(255,255,255,.9);
+}
+/* The comp's rule glows at its left end. */
+.oxr-cta-band::before{
+  content:"";
+  position:absolute;left:-40px;top:-30px;
+  width:240px;height:60px;
+  background:radial-gradient(ellipse at center, rgba(255,255,255,.55), rgba(255,255,255,0) 70%);
+  pointer-events:none;
+  z-index:1;
+}
+.oxr-cta-water{
+  position:absolute;left:0;top:0;
+  width:clamp(90px,10.2vw,196px);height:100%;
+  object-fit:cover;
+  -webkit-mask-image:linear-gradient(90deg,#000 55%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 55%,transparent 100%);
+}
+.oxr-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px clamp(20px,2vw,40px);
+  flex-wrap:wrap;
+  padding-block:clamp(20px,1.66vw,32px);
+  padding-left:calc(var(--wide-pad) + clamp(0px,5.57vw,107px));
+  padding-right:calc(var(--wide-pad-r) + clamp(0px,7.9vw,152px));
+}
+.oxr-cta h2{color:#fff;font-size:clamp(22px,1.82vw,35px);letter-spacing:-.03em;line-height:1.1;margin-bottom:clamp(2px,.2vw,4px);}
+.oxr-cta p{font-size:clamp(14px,1.12vw,21.5px);color:rgba(255,255,255,.88);}
+.oxr-cta-actions{display:flex;gap:clamp(10px,1.56vw,30px);flex-wrap:wrap;}
+.oxr-cta-actions .btn{height:clamp(46px,3.15vw,60px);font-size:clamp(14.5px,1.22vw,23.4px);}
+.oxr-cta-actions .btn-accent{min-width:clamp(170px,17.2vw,330px);}
+.oxr-cta-actions .btn-outline-light{min-width:clamp(190px,18.75vw,360px);background:rgba(0,22,46,.35);}
+
+/* ==========================================================================
+   Responsive — widest first (see the recipe: equal specificity, later wins)
+   ========================================================================== */
+
+@media (max-width:1400px){
+  .oxr-trust{column-gap:clamp(20px,3vw,48px);}
+  /* Causes: the copy's minimum size outgrows its slice of the row, so copy +
+     diagram share a row without overlapping and the checklist goes below. */
+  .oxr-causes-inner{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:24px 28px;padding-block:28px;}
+  .oxr-causes-copy{margin:0;align-self:center;}
+  .oxr-choose{grid-column:1 / -1;max-width:640px;margin-left:0;}
+}
+
+@media (max-width:1240px){
+  .oxr-intro-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .oxr-intro-copy{padding-left:0;}
+  .oxr-intro-copy p{max-width:46em;}
+  .oxr-benefits{max-width:760px;}
+  /* Compare: panel full width inside the frame, card below it. */
+  .oxr-compare-inner{
+    grid-template-columns:minmax(0,1fr);
+    row-gap:24px;
+    padding-inline:clamp(18px,4.2vw,76px);
+    padding-block:26px;
+  }
+  .oxr-cmp{border-radius:12px;max-width:900px;}
+  .oxr-process-card{margin-top:0;max-width:900px;}
+  .oxr-steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px;}
+  .oxr-steps li + li::before{display:none;}
+  .oxr-steps li > div,.oxr-steps li:first-child > div{padding-block:12px;border-bottom:0;}
+  .oxr-results-head,.oxr-ba-grid{margin-inline:0;}
+  .oxr-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px;}
+  .oxr-related-inner{grid-template-columns:minmax(0,1fr);row-gap:18px;padding-block:26px;}
+  .oxr-related-copy{max-width:640px;}
+  .oxr-cta-inner{padding-left:calc(var(--wide-pad) + 60px);padding-right:var(--wide-pad-r);}
+}
+
+@media (max-width:1024px){
+  .oxr-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:70% center;}
+  .oxr-hero-scrim{
+    background:
+      linear-gradient(90deg, rgba(1,22,48,.94) 0%, rgba(1,22,48,.84) 55%, rgba(1,22,48,.5) 100%),
+      linear-gradient(0deg, rgba(0,24,52,.7) 0%, rgba(0,24,52,0) 35%);
+  }
+  .oxr-hero-inner{padding-top:40px;padding-bottom:28px;}
+  .oxr-hero-content,.oxr-trust{margin-left:0;}
+  .oxr-hero-content{max-width:620px;}
+  .oxr-trust{grid-template-columns:repeat(2,max-content);justify-content:start;max-width:none;column-gap:48px;margin-top:28px;}
+  .oxr-cta-water{display:none;}
+  .oxr-cta-inner{padding-left:var(--wide-pad);}
+}
+
+@media (max-width:820px){
+  .oxr-benefits{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px;}
+  .oxr-benefits li:nth-child(3){border-left:0;}
+  .oxr-causes-inner{grid-template-columns:minmax(0,1fr);}
+  .oxr-layers{max-width:620px;}
+  .oxr-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .oxr-hero h1{font-size:clamp(30px,8.6vw,38px);line-height:.95;}
+  .oxr-hero h1 br{display:none;}
+  .oxr-hero h1 .accent{display:block;}
+  .oxr-hero-sub{font-size:15px;}
+  .oxr-hero-actions .btn,.oxr-cta-actions .btn{flex:1 1 100%;}
+  .oxr-hero-img{object-position:62% center;}
+  .oxr-hero-scrim{
+    background:linear-gradient(180deg, rgba(1,22,48,.9) 0%, rgba(1,22,48,.82) 55%, rgba(1,22,48,.78) 100%);
+  }
+  .oxr-trust{grid-template-columns:minmax(0,1fr);}
+  .oxr-intro h2 .accent{display:block;}
+  .oxr-causes-copy p{font-size:14px;}
+  /* Compare: the halves stack, each at full width (labels stay readable). */
+  .oxr-cmp{flex-direction:column;max-width:480px;}
+  .oxr-cmp-before,.oxr-cmp-after{flex:none;}
+  .oxr-steps{grid-template-columns:minmax(0,1fr);}
+  .oxr-results-head{grid-template-columns:minmax(0,1fr);}
+  .oxr-results-head .btn{justify-self:start;}
+  /* Diagram: labels drop below the image as a list keyed by the dots' colours. */
+  .oxr-layers{grid-template-columns:minmax(0,1fr);}
+  .oxr-layers img{width:78%;}
+  .oxr-layer-labels{display:grid;gap:12px;margin-top:12px;}
+  .oxr-layer-labels li{position:relative;left:auto;right:auto;top:auto;padding-left:22px;}
+  .oxr-layer-labels li::before{
+    content:"";position:absolute;
+    width:11px;height:11px;border-radius:50%;
+    margin:4px 0 0 -22px;
+    border:2px solid #fff;box-shadow:0 0 0 1px #B9C6D3;
+  }
+  .oxr-layer-uv::before{background:#6B7684;}
+  .oxr-layer-ox::before{background:#D8403F;}
+  .oxr-layer-gel::before{background:#1A3F99;}
+  .oxr-cta-actions{width:100%;}
+}
+
+@media (max-width:480px){
+  .oxr-ba-grid,.oxr-related-grid{grid-template-columns:minmax(0,1fr);}
+}
+
+@media (max-width:400px){
+  .oxr-benefits li{padding-inline:4px;}
+}

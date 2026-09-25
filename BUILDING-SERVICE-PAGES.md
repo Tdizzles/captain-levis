@@ -666,3 +666,21 @@ node --check script.js
   `full-boat-restoration.html` is committed. The CTA repeats
   "Captain Dave", and the FAQ answers are drafted copy. Check both with the
   owner.
+- **`oxidation-removal.html`** (sub-page of Oxidation & Fading Restoration,
+  `.oxr-` prefix, linked from its Oxidation Removal card) is not in the nav
+  dropdown. Its `oxr-*` images are cropped from a 1024px comp and saved at 2×,
+  so they are soft. The big oxidized/restored panel is a static diagram, not a
+  slider: its two halves are the comp's, split at the divider with the drag
+  handle painted out, and its ten labels are HTML laid exactly over the comp's
+  baked-in ones (each half is a size container, positions in % and sizes in
+  `cqw`), so resize them only together with the images. All four before/after
+  pairs are placeholders built like the surface scratch page's (one comp half
+  plus its mirror, tags and handle painted out, squeezed so the comp's seam
+  lands on the slider's 50%), so they match the comp at rest but show the
+  mirror when dragged. The hero photo's trust row was painted out with tiled
+  water. The causes paragraph is the comp's ~12px at 1536 and runs over the
+  diagram's faded edge above 1400px. The Compound & Polish and Full Boat
+  Restoration cards link to the parent's `#compound-polish` and
+  `#full-boat-restoration` cards until those pages are committed. The results
+  band says "Real Results" although the pairs are placeholders; check with the
+  owner.
