@@ -533,6 +533,19 @@ node --check script.js
   photos. The comp's CTA skyline is dropped: the band is navy with the comp's
   boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
   drafted copy. Check both with the owner.
+- **`blended-gelcoat-repair.html`** (sub-page of Scratch & Gouge, `.bgr-`
+  prefix, linked from its Blended Repairs card) is not in the nav dropdown.
+  Its `bgr-*` images are cropped from a 1024px comp and saved at 2×, so they
+  are soft. All four before/after pairs are placeholders: each file is one
+  comp half plus its mirror at the slider's own aspect, with the burned-in
+  BEFORE/AFTER tags and handle patched out, so they match the comp at rest but
+  show the mirror when dragged. The page's own tags and handle are sized in
+  `cqw` (the slider is a size container) so they cover the patched spots at
+  every width; resize them only together with the images. Type is sized in
+  `vw` and capped at its 1536px value, because the container stops growing
+  there. The comp's CTA skyline is dropped: the band is navy with the comp's
+  boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
+  drafted copy. Check both with the owner.
 - **`edge-rub-rail-repair.html`** (sub-page of Gelcoat Chip Repair, `.err-`
   prefix, linked from its Edge & Rub Rail Damage card) is not in the nav
   dropdown. Its comp is 1024px wide, so every `err-*` image is a 2× upscale
