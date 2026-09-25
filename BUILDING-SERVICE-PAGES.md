@@ -647,3 +647,22 @@ node --check script.js
   has four cards; Compound & Polish links to the parent's `#compound-polish`
   card until that page exists. The CTA repeats "Captain Dave", and the FAQ
   answers are drafted copy. Check both with the owner.
+- **`color-restoration.html`** (sub-page of Oxidation & Fading Restoration,
+  `.clr-` prefix, linked from its Color Restoration card) is not in the nav
+  dropdown. Its stylesheet started as a copy of `dock-rash-scuff-repair.css`.
+  Its `clr-*` images are cropped from a 1024px comp and saved at 2×, so they
+  are soft. The hero photo is the comp's hero with its copy painted out, and
+  it doubles as the hero slider's before layer: both slider layers are sized
+  to the whole stage and pinned to its right edge, so they line up with the
+  photo underneath. Move the slider's left edge only through `--ba-l`. The
+  hero pair and all three results pairs are placeholders built like the
+  surface scratch page's (one comp half plus its mirror, with the burned-in
+  tags and handle painted out), so they match the comp at rest but show the
+  mirror when dragged. `clr-layers.jpg` keeps the comp's leader lines and
+  dots; its labels and BEFORE/AFTER tags are HTML placed in % and sized in
+  `cqw`, so resize them only together with the image. The CTA skyline is the
+  faded right end of `results-marina.jpg`, not the comp's. The Full Boat
+  Restoration card links to the parent's `#full-boat-restoration` card until
+  `full-boat-restoration.html` is committed. The CTA repeats
+  "Captain Dave", and the FAQ answers are drafted copy. Check both with the
+  owner.
