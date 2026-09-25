@@ -546,6 +546,16 @@ node --check script.js
   there. The comp's CTA skyline is dropped: the band is navy with the comp's
   boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
   drafted copy. Check both with the owner.
+- **`moderate-chip-repair.html`** (sub-page of Gelcoat Chip Repair, `.mcr-`
+  prefix, linked from its Moderate Gelcoat Chips card) is not in the nav
+  dropdown. It started as a copy of `blended-gelcoat-repair.css`, whose comp
+  has the same layout. Its `mcr-*` images are cropped from a 1024px comp and
+  saved at 2×, so they are soft. All four before/after pairs are placeholders
+  built like the surface scratch page's (one comp half plus its mirror, with
+  the burned-in BEFORE/AFTER tags and handle interpolated out), so they match
+  the comp at rest but show the mirror when dragged. Its Larger Gelcoat Chips
+  card links to its own `#repairs`. The CTA repeats "Captain Dave", and the
+  FAQ answers are drafted copy. Check both with the owner.
 - **`edge-rub-rail-repair.html`** (sub-page of Gelcoat Chip Repair, `.err-`
   prefix, linked from its Edge & Rub Rail Damage card) is not in the nav
   dropdown. Its comp is 1024px wide, so every `err-*` image is a 2× upscale

@@ -1,0 +1,608 @@
+/* ==========================================================================
+   Moderate Gelcoat Chip Repair — page-specific styles (a sub-page of Gelcoat
+   Chip Repair, linked from its Moderate Gelcoat Chips card). Started as a
+   copy of blended-gelcoat-repair.css, whose comp shares this layout.
+   Loads after styles.css and reuses its tokens, buttons, eyebrows, header,
+   footer, contact form and .fg-card. Everything here is prefixed .mcr- so no
+   other page moves; the only unprefixed rules are the .sfr-ba slider styles,
+   which every page that uses the shared slider redefines for itself.
+   The comp is drawn at 1024px; sizes below are its measurements x1.5, the
+   1536px design width, expressed as vw so they track it.
+   ========================================================================== */
+
+.mcr-eyebrow{
+  color:var(--icon-blue);
+  font-size:clamp(11px,.76vw,12.5px);
+  letter-spacing:2px;
+  gap:18px;
+  margin-bottom:12px;
+}
+.mcr-eyebrow i{background:var(--icon-blue);}
+.mcr-accent{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   One photo (mcr-hero.jpg, "Same Boats. New Beginnings." baked in at its
+   right edge). It covers the right of the band and stays anchored right so
+   the tagline always survives the crop; its left edge feathers into the navy. */
+.mcr-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.mcr-hero-img{
+  position:absolute;top:0;right:0;
+  width:60%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 24%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 24%);
+}
+.mcr-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.9) 0%,
+      rgba(0,22,46,.72) 34%,
+      rgba(0,22,46,.2) 50%,
+      rgba(0,22,46,0) 62%),
+    linear-gradient(0deg, rgba(0,22,46,.72) 0%, rgba(0,22,46,0) 26%);
+}
+/* The comp indents the hero copy past the page edge and hangs the eyebrow
+   rule out to its left. */
+.mcr-hero-inner{
+  --hero-indent:clamp(0px,4.2vw,72px);
+  position:relative;z-index:2;
+  padding-left:calc(var(--pad) + var(--hero-indent));
+  padding-top:clamp(30px,2.45vw,42px);
+  padding-bottom:clamp(14px,1.1vw,20px);
+}
+.mcr-hero-content{max-width:640px;}
+.mcr-hero-eyebrow{
+  font-size:clamp(11px,.8vw,13px);
+  letter-spacing:2.2px;
+  gap:18px;
+  margin-bottom:14px;
+  margin-left:calc(-40px - 18px);
+}
+.mcr-hero h1{
+  font-size:clamp(32px,3.07vw,51px);
+  letter-spacing:-1px;
+  line-height:1.03;
+  color:#fff;
+  margin-bottom:12px;
+}
+.mcr-hero h1 .accent{color:var(--accent);}
+.mcr-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(15px,1.055vw,17.5px);
+  line-height:1.42;
+  max-width:30.9em;
+  margin-bottom:clamp(20px,1.6vw,26px);
+}
+.mcr-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.mcr-hero-actions .btn{padding:14px 28px;}
+.mcr-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:18px clamp(20px,3vw,56px);
+  max-width:1210px;
+  margin-top:clamp(22px,1.8vw,30px);
+}
+.mcr-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
+.mcr-trust-icon{color:var(--accent);display:flex;flex:none;}
+.mcr-trust strong{display:block;font-family:var(--font-head);font-size:14.5px;line-height:1.3;}
+.mcr-trust small{display:block;font-size:12.5px;color:rgba(255,255,255,.8);}
+
+/* ---------- Icon row (intro features) ----------
+   Centred columns, a pale-blue icon circle, hairline dividers between. */
+.mcr-icons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.mcr-icons li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(4px,.4vw,8px);
+}
+.mcr-icons li + li{border-left:1px solid #DCE8F3;}
+.mcr-icon{
+  width:clamp(50px,4.6vw,72px);height:clamp(50px,4.6vw,72px);
+  border-radius:50%;
+  background:#E3F2FD;
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:clamp(10px,1vw,16px);
+}
+.mcr-icon svg{width:54%;height:54%;}
+.mcr-icons strong{
+  font-family:var(--font-head);
+  font-size:clamp(12.5px,.84vw,12.9px);
+  line-height:1.25;
+  color:var(--navy);
+  margin-bottom:5px;
+}
+.mcr-icons small{font-size:clamp(12px,.82vw,12.6px);line-height:1.3;color:var(--gray-text);}
+
+/* ---------- Intro: copy + features | big before/after ---------- */
+.mcr-intro{background:var(--light-bg);}
+.mcr-intro-inner{
+  display:grid;
+  grid-template-columns:minmax(0,426fr) minmax(0,464fr);
+  align-items:center;
+  column-gap:clamp(24px,3.1vw,48px);
+  padding-block:clamp(24px,2.2vw,36px) clamp(22px,2vw,32px);
+}
+.mcr-intro-copy h2{
+  font-size:clamp(28px,2.6vw,42px);
+  letter-spacing:-.9px;
+  line-height:1.06;
+  margin-bottom:12px;
+}
+.mcr-intro-copy > p{
+  font-size:clamp(15px,1.08vw,17px);
+  line-height:1.36;
+  color:var(--gray-text);
+  margin-bottom:clamp(18px,1.4vw,24px);
+}
+/* The comp's feature row runs a little wider than the paragraph above it,
+   which is what keeps "Prevents Water Intrusion" on one line. */
+.mcr-intro-features{margin-inline:calc(-1 * clamp(0px,2.6vw,40px));}
+.mcr-intro-features small{max-width:160px;}
+
+/* ---------- Process band ----------
+   Photo bleeding off the left edge with a chevron point on its right, then
+   copy + four step cards. The section's right padding reproduces .container's
+   content edge (the recipe's why-band trick), so the cards stop where every
+   other band's content does. */
+.mcr-process{
+  display:grid;
+  grid-template-columns:minmax(260px,34.7%) minmax(0,1fr);
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.16), transparent 60%),
+    linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 60%,#003463 100%);
+  padding-right:max(var(--pad), calc((100% - var(--container)) / 2 + var(--pad)));
+}
+.mcr-process-photo{
+  position:relative;
+  min-height:300px;
+  clip-path:polygon(0 0, calc(100% - 40px) 0, 100% 50%, calc(100% - 40px) 100%, 0 100%);
+}
+.mcr-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:left center;   /* keeps the shirt logo in frame */
+}
+.mcr-process-body{
+  padding-left:clamp(16px,1.9vw,30px);
+  padding-block:clamp(24px,2.15vw,34px) clamp(12px,1vw,18px);
+}
+.mcr-process-copy{padding-left:calc(40px + 18px);}
+.mcr-process-eyebrow{
+  font-size:clamp(11px,.8vw,13px);
+  letter-spacing:2.4px;
+  gap:18px;
+  margin-bottom:12px;
+  margin-left:calc(-40px - 18px);
+}
+.mcr-process-copy h2{
+  color:#fff;
+  font-size:clamp(26px,2.27vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.1;
+  margin-bottom:8px;
+}
+.mcr-process-copy h2 .accent{color:var(--accent);}
+.mcr-process-copy p{
+  color:rgba(255,255,255,.88);
+  font-size:clamp(13.5px,.9vw,15px);
+  line-height:1.3;
+  max-width:31.5em;
+  margin-bottom:clamp(14px,1.1vw,18px);
+}
+.mcr-steps{
+  --step-gap:clamp(24px,1.95vw,32px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:var(--step-gap);
+}
+.mcr-step{
+  position:relative;
+  padding:clamp(12px,.95vw,16px) clamp(14px,1.15vw,20px) clamp(14px,1.05vw,18px);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(94,205,250,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+/* Arrow between cards, centred in the column gap. */
+.mcr-step + .mcr-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * var(--step-gap) / 2 - 9px);
+  top:50%;
+  width:18px;height:22px;
+  margin-top:-11px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 22' fill='none'%3E%3Cpath d='M1 11h15M8 2.5l8 8.5-8 8.5' stroke='%23C9E6F7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.mcr-step-top{
+  display:flex;align-items:center;gap:clamp(14px,1.3vw,22px);
+  color:#E8F6FE;
+  margin-bottom:clamp(10px,.9vw,14px);
+}
+.mcr-step-top svg{flex:none;width:clamp(24px,2vw,32px);height:clamp(24px,2vw,32px);}
+.mcr-step-num{
+  flex:none;
+  width:clamp(34px,2.75vw,42px);height:clamp(34px,2.75vw,42px);
+  border-radius:50%;
+  background:var(--icon-blue);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(15px,1.2vw,19px);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.mcr-step h3{color:#fff;font-size:clamp(14px,1vw,15.4px);letter-spacing:-.3px;margin-bottom:6px;}
+.mcr-step p{color:rgba(255,255,255,.82);font-size:clamp(13px,.94vw,14.4px);line-height:1.25;}
+
+/* ---------- Before & after ---------- */
+.mcr-results{background:var(--light-bg);}
+.mcr-results .container{padding-block:clamp(22px,1.7vw,28px) clamp(22px,1.6vw,26px);}
+.mcr-results-head{
+  display:flex;align-items:flex-start;justify-content:space-between;gap:16px 32px;
+  margin-bottom:clamp(14px,1.1vw,18px);
+}
+.mcr-results-head h2{
+  font-size:clamp(25px,2.26vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.1;
+  margin-bottom:6px;
+}
+.mcr-results-head p{font-size:clamp(14px,1.08vw,16.5px);line-height:1.45;color:var(--gray-text);}
+.mcr-results-head .btn{margin-top:clamp(4px,.6vw,10px);font-size:14px;padding:13px 26px;}
+.mcr-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,1.1vw,18px);
+}
+
+/* The shared slider (script.js binds every .sfr-ba). Each half of the comp's
+   pairs is a narrow crop, so cover trims a little top and bottom. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:305/100;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(32px,2.9vw,45px);height:clamp(32px,2.9vw,45px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;width:40%;height:40%;}
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(8px,.75vw,12px);
+  min-width:clamp(70px,6.6vw,102px);
+  text-align:center;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(10.5px,.9vw,14px);
+  letter-spacing:.6px;
+  padding:clamp(5px,.5vw,8px) 12px;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:clamp(8px,.85vw,13px);background:rgba(0,22,46,.9);color:#fff;}
+.sfr-ba-tag-after{right:clamp(8px,.85vw,13px);background:var(--icon-blue);color:#fff;}
+
+/* The intro's big slider: its own proportions and larger chips. */
+.mcr-intro-ba{aspect-ratio:464/250;border-radius:10px;box-shadow:0 22px 44px -26px rgba(0,38,75,.6);}
+.mcr-intro-ba .sfr-ba-handle{width:clamp(40px,3.9vw,60px);height:clamp(40px,3.9vw,60px);}
+.mcr-intro-ba .sfr-ba-tag{
+  bottom:clamp(12px,1.4vw,22px);
+  min-width:clamp(90px,8.9vw,137px);
+  font-size:clamp(12px,1.12vw,17px);
+  padding:clamp(7px,.65vw,10px) 16px;
+  border-radius:6px;
+}
+.mcr-intro-ba .sfr-ba-tag-before{left:clamp(12px,1.25vw,19px);}
+.mcr-intro-ba .sfr-ba-tag-after{right:clamp(12px,1.25vw,19px);}
+
+/* ---------- Common moderate chips: five cards ----------
+   Shared .fg-card, but the comp's cards have no overlapping icon badge, a
+   shallow photo and tighter type. They sit on this page's own grid rather
+   than .fg-grid, which is six-up and wider than .container. */
+.mcr-types{background:var(--light-bg);border-top:1px solid #E6EFF7;}
+.mcr-types .container{padding-block:clamp(20px,1.3vw,22px) clamp(24px,1.6vw,26px);}
+.mcr-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(12px,1.65vw,26px);
+}
+.mcr-grid .fg-card{border:1px solid #E6EFF7;border-radius:8px;}
+.mcr-grid .fg-card-media img{aspect-ratio:172/72;}
+.mcr-grid .fg-card-body{padding:clamp(14px,1.15vw,18px) clamp(14px,1.3vw,20px) clamp(14px,1.1vw,18px);}
+.mcr-grid .fg-card-body h3{font-size:clamp(15px,1.1vw,17px);letter-spacing:-.2px;margin-bottom:6px;}
+.mcr-grid .fg-card-body p{font-size:clamp(12.5px,.85vw,13px);line-height:1.4;margin-bottom:12px;}
+.mcr-grid .fg-card-link{font-size:13.5px;}
+
+/* ---------- Related services ---------- */
+.mcr-related-copy h2{
+  font-size:clamp(25px,2.1vw,33px);
+  letter-spacing:-.8px;
+  line-height:1.06;
+  margin-bottom:8px;
+}
+.mcr-related{background:var(--light-bg);}
+.mcr-related-inner{
+  display:grid;
+  grid-template-columns:minmax(0,27fr) minmax(0,70fr);
+  align-items:center;
+  column-gap:clamp(18px,1.3vw,24px);
+  padding-block:clamp(14px,1.1vw,18px);
+}
+.mcr-related-copy p{font-size:clamp(13px,.86vw,13.2px);line-height:1.55;max-width:31em;color:var(--gray-text);}
+.mcr-related-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1.07fr)) minmax(0,1fr);
+  gap:clamp(8px,.85vw,14px);
+}
+.mcr-rel-card{
+  display:flex;flex-direction:column;
+  background:#fff;
+  border-radius:9px;
+  overflow:hidden;
+  box-shadow:0 10px 26px -18px rgba(0,38,75,.45);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+a.mcr-rel-card:hover{transform:translateY(-3px);box-shadow:0 18px 34px -20px rgba(0,38,75,.5);}
+a.mcr-rel-card:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.mcr-rel-card img{width:100%;aspect-ratio:115/47;object-fit:cover;}
+/* Title, copy, then a "Learn More" line pinned to the card's foot. */
+.mcr-rel-body{
+  display:flex;flex-direction:column;flex:1;
+  padding:clamp(10px,.9vw,14px) clamp(10px,.72vw,12px) clamp(12px,1vw,15px);
+}
+.mcr-rel-body strong{
+  font-family:var(--font-head);
+  font-size:clamp(12.5px,.85vw,13px);
+  letter-spacing:-.1px;
+  line-height:1.25;
+  color:var(--navy);
+  margin-bottom:5px;
+}
+.mcr-rel-body small{display:block;font-size:clamp(12.5px,.82vw,13.5px);line-height:1.35;color:var(--gray-text);margin-bottom:10px;}
+.mcr-rel-link{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-top:auto;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(12.5px,.82vw,13.5px);
+  color:var(--icon-blue);
+}
+.mcr-rel-link svg{flex:none;transition:transform .15s ease;}
+a.mcr-rel-card:hover .mcr-rel-link svg,
+a.mcr-rel-link:hover svg{transform:translateX(3px);}
+.mcr-rel-help{
+  align-items:center;justify-content:center;text-align:center;
+  background:#E6F3FD;
+  box-shadow:none;
+  padding:clamp(12px,1vw,16px);
+}
+.mcr-rel-help-icon{
+  width:clamp(42px,3.7vw,56px);height:clamp(42px,3.7vw,56px);
+  border-radius:50%;
+  background:#fff;
+  color:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:8px;
+}
+.mcr-rel-help strong{
+  font-family:var(--font-head);
+  font-size:clamp(13.5px,.9vw,14px);
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:5px;
+}
+.mcr-rel-help small{font-size:clamp(12.5px,.82vw,13.5px);line-height:1.35;color:var(--gray-text);margin-bottom:6px;}
+.mcr-rel-help .mcr-rel-link{margin-top:0;}
+.mcr-rel-help .mcr-rel-link:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;border-radius:3px;}
+
+/* ---------- Why boaters choose us + FAQ ---------- */
+.mcr-why{background:linear-gradient(180deg,#fff 0%,#F9FCFE 100%);border-top:1px solid #E6EFF7;}
+.mcr-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,27fr) minmax(0,26fr) minmax(0,37fr);
+  align-items:center;
+  column-gap:clamp(20px,2.2vw,36px);
+  padding-block:clamp(18px,1.4vw,22px) clamp(18px,1.2vw,20px);
+}
+.mcr-why-copy h2{
+  font-size:clamp(24px,1.87vw,30px);
+  letter-spacing:-.8px;
+  line-height:1.08;
+  margin-bottom:10px;
+}
+.mcr-why-copy p{font-size:clamp(13px,.885vw,13.6px);line-height:1.45;max-width:29.5em;color:var(--gray-text);}
+@media (min-width:1025px){
+  .mcr-why-copy .eyebrow span{white-space:nowrap;}
+}
+.mcr-checks{display:grid;gap:clamp(8px,.72vw,11px);}
+.mcr-checks li{
+  display:flex;align-items:center;gap:14px;
+  font-size:clamp(13.5px,.93vw,14.3px);
+  line-height:1.3;
+  color:var(--gray-text);
+}
+.mcr-checks li::before{
+  content:"";flex:none;
+  width:clamp(20px,1.6vw,25px);height:clamp(20px,1.6vw,25px);
+  border-radius:50%;
+  background:var(--icon-blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.5 12.5l3.6 3.6 7.4-7.6' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 70%;
+}
+.mcr-faq{
+  align-self:stretch;
+  border-left:1px solid #DCE8F3;
+  padding-left:clamp(20px,3vw,48px);
+  display:grid;
+  align-content:center;
+  gap:clamp(5px,.45vw,7px);
+}
+.mcr-faq h2{font-size:clamp(19px,1.43vw,23px);letter-spacing:-.5px;margin-bottom:4px;}
+.mcr-faq details{
+  background:#fff;
+  border:1px solid #DDE8F4;
+  border-radius:6px;
+}
+.mcr-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:clamp(6px,.5vw,8px) clamp(12px,1vw,16px);
+  font-family:var(--font-head);font-weight:500;font-size:clamp(13.5px,.91vw,15px);
+  line-height:1.3;
+  color:var(--navy);
+  cursor:pointer;list-style:none;
+}
+.mcr-faq summary::-webkit-details-marker{display:none;}
+.mcr-faq summary::after{
+  content:"";flex:none;width:14px;height:14px;
+  background:linear-gradient(var(--icon-blue),var(--icon-blue)) center/14px 2px no-repeat,linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 14px no-repeat;
+  transition:transform .2s ease;
+}
+.mcr-faq details[open] summary::after{transform:rotate(45deg);}
+.mcr-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.mcr-faq details p{padding:0 clamp(12px,1vw,16px) 12px;font-size:14px;line-height:1.55;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ---------- */
+.mcr-cta{
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(94,205,250,0) 55%,rgba(94,205,250,.08) 100%),
+    linear-gradient(100deg,#0B3A66 0%,var(--navy) 40%,var(--navy-2) 75%,#0A3560 100%);
+  color:#fff;
+}
+.mcr-cta-boat{
+  position:absolute;left:0;top:0;height:100%;width:25%;
+  object-fit:cover;object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+}
+.mcr-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;gap:18px 40px;flex-wrap:wrap;
+  padding-block:clamp(22px,1.75vw,28px);
+  /* Clears the boat photo (25% of the band). The percentage resolves against
+     the full-width band, so take off .container's centring margin once the
+     viewport is wider than it, or the copy drifts right and the buttons wrap. */
+  padding-left:max(var(--pad), calc(25.7% - max(0px, (100% - var(--container)) / 2)));
+}
+.mcr-cta h2{color:#fff;font-size:clamp(23px,1.9vw,30px);letter-spacing:-.6px;margin-bottom:6px;}
+.mcr-cta p{font-size:clamp(14px,.98vw,15.5px);color:rgba(255,255,255,.88);}
+.mcr-cta-actions{display:flex;gap:clamp(12px,1.1vw,18px);flex-wrap:wrap;}
+.mcr-cta-actions .btn{font-size:16px;padding:15px 32px;}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, the later block wins).
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* Why band: checks move under the copy so the FAQ keeps a usable width. */
+  .mcr-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:18px;}
+  .mcr-why-copy{grid-column:1;grid-row:1;}
+  .mcr-checks{grid-column:1;grid-row:2;}
+  .mcr-faq{grid-column:2;grid-row:1 / span 2;}
+  .mcr-process-copy{padding-left:0;}
+  .mcr-process-eyebrow{margin-left:0;}
+}
+
+@media (max-width:1240px){
+  .mcr-intro-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .mcr-intro-ba{max-width:720px;width:100%;justify-self:center;}
+  .mcr-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:18px;}
+  .mcr-step:nth-child(3)::before{display:none;}
+  .mcr-related-inner{grid-template-columns:minmax(0,1fr);row-gap:18px;}
+  .mcr-related-copy p{max-width:620px;}
+}
+
+@media (max-width:1100px){
+  .mcr-hero-inner{--hero-indent:0px;}
+  .mcr-hero-eyebrow{margin-left:0;}
+  .mcr-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:48px;}
+}
+
+@media (max-width:1024px){
+  .mcr-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:80% center;}
+  .mcr-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.94) 0%, rgba(0,22,46,.84) 55%, rgba(0,22,46,.5) 100%);
+  }
+  /* Process: the photo becomes a banner above the copy. */
+  .mcr-process{grid-template-columns:minmax(0,1fr);padding-right:0;}
+  .mcr-process-photo{clip-path:none;min-height:0;aspect-ratio:608/260;}
+  .mcr-process-photo img{object-position:left 40%;}
+  .mcr-process-body{padding:clamp(26px,4vw,40px) var(--pad);}
+  .mcr-why-inner{grid-template-columns:minmax(0,1fr);}
+  .mcr-why-copy,.mcr-checks,.mcr-faq{grid-column:auto;grid-row:auto;}
+  .mcr-faq{border-left:0;padding-left:0;border-top:1px solid #DCE8F3;padding-top:20px;}
+  .mcr-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .mcr-related-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .mcr-cta-boat{display:none;}
+  .mcr-cta-inner{padding-left:var(--pad);}
+}
+
+@media (max-width:820px){
+  .mcr-results-head{flex-direction:column;}
+  .mcr-results-head .btn{margin-top:0;}
+  .mcr-ba-grid{grid-template-columns:minmax(0,1fr);max-width:560px;}
+  .mcr-ba-grid .sfr-ba{aspect-ratio:2.4/1;}
+  .mcr-icons{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .mcr-icons li:nth-child(3){border-left:0;}
+  .mcr-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .mcr-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .mcr-hero-inner{padding-top:32px;padding-bottom:28px;}
+  .mcr-hero h1{font-size:clamp(28px,8.4vw,36px);letter-spacing:-.7px;}
+  .mcr-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .mcr-hero-actions{gap:10px;}
+  .mcr-hero-actions .btn,.mcr-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .mcr-cta-actions{width:100%;}
+  .mcr-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
+  }
+  .mcr-trust{grid-template-columns:minmax(0,1fr);gap:14px;}
+  .mcr-intro-copy h2 br,.mcr-related-copy h2 br,.mcr-why-copy h2 br{display:none;}
+  .mcr-grid{grid-template-columns:minmax(0,1fr);}
+  .mcr-grid .fg-card-media img{aspect-ratio:5/2;}
+  .mcr-steps{grid-template-columns:minmax(0,1fr);}
+  .mcr-step + .mcr-step::before{display:none;}
+  .mcr-results-head .btn{align-self:stretch;justify-content:center;}
+  .mcr-faq summary{padding-block:10px;}
+}
+
+@media (max-width:400px){
+  .mcr-icons{grid-template-columns:minmax(0,1fr);}
+  .mcr-icons li + li{border-left:0;}
+  .mcr-related-grid{grid-template-columns:minmax(0,1fr);}
+}
