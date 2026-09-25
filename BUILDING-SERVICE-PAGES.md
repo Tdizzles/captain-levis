@@ -661,9 +661,7 @@ node --check script.js
   mirror when dragged. `clr-layers.jpg` keeps the comp's leader lines and
   dots; its labels and BEFORE/AFTER tags are HTML placed in % and sized in
   `cqw`, so resize them only together with the image. The CTA skyline is the
-  faded right end of `results-marina.jpg`, not the comp's. The Full Boat
-  Restoration card links to the parent's `#full-boat-restoration` card until
-  `full-boat-restoration.html` is committed. The CTA repeats
+  faded right end of `results-marina.jpg`, not the comp's. The CTA repeats
   "Captain Dave", and the FAQ answers are drafted copy. Check both with the
   owner.
 - **`oxidation-removal.html`** (sub-page of Oxidation & Fading Restoration,
@@ -679,8 +677,32 @@ node --check script.js
   lands on the slider's 50%), so they match the comp at rest but show the
   mirror when dragged. The hero photo's trust row was painted out with tiled
   water. The causes paragraph is the comp's ~12px at 1536 and runs over the
-  diagram's faded edge above 1400px. The Compound & Polish and Full Boat
-  Restoration cards link to the parent's `#compound-polish` and
-  `#full-boat-restoration` cards until those pages are committed. The results
+  diagram's faded edge above 1400px. The Compound & Polish card links to the
+  parent's `#compound-polish` card until that page is committed. The results
   band says "Real Results" although the pairs are placeholders; check with the
   owner.
+- **`full-boat-restoration.html`** (sub-page of Oxidation & Fading
+  Restoration, `.fbr-` prefix, linked from its Full Boat Restoration card) is
+  not in the nav dropdown. Its stylesheet started as a copy of
+  `blended-gelcoat-repair.css`. Its `fbr-*` images are cropped from a 1024px
+  comp and saved at 2×, so they are soft. The hero photo is one static image
+  split down the bow (before | after baked in), not a slider: the comp's
+  angled bow can't be mirrored into a pair. Its drag handle is painted out and
+  its BEFORE/AFTER chips are HTML over the painted-out spots. The photo box
+  keeps the image's aspect ratio (hero height × 569/295), so the chips'
+  `cqw`/`cqh` positions hold at every width. Below 1240px the photo drops
+  under the copy as a banner: any narrower side by side and its BEFORE chip
+  runs into the copy. The callout diagram
+  (`fbr-diagram.jpg`) has all of the comp's leader lines, dots and label text
+  painted out. The lines are an SVG in the comp's own 536×312 coordinates,
+  and the dots and labels are HTML in % with `cqw` type, so re-crop the image
+  only together with those coordinates. On phones the labels drop below the
+  photo as a numbered list and the dots take the numbers. All three
+  before/after pairs are placeholders built like the surface scratch page's
+  (one comp half plus its mirror, tags and handle painted out), so they match
+  the comp at rest but show the mirror when dragged. Pair 2 keeps the comp's
+  "Transom Restoration" caption although its photo is a bow. The Compound &
+  Polish card links to the parent's `#compound-polish` card until that page
+  exists. The comp's CTA skyline is dropped: the band is navy with the comp's
+  boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
+  drafted copy. Check both with the owner.
