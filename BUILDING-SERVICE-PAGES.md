@@ -706,3 +706,23 @@ node --check script.js
   exists. The comp's CTA skyline is dropped: the band is navy with the comp's
   boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
   drafted copy. Check both with the owner.
+- **`dock-rash-repair.html`** (sub-page of Dock & Trailer Damage, `.drr-`
+  prefix, linked from its Dock Rash Repair card) is not in the nav dropdown.
+  It is not `dock-rash-scuff-repair.html`, the Scratch & Gouge sub-page. Its
+  section order follows `waterline-chip-repair.css`. Its `drr-*` images are
+  cropped from a 1024px comp and saved at 2×, so they are soft. The hull
+  diagram (`drr-diagram.jpg`) has the comp's pins, leader lines and callout
+  cards painted out with PIL alone (a diffusion fill under the pins and lines,
+  row interpolation under the cards). The lines are an SVG in the comp crop's
+  own 558×225 coordinates, and the pins and cards are HTML in % with `cqw`
+  type, so re-crop the image only together with those coordinates. On phones
+  the cards drop below the photo as a numbered list and the pins take the
+  numbers. All three before/after pairs are placeholders built like the
+  surface scratch page's (one comp half plus its mirror, tags and handle
+  painted out), so they match the comp at rest but show the mirror when
+  dragged. The four related cards link to the parent's card anchors
+  (`dock-trailer-damage.html#trailer-bunk-damage`, …) until those sub-pages
+  exist. The comp ends at the FAQ, so there is no closing CTA band: the quote
+  form follows the FAQ. The results band says "Real Results" although the
+  pairs are placeholders, and the FAQ answers are drafted copy. Check both
+  with the owner.
