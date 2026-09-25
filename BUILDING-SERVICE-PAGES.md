@@ -499,3 +499,11 @@ node --check script.js
   soft). The other five reuse existing hull/deck/stringer photos. Every
   before/after pair on the five is a placeholder (flagged in the markup), and
   several pairs repeat across pages. None of the six are in the nav dropdown.
+- **`dock-rash-scuff-repair.html`** (sub-page of Scratch & Gouge, `.drs-`
+  prefix, linked from its Dock Rash & Scuffs card) is not in the nav dropdown.
+  Its `drs-*` images are cropped from a 1024px comp and saved at 2×, so they
+  are soft. All four before/after pairs are placeholders: the halves are
+  cropped from the comp and are not the same boat (flagged in the markup). The
+  comp's CTA skyline is dropped; the band is navy over a strip of the comp's
+  water. The CTA repeats "Captain Dave", and the FAQ answers are drafted copy.
+  Check both with the owner.

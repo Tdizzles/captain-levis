@@ -1,0 +1,598 @@
+/* ==========================================================================
+   Dock Rash & Scuff Repair — page-specific styles (a sub-page of Scratch &
+   Gouge Repair, under Gelcoat Repair). Loads after styles.css and reuses its
+   tokens, buttons, eyebrows, fg-card, header and footer. Everything here is
+   prefixed .drs- so no other page moves; the only unprefixed rules are the
+   .sfr-ba slider styles, which every page that uses the shared slider
+   redefines for itself (see scratch-gouge-repair.css).
+
+   Sizes come from the comp, which is drawn 1024px wide: one comp pixel is
+   ~0.0977vw, so most clamp() middles below are "comp px x 0.0977".
+   ========================================================================== */
+
+/* Shared frame: the comp runs every band a little wider than .container. */
+.drs-wide{
+  --wide-pad:clamp(18px,4.2vw,76px);
+  max-width:1920px;
+  margin-inline:auto;
+  padding-inline:var(--wide-pad);
+}
+.drs-eyebrow{
+  gap:clamp(10px,1.3vw,20px);
+  color:var(--icon-blue);
+  font-size:clamp(11px,.78vw,13px);
+  letter-spacing:1.9px;
+  margin-bottom:clamp(8px,.7vw,12px);
+}
+.drs-eyebrow i{background:var(--icon-blue);width:clamp(28px,2.44vw,44px);}
+/* The hero and process eyebrows hang their rule in the margin so the label
+   lines up with the heading (desktop only: on phones it would run off-screen). */
+.drs-hang{
+  --rule:clamp(28px,2.44vw,44px);
+  --rule-gap:clamp(10px,1.3vw,20px);
+  gap:var(--rule-gap);
+}
+.drs-hang i{width:var(--rule);}
+@media (min-width:1025px){
+  .drs-hang{margin-left:calc(-1 * (var(--rule) + var(--rule-gap)));}
+}
+
+/* ---------- Hero ----------
+   drs-hero.jpg covers the right of the band, anchored right so the baked-in
+   "Same Boats. New Beginnings." survives the crop; its left edge feathers
+   into the navy and a bottom wash carries the trust row. */
+.drs-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#0D2F50 0%,#0A2A49 40%,#0F3C66 100%);
+}
+.drs-hero-img{
+  position:absolute;top:0;right:0;
+  width:57%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 24%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 24%);
+}
+.drs-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.3) 0%,
+      rgba(0,22,46,.5) 36%,
+      rgba(0,22,46,.16) 50%,
+      rgba(0,22,46,0) 60%),
+    linear-gradient(0deg, rgba(0,33,66,.97) 0%, rgba(0,33,66,.72) 14%, rgba(0,33,66,0) 30%);
+}
+.drs-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(28px,2.15vw,44px);
+  padding-bottom:clamp(18px,1.2vw,26px);
+}
+.drs-hero-content,.drs-trust{margin-inline:clamp(0px,6vw,100px);}
+.drs-hero-content{max-width:700px;}
+.drs-hero-eyebrow{
+  font-size:clamp(11px,.8vw,13px);
+  letter-spacing:2px;
+  margin-bottom:clamp(8px,.6vw,12px);
+}
+.drs-hero h1{
+  font-size:clamp(32px,2.96vw,56px);
+  letter-spacing:-.02em;
+  line-height:1.04;
+  color:#fff;
+  margin-bottom:clamp(12px,1.05vw,20px);
+}
+.drs-hero h1 .accent{color:var(--accent);}
+.drs-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(15px,1.12vw,19px);
+  line-height:1.42;
+  max-width:29.5em;
+  margin-bottom:clamp(16px,1.3vw,26px);
+}
+.drs-hero-actions{display:flex;gap:clamp(10px,1.1vw,18px);flex-wrap:wrap;}
+.drs-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:16px 28px;
+  margin-top:clamp(20px,2vw,38px);
+}
+.drs-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
+.drs-trust-icon{color:var(--accent);display:flex;flex:none;}
+.drs-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13px,.9vw,15px);line-height:1.25;}
+.drs-trust small{display:block;font-size:clamp(11.5px,.8vw,13px);color:rgba(255,255,255,.8);}
+
+/* ---------- Overview ----------
+   copy + four benefits | one large before/after slider. */
+.drs-intro{background:linear-gradient(180deg,#F8FBFF 0%,var(--light-bg) 100%);}
+.drs-intro-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(20px,1.95vw,40px);
+  padding-block:clamp(22px,1.7vw,36px);
+}
+.drs-intro-copy{padding-left:clamp(0px,1vw,20px);}
+.drs-intro h2{
+  font-size:clamp(26px,2.62vw,48px);
+  letter-spacing:-.02em;
+  line-height:1.08;
+  margin-bottom:clamp(8px,.7vw,14px);
+}
+.drs-intro h2 .accent,.drs-results h2 .accent{color:var(--icon-blue);}
+.drs-intro-copy > p{
+  font-size:clamp(14.5px,1.12vw,19px);
+  line-height:1.53;
+  color:var(--gray-text);
+  max-width:37em;
+}
+.drs-benefits{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(18px,1.75vw,34px);
+}
+.drs-benefits li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(6px,.8vw,16px);
+}
+.drs-benefits li + li{border-left:1px solid #DCE8F3;}
+.drs-benefit-icon{
+  width:clamp(50px,4.3vw,78px);height:clamp(50px,4.3vw,78px);
+  border-radius:50%;
+  background:var(--icon-bg);
+  box-shadow:0 0 0 clamp(4px,.4vw,7px) rgba(220,238,252,.45);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:clamp(10px,1vw,18px);
+}
+.drs-benefit-icon svg{width:50%;height:auto;}
+.drs-benefits strong{
+  font-family:var(--font-head);
+  font-size:clamp(13px,1vw,17px);
+  line-height:1.18;
+  color:var(--navy);
+  margin-bottom:6px;
+}
+.drs-benefits small{font-size:clamp(11.5px,.83vw,14px);line-height:1.4;color:var(--gray-text);}
+
+/* Doubled class: the generic .sfr-ba rule further down would otherwise win. */
+.drs-ba-lead.sfr-ba{aspect-ratio:446/283;border-radius:12px;}
+.drs-ba-lead .sfr-ba-handle{width:clamp(40px,4vw,64px);height:clamp(40px,4vw,64px);}
+.drs-ba-lead .sfr-ba-tag{
+  bottom:clamp(10px,1.2vw,20px);
+  font-size:clamp(11px,1vw,16px);
+  padding:.55em 2.1em;
+  border-radius:6px;
+}
+.drs-ba-lead .sfr-ba-tag-before{left:clamp(10px,1.3vw,22px);}
+.drs-ba-lead .sfr-ba-tag-after{right:clamp(10px,1.3vw,22px);}
+
+/* ---------- Process band ----------
+   Photo with a chevron on its trailing edge | copy + four step cards. */
+.drs-process{
+  display:grid;
+  grid-template-columns:minmax(260px,35.5%) minmax(0,1fr);
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.18), transparent 60%),
+    linear-gradient(100deg,var(--navy-2) 0%,var(--navy) 62%,#003463 100%);
+}
+.drs-process-photo{
+  --notch:clamp(26px,4.7vw,80px);
+  position:relative;
+  min-height:220px;
+  clip-path:polygon(0 0, calc(100% - var(--notch)) 0, 100% 50%, calc(100% - var(--notch)) 100%, 0 100%);
+}
+.drs-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:left center;   /* keeps the logo on the shirt and the grinder */
+}
+.drs-process-body{
+  padding:clamp(24px,2.25vw,42px) clamp(18px,2.6vw,48px) clamp(18px,1.4vw,28px) clamp(12px,1.3vw,24px);
+}
+.drs-process-copy{position:relative;z-index:1;padding-left:clamp(0px,1.1vw,20px);}
+.drs-process-copy .eyebrow{font-size:clamp(11px,.78vw,13px);letter-spacing:1.9px;margin-bottom:clamp(8px,.7vw,12px);}
+.drs-process h2{
+  color:#fff;
+  font-size:clamp(24px,2vw,38px);
+  letter-spacing:-.02em;
+  margin-bottom:clamp(8px,.8vw,14px);
+}
+.drs-process h2 .accent{color:var(--accent);}
+.drs-process-copy p{color:rgba(255,255,255,.86);font-size:clamp(13px,.86vw,15.5px);line-height:1.5;}
+.drs-steps{
+  --step-gap:clamp(18px,2.15vw,40px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  column-gap:var(--step-gap);
+  margin-top:clamp(14px,1.3vw,24px);
+}
+.drs-step{
+  position:relative;
+  padding:clamp(46px,3.8vw,70px) clamp(14px,1.37vw,24px) clamp(12px,1vw,18px);
+  border:1px solid rgba(94,205,250,.26);
+  border-radius:8px;
+  background:rgba(255,255,255,.035);
+}
+/* Arrow between cards, centred in the column gap. */
+.drs-step + .drs-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-1 * var(--step-gap) / 2 - 11px);
+  top:50%;
+  width:22px;height:22px;
+  margin-top:-4px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M3 12h17M13 5l7 7-7 7' stroke='%23C9D8E6' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+.drs-step-num{
+  position:absolute;top:clamp(4px,.5vw,9px);left:-1px;
+  width:clamp(34px,2.9vw,52px);height:clamp(34px,2.9vw,52px);
+  border-radius:50%;
+  background:var(--icon-blue);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(15px,1.2vw,21px);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
+}
+.drs-step-icon{
+  position:absolute;
+  top:clamp(10px,.95vw,17px);
+  left:clamp(48px,4.6vw,82px);
+  color:#E4EEF7;
+  display:flex;
+}
+.drs-step-icon svg{width:clamp(20px,1.66vw,30px);height:auto;}
+.drs-step h3{color:#fff;font-size:clamp(14px,1.03vw,18px);letter-spacing:-.2px;margin-bottom:6px;}
+.drs-step p{color:rgba(255,255,255,.78);font-size:clamp(12.5px,.83vw,14.5px);line-height:1.38;}
+
+/* ---------- Before & after ---------- */
+.drs-results{background:var(--light-bg);}
+.drs-results .drs-wide{padding-block:clamp(22px,1.66vw,34px) clamp(18px,1.4vw,28px);}
+.drs-results-head,.drs-ba-grid{margin-inline:clamp(0px,1vw,20px);}
+.drs-results-head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  gap:14px 30px;
+  margin-bottom:clamp(10px,.8vw,16px);
+}
+.drs-results h2{
+  font-size:clamp(22px,1.86vw,34px);
+  letter-spacing:-.02em;
+  line-height:1.12;
+  margin-bottom:6px;
+}
+.drs-results-head p{font-size:clamp(13px,.88vw,15.5px);line-height:1.5;color:var(--gray-text);}
+.drs-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(12px,1.27vw,24px);
+}
+
+/* The shared slider (script.js binds every .sfr-ba). The comp's pairs are wide
+   strips; each cropped half is ~1.75:1, so cover trims a little top and bottom. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:299/108;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(32px,2.75vw,48px);height:clamp(32px,2.75vw,48px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;width:40%;height:auto;}
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(8px,.75vw,14px);
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(10px,.85vw,14px);
+  letter-spacing:.6px;
+  padding:.5em 1.9em;
+  border-radius:4px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:clamp(8px,1vw,18px);background:rgba(0,22,46,.9);color:#fff;}
+.sfr-ba-tag-after{right:clamp(8px,1vw,18px);background:#1E9BF0;color:#fff;}
+
+/* ---------- Related gelcoat services ----------
+   copy | four fg-cards (whole card is the link) + a "can't find it" card. */
+.drs-related{background:linear-gradient(180deg,#F9FCFF 0%,#fff 100%);border-top:1px solid #E6EFF7;}
+.drs-related-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,30%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(20px,2vw,40px);
+  padding-block:clamp(22px,1.6vw,34px) clamp(18px,1.2vw,26px);
+}
+.drs-related h2,.drs-why-copy h2{
+  font-size:clamp(24px,2.05vw,38px);
+  letter-spacing:-.02em;
+  line-height:1.16;
+  margin-bottom:clamp(8px,.8vw,14px);
+}
+.drs-related-copy p{font-size:clamp(13.5px,.93vw,16px);line-height:1.5;color:var(--gray-text);max-width:28em;}
+.drs-related-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.88fr);
+  gap:clamp(10px,1.07vw,18px);
+}
+.drs-rel-card{border:1px solid #E6EFF7;}
+.drs-rel-card .fg-card-media img{aspect-ratio:2/1;}
+.drs-rel-card .fg-card-body{padding:clamp(10px,1vw,16px) clamp(10px,.8vw,16px) clamp(12px,1.1vw,18px);}
+.drs-rel-card .fg-card-body h3{
+  display:flex;align-items:center;justify-content:space-between;gap:5px;
+  font-size:clamp(13.5px,.95vw,16.5px);
+  letter-spacing:-.2px;
+  margin-bottom:6px;
+}
+.drs-rel-card h3 svg{flex:none;color:var(--icon-blue);transition:transform .15s ease;}
+.drs-rel-card:hover h3 svg{transform:translateX(3px);}
+.drs-rel-card .fg-card-body p{font-size:clamp(12px,.83vw,14.5px);line-height:1.45;margin-bottom:0;}
+.drs-rel-help{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  gap:6px;
+  padding:clamp(12px,1.1vw,20px) clamp(10px,.9vw,16px);
+  border-radius:12px;
+  background:#E4F2FD;
+  transition:transform .18s ease;
+}
+.drs-rel-help:hover{transform:translateY(-3px);}
+.drs-rel-help-icon{
+  width:clamp(44px,3.3vw,58px);height:clamp(44px,3.3vw,58px);
+  border-radius:50%;
+  background:#fff;
+  color:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:4px;
+}
+.drs-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(13px,1vw,16.5px);line-height:1.25;color:var(--navy);}
+.drs-rel-help-arrow{color:var(--icon-blue);flex:none;}
+.drs-rel-help small{font-size:clamp(11px,.72vw,12.5px);line-height:1.4;color:var(--gray-text);}
+
+/* ---------- Why us + FAQ ----------
+   copy | checklist | FAQ accordion (native <details>, no JS). */
+.drs-why{
+  background:
+    radial-gradient(ellipse at 45% 0%, rgba(94,205,250,.1), transparent 60%),
+    linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+  border-top:1px solid #E6EFF7;
+}
+.drs-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,.92fr) minmax(0,1.13fr);
+  align-items:center;
+  column-gap:clamp(20px,2.4vw,46px);
+  padding-block:clamp(22px,1.7vw,34px);
+}
+.drs-why-copy p{font-size:clamp(13.5px,.93vw,16px);line-height:1.5;color:var(--gray-text);}
+.drs-checks{display:grid;gap:clamp(9px,.95vw,16px);}
+.drs-checks li{
+  display:flex;align-items:center;gap:clamp(10px,1.1vw,18px);
+  font-size:clamp(13.5px,.93vw,16px);
+  color:#34506A;
+}
+.drs-checks li::before{
+  content:"";flex:none;
+  width:clamp(20px,1.56vw,27px);height:clamp(20px,1.56vw,27px);
+  border-radius:50%;
+  background:var(--icon-blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6.5 12.5l3.6 3.5 7.4-8' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / 64%;
+}
+.drs-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-left:clamp(18px,2.6vw,48px);
+  border-left:1px solid #DCE8F3;
+}
+.drs-faq h2{font-size:clamp(19px,1.42vw,26px);letter-spacing:-.02em;margin-bottom:clamp(6px,.6vw,10px);}
+.drs-faq details{
+  background:#fff;
+  border:1px solid #D9E6F2;
+  border-radius:6px;
+}
+.drs-faq details + details{margin-top:clamp(5px,.45vw,8px);}
+.drs-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:clamp(7px,.55vw,10px) clamp(12px,.9vw,16px);
+  font-weight:500;
+  font-size:clamp(13px,.86vw,15px);
+  cursor:pointer;
+  list-style:none;
+}
+.drs-faq summary::-webkit-details-marker{display:none;}
+.drs-faq summary::after{
+  content:"";flex:none;width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.drs-faq details[open] summary::after{transform:rotate(45deg);}
+.drs-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.drs-faq details p{
+  padding:0 clamp(12px,.9vw,16px) 12px;
+  font-size:clamp(13px,.86vw,14.5px);
+  line-height:1.55;
+  color:var(--gray-text);
+}
+.drs-faq details a{color:var(--icon-blue);font-weight:600;text-decoration:underline;text-underline-offset:2px;}
+
+/* ---------- Closing CTA band ----------
+   Boat at the left edge, water along the bottom, copy | two buttons. */
+.drs-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg,#0A2C55 0%,var(--navy) 55%,#0B3E73 100%);
+  color:#fff;
+}
+.drs-cta-water{
+  position:absolute;left:0;right:0;bottom:0;
+  width:100%;height:42%;
+  object-fit:cover;
+  object-position:center top;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 55%);
+          mask-image:linear-gradient(180deg,transparent 0%,#000 55%);
+  opacity:.9;
+}
+.drs-cta-boat{
+  position:absolute;left:0;top:0;
+  width:23%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,#000 78%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 78%,transparent 100%);
+}
+.drs-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px clamp(24px,3vw,56px);
+  flex-wrap:wrap;
+  padding-block:clamp(26px,2.9vw,54px);
+  /* Clear the boat (23% of the band) even though this frame is centred:
+     % padding resolves against the full-width section. */
+  padding-left:max(var(--wide-pad), 23.6% - max(0px, (100% - 1920px) / 2));
+  padding-right:calc(var(--wide-pad) + clamp(0px,1.6vw,30px));
+}
+.drs-cta h2{color:#fff;font-size:clamp(22px,1.86vw,34px);letter-spacing:-.02em;margin-bottom:6px;}
+.drs-cta p{font-size:clamp(14px,.93vw,16.5px);color:rgba(255,255,255,.9);}
+.drs-cta-actions{display:flex;gap:clamp(10px,1.4vw,24px);flex-wrap:wrap;}
+.drs-cta-actions .btn{padding:clamp(13px,1.05vw,18px) clamp(24px,2.2vw,40px);}
+.drs-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);}
+
+/* ==========================================================================
+   Responsive — widest first (see the recipe: equal specificity, later wins)
+   ========================================================================== */
+
+@media (max-width:1500px){
+  .drs-why-inner{grid-template-columns:minmax(0,.9fr) minmax(0,.9fr) minmax(0,1.2fr);}
+}
+
+@media (max-width:1400px){
+  .drs-related-inner{grid-template-columns:minmax(0,1fr);row-gap:16px;}
+  .drs-related-copy p{max-width:52em;}
+  /* Why: copy moves above the checklist and FAQ so neither column squeezes. */
+  .drs-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);row-gap:22px;}
+  .drs-why-copy{grid-column:1 / -1;}
+  .drs-why-copy p{max-width:52em;}
+  .drs-why-copy h2 br{display:none;}
+  /* CTA: a narrower boat keeps both buttons on the copy's row. */
+  .drs-cta-boat{width:19%;}
+  .drs-cta-inner{padding-left:max(var(--wide-pad), 20%);}
+}
+
+@media (max-width:1240px){
+  .drs-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:56px;}
+  .drs-intro-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .drs-intro-copy{padding-left:0;}
+  .drs-results-head,.drs-ba-grid{margin-inline:0;}
+  .drs-ba-lead.sfr-ba{max-width:760px;}
+  .drs-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .drs-step:nth-child(3)::before{display:none;}
+}
+
+@media (max-width:1100px){
+  /* The "can't find it" card becomes a strip under the four service cards. */
+  .drs-related-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .drs-rel-help{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr) auto;
+    grid-template-areas:"icon title arrow" "icon small arrow";
+    align-items:center;
+    column-gap:16px;row-gap:2px;
+    text-align:left;
+    padding:14px 20px;
+  }
+  .drs-rel-help-icon{grid-area:icon;margin:0;}
+  .drs-rel-help strong{grid-area:title;}
+  .drs-rel-help small{grid-area:small;}
+  .drs-rel-help-arrow{grid-area:arrow;}
+}
+
+@media (max-width:1024px){
+  .drs-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:78% center;}
+  .drs-hero-scrim{
+    background:
+      linear-gradient(90deg, rgba(0,22,46,.94) 0%, rgba(0,22,46,.84) 55%, rgba(0,22,46,.5) 100%),
+      linear-gradient(0deg, rgba(0,22,46,.7) 0%, rgba(0,22,46,0) 35%);
+  }
+  .drs-hero-content,.drs-trust{margin-inline:0;}
+  .drs-process{grid-template-columns:minmax(0,1fr);}
+  /* The photo's right edge has the comp's navy chevron baked in: overscan
+     the image so the banner crops it off instead of showing it. */
+  .drs-process-photo{clip-path:none;aspect-ratio:640/444;max-height:420px;width:100%;overflow:hidden;}
+  .drs-process-photo img{width:114%;max-width:none;}
+  .drs-process-body{padding:clamp(28px,5vw,40px) clamp(18px,4.2vw,76px) clamp(30px,5vw,44px);}
+  .drs-process-copy{padding-left:0;}
+  .drs-cta-boat{display:none;}
+  .drs-cta-inner{padding-left:var(--wide-pad);padding-right:var(--wide-pad);}
+}
+
+@media (max-width:820px){
+  .drs-benefits{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px;}
+  .drs-benefits li:nth-child(3){border-left:0;}
+  .drs-ba-grid{grid-template-columns:minmax(0,1fr);max-width:620px;}
+  .drs-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .drs-why-inner{grid-template-columns:minmax(0,1fr);}
+  .drs-faq{padding-left:0;border-left:0;padding-top:22px;border-top:1px solid #DCE8F3;}
+}
+
+@media (max-width:640px){
+  .drs-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .drs-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .drs-hero h1 br{display:none;}
+  .drs-hero-sub{font-size:14.5px;}
+  .drs-hero-actions .btn,.drs-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  /* Show the scuffed bow rather than the tagline, which would sit under the copy. */
+  .drs-hero-img{object-position:28% center;}
+  .drs-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.78) 100%);
+  }
+  .drs-trust{grid-template-columns:minmax(0,1fr);gap:14px;}
+  .drs-intro h2 br,.drs-related h2 br,.drs-process-copy p br{display:none;}
+  .drs-process h2 .accent{display:block;}
+  .drs-steps{grid-template-columns:minmax(0,1fr);}
+  .drs-step + .drs-step::before{display:none;}
+  .drs-results-head{grid-template-columns:minmax(0,1fr);}
+  .drs-results-head .btn{justify-self:start;}
+  .sfr-ba{aspect-ratio:2.2/1;}
+  .drs-ba-lead.sfr-ba{aspect-ratio:4/3;}
+  .drs-rel-help{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"icon title" "icon small";}
+  .drs-rel-help-arrow{display:none;}
+  .drs-cta-actions{width:100%;}
+}
+
+@media (max-width:400px){
+  .drs-benefits li{padding-inline:4px;}
+}
