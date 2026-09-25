@@ -1,0 +1,508 @@
+/* ==========================================================================
+   Deep Gouge Repair — page-specific styles (a sub-page of Scratch & Gouge
+   Repair, under Gelcoat). Loads after styles.css and reuses its tokens,
+   buttons, eyebrows, card shell, header, footer and contact form. Everything
+   here is prefixed .dg- so no other page moves; the only unprefixed rules are
+   the .sfr-ba slider styles, which every page repeats because structural.css
+   belongs to the structural page and script.js binds to .sfr-ba.
+   ========================================================================== */
+
+/* The comp runs its light bands at the card grid's width, wider than
+   .container. */
+.dg-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,4vw,64px);
+}
+.dg-eyebrow{
+  color:var(--icon-blue);
+  font-size:11.5px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.dg-eyebrow i{background:var(--icon-blue);width:32px;}
+.dg-accent{color:var(--icon-blue);}
+
+/* ---------- Hero ----------
+   One photo (dg-hero.jpg, "Same Boats. New Beginnings." baked in at its right
+   edge). It covers the right of the band, anchored right so the tagline
+   survives the crop, and its left edge feathers into the navy. */
+.dg-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.dg-hero-img{
+  position:absolute;top:0;right:0;
+  width:62%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 24%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 24%);
+}
+.dg-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,
+      rgba(0,22,46,.86) 0%,
+      rgba(0,22,46,.62) 34%,
+      rgba(0,22,46,.14) 50%,
+      rgba(0,22,46,0) 60%),
+    linear-gradient(0deg,rgba(0,22,46,.72) 0%,rgba(0,22,46,.3) 16%,rgba(0,22,46,0) 32%);
+}
+.dg-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(34px,3.3vw,54px);
+  padding-bottom:clamp(20px,1.6vw,26px);
+}
+.dg-hero-content{max-width:640px;}
+.dg-hero-eyebrow{margin-bottom:12px;font-size:12px;letter-spacing:2.2px;}
+.dg-hero h1{
+  font-size:clamp(32px,2.8vw,45px);
+  letter-spacing:-1px;
+  line-height:1.05;
+  color:#fff;
+  margin-bottom:14px;
+}
+.dg-hero h1 .accent{color:var(--accent);}
+.dg-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(15px,1.05vw,16.5px);
+  line-height:1.45;
+  max-width:520px;
+  margin-bottom:22px;
+}
+.dg-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.dg-trust{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:14px clamp(20px,2.4vw,40px);
+  max-width:1200px;
+  margin-top:clamp(20px,1.6vw,26px);
+}
+.dg-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
+.dg-trust-icon{flex:none;display:flex;color:var(--accent);}
+.dg-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;font-weight:700;line-height:1.25;}
+.dg-trust small{display:block;font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.3;}
+
+/* ---------- Intro: copy + four points | before/after ---------- */
+.dg-intro{background:linear-gradient(180deg,#F8FBFE 0%,#EEF5FC 100%);overflow:hidden;}
+.dg-intro-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(24px,2.8vw,48px);
+  padding-block:clamp(26px,1.8vw,30px);
+}
+.dg-intro h2{
+  font-size:clamp(26px,2.3vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.1;
+  margin-bottom:12px;
+}
+.dg-intro-copy > p{font-size:clamp(15px,1.02vw,16px);line-height:1.5;color:var(--gray-text);max-width:640px;}
+.dg-points{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(16px,1.4vw,22px);
+  max-width:720px;
+}
+.dg-points li{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  padding-inline:clamp(8px,1vw,16px);
+  border-left:1px solid #DCE7F1;
+}
+.dg-points li:first-child{border-left:0;}
+.dg-point-icon{
+  width:50px;height:50px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:#DCEEFC;
+  color:var(--icon-blue);
+  margin-bottom:10px;
+}
+.dg-points strong{font-family:var(--font-head);font-size:14px;font-weight:800;line-height:1.25;margin-bottom:4px;}
+.dg-points small{font-size:12.5px;line-height:1.4;color:var(--gray-text);}
+
+/* ---------- The shared slider (script.js binds every .sfr-ba) ----------
+   Each dg-*-before/after image is the comp's half plus its mirror, so at the
+   default 50% split each side shows its half at the comp's scale, and the
+   seam stays continuous when dragged. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:302/97;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 16px 36px -22px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:3px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:3px;margin-left:-1.5px;
+  background:#fff;
+  box-shadow:0 0 10px rgba(0,0,0,.35);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:40px;height:40px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:10px;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:1.2px;
+  padding:7px 20px;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:10px;background:rgba(0,22,46,.9);color:#fff;}
+.sfr-ba-tag-after{right:10px;background:#1E86F0;color:#fff;padding-inline:26px;}
+
+/* The intro pair is the page's big one: taller, with larger handle and chips. */
+.dg-intro-ba{aspect-ratio:447/246;border-radius:14px;}
+.dg-intro-ba .sfr-ba-handle{width:54px;height:54px;}
+.dg-intro-ba .sfr-ba-tag{bottom:clamp(12px,1.2vw,18px);font-size:clamp(12px,1.05vw,17px);padding:clamp(7px,.75vw,11px) clamp(18px,2.1vw,34px);border-radius:7px;}
+.dg-intro-ba .sfr-ba-tag-before{left:clamp(12px,1.4vw,22px);}
+.dg-intro-ba .sfr-ba-tag-after{right:clamp(12px,1.4vw,22px);padding-inline:clamp(24px,2.6vw,44px);}
+
+/* ---------- Process band: photo (chevron edge) | copy + four steps ---------- */
+.dg-process{
+  display:grid;
+  grid-template-columns:minmax(260px,33.5%) minmax(0,1fr);
+  background:linear-gradient(100deg,#062F5A 0%,var(--navy) 45%,var(--navy-2) 100%);
+  color:#fff;
+}
+/* The container shows through as a thin accent rule along the chevron. */
+.dg-process-photo{
+  position:relative;
+  background:var(--accent);
+  clip-path:polygon(0 0,calc(100% - 64px) 0,100% 50%,calc(100% - 64px) 100%,0 100%);
+}
+.dg-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:40% center;
+  clip-path:polygon(0 0,calc(100% - 66px) 0,calc(100% - 3px) 50%,calc(100% - 66px) 100%,0 100%);
+}
+.dg-process-body{
+  padding:clamp(30px,2.4vw,40px) clamp(20px,2.8vw,44px) clamp(30px,2.4vw,40px) clamp(20px,4vw,62px);
+}
+.dg-process-eyebrow{color:#fff;}
+.dg-process-eyebrow i{background:var(--accent);}
+.dg-process h2{
+  color:#fff;
+  font-size:clamp(26px,2.2vw,34px);
+  letter-spacing:-.8px;
+  margin-bottom:10px;
+}
+.dg-process h2 .accent{color:var(--accent);}
+.dg-process-lead{font-size:15px;line-height:1.5;color:rgba(255,255,255,.86);margin-bottom:clamp(18px,1.5vw,24px);}
+.dg-steps{
+  --step-gap:clamp(22px,2vw,32px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--step-gap);
+  list-style:none;
+}
+.dg-step{
+  position:relative;
+  padding:clamp(12px,1vw,16px) clamp(14px,1.2vw,20px) clamp(16px,1.3vw,20px);
+  border-radius:10px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+}
+.dg-step + .dg-step::before{
+  /* The arrow between steps sits in the gap, level with the card's middle. */
+  content:"";
+  position:absolute;
+  left:calc(-1 * var(--step-gap) / 2 - 11px);
+  top:50%;
+  width:22px;height:22px;margin-top:-11px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 5.5l6.5 6.5-6.5 6.5'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity:.9;
+}
+.dg-step-top{display:flex;align-items:center;gap:clamp(12px,1.4vw,20px);margin-bottom:12px;}
+.dg-step-num{
+  flex:none;
+  width:40px;height:40px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:#1E86F0;
+  box-shadow:0 0 0 4px rgba(30,134,240,.22);
+  font-family:var(--font-head);font-weight:800;font-size:16px;color:#fff;
+}
+.dg-step-icon{display:flex;color:#fff;}
+.dg-step h3{color:#fff;font-size:15.5px;letter-spacing:-.2px;margin-bottom:6px;}
+.dg-step p{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.84);}
+
+/* ---------- Results ---------- */
+.dg-results{background:var(--light-bg);padding-block:clamp(24px,1.8vw,30px);}
+.dg-results-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px 30px;flex-wrap:wrap;
+  margin-bottom:clamp(12px,1vw,16px);
+}
+.dg-results h2,.dg-why h2,.dg-related h2,.dg-choose-copy h2{
+  font-size:clamp(24px,2vw,31px);
+  letter-spacing:-.7px;
+  line-height:1.12;
+  margin-bottom:8px;
+}
+.dg-results-head p{font-size:14.5px;color:var(--gray-text);}
+.dg-results-head .btn{font-size:14px;padding:12px 24px;}
+.dg-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.6vw,26px);
+}
+
+/* ---------- Why repair: copy | four risks ---------- */
+.dg-why{background:#fff;}
+.dg-why-inner{
+  display:grid;
+  grid-template-columns:minmax(300px,31%) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(20px,2.4vw,40px);
+  padding-block:clamp(24px,2vw,32px);
+}
+.dg-why-copy > p{font-size:15px;line-height:1.5;color:var(--gray-text);}
+.dg-risks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
+.dg-risks li{
+  display:flex;flex-direction:column;align-items:center;
+  text-align:center;
+  padding-inline:clamp(10px,1.4vw,24px);
+  border-left:1px solid #DCE7F1;
+}
+.dg-risk-icon{
+  width:50px;height:50px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  background:#DCEEFC;
+  color:#1E86F0;
+  margin-bottom:12px;
+}
+.dg-risks strong{font-family:var(--font-head);font-size:15px;font-weight:800;margin-bottom:6px;}
+.dg-risks small{font-size:13.5px;line-height:1.45;color:var(--gray-text);max-width:210px;}
+
+/* ---------- Related services: copy | four cards + help card ---------- */
+.dg-related{background:linear-gradient(180deg,#F4F9FE 0%,#EFF6FD 100%);}
+.dg-related-inner{
+  display:grid;
+  grid-template-columns:minmax(280px,26%) minmax(0,1fr);
+  align-items:center;
+  gap:clamp(20px,2.4vw,40px);
+  padding-block:clamp(22px,1.8vw,28px);
+}
+.dg-related-copy > p{font-size:14.5px;line-height:1.5;color:var(--gray-text);}
+.dg-related-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.93fr);
+  gap:clamp(12px,1.3vw,21px);
+}
+.dg-rel-card{border:1px solid #E6EFF7;}
+.dg-rel-card .fg-card-media img{aspect-ratio:123/58;}
+.dg-rel-card .fg-card-body{padding:12px 12px 16px;}
+.dg-rel-card h3{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  width:100%;
+  font-size:14.5px;
+  letter-spacing:-.2px;
+  margin-bottom:6px;
+}
+.dg-rel-card h3 svg{flex:none;color:var(--icon-blue);transition:transform .15s ease;}
+.dg-rel-card:hover h3 svg{transform:translateX(3px);}
+.dg-rel-card .fg-card-body p{font-size:13px;line-height:1.45;margin-bottom:0;}
+.dg-rel-card:focus-visible,.dg-help-card:focus-visible{outline:3px solid var(--icon-blue);outline-offset:3px;}
+.dg-help-card{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:16px 14px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#E3F0FC 0%,#D8EAFB 100%);
+  transition:transform .18s ease;
+}
+.dg-help-card:hover{transform:translateY(-3px);}
+.dg-help-icon{display:flex;color:var(--navy);margin-bottom:8px;}
+.dg-help-card strong{font-family:var(--font-head);font-size:15.5px;font-weight:800;line-height:1.2;}
+.dg-help-arrow{color:var(--icon-blue);margin:4px 0;}
+.dg-help-card small{font-size:12.5px;line-height:1.4;color:var(--gray-text);}
+
+/* ---------- Why choose us | checklist | FAQ ---------- */
+.dg-choose{background:#fff;}
+.dg-choose-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.36fr);
+  align-items:center;
+  gap:clamp(20px,2.4vw,40px);
+  padding-block:clamp(22px,1.8vw,28px);
+}
+.dg-choose-copy > p{font-size:14.5px;line-height:1.5;color:var(--gray-text);}
+.dg-checks{display:grid;gap:10px;}
+.dg-checks li{display:flex;align-items:center;gap:14px;font-size:15px;line-height:1.35;color:#2A4560;}
+.dg-checks li::before{
+  content:"";flex:none;
+  width:22px;height:22px;border-radius:50%;
+  background:#1E86F0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") no-repeat center/13px;
+}
+.dg-faq{align-self:stretch;padding-left:clamp(20px,2.6vw,42px);border-left:1px solid #DCE7F1;}
+.dg-faq h2{font-size:clamp(20px,1.45vw,23px);letter-spacing:-.4px;margin-bottom:10px;}
+.dg-faq details{
+  border:1px solid #DCE7F1;
+  border-radius:6px;
+  background:#fff;
+  margin-bottom:6px;
+}
+.dg-faq details:last-child{margin-bottom:0;}
+.dg-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:8px 14px;
+  font-size:14px;font-weight:500;color:var(--navy);
+  cursor:pointer;list-style:none;
+}
+.dg-faq summary::-webkit-details-marker{display:none;}
+.dg-faq summary::after{
+  content:"";flex:none;width:13px;height:13px;
+  background:linear-gradient(#1E86F0,#1E86F0) center/13px 2px no-repeat,linear-gradient(#1E86F0,#1E86F0) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.dg-faq details[open] summary::after{transform:rotate(45deg);}
+.dg-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.dg-faq details p{padding:0 14px 12px;font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ---------- */
+.dg-cta{
+  position:relative;overflow:hidden;
+  background:linear-gradient(180deg,#07335F 0%,var(--navy) 55%,#0A3D70 100%);
+  color:#fff;
+}
+.dg-cta-boat{
+  position:absolute;left:0;top:0;
+  width:25%;height:100%;
+  object-fit:cover;object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+}
+.dg-cta-inner{
+  position:relative;
+  display:flex;align-items:center;gap:20px clamp(24px,2.4vw,40px);flex-wrap:wrap;
+  padding-block:clamp(24px,2.2vw,34px);
+  /* Start just past the boat photo (26% of the band), measured from the
+     container's own edge so it holds at every viewport width. */
+  padding-left:max(var(--pad),calc(26% - max(0px,(100% - var(--container)) / 2)));
+}
+.dg-cta h2{color:#fff;font-size:clamp(24px,2vw,31px);letter-spacing:-.6px;margin-bottom:4px;}
+.dg-cta p{font-size:15.5px;color:rgba(255,255,255,.88);}
+.dg-cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7).
+   ========================================================================== */
+/* The hero and process eyebrows hang their rule in the margin, as in the
+   comp. Desktop only: on narrow screens the rule would push past the edge. */
+@media (min-width:1025px){
+  .dg-hero-content{padding-left:54px;}
+  .dg-hero-eyebrow{margin-left:-54px;}
+  .dg-process-eyebrow{margin-left:-46px;}
+  .dg-process-body{padding-left:clamp(56px,5.2vw,104px);}
+}
+@media (max-width:1500px){
+  /* The copy column narrows here; give it more of the row and tighten the
+     points so their titles keep to two lines. */
+  .dg-intro-inner{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);}
+  .dg-points li{padding-inline:6px;}
+  .dg-points strong{font-size:13.5px;}
+  .dg-related-inner{grid-template-columns:minmax(0,1fr);}
+  .dg-related-copy{max-width:760px;}
+  .dg-related-copy h2 br{display:none;}
+}
+@media (max-width:1400px){
+  .dg-process{grid-template-columns:minmax(260px,30%) minmax(0,1fr);}
+  .dg-risks li{padding-inline:12px;}
+}
+@media (max-width:1240px){
+  .dg-intro-inner{grid-template-columns:minmax(0,1fr);}
+  .dg-intro-ba{max-width:760px;width:100%;}
+  .dg-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .dg-step:nth-child(3)::before{display:none;}
+  .dg-why-inner{grid-template-columns:minmax(0,1fr);}
+  .dg-why-copy{max-width:760px;}
+  .dg-choose-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+  .dg-faq{grid-column:1/-1;padding-left:0;border-left:0;}
+}
+@media (max-width:1100px){
+  .dg-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  /* Third pair centred under the first two instead of left hanging. */
+  .dg-ba-grid > :last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - clamp(14px,1.6vw,26px) / 2);}
+  .dg-related-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media (max-width:1024px){
+  .dg-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;object-position:78% center;}
+  .dg-hero-scrim{
+    background:linear-gradient(90deg,rgba(0,22,46,.94) 0%,rgba(0,22,46,.84) 55%,rgba(0,22,46,.5) 100%);
+  }
+  .dg-trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:640px;}
+  .dg-process{grid-template-columns:minmax(0,1fr);}
+  .dg-process-photo{clip-path:none;aspect-ratio:2.4/1;background:none;}
+  .dg-process-photo img{clip-path:none;object-position:30% 30%;}
+  .dg-process-body{padding-inline:var(--pad);}
+  .dg-cta-boat{display:none;}
+  .dg-cta-inner{padding-left:var(--pad);}
+}
+@media (max-width:820px){
+  .dg-points{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:20px;}
+  .dg-points li:nth-child(3){border-left:0;}
+  .dg-risks{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:24px;}
+  .dg-risks li:nth-child(odd){border-left:0;}
+  .dg-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .dg-help-card{grid-column:1/-1;}
+  .dg-choose-inner{grid-template-columns:minmax(0,1fr);}
+}
+@media (max-width:640px){
+  .dg-hero-inner{padding-top:32px;padding-bottom:26px;}
+  .dg-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .dg-hero h1 br{display:none;}
+  .dg-hero-sub{font-size:14.5px;}
+  .dg-hero-scrim{
+    background:linear-gradient(180deg,rgba(0,22,46,.9) 0%,rgba(0,22,46,.82) 55%,rgba(0,22,46,.74) 100%);
+  }
+  .dg-hero-actions{gap:10px;}
+  .dg-hero-actions .btn,.dg-cta-actions .btn,.dg-results-head .btn{flex:1 1 100%;justify-content:center;}
+  .dg-cta-actions{width:100%;}
+  .dg-intro h2 br,.dg-choose-copy h2 br,.dg-process-lead br{display:none;}
+  .dg-steps{grid-template-columns:minmax(0,1fr);}
+  .dg-step + .dg-step::before{display:none;}
+  .dg-ba-grid{grid-template-columns:minmax(0,1fr);}
+  .dg-ba-grid > :last-child:nth-child(odd){grid-column:auto;width:auto;justify-self:stretch;}
+  .sfr-ba{aspect-ratio:2.6/1;}
+  .dg-intro-ba{aspect-ratio:447/246;}
+  .dg-intro-ba .sfr-ba-handle{width:44px;height:44px;}
+  .dg-results-head{align-items:flex-start;}
+}
+@media (max-width:400px){
+  .dg-trust{grid-template-columns:minmax(0,1fr);}
+  .dg-points li{padding-inline:6px;}
+  .dg-risks{grid-template-columns:minmax(0,1fr);}
+  .dg-risks li{border-left:0;}
+}

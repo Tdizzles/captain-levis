@@ -524,3 +524,12 @@ node --check script.js
   skyline is the faded right end of `results-marina.jpg`, not the comp's. The
   CTA repeats "Captain Dave", and the FAQ answers are drafted copy. Check both
   with the owner.
+- **`deep-gouge-repair.html`** (sub-page of Scratch & Gouge, `.dg-` prefix,
+  linked from its Deep Gouges card) is not in the nav dropdown. Its `dg-*`
+  images are cropped from a 1024px comp and saved at 2×, so they are soft.
+  All four before/after pairs are placeholders built like the surface scratch
+  page's (one comp half plus its mirror), so they match the comp at rest but
+  show the mirror when dragged. The related cards reuse the parent's `sg-svc-*`
+  photos. The comp's CTA skyline is dropped: the band is navy with the comp's
+  boat on the left. The CTA repeats "Captain Dave", and the FAQ answers are
+  drafted copy. Check both with the owner.
