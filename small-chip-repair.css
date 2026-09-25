@@ -1,0 +1,641 @@
+/* ==========================================================================
+   Small Chips & Nicks — page-specific styles (a sub-page of Gelcoat Chip
+   Repair, linked from its Small Chips & Nicks card). Loads after styles.css
+   and reuses its tokens, buttons, eyebrows, header, footer and contact form.
+   Everything here is prefixed .scn-; the only unprefixed rules are the shared
+   .sfr-ba slider styles, which every page that uses the slider defines for
+   itself (script.js binds to the class).
+   ========================================================================== */
+
+/* The comp runs its bands nearly edge to edge, like the other gelcoat
+   sub-pages: the card grid's 1760px frame, not .container. */
+.scn-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,2.6vw,44px);
+}
+.scn-eyebrow{
+  color:var(--icon-blue);
+  font-size:11.5px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.scn-eyebrow i{background:var(--icon-blue);width:32px;}
+
+/* ---------- Hero ----------
+   One photo (scn-hero.jpg, "Same Boats. New Beginnings." baked in at its
+   right) covering the right of the band, feathered into the navy on its
+   left. The copy is indented past the eyebrow's rule, as in the comp, and
+   the trust row sits over the bottom of the photo on a darkening wash. */
+.scn-hero{
+  --scn-indent:50px;                /* eyebrow rule (36px) + its gap (14px) */
+  --scn-inset:clamp(0px,1.4vw,28px);/* matches the copy inset of the bands below */
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 38%,#0B3A66 100%);
+}
+.scn-hero-img{
+  position:absolute;top:0;right:0;
+  width:61%;height:100%;
+  object-fit:cover;
+  object-position:right center;     /* the tagline lives at the right edge */
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 20%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 20%);
+}
+.scn-hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,22,46,.72) 0%,
+    rgba(0,22,46,.5) 38%,
+    rgba(0,22,46,0) 58%);
+}
+.scn-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(34px,3.2vw,60px);
+  padding-bottom:clamp(26px,2.4vw,44px);
+}
+.scn-hero-content{max-width:680px;margin-left:var(--scn-inset);padding-left:var(--scn-indent);}
+.scn-hero-eyebrow{
+  margin-left:calc(-1 * var(--scn-indent));
+  margin-bottom:14px;
+  font-size:12px;
+  letter-spacing:2.2px;
+}
+.scn-hero-eyebrow i{width:36px;}
+.scn-hero h1{
+  font-size:clamp(34px,3.25vw,58px);
+  letter-spacing:-1.4px;
+  line-height:1.02;
+  color:#fff;
+  margin-bottom:18px;
+}
+.scn-hero h1 .accent{color:var(--accent);}
+.scn-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(15px,1.05vw,17.5px);
+  line-height:1.5;
+  max-width:540px;
+  margin-bottom:26px;
+}
+.scn-hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+.scn-trust-bar{
+  position:relative;z-index:2;
+  background:linear-gradient(180deg,rgba(0,24,50,0) 0%,rgba(0,24,50,.62) 45%,rgba(0,20,42,.86) 100%);
+}
+.scn-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:14px 24px;
+  padding-block:clamp(12px,1.2vw,20px) clamp(14px,1.3vw,22px);
+  padding-left:calc(clamp(18px,2.6vw,44px) + var(--scn-inset) + var(--scn-indent));
+}
+.scn-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
+.scn-trust-icon{flex:none;display:flex;color:var(--accent);}
+.scn-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
+.scn-trust small{display:block;font-size:12px;line-height:1.3;color:rgba(255,255,255,.78);}
+
+/* ---------- Intro: copy + four benefits | before/after slider ---------- */
+.scn-intro{
+  background:
+    radial-gradient(ellipse at 12% 0%, rgba(94,205,250,.1), transparent 55%),
+    linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);
+}
+.scn-intro-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.06fr) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(24px,3vw,56px);
+  padding-block:clamp(26px,2.4vw,42px);
+}
+.scn-intro-copy{padding-left:clamp(0px,1.4vw,28px);}
+.scn-intro h2{
+  font-size:clamp(25px,2.05vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+  margin-bottom:12px;
+}
+.scn-intro h2 .accent{color:var(--icon-blue);}
+.scn-intro-copy > p{
+  font-size:clamp(14.5px,1vw,16px);
+  line-height:1.6;
+  color:var(--gray-text);
+  max-width:680px;
+}
+.scn-benefits{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(20px,2vw,32px);
+}
+.scn-benefits li{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding-inline:clamp(6px,.9vw,16px);
+}
+.scn-benefits li + li{border-left:1px solid #DCE8F3;}
+.scn-benefit-icon{
+  width:56px;height:56px;
+  border-radius:50%;
+  background:var(--icon-bg);
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;
+}
+.scn-benefits strong{font-family:var(--font-head);font-size:14px;line-height:1.25;color:var(--navy);margin-bottom:6px;}
+.scn-benefits small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:150px;}
+
+/* ---------- Shared slider (script.js binds every .sfr-ba) ----------
+   Each image is one half of the comp's pair plus its mirror, so at rest the
+   seam sits on the handle and the frame matches the comp. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:304/107;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:34px;height:34px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+.sfr-ba-tag{
+  position:absolute;bottom:10px;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:11px;
+  letter-spacing:1.1px;
+  padding:5px 18px;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:10px;background:rgba(0,22,46,.9);color:#fff;}
+.sfr-ba-tag-after{right:10px;background:var(--icon-blue);color:#fff;}
+
+/* The intro's single, larger slider. */
+.scn-ba-lg{
+  aspect-ratio:474/278;
+  border-radius:12px;
+  box-shadow:0 24px 44px -28px rgba(0,38,75,.6);
+}
+.scn-ba-lg .sfr-ba-handle{width:clamp(40px,3vw,54px);height:clamp(40px,3vw,54px);}
+.scn-ba-lg .sfr-ba-tag{
+  bottom:clamp(12px,1.2vw,20px);
+  font-size:clamp(12px,.85vw,14px);
+  padding:clamp(7px,.6vw,10px) clamp(22px,2.4vw,44px);
+  border-radius:6px;
+}
+.scn-ba-lg .sfr-ba-tag-before{left:clamp(12px,1.2vw,20px);}
+.scn-ba-lg .sfr-ba-tag-after{right:clamp(12px,1.2vw,20px);}
+
+/* ---------- Process band ----------
+   Light band. The polisher photo (scn-worker.jpg) fills the top right and
+   fades out to the left and downward; the four white step cards run across
+   the band's lower half and overlap it, with arrows in the gaps. */
+.scn-process{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 0% 100%, rgba(94,205,250,.14), transparent 55%),
+    linear-gradient(90deg,#F1F8FE 0%,#E8F2FB 50%,#DDEBF7 100%);
+}
+.scn-process-photo{
+  /* Full band width, faded in from the left by the mask: an element edge
+     inside the band showed as a hairline seam on fractional pixel offsets. */
+  position:absolute;top:0;left:0;
+  width:100%;height:74%;
+  object-fit:cover;
+  object-position:right 30%;
+  -webkit-mask-image:linear-gradient(90deg,transparent 40%,#000 64%),linear-gradient(180deg,#000 55%,transparent 100%);
+  -webkit-mask-composite:source-in;
+          mask-image:linear-gradient(90deg,transparent 40%,#000 64%),linear-gradient(180deg,#000 55%,transparent 100%);
+          mask-composite:intersect;
+}
+.scn-process-inner{
+  position:relative;z-index:1;
+  padding-block:clamp(26px,2.4vw,42px) clamp(28px,2.6vw,46px);
+}
+.scn-process-copy{padding-left:clamp(0px,1.4vw,28px);max-width:640px;}
+.scn-process h2{
+  font-size:clamp(25px,2.05vw,36px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+  margin-bottom:10px;
+}
+.scn-process h2 .accent{color:var(--icon-blue);}
+.scn-process-copy p{
+  font-size:clamp(14.5px,1vw,16px);
+  line-height:1.55;
+  color:var(--gray-text);
+}
+.scn-steps{
+  --step-gap:clamp(34px,3.2vw,60px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px var(--step-gap);
+  margin-top:clamp(22px,2.4vw,40px);
+  padding-inline:clamp(0px,1.4vw,28px);
+}
+.scn-step{
+  position:relative;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-content:start;
+  column-gap:clamp(12px,1.1vw,20px);
+  padding:clamp(16px,1.3vw,22px) clamp(16px,1.3vw,24px) clamp(18px,1.4vw,24px);
+  background:#fff;
+  border:1px solid #E3EEF8;
+  border-radius:10px;
+  box-shadow:0 16px 34px -22px rgba(0,38,75,.45);
+}
+/* Arrow between cards, centred in the gap. */
+.scn-step + .scn-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-.5 * var(--step-gap) - 13px);
+  top:50%;
+  width:26px;height:26px;
+  margin-top:-13px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C94DC' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+}
+.scn-step-num{
+  grid-row:1 / span 3;
+  width:40px;height:40px;
+  border-radius:50%;
+  background:var(--icon-blue);
+  box-shadow:0 0 0 4px rgba(28,148,220,.16);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:17px;
+  display:flex;align-items:center;justify-content:center;
+}
+.scn-step-icon{display:flex;color:var(--navy);margin:6px 0 12px;}
+.scn-step h3{font-size:clamp(15px,1vw,16.5px);letter-spacing:-.2px;margin-bottom:6px;}
+.scn-step p{font-size:13.5px;line-height:1.5;color:var(--gray-text);}
+
+/* ---------- Before & after ---------- */
+.scn-results{
+  background:linear-gradient(180deg,var(--light-bg) 0%,#F8FBFE 100%);
+}
+.scn-results-inner{padding-block:clamp(24px,2.2vw,38px);}
+.scn-results-head{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px 40px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(14px,1.4vw,22px);
+  padding-inline:clamp(0px,1.4vw,28px);
+}
+.scn-results h2{
+  font-size:clamp(23px,1.9vw,33px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+  margin-bottom:8px;
+}
+.scn-results-copy p{
+  font-size:clamp(14px,.98vw,15.5px);
+  line-height:1.55;
+  color:var(--gray-text);
+  max-width:780px;
+}
+.scn-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr)) minmax(170px,.55fr);
+  gap:clamp(12px,1.4vw,24px);
+  padding-inline:clamp(0px,1.4vw,28px);
+}
+.scn-ba-help{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:14px 16px;
+  border-radius:8px;
+  background:linear-gradient(180deg,#EAF4FD 0%,#E2EEFB 100%);
+  border:1px solid #DCEAF8;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.scn-ba-help:hover{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(0,38,75,.5);}
+.scn-ba-help:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.scn-help-icon{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:#fff;
+  color:var(--icon-blue);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:8px;
+  box-shadow:0 6px 14px -8px rgba(0,38,75,.45);
+}
+.scn-ba-help h3{font-size:14.5px;letter-spacing:-.2px;line-height:1.25;margin-bottom:4px;}
+.scn-ba-help small{display:block;font-size:12.5px;line-height:1.45;color:var(--gray-text);}
+.scn-help-link{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:6px;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:13px;
+  color:var(--icon-blue);
+}
+
+/* ---------- Related gelcoat services ---------- */
+.scn-related{
+  background:linear-gradient(180deg,#F8FBFE 0%,var(--light-bg) 100%);
+  border-top:1px solid #E6EFF7;
+}
+.scn-related-inner{
+  display:grid;
+  grid-template-columns:minmax(0,32%) minmax(0,1fr);
+  align-items:center;
+  column-gap:clamp(20px,2vw,36px);
+  row-gap:18px;
+  padding-block:clamp(22px,2vw,36px);
+}
+.scn-related-copy{padding-left:clamp(0px,1.4vw,28px);}
+.scn-related h2{
+  font-size:clamp(23px,1.9vw,33px);
+  letter-spacing:-.8px;
+  line-height:1.12;
+  margin-bottom:10px;
+}
+.scn-related-copy p{
+  font-size:clamp(14px,.98vw,15.5px);
+  line-height:1.55;
+  color:var(--gray-text);
+  max-width:560px;
+}
+.scn-related-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(8px,.8vw,14px);
+}
+.scn-rel-card{
+  display:flex;flex-direction:column;
+  height:100%;
+  background:#fff;
+  border:1px solid #E6EFF7;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 10px 26px -18px rgba(0,38,75,.5);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.scn-rel-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px -18px rgba(0,38,75,.55);}
+.scn-rel-card:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.scn-rel-card img{width:100%;aspect-ratio:131/48;object-fit:cover;}
+.scn-rel-body{display:flex;flex-direction:column;flex:1;padding:12px 14px 14px;}
+.scn-rel-card h3{font-size:14px;letter-spacing:-.2px;line-height:1.25;margin-bottom:6px;}
+.scn-rel-card small{display:block;font-size:12.5px;line-height:1.45;color:var(--gray-text);margin-bottom:10px;}
+.scn-rel-more{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:auto;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:13px;
+  color:var(--icon-blue);
+}
+.scn-rel-help{
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:16px 14px;
+  background:linear-gradient(180deg,#EAF4FD 0%,#E2EEFB 100%);
+  border-color:#DCEAF8;
+}
+.scn-rel-help .scn-help-icon{width:48px;height:48px;color:var(--navy);margin-bottom:10px;}
+.scn-rel-help h3{font-size:14.5px;margin-bottom:2px;}
+.scn-rel-help-arrow{color:var(--icon-blue);margin:2px 0 6px;}
+.scn-rel-help small{margin-bottom:6px;}
+
+/* ---------- Why choose us + FAQ ----------
+   copy | checklist | FAQ, the FAQ set off by a rule. Questions use native
+   <details>, so they work without script. */
+.scn-why{background:#fff;border-top:1px solid #E6EFF7;}
+.scn-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,28%) minmax(0,1fr) minmax(0,37%);
+  align-items:center;
+  column-gap:clamp(20px,2.6vw,48px);
+  padding-block:clamp(22px,2.2vw,38px);
+}
+.scn-why-copy{padding-left:clamp(0px,1.4vw,28px);}
+.scn-why h2{
+  font-size:clamp(23px,1.9vw,33px);
+  letter-spacing:-.7px;
+  line-height:1.1;
+  margin-bottom:10px;
+}
+.scn-why-copy p{font-size:14px;line-height:1.55;color:var(--gray-text);}
+.scn-checks{display:grid;gap:clamp(10px,.9vw,14px);}
+.scn-checks li{display:flex;align-items:center;gap:12px;font-size:clamp(14px,.95vw,15.5px);line-height:1.35;color:#2A4560;}
+.scn-checks li::before{
+  content:"";flex:none;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:var(--icon-blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") no-repeat center/13px;
+}
+.scn-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+  padding-left:clamp(20px,2.6vw,48px);
+  padding-right:clamp(0px,1.4vw,28px);
+  border-left:1px solid #DCE7F1;
+}
+.scn-faq h2{font-size:clamp(19px,1.35vw,24px);letter-spacing:-.4px;margin-bottom:12px;}
+.scn-faq-list{display:grid;gap:8px;}
+.scn-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;}
+.scn-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:10px 16px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--navy);
+  cursor:pointer;
+  list-style:none;
+}
+.scn-faq summary::-webkit-details-marker{display:none;}
+.scn-faq summary::after{
+  content:"";flex:none;
+  width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.scn-faq details[open] summary::after{transform:rotate(45deg);}
+.scn-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.scn-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ----------
+   scn-cta-boat.jpg (the comp's boat and skyline) sits at the left and fades
+   into the navy; the copy starts just past it, the buttons sit at the right
+   edge of the 1760px frame. */
+.scn-cta{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(28,148,220,.14), transparent 60%),
+    linear-gradient(90deg,var(--navy-2) 0%,var(--navy) 55%,#062F5A 100%);
+  color:#fff;
+}
+.scn-cta-photo{
+  position:absolute;top:0;left:0;
+  width:34%;height:100%;
+  object-fit:cover;
+  object-position:left center;
+  -webkit-mask-image:linear-gradient(90deg,#000 62%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 62%,transparent 100%);
+}
+.scn-cta-inner{
+  position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+  gap:18px clamp(24px,3vw,56px);
+  padding-block:clamp(26px,2.4vw,44px);
+  padding-left:max(var(--pad),33%);
+  padding-right:max(clamp(18px,2.6vw,44px), calc((100% - 1760px) / 2 + clamp(18px,2.6vw,44px)));
+}
+.scn-cta-kicker{
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:8px;
+}
+.scn-cta h2{color:#fff;font-size:clamp(24px,2.1vw,37px);letter-spacing:-.7px;line-height:1.1;margin-bottom:8px;}
+.scn-cta-copy p:last-child{font-size:clamp(14.5px,1vw,16.5px);color:rgba(255,255,255,.9);}
+.scn-cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, so the later block wins).
+   ========================================================================== */
+
+@media (max-width:1680px){
+  /* Related: the copy moves above the cards so all five keep a usable
+     width (beside the copy they drop under ~190px and the titles wrap). */
+  .scn-related-inner{grid-template-columns:minmax(0,1fr);}
+  .scn-related-copy p{max-width:720px;}
+}
+
+@media (max-width:1400px){
+  /* Intro: give the copy more of the row so "Fast & Professional" keeps to
+     one line in its benefit column until the intro stacks at 1240. */
+  .scn-intro-inner{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);}
+  .scn-benefits li{padding-inline:6px;}
+}
+
+@media (max-width:1240px){
+  /* Intro stacks: below here the benefit titles break onto a third line. */
+  .scn-intro-inner{grid-template-columns:minmax(0,1fr);row-gap:26px;}
+  .scn-intro-media{max-width:760px;margin-left:clamp(0px,1.4vw,28px);}
+  .scn-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .scn-step:nth-child(3)::before{display:none;}
+  .scn-process-photo{height:52%;}
+  /* Results: three sliders in a row, the help card becomes a strip below. */
+  .scn-ba-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .scn-ba-help{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;justify-content:center;column-gap:14px;text-align:left;}
+  .scn-ba-help .scn-help-icon{margin-bottom:0;}
+  .scn-ba-help-text{max-width:560px;}
+  /* Why: copy | checklist on top, the FAQ full width below. */
+  .scn-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:24px;}
+  .scn-faq{
+    grid-column:1 / -1;
+    border-left:0;border-top:1px solid #DCE7F1;
+    padding:22px clamp(0px,1.4vw,28px) 0;
+  }
+}
+
+@media (max-width:1100px){
+  /* Related: the thumbnails are small, so rather than blowing them up in
+     tall cards, each card becomes a row — thumbnail left, text right. */
+  .scn-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .scn-rel-card{flex-direction:row;}
+  .scn-rel-card img{flex:none;width:clamp(110px,32%,170px);height:auto;aspect-ratio:auto;align-self:stretch;}
+  .scn-rel-body{align-self:center;}
+  .scn-rel-help-item{grid-column:1 / -1;}
+  .scn-rel-help{flex-direction:column;}
+}
+
+@media (max-width:1024px){
+  .scn-hero-img{width:100%;-webkit-mask-image:none;mask-image:none;}
+  .scn-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.74) 60%, rgba(0,22,46,.45) 100%);
+  }
+  .scn-trust-bar{background:rgba(0,20,42,.72);}
+  .scn-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:clamp(24px,6vw,64px);}
+  /* Process: the photo would sit behind the heading, so it becomes a banner
+     above the copy, fading into the band. */
+  .scn-process-photo{
+    position:relative;display:block;
+    width:100%;height:auto;aspect-ratio:3/1;
+    object-position:85% 30%;
+    -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
+            mask-image:linear-gradient(180deg,#000 55%,transparent 100%);
+  }
+  .scn-process-inner{padding-top:0;margin-top:-18px;}
+  .scn-cta-photo{width:100%;opacity:.4;-webkit-mask-image:none;mask-image:none;}
+  .scn-cta-inner{padding-left:var(--pad);padding-right:var(--pad);}
+}
+
+@media (max-width:820px){
+  .scn-why-inner{grid-template-columns:minmax(0,1fr);}
+  .scn-why-copy{padding-left:0;}
+  .scn-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .scn-hero{--scn-indent:0px;}
+  .scn-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .scn-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .scn-hero-eyebrow i{width:24px;}
+  .scn-hero h1{font-size:clamp(30px,9vw,38px);letter-spacing:-.8px;}
+  .scn-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .scn-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.72) 100%);
+  }
+  .scn-hero-actions,.scn-cta-actions{width:100%;gap:10px;}
+  .scn-hero-actions .btn,.scn-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .scn-trust{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;}
+  .scn-intro h2 br,.scn-why h2 br,.scn-related h2 br{display:none;}
+  .scn-intro-copy,.scn-process-copy,.scn-related-copy{padding-left:0;}
+  .scn-intro-media{margin-left:0;}
+  .scn-benefits{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:22px;}
+  .scn-benefits li:nth-child(3){border-left:0;}
+  .scn-steps{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .scn-step + .scn-step::before{display:none;}
+  .scn-process-photo{aspect-ratio:2.2/1;}
+  .scn-results-head{padding-inline:0;}
+  .scn-results-head .btn{width:100%;justify-content:center;}
+  .scn-ba-grid{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .scn-ba-grid .sfr-ba{aspect-ratio:2.4/1;}
+  .scn-ba-help{flex-direction:column;text-align:center;}
+  .scn-ba-help .scn-help-icon{margin-bottom:8px;}
+  .scn-related-grid{grid-template-columns:minmax(0,1fr);}
+  .scn-faq{padding-inline:0;}
+  .scn-cta-photo{opacity:.3;}
+}
+
+@media (max-width:400px){
+  .scn-trust{grid-template-columns:minmax(0,1fr);}
+}

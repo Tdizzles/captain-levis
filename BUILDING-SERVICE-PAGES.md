@@ -544,3 +544,17 @@ node --check script.js
   More links go to `#quote`. The results copy says "real examples" although
   the pairs are placeholders, the CTA repeats "Captain Dave", and the FAQ
   answers are drafted copy. Check all three with the owner.
+- **`small-chip-repair.html`** (sub-page of Gelcoat Chip Repair, `.scn-`
+  prefix, linked from its Small Chips & Nicks card) is not in the nav
+  dropdown. Its `scn-*` images are cropped from a 1024px comp and saved at 2×,
+  so they are soft. All four before/after pairs are placeholders built like
+  the surface scratch page's (one comp half plus its mirror, with the
+  burned-in tags and handles painted out); the comp's third pair has no after
+  half, so its after image is a crop of the intro slider's after photo. The
+  process photo is only the strip above the comp's step cards, so it fills
+  the top of the band and fades out behind them. The related cards reuse the
+  parent's `gcc-svc-*` photos. The results row's help card reads "Have a chip
+  like these?" instead of repeating the related row's "Can't find what you're
+  looking for?". The results copy says "real examples" although the pairs are
+  placeholders, "Most small chips repaired the same day" is the comp's claim,
+  and the FAQ answers are drafted copy. Check all three with the owner.
