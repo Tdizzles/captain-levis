@@ -594,3 +594,19 @@ node --check script.js
   to `edge-rub-rail-repair.html`. The results copy says "real examples"
   although the pairs are placeholders, the CTA repeats "Captain Dave", and
   the FAQ answers are drafted copy. Check all three with the owner.
+- **`waterline-chip-repair.html`** (sub-page of Gelcoat Chip Repair, `.wcr-`
+  prefix, linked from its Waterline Chips card) is not in the nav dropdown.
+  Its stylesheet started as a copy of `dock-rash-scuff-repair.css`, plus a
+  five-card "common repairs" row. Its `wcr-*` images are cropped from a 1024px
+  comp and saved at 2×, so they are soft. All four before/after pairs are
+  placeholders built like the surface scratch page's (one comp half plus its
+  mirror, with the burned-in tags filled from the same rows beside them), so
+  they match the comp at rest but show the mirror when dragged. In the common
+  row, Longer Scrapes links to `dock-trailer-damage.html` and Impact Damage
+  to `impact-mark-repair.html`, the closest existing pages. The comp sets body
+  copy at ~1.1 line-height; the page uses 1.24–1.45, so some bands run up to
+  ~10% taller than the comp at 1536. Its steps `<ol>` sets `list-style:none`
+  itself: `styles.css` resets only `ul`, so an `<ol>` of step cards elsewhere
+  shows decimal markers in the gaps. The results copy says "real examples"
+  although the pairs are placeholders, the CTA repeats "Captain Dave", and the
+  FAQ answers are drafted copy. Check all three with the owner.
