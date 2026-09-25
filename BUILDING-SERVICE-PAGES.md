@@ -720,9 +720,10 @@ node --check script.js
   numbers. All three before/after pairs are placeholders built like the
   surface scratch page's (one comp half plus its mirror, tags and handle
   painted out), so they match the comp at rest but show the mirror when
-  dragged. The four related cards link to the parent's card anchors
-  (`dock-trailer-damage.html#trailer-bunk-damage`, …) until those sub-pages
-  exist. The comp ends at the FAQ, so there is no closing CTA band: the quote
+  dragged. The Trailer Bunk Damage related card links to
+  `trailer-bunk-damage-repair.html`; the other three link to the parent's card
+  anchors (`dock-trailer-damage.html#loading-unloading-damage`, …) until those
+  sub-pages exist. The comp ends at the FAQ, so there is no closing CTA band: the quote
   form follows the FAQ. The results band says "Real Results" although the
   pairs are placeholders, and the FAQ answers are drafted copy. Check both
   with the owner.
