@@ -749,3 +749,24 @@ node --check script.js
   right end of `results-marina.jpg`. The results band says "Real Results"
   although the pairs are placeholders, the CTA repeats "Captain Dave", and
   the FAQ answers are drafted copy. Check all three with the owner.
+- **`custom-consoles-dash-panels.html`** (sub-page of Custom Fabrication,
+  `.ccd-` prefix, linked from its Custom Consoles & Dash Panels card) is not
+  in the nav dropdown. Its stylesheet started as a copy of
+  `trailer-bunk-damage-repair.css`, whose comp shares most of the layout.
+  Its `ccd-*` images are cropped from a 1024px comp and saved at 2×, so they
+  are soft. The hero photo is the comp's photo right of the copy; the line
+  ends of the heading and paragraph that reached into it were inpainted
+  (OpenCV, a throwaway install, not a repo dependency), and that strip is
+  feathered into the navy. The diagram (`ccd-diagram.jpg`) keeps the comp's
+  pins and leader lines; its six callout cards were whitened and live cards
+  sit over them in % of the photo with `cqw` type, so re-crop the image only
+  together with those positions. All three before/after pairs are
+  placeholders built like the surface scratch page's (one comp half plus its
+  mirror, tags and handle painted out), so they match the comp at rest but
+  show the mirror when dragged. The related row's six cards are title-only,
+  as in the comp; each title links the whole card (Transom & Stringer Repair
+  goes to `transom-replacement.html`). The comp's slim footer is not used;
+  the page keeps the shared footer and quote form. The results band says
+  "Real Results" although the pairs are placeholders, the why copy says
+  "helped thousands of boaters" (the comp's claim), and the FAQ answers are
+  drafted copy. Check all three with the owner.
