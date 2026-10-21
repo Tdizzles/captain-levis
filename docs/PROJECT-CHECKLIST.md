@@ -47,11 +47,11 @@ session. Brief section numbers refer to the owner's implementation brief (2026-1
 - ☐ Optional AI draft reply, labelled, never auto-sent
 
 ## Phase 5 — Estimate editor (§13, §14) — estimater repo
-- ☐ Rev5 parity: sections, document kind/revision title, Owner/Insured, FL Reg + Location, Reported + Appraiser, material-only lines, photo appendix, notes, Direction to Pay, footer, signature labels
+- ☑ Rev5 parity: sections, document kind, Owner/Insured, FL Reg + Location, Reported + Appraiser, material-only lines, photo appendix, notes, Direction to Pay, footer, signature labels (estimater 5722158, 72 tests, deployed)
 - ⛔ Store → API on Postgres; server-side `calcTotals()` on save
 - ☐ Server-rendered PDF validated against Rev5
 - ☐ Revisions keep history; statuses + timestamps; approval only on explicit action
-- ☐ AI panel: summarize inquiry, scope from notes, flag missing prices; side-by-side layout on desktop, switchable on mobile
+- ◐ AI panel: section/doc-kind ops, side-by-side desktop + phone toggle done; "summarize inquiry" needs the inquiries backend
 - ☐ Tax 7% (6% FL + 1% Pinellas) confirmed → flip "confirmed" in Settings ⛔ owner/accountant
 
 ## Phase 6 — Admin dashboard and analytics (§15) — estimater repo
