@@ -847,3 +847,36 @@ node --check script.js
   although the pairs are placeholders, and the FAQ answers are drafted copy
   (including "a hardware or gasket replacement is often done in a day").
   Check both with the owner.
+- **`bulkheads-structural-fabrication.html`** (sub-page of Custom
+  Fabrication, `.bsf-` prefix, linked from its Bulkheads & Structural
+  Fabrication card) is not in the nav dropdown. It is not
+  `bulkhead-repairs.html`, the structural repair page the nav links, which
+  that card used to point at. Its stylesheet started as a copy of
+  `livewell-fish-box-modifications.css`, whose comp has the same layout; the
+  process photo's curved edge follows `storage-compartments.css`, traced as
+  a lopsided arc (flush 40% of the way down). Its `bsf-*` images are cropped
+  from a 1024px comp and saved at 2×, so they are soft. The hero photo is a
+  labelled diagram: the comp's four label boxes are flattened to navy in
+  `bsf-hero.jpg` (their baked text was garbled) and live labels sit over
+  them in % of the photo with `cqw` type, so re-crop the image only together
+  with those positions. To keep the labels on their boxes the photo is never
+  cropped: it keeps its aspect ratio at the band's right and the band is at
+  least as tall as it. Below ~1300px the labels' type stops shrinking and
+  the boxes grow rightward. Below 1024px the photo becomes the scrimmed
+  background and switches (via `<picture>`) to `bsf-hero-plain.jpg`, with
+  the boxes and leader lines inpainted out (OpenCV, a throwaway install, not
+  a repo dependency). The intro diagram (`bsf-diagram.jpg`) keeps the comp's
+  pins and leader lines; its four callout cards were whitened and its
+  "Common Bulkhead Locations" caption inpainted, and both are live markup
+  over it. The intro paragraph and hero copy break on the comp's words at
+  1536 (`<br>`s in the intro, hidden once it stacks, and one `&nbsp;` in the
+  hero). The issue cards keep their own heights, as in the comp. All three
+  before/after pairs are placeholders built like the surface scratch page's
+  (one comp half plus its mirror, tags and handle painted out), so they
+  match the comp at rest but show the mirror when dragged. "View More
+  Results" goes to the homepage's `#repairs`. The comp's slim footer is not
+  used; the page keeps the shared footer and quote form, with Bulkhead
+  Repairs preselected. The comp's process lead ends "install strong." with a
+  period; the page uses a comma. The results band says "Real Results"
+  although the pairs are placeholders, and the FAQ answers are drafted copy.
+  Check both with the owner.

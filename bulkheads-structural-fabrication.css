@@ -1,0 +1,716 @@
+/* ==========================================================================
+   Bulkheads & Structural Fabrication — page-specific styles (a sub-page of
+   Custom Fabrication, linked from its Bulkheads & Structural Fabrication
+   card). Loads after styles.css and reuses its tokens, buttons, eyebrows,
+   cards, header, footer and contact form. Everything here is prefixed
+   .bsf-; the only unprefixed rules are the shared .sfr-ba slider styles,
+   which every page that uses the slider defines for itself. Started as a
+   copy of livewell-fish-box-modifications.css, whose comp has the same
+   layout; the process photo's curved edge follows storage-compartments.css.
+   ========================================================================== */
+
+/* The comp runs its bands nearly edge to edge: a 1760px frame whose content
+   edge sits 57px in at 1536 (the comp's 38px). --bsf-edge is that edge, for
+   bands that bleed a photo to the viewport instead. */
+.bsf-hero,.bsf-intro,.bsf-process,.bsf-cta{
+  --bsf-gutter:clamp(18px,3.7vw,64px);
+  --bsf-edge:max(var(--bsf-gutter), calc((100% - 1760px) / 2 + var(--bsf-gutter)));
+}
+.bsf-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,3.7vw,64px);
+}
+.bsf-eyebrow{
+  color:var(--icon-blue);
+  font-size:12px;
+  letter-spacing:2.2px;
+  gap:14px;
+  margin-bottom:8px;
+}
+.bsf-eyebrow i{background:var(--icon-blue);width:34px;}
+
+/* ---------- Hero ----------
+   bsf-hero.jpg (the comp's photo right of the copy, from x 485 of 1024)
+   sits at the right of the band at its own aspect ratio, never cropped, so
+   the live labels stay on the comp's label boxes (flattened in the image;
+   the pins and leader lines are the comp's). The band is at least as tall as
+   the photo; if the copy is taller, the photo stays at the top and its
+   bottom edge fades into the navy. The copy is indented past the eyebrow's
+   rule, as in the comp. */
+.bsf-hero{
+  --bsf-indent:76px;                /* eyebrow rule (47px) + its gap (29px) */
+  --bsf-photo-w:min(52.6cqw,1000px);  /* the comp's 539 of 1024 */
+  container-type:inline-size;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.bsf-hero-main{
+  position:relative;overflow:hidden;
+  display:grid;align-content:center;
+  min-height:calc(var(--bsf-photo-w) * 258 / 539);
+}
+.bsf-hero-photo{
+  position:absolute;top:0;right:0;
+  width:var(--bsf-photo-w);
+  aspect-ratio:539/258;
+  container-type:inline-size;
+}
+.bsf-hero-photo picture{display:contents;}
+.bsf-hero-img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 9%),linear-gradient(180deg,#000 93%,transparent 100%);
+  -webkit-mask-composite:source-in;
+          mask-image:linear-gradient(90deg,transparent 0%,#000 9%),linear-gradient(180deg,#000 93%,transparent 100%);
+          mask-composite:intersect;
+}
+/* Darkens the photo's leading edge, under the labels. */
+.bsf-hero-photo::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,22,46,.45) 0%,rgba(0,22,46,0) 16%);
+  pointer-events:none;
+}
+.bsf-hero-labels{list-style:none;margin:0;padding:0;}
+.bsf-hl{
+  position:absolute;z-index:1;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 max(5px,1cqw) 0 max(6px,1.45cqw);
+  background:#021D37;
+  border:1px solid rgba(120,170,215,.28);
+  border-radius:.75cqw;
+  box-shadow:0 6px 16px -8px rgba(0,0,0,.6);
+  color:#fff;
+  white-space:nowrap;
+}
+/* Sized to cover the comp's boxes; under ~1300px the type stops shrinking
+   and the boxes grow to the right of them instead. */
+.bsf-hl-forward{left:3.55%;top:25.2%;min-width:23.4%;min-height:13.9%;}
+.bsf-hl-console{left:49.55%;top:22.5%;min-width:21.9%;min-height:13.6%;}
+.bsf-hl-transom{left:77.95%;top:26.75%;min-width:18.2%;min-height:13.6%;}
+.bsf-hl-floor  {left:58.3%;top:81.8%;min-width:20.4%;min-height:13.9%;}
+.bsf-hl strong{
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:max(9px,1.5cqw);
+  line-height:1.3;
+  letter-spacing:-.01em;
+}
+.bsf-hl small{
+  font-size:max(8px,1.36cqw);
+  line-height:1.3;
+  color:rgba(255,255,255,.78);
+}
+/* Shown only once the photo becomes the background (below 1024px). */
+.bsf-hero-scrim{display:none;position:absolute;inset:0;}
+.bsf-hero-inner{
+  position:relative;z-index:2;
+  width:100%;
+  padding-top:clamp(22px,1.75vw,32px);
+  padding-bottom:clamp(14px,1.05vw,20px);
+}
+.bsf-hero-content{max-width:780px;padding-left:var(--bsf-indent);}
+.bsf-hero-eyebrow{
+  margin-left:calc(-1 * var(--bsf-indent));
+  margin-bottom:10px;
+  font-size:13px;
+  letter-spacing:2.1px;
+  gap:29px;
+  color:#E6F6FE;
+}
+.bsf-hero-eyebrow i{width:47px;}
+.bsf-hero-eyebrow em{font-style:normal;color:var(--accent);}
+.bsf-hero h1{
+  font-size:clamp(30px,3.12vw,52px);
+  letter-spacing:-1.1px;
+  line-height:1.03;
+  color:#fff;
+  margin-bottom:7px;
+}
+.bsf-hero h1 .accent{color:var(--accent);}
+.bsf-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(14.5px,1.145vw,19px);
+  line-height:1.3;
+  max-width:605px;
+  margin-bottom:14px;
+}
+.bsf-hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.bsf-hero-actions .btn{padding:clamp(13px,1vw,16px) clamp(24px,1.95vw,34px);font-size:clamp(14.5px,1.02vw,16.5px);}
+
+.bsf-trust-bar{
+  background:linear-gradient(180deg,rgba(0,26,54,.82) 0%,rgba(0,20,42,.96) 100%);
+}
+.bsf-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:14px 24px;
+  padding-block:clamp(12px,.9vw,16px);
+  padding-left:clamp(0px,5.3vw,92px);
+  padding-right:clamp(0px,2.9vw,50px);
+}
+.bsf-trust li{display:flex;align-items:center;gap:16px;color:#fff;}
+.bsf-trust-icon{flex:none;display:flex;color:var(--accent);}
+.bsf-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13.5px,1vw,16px);line-height:1.25;}
+.bsf-trust small{display:block;font-size:clamp(12px,.88vw,14px);line-height:1.3;color:rgba(255,255,255,.78);}
+
+/* ---------- Intro: copy | diagram bleeding to the right edge ----------
+   The copy keeps the frame's content edge; the photo is a grid cell that
+   runs to the viewport edge and sets the band's height. */
+.bsf-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) min(58%, 1120px);
+  align-items:center;
+  column-gap:clamp(6px,.5vw,10px);
+  padding-left:var(--bsf-edge);
+  background:var(--light-bg);
+}
+.bsf-intro-copy{padding-block:clamp(12px,.8vw,16px);}
+.bsf-intro h2{
+  font-size:clamp(24px,2.46vw,42px);
+  letter-spacing:-.8px;
+  line-height:1.04;
+  margin-bottom:8px;
+}
+/* The <br>s give the comp's line breaks while the copy sits beside the
+   diagram; the type and the column scale together, so they hold. */
+.bsf-intro-copy > p{
+  font-size:clamp(15px,1.19vw,21px);
+  line-height:1.22;
+  color:var(--gray-text);
+  margin-bottom:clamp(14px,1.1vw,19px);
+}
+.bsf-intro-copy .btn{padding:clamp(10px,.72vw,13px) clamp(22px,2.4vw,40px);font-size:clamp(14.5px,1.02vw,16.5px);}
+
+/* Diagram: the comp's hull with its pins and leader lines kept, its four
+   callout cards whitened and its caption painted out. Live cards and the
+   caption are laid over the comp's, the cards a little larger, in % of the
+   photo (578x228 comp px), with type in container query units, so the whole
+   diagram scales as one. */
+.bsf-diagram{
+  position:relative;
+  container-type:inline-size;
+  margin:0;
+}
+.bsf-diagram > img{
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%);
+          mask-image:linear-gradient(90deg,transparent,#000 4%);
+}
+.bsf-callouts{list-style:none;margin:0;padding:0;}
+.bsf-callout{
+  position:absolute;
+  background:#fff;
+  border-radius:clamp(4px,.75cqw,7px);
+  box-shadow:0 10px 22px -14px rgba(0,38,75,.45);
+  padding:1cqw 1.8cqw 1cqw 2.05cqw;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.bsf-co-forward{left:2.25%;top:17.54%;width:24.05%;min-height:30.26%;}
+.bsf-co-midship{left:2.08%;top:63.6%;width:26.64%;min-height:25.44%;}
+.bsf-co-console{left:73.01%;top:9.21%;width:24.57%;min-height:25%;}
+.bsf-co-transom{left:73.7%;top:63.6%;width:23.88%;min-height:30.26%;}
+.bsf-diagram-cap{
+  position:absolute;left:2.42%;top:6.2%;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(10px,1.6cqw,16px);
+  line-height:1.2;
+  letter-spacing:-.01em;
+  color:var(--navy);
+}
+.bsf-callout strong{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(9.5px,1.72cqw,17px);
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:.25em;
+}
+.bsf-callout small{
+  display:block;
+  font-size:clamp(8.5px,1.58cqw,15.5px);
+  line-height:1.24;
+  color:var(--gray-text);
+}
+@container (max-width:620px){
+  /* Too small for the descriptions to fit their cards; the titles stay. */
+  .bsf-callout{padding:4px 6px 4px 8px;}
+  .bsf-callout small{display:none;}
+  .bsf-callout strong{margin:0;font-size:clamp(9.5px,2.5cqw,13px);}
+}
+
+/* ---------- Popular options: five fg-cards without links ---------- */
+.bsf-options{background:linear-gradient(180deg,#F4FAFE 0%,#F9FBFE 100%);}
+.bsf-options .bsf-wide{padding-block:clamp(6px,.45vw,8px) clamp(8px,.6vw,10px);}
+.bsf-opt-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  align-items:start;                /* as in the comp, each card is as tall as its copy */
+  gap:clamp(12px,1.08vw,18px);
+}
+.bsf-opt{border-radius:8px;}
+.bsf-opt:hover{transform:none;}
+.bsf-opt .fg-card-media img{aspect-ratio:181/74;}
+.bsf-opt .fg-card-body{padding:clamp(9px,.6vw,11px) clamp(14px,1.75vw,30px) clamp(12px,.9vw,15px) clamp(14px,1.15vw,20px);}
+.bsf-opt .fg-card-body h3{font-size:clamp(14.5px,1.1vw,18px);letter-spacing:-.3px;margin-bottom:clamp(3px,.3vw,5px);}
+.bsf-opt .fg-card-body p{font-size:clamp(13px,.98vw,16px);line-height:1.25;margin-bottom:0;}
+
+/* ---------- Shared slider (script.js binds every .sfr-ba) ----------
+   Each image is one half of the comp's pair plus its mirror, so at rest the
+   seam sits on the handle and the frame matches the comp. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:306/82;
+  border-radius:7px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(34px,2.8vw,46px);height:clamp(34px,2.8vw,46px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+/* The comp's tags sit almost on the bottom edge. */
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(2px,.2vw,4px);
+  width:25.2%;
+  text-align:center;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(11px,.95vw,15px);
+  letter-spacing:.8px;
+  padding:clamp(5px,.5vw,8px) 0;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:3.6%;background:rgba(0,22,46,.92);color:#fff;}
+.sfr-ba-tag-after{right:3.6%;background:#1E9BF0;color:#fff;}
+
+/* ---------- Process band ----------
+   Photo bleeding off the left edge with a curved trailing side, then copy
+   and four step cards. The section's right padding reproduces .bsf-wide's
+   content edge. */
+.bsf-process{
+  --bulge:8.2%;
+  display:grid;
+  /* 36.8% of the viewport, as in the comp: the % resolves against the
+     content box, which loses the right padding. */
+  grid-template-columns:clamp(260px,38.4%,740px) minmax(0,1fr);
+  /* The comp's step cards run to 35px from the window edge at 1536. */
+  padding-right:max(16px, calc(var(--bsf-edge) - clamp(0px,1.42vw,22px)));
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(28,148,220,.16), transparent 60%),
+    linear-gradient(100deg,var(--navy) 0%,#062F5A 55%,var(--navy-2) 100%);
+}
+.bsf-process-photo{
+  position:relative;
+  /* The comp's edge is a lopsided arc: 18px in at the top, flush 40% of the
+     way down, 30px in at the bottom (of a 377px photo at 1024), traced
+     through its points every 10% of the height. */
+  clip-path:polygon(0 0,
+    calc(100% - var(--bulge) * .61) 0,
+    calc(100% - var(--bulge) * .35) 10%,
+    calc(100% - var(--bulge) * .19) 20%,
+    calc(100% - var(--bulge) * .08) 30%,
+    100% 40%,
+    calc(100% - var(--bulge) * .05) 50%,
+    calc(100% - var(--bulge) * .13) 60%,
+    calc(100% - var(--bulge) * .26) 70%,
+    calc(100% - var(--bulge) * .48) 80%,
+    calc(100% - var(--bulge) * .71) 90%,
+    calc(100% - var(--bulge)) 100%,
+    0 100%);
+}
+.bsf-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+}
+.bsf-process-body{
+  padding:clamp(10px,.6vw,11px) 0 clamp(10px,.75vw,13px) clamp(10px,1vw,15px);
+}
+.bsf-process-head{margin-left:clamp(10px,1.2vw,18px);}
+/* As in the comp, the eyebrow's rule hangs left of the heading. */
+.bsf-process-eyebrow{
+  color:var(--accent);
+  font-size:12px;
+  letter-spacing:2.2px;
+  margin-bottom:0;
+  margin-left:-48px;
+}
+.bsf-process-eyebrow i{background:var(--accent);width:34px;}
+.bsf-process h2{
+  color:#fff;
+  font-size:clamp(22px,1.88vw,31px);
+  letter-spacing:-.6px;
+  line-height:1.15;
+  margin-bottom:4px;
+}
+.bsf-process-lead{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(14px,1.17vw,19px);
+  line-height:1.18;
+  max-width:680px;
+  margin-bottom:clamp(14px,1vw,17px);
+}
+.bsf-steps{
+  --step-gap:clamp(24px,1.95vw,34px);
+  list-style:none;
+  display:grid;
+  grid-template-columns:132fr 136fr 142fr 138fr;   /* the comp's card widths */
+  gap:24px var(--step-gap);
+}
+.bsf-step{
+  position:relative;
+  padding:clamp(10px,.7vw,13px) clamp(10px,.8vw,13px) clamp(10px,.7vw,13px);
+  border:1px solid rgba(94,205,250,.2);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 100%);
+}
+/* Arrow between cards, centred in the gap. */
+.bsf-step + .bsf-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-.5 * var(--step-gap) - 12px);
+  top:50%;
+  width:24px;height:24px;
+  margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity:.9;
+}
+.bsf-step-top{display:flex;align-items:center;gap:clamp(14px,1.5vw,26px);margin-bottom:4px;}
+.bsf-step-num{
+  flex:none;
+  width:clamp(32px,2.35vw,40px);height:clamp(32px,2.35vw,40px);
+  border-radius:50%;
+  background:#1E8BF0;
+  box-shadow:0 0 0 4px rgba(28,148,220,.22);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(16px,1.2vw,20px);
+  display:flex;align-items:center;justify-content:center;
+}
+.bsf-step-icon{display:flex;color:#fff;}
+.bsf-step h3{color:#fff;font-size:clamp(14.5px,1.04vw,17px);letter-spacing:-.2px;margin-bottom:4px;text-align:center;}
+.bsf-step p{color:rgba(255,255,255,.8);font-size:clamp(13px,.88vw,14.5px);line-height:1.16;}
+
+/* ---------- Before & after ---------- */
+.bsf-results{
+  background:linear-gradient(180deg,#F8FBFE 0%,var(--light-bg) 100%);
+}
+.bsf-results-inner{padding-block:clamp(12px,.95vw,16px) clamp(12px,.8vw,14px);}
+.bsf-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:12px 40px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(8px,.55vw,10px);
+}
+.bsf-head h2{
+  font-size:clamp(23px,1.95vw,33px);
+  letter-spacing:-.7px;
+  line-height:1.12;
+}
+.bsf-head .btn{
+  align-self:flex-start;
+  margin-top:clamp(2px,.3vw,5px);
+  padding:clamp(9px,.62vw,11px) clamp(20px,1.6vw,28px);
+  font-size:clamp(13.5px,.98vw,15.5px);
+}
+.bsf-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.65vw,28px);
+}
+
+/* ---------- Other boat repair services ----------
+   Head row (copy | button), then six title-only cards and a "can't find
+   it" card. The card widths follow the comp; each card is one link. */
+.bsf-related{background:linear-gradient(180deg,#F6FBFD 0%,#F3F9FE 100%);}
+.bsf-related-inner{padding-block:clamp(10px,.75vw,13px) clamp(12px,.75vw,14px);}
+.bsf-related-grid{
+  display:grid;
+  grid-template-columns:107fr 113fr 119fr 102fr 102fr 213fr 138fr;
+  gap:clamp(10px,.85vw,14px);
+}
+.bsf-rel-card{position:relative;border:1px solid #E6EFF7;border-radius:8px;}
+.bsf-rel-card:hover{transform:translateY(-2px);}
+.bsf-rel-card .fg-card-media img{aspect-ratio:auto;height:clamp(72px,5.86vw,98px);}
+.bsf-rel-card .fg-card-body{padding:clamp(8px,.68vw,11px) clamp(10px,1vw,16px) clamp(10px,.82vw,13px);}
+.bsf-rel-card h3{font-size:clamp(12.5px,.95vw,15px);letter-spacing:-.3px;line-height:1.24;margin:0;}
+.bsf-rel-card h3 a{color:inherit;}
+/* The title's link covers the whole card. */
+.bsf-rel-card h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.bsf-rel-card h3 a:focus-visible{outline:none;}
+.bsf-rel-card:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.bsf-rel-help{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  gap:clamp(3px,.3vw,5px);
+  padding:clamp(8px,.6vw,10px) clamp(10px,.8vw,14px);
+  border-radius:10px;
+  background:#E6F2FD;
+}
+.bsf-rel-help-icon{
+  width:clamp(32px,2.2vw,38px);height:clamp(32px,2.2vw,38px);
+  border-radius:50%;
+  background:#fff;
+  color:#1E8BF0;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:2px;
+}
+.bsf-rel-help a{font-family:var(--font-head);font-weight:800;font-size:clamp(14px,1.02vw,16.5px);line-height:1.2;letter-spacing:-.3px;color:var(--navy);}
+.bsf-rel-help a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.bsf-rel-help a:focus-visible{outline:none;}
+.bsf-rel-help:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.bsf-rel-help p{font-size:clamp(12px,.85vw,13.5px);line-height:1.22;color:var(--gray-text);}
+
+/* ---------- Why choose us + FAQ ----------
+   copy | four features | FAQ, the first two set off by a rule. Questions
+   use native <details>, so they work without script. */
+.bsf-why{background:linear-gradient(180deg,#F7FBFE 0%,#F2F8FD 100%);}
+.bsf-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,36.6%) minmax(0,1fr) minmax(0,34%);
+  align-items:center;
+  padding-block:clamp(12px,.9vw,16px) clamp(12px,.8vw,14px);
+}
+.bsf-why-copy{padding-right:clamp(16px,1.4vw,24px);}
+.bsf-why h2{
+  font-size:clamp(22px,1.68vw,28px);
+  letter-spacing:-.6px;
+  line-height:1.12;
+  margin-bottom:4px;
+}
+.bsf-why-copy p{font-size:clamp(14px,1vw,16.5px);line-height:1.38;color:var(--gray-text);}
+.bsf-features{
+  align-self:stretch;
+  display:grid;align-content:center;
+  gap:clamp(12px,1.05vw,18px);
+  padding-left:clamp(20px,2.9vw,48px);
+  padding-right:clamp(16px,1.6vw,28px);
+  border-left:1px solid #DCE7F1;
+}
+.bsf-features li{display:flex;align-items:center;gap:clamp(14px,1.3vw,22px);}
+.bsf-feature-icon{flex:none;display:flex;justify-content:center;width:32px;color:#1E8BF0;}
+.bsf-features strong{display:block;font-family:var(--font-head);font-size:clamp(14px,.98vw,16px);line-height:1.25;color:var(--navy);}
+.bsf-features small{display:block;font-size:clamp(13px,.9vw,14.5px);line-height:1.3;color:var(--gray-text);}
+.bsf-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.bsf-faq h2{font-size:clamp(19px,1.45vw,24px);letter-spacing:-.5px;margin-bottom:6px;}
+.bsf-faq-list{display:grid;gap:4px;}
+.bsf-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;box-shadow:0 4px 10px -8px rgba(0,38,75,.3);}
+.bsf-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:3px 14px;
+  line-height:1.4;
+  font-size:clamp(13.5px,.9vw,15px);
+  font-weight:500;
+  color:var(--navy);
+  cursor:pointer;
+  list-style:none;
+}
+.bsf-faq summary::-webkit-details-marker{display:none;}
+.bsf-faq summary::after{
+  content:"";flex:none;
+  width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.bsf-faq details[open] summary::after{transform:rotate(45deg);}
+.bsf-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.bsf-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ----------
+   The comp's boat and skyline at the left edge, feathered into the navy;
+   the faint skyline on the right is the faded end of results-marina.jpg.
+   Copy | two buttons. */
+.bsf-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy) 55%,#0B3A66 100%);
+}
+.bsf-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+  opacity:.22;
+  -webkit-mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+          mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+}
+.bsf-cta-boat{
+  position:absolute;top:0;bottom:0;left:0;
+  width:clamp(200px,34.2vw,600px);
+  -webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+}
+.bsf-cta-boat img{width:100%;height:100%;object-fit:cover;object-position:left center;}
+.bsf-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px clamp(20px,1.5vw,28px);
+  flex-wrap:wrap;
+  min-height:clamp(84px,6.6vw,110px);
+  padding-block:clamp(12px,.9vw,16px);
+  /* The copy starts just past the boat (the comp's x 362 of 1024). */
+  padding-left:max(var(--bsf-gutter), calc(35.35vw - max(0px, (100vw - 1760px) / 2)));
+}
+.bsf-cta h2{color:#fff;font-size:clamp(19px,1.46vw,24px);letter-spacing:-.5px;line-height:1.15;margin-bottom:2px;}
+.bsf-cta p{font-size:clamp(13.5px,.94vw,15.5px);color:rgba(255,255,255,.85);}
+.bsf-cta-actions{display:flex;gap:clamp(10px,1.05vw,18px);flex-wrap:wrap;margin-left:auto;}
+.bsf-cta-actions .btn{padding:clamp(12px,.95vw,15px) clamp(22px,1.8vw,32px);font-size:clamp(14px,.98vw,16px);}
+.bsf-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);border-color:rgba(94,205,250,.7);}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, so the later block wins).
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* Hero: the copy's type stops shrinking with the window, so the photo
+     narrows to keep its labels clear of the copy. */
+  .bsf-hero{--bsf-photo-w:48cqw;}
+  .bsf-hero-sub{max-width:500px;}
+  /* Related: the help card becomes a strip under the six service cards. */
+  .bsf-related-grid{grid-template-columns:repeat(6,minmax(0,1fr));}
+  .bsf-rel-help{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    grid-template-areas:"icon title" "icon copy";
+    align-items:center;
+    column-gap:16px;row-gap:2px;
+    text-align:left;
+    padding:12px 20px;
+  }
+  .bsf-rel-help-icon{grid-area:icon;margin:0;}
+  .bsf-rel-help a{grid-area:title;}
+  .bsf-rel-help p{grid-area:copy;}
+  .bsf-rel-help a br{display:none;}
+}
+
+@media (max-width:1240px){
+  .bsf-opt-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .bsf-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bsf-step:nth-child(3)::before{display:none;}
+  .bsf-related-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  /* Why: copy | features on top, the FAQ full width below. */
+  .bsf-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:24px;padding-block:28px;}
+  .bsf-features{padding-right:0;}
+  .bsf-faq{grid-column:1 / -1;border-top:1px solid #DCE7F1;padding-top:22px;}
+  /* The CTA copy wraps under the boat; the buttons drop below it. */
+  .bsf-cta-inner{padding-left:clamp(200px,34.2vw,600px);}
+  .bsf-cta-actions{margin-left:0;}
+}
+
+@media (max-width:1100px){
+  /* Intro stacks: the diagram becomes a full-width row under the copy so its
+     callouts keep room for their descriptions. */
+  .bsf-intro{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .bsf-intro-copy > p{max-width:640px;}
+  .bsf-intro-copy > p br{display:none;}
+  .bsf-intro-copy{padding:clamp(28px,4vw,40px) var(--bsf-edge) 8px;}
+  .bsf-diagram{width:100%;max-width:900px;justify-self:end;}
+}
+
+@media (max-width:1024px){
+  /* The photo becomes a scrimmed background (bsf-hero-plain.jpg, without
+     the label boxes); the labels are dropped. */
+  .bsf-hero-main{min-height:0;}
+  .bsf-hero-photo{inset:0;width:auto;aspect-ratio:auto;}
+  .bsf-hero-photo::after,.bsf-hero-labels{display:none;}
+  .bsf-hero-img{object-position:70% center;-webkit-mask-image:none;mask-image:none;}
+  .bsf-hero-scrim{
+    display:block;
+    background:linear-gradient(90deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.76) 60%, rgba(0,22,46,.5) 100%);
+  }
+  .bsf-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:clamp(24px,6vw,64px);padding-inline:clamp(18px,3.7vw,64px);}
+  .bsf-process{grid-template-columns:minmax(0,1fr);padding-right:0;}
+  /* The banner loses the curve, so the navy the image carries beyond the
+     comp's arc (its right ~8%) is pushed out of the frame. */
+  .bsf-process-photo{clip-path:none;aspect-ratio:2.4/1;overflow:hidden;}
+  .bsf-process-photo img{width:109%;max-width:none;object-position:center 40%;}
+  .bsf-process-body{padding:clamp(24px,4vw,36px) var(--pad) clamp(26px,4vw,40px);}
+  .bsf-process-head{margin-left:0;}
+  .bsf-process-eyebrow{margin-left:0;}
+  .bsf-step h3{text-align:left;}
+  .bsf-cta-boat{width:40%;opacity:.45;}
+  .bsf-cta-inner{padding-block:24px;padding-left:var(--bsf-gutter);}
+}
+
+@media (max-width:820px){
+  .bsf-opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bsf-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .bsf-rel-card h3{font-size:15px;}
+  .bsf-why-inner{grid-template-columns:minmax(0,1fr);}
+  .bsf-why-copy{padding-right:0;}
+  .bsf-features{border-left:0;padding-inline:0;}
+  .bsf-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .bsf-hero{--bsf-indent:0px;}
+  .bsf-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .bsf-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .bsf-hero-eyebrow i{width:24px;}
+  .bsf-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .bsf-hero h1 br{display:none;}
+  .bsf-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .bsf-hero-img{object-position:62% center;}
+  .bsf-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
+  }
+  .bsf-hero-actions,.bsf-cta-actions{width:100%;gap:10px;}
+  .bsf-hero-actions .btn,.bsf-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .bsf-trust{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;}
+  .bsf-intro h2 br{display:none;}
+  .bsf-intro-copy .btn{width:100%;justify-content:center;}
+  .bsf-opt-grid{grid-template-columns:minmax(0,1fr);}
+  .bsf-steps{grid-template-columns:minmax(0,1fr);}
+  .bsf-step + .bsf-step::before{display:none;}
+  .bsf-head .btn{width:100%;justify-content:center;margin-top:0;}
+  .bsf-ba-grid{grid-template-columns:minmax(0,1fr);max-width:520px;}
+  .sfr-ba{aspect-ratio:2.6/1;}
+  .bsf-why h2 br{display:none;}
+  .bsf-faq summary{padding-block:10px;}
+  .bsf-cta-boat{width:70%;opacity:.3;}
+}
+
+@media (max-width:400px){
+  .bsf-trust{grid-template-columns:minmax(0,1fr);}
+  .bsf-related-grid{grid-template-columns:minmax(0,1fr);}
+}
