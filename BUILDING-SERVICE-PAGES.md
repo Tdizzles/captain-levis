@@ -794,3 +794,24 @@ node --check script.js
   not used; the page keeps the shared footer and quote form. The results
   band says "Real Results" although the pairs are placeholders, and the FAQ
   answers are drafted copy. Check both with the owner.
+- **`livewell-fish-box-modifications.html`** (sub-page of Custom
+  Fabrication, `.lfb-` prefix, linked from its Livewell & Fish Box
+  Modifications card) is not in the nav dropdown. Its stylesheet started as
+  a copy of `custom-consoles-dash-panels.css`, whose comp has the same
+  layout. Its `lfb-*` images are cropped from a 1024px comp and saved at 2×,
+  so they are soft. The hero photo is the comp's photo right of x 466, where
+  the copy's longest line ends, so nothing in it was painted out. The
+  diagram (`lfb-diagram.jpg`) keeps the comp's pins and leader lines; its
+  six callout cards were whitened and live cards sit over them in % of the
+  photo with `cqw` type, so re-crop the image only together with those
+  positions. All three before/after pairs are placeholders built like the
+  surface scratch page's (one comp half plus its mirror, tags and handle
+  painted out), so they match the comp at rest but show the mirror when
+  dragged. The hero, intro, process lead and why copy are sized so they
+  break on the comp's words at 1536, and the option titles run at 1.06vw to
+  keep "Larger Capacity Modifications" on one line. Step 1's copy fixes the
+  comp's "Build review your boat". "View More Results" goes to the
+  homepage's `#repairs`. The comp's slim footer is not used; the page keeps
+  the shared footer and quote form. The results band says "Real Results"
+  although the pairs are placeholders, and the FAQ answers are drafted
+  copy. Check both with the owner.
