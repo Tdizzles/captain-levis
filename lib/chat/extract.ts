@@ -47,6 +47,7 @@ function cleanName(text: string): string | undefined {
   let s = text.trim().replace(/^(my name is|my name's|i am|i'm|im|it's|its|this is|name:?)\s+/i, '').replace(/[.!]+$/, '').trim()
   s = s.replace(/\s+(here|speaking)$/i, '')
   if (!s || s.length > 80 || /\d/.test(s) || EMAIL_RE.test(s) || s.split(/\s+/).length > 5) return undefined
+  if (/^(move on|skip|next|ok|okay|yes|no|sure|done|continue|hello|hi|hey)$/i.test(s)) return undefined
   return s
 }
 
