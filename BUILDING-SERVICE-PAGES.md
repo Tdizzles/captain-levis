@@ -770,3 +770,27 @@ node --check script.js
   "Real Results" although the pairs are placeholders, the why copy says
   "helped thousands of boaters" (the comp's claim), and the FAQ answers are
   drafted copy. Check all three with the owner.
+- **`storage-compartments.html`** (sub-page of Custom Fabrication, `.scp-`
+  prefix, linked from its Storage Compartments card) is not in the nav
+  dropdown. Its stylesheet started as a copy of
+  `custom-consoles-dash-panels.css`, whose comp has the same layout. This
+  comp adds a fourth before/after slider, and its process photo has a curved
+  trailing edge instead of a chevron (a nine-point `clip-path` polygon sized
+  by `--bulge`). Below 1024px the photo is a straight-edged banner, so the
+  image is widened 6.5% to push the navy past the comp's arc out of frame.
+  Its `scp-*` images are cropped from a 1024px comp and saved at 2×, so they
+  are soft. The hero photo is the comp's photo right of x 450; the ends of
+  the heading's first line and the paragraph's lines that reached into it
+  were inpainted (OpenCV, a throwaway install, not a repo dependency). The
+  diagram (`scp-diagram.jpg`) keeps the comp's pins and leader lines; its six
+  callout cards were whitened and live cards sit over them in % of the photo
+  with `cqw` type, so re-crop the image only together with those positions.
+  All four before/after pairs are placeholders built like the surface
+  scratch page's (one comp half plus its mirror, tags and handle painted
+  out), so they match the comp at rest but show the mirror when dragged.
+  The CTA heading and lead are set ~4% under the comp's sizes so they keep
+  one row with the buttons in a 1536px window that has a scrollbar. "View
+  More Results" goes to the homepage's `#repairs`. The comp's slim footer is
+  not used; the page keeps the shared footer and quote form. The results
+  band says "Real Results" although the pairs are placeholders, and the FAQ
+  answers are drafted copy. Check both with the owner.
