@@ -880,3 +880,30 @@ node --check script.js
   period; the page uses a comma. The results band says "Real Results"
   although the pairs are placeholders, and the FAQ answers are drafted copy.
   Check both with the owner.
+- **`one-off-fiberglass-parts.html`** (sub-page of Custom Fabrication,
+  `.ofp-` prefix, linked from its One-Off Fiberglass Parts card) is not in
+  the nav dropdown. Its comp is titled "Custom Fiberglass Parts"; the file
+  follows the card. Its stylesheet started as a copy of
+  `livewell-fish-box-modifications.css`, whose comp has the same layout; the
+  process photo's curved edge follows `bulkheads-structural-fabrication.css`
+  (a lopsided arc, flush 45% of the way down), and the trust strip keeps its
+  side padding on phones, as on the hatches page. Its `ofp-*` images are
+  cropped from a 1024px comp and saved at 2×, so they are soft. The hero
+  photo is the comp's photo right of x 500, where the heading's first line
+  ends, so nothing in it was painted out. The diagram (`ofp-diagram.jpg`)
+  keeps the comp's pins and leader lines; its six callout cards were
+  whitened and live cards sit over them in % of the photo with `cqw` type,
+  each stopping 3 comp px short of its pin side so the pins stay whole.
+  Re-crop the image only together with those positions. "Marine-Grade
+  Fiberglass" is `nowrap` above the 620px container query so it holds one
+  line, as in the comp. All three before/after pairs are placeholders built
+  like the surface scratch page's (one comp half plus its mirror, tags and
+  handle painted out), so they match the comp at rest but show the mirror
+  when dragged. The hero, intro, example, step and why copy break on the
+  comp's words at 1536 (step 1 through a `<br>` hidden once the steps go two
+  across; the intro paragraph runs into the gap before the diagram, as in
+  the comp). The example cards have no links, as in the comp. "View More
+  Results" goes to the homepage's `#repairs`. The comp's slim footer is not
+  used; the page keeps the shared footer and quote form. The results band
+  says "Real Results" although the pairs are placeholders, and the FAQ
+  answers are drafted copy. Check both with the owner.
