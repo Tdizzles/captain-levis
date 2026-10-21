@@ -20,7 +20,7 @@
 .drs-eyebrow{
   gap:clamp(10px,1.3vw,20px);
   color:var(--icon-blue);
-  font-size:clamp(11px,.78vw,13px);
+  font-size:clamp(0.6875rem,.78vw,0.8125rem);
   letter-spacing:1.9px;
   margin-bottom:clamp(8px,.7vw,12px);
 }
@@ -72,12 +72,12 @@
 .drs-hero-content,.drs-trust{margin-inline:clamp(0px,6vw,100px);}
 .drs-hero-content{max-width:700px;}
 .drs-hero-eyebrow{
-  font-size:clamp(11px,.8vw,13px);
+  font-size:clamp(0.6875rem,.8vw,0.8125rem);
   letter-spacing:2px;
   margin-bottom:clamp(8px,.6vw,12px);
 }
 .drs-hero h1{
-  font-size:clamp(32px,2.96vw,56px);
+  font-size:clamp(2rem,2.96vw,3.5rem);
   letter-spacing:-.02em;
   line-height:1.04;
   color:#fff;
@@ -86,7 +86,7 @@
 .drs-hero h1 .accent{color:var(--accent);}
 .drs-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(15px,1.12vw,19px);
+  font-size:clamp(0.9375rem,1.12vw,1.1875rem);
   line-height:1.42;
   max-width:29.5em;
   margin-bottom:clamp(16px,1.3vw,26px);
@@ -101,8 +101,8 @@
 }
 .drs-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
 .drs-trust-icon{color:var(--accent);display:flex;flex:none;}
-.drs-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13px,.9vw,15px);line-height:1.25;}
-.drs-trust small{display:block;font-size:clamp(11.5px,.8vw,13px);color:rgba(255,255,255,.8);}
+.drs-trust strong{display:block;font-family:var(--font-head);font-size:clamp(0.8125rem,.9vw,0.9375rem);line-height:1.25;}
+.drs-trust small{display:block;font-size:clamp(0.7188rem,.8vw,0.8125rem);color:rgba(255,255,255,.8);}
 
 /* ---------- Overview ----------
    copy + four benefits | one large before/after slider. */
@@ -116,14 +116,14 @@
 }
 .drs-intro-copy{padding-left:clamp(0px,1vw,20px);}
 .drs-intro h2{
-  font-size:clamp(26px,2.62vw,48px);
+  font-size:clamp(1.625rem,2.62vw,3rem);
   letter-spacing:-.02em;
   line-height:1.08;
   margin-bottom:clamp(8px,.7vw,14px);
 }
 .drs-intro h2 .accent,.drs-results h2 .accent{color:var(--icon-blue);}
 .drs-intro-copy > p{
-  font-size:clamp(14.5px,1.12vw,19px);
+  font-size:clamp(0.9063rem,1.12vw,1.1875rem);
   line-height:1.53;
   color:var(--gray-text);
   max-width:37em;
@@ -150,19 +150,19 @@
 .drs-benefit-icon svg{width:50%;height:auto;}
 .drs-benefits strong{
   font-family:var(--font-head);
-  font-size:clamp(13px,1vw,17px);
+  font-size:clamp(0.8125rem,1vw,1.0625rem);
   line-height:1.18;
   color:var(--navy);
   margin-bottom:6px;
 }
-.drs-benefits small{font-size:clamp(11.5px,.83vw,14px);line-height:1.4;color:var(--gray-text);}
+.drs-benefits small{font-size:clamp(0.7188rem,.83vw,0.875rem);line-height:1.4;color:var(--gray-text);}
 
 /* Doubled class: the generic .sfr-ba rule further down would otherwise win. */
 .drs-ba-lead.sfr-ba{aspect-ratio:446/283;border-radius:12px;}
 .drs-ba-lead .sfr-ba-handle{width:clamp(40px,4vw,64px);height:clamp(40px,4vw,64px);}
 .drs-ba-lead .sfr-ba-tag{
   bottom:clamp(10px,1.2vw,20px);
-  font-size:clamp(11px,1vw,16px);
+  font-size:clamp(0.6875rem,1vw,1rem);
   padding:.55em 2.1em;
   border-radius:6px;
 }
@@ -194,15 +194,15 @@
   padding:clamp(24px,2.25vw,42px) clamp(18px,2.6vw,48px) clamp(18px,1.4vw,28px) clamp(12px,1.3vw,24px);
 }
 .drs-process-copy{position:relative;z-index:1;padding-left:clamp(0px,1.1vw,20px);}
-.drs-process-copy .eyebrow{font-size:clamp(11px,.78vw,13px);letter-spacing:1.9px;margin-bottom:clamp(8px,.7vw,12px);}
+.drs-process-copy .eyebrow{font-size:clamp(0.6875rem,.78vw,0.8125rem);letter-spacing:1.9px;margin-bottom:clamp(8px,.7vw,12px);}
 .drs-process h2{
   color:#fff;
-  font-size:clamp(24px,2vw,38px);
+  font-size:clamp(1.5rem,2vw,2.375rem);
   letter-spacing:-.02em;
   margin-bottom:clamp(8px,.8vw,14px);
 }
 .drs-process h2 .accent{color:var(--accent);}
-.drs-process-copy p{color:rgba(255,255,255,.86);font-size:clamp(13px,.86vw,15.5px);line-height:1.5;}
+.drs-process-copy p{color:rgba(255,255,255,.86);font-size:clamp(0.8125rem,.86vw,0.9688rem);line-height:1.5;}
 .drs-steps{
   --step-gap:clamp(18px,2.15vw,40px);
   display:grid;
@@ -235,7 +235,7 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(15px,1.2vw,21px);
+  font-size:clamp(0.9375rem,1.2vw,1.3125rem);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
@@ -247,8 +247,8 @@
   display:flex;
 }
 .drs-step-icon svg{width:clamp(20px,1.66vw,30px);height:auto;}
-.drs-step h3{color:#fff;font-size:clamp(14px,1.03vw,18px);letter-spacing:-.2px;margin-bottom:6px;}
-.drs-step p{color:rgba(255,255,255,.78);font-size:clamp(12.5px,.83vw,14.5px);line-height:1.38;}
+.drs-step h3{color:#fff;font-size:clamp(0.875rem,1.03vw,1.125rem);letter-spacing:-.2px;margin-bottom:6px;}
+.drs-step p{color:rgba(255,255,255,.78);font-size:clamp(0.7813rem,.83vw,0.9063rem);line-height:1.38;}
 
 /* ---------- Before & after ---------- */
 .drs-results{background:var(--light-bg);}
@@ -262,12 +262,12 @@
   margin-bottom:clamp(10px,.8vw,16px);
 }
 .drs-results h2{
-  font-size:clamp(22px,1.86vw,34px);
+  font-size:clamp(1.375rem,1.86vw,2.125rem);
   letter-spacing:-.02em;
   line-height:1.12;
   margin-bottom:6px;
 }
-.drs-results-head p{font-size:clamp(13px,.88vw,15.5px);line-height:1.5;color:var(--gray-text);}
+.drs-results-head p{font-size:clamp(0.8125rem,.88vw,0.9688rem);line-height:1.5;color:var(--gray-text);}
 .drs-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -316,7 +316,7 @@
   position:absolute;bottom:clamp(8px,.75vw,14px);
   font-family:var(--font-head);
   font-weight:700;
-  font-size:clamp(10px,.85vw,14px);
+  font-size:clamp(0.625rem,.85vw,0.875rem);
   letter-spacing:.6px;
   padding:.5em 1.9em;
   border-radius:4px;
@@ -336,12 +336,12 @@
   padding-block:clamp(22px,1.6vw,34px) clamp(18px,1.2vw,26px);
 }
 .drs-related h2,.drs-why-copy h2{
-  font-size:clamp(24px,2.05vw,38px);
+  font-size:clamp(1.5rem,2.05vw,2.375rem);
   letter-spacing:-.02em;
   line-height:1.16;
   margin-bottom:clamp(8px,.8vw,14px);
 }
-.drs-related-copy p{font-size:clamp(13.5px,.93vw,16px);line-height:1.5;color:var(--gray-text);max-width:28em;}
+.drs-related-copy p{font-size:clamp(0.8438rem,.93vw,1rem);line-height:1.5;color:var(--gray-text);max-width:28em;}
 .drs-related-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.88fr);
@@ -352,13 +352,13 @@
 .drs-rel-card .fg-card-body{padding:clamp(10px,1vw,16px) clamp(10px,.8vw,16px) clamp(12px,1.1vw,18px);}
 .drs-rel-card .fg-card-body h3{
   display:flex;align-items:center;justify-content:space-between;gap:5px;
-  font-size:clamp(13.5px,.95vw,16.5px);
+  font-size:clamp(0.8438rem,.95vw,1.0313rem);
   letter-spacing:-.2px;
   margin-bottom:6px;
 }
 .drs-rel-card h3 svg{flex:none;color:var(--icon-blue);transition:transform .15s ease;}
 .drs-rel-card:hover h3 svg{transform:translateX(3px);}
-.drs-rel-card .fg-card-body p{font-size:clamp(12px,.83vw,14.5px);line-height:1.45;margin-bottom:0;}
+.drs-rel-card .fg-card-body p{font-size:clamp(0.75rem,.83vw,0.9063rem);line-height:1.45;margin-bottom:0;}
 .drs-rel-help{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
@@ -377,9 +377,9 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:4px;
 }
-.drs-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(13px,1vw,16.5px);line-height:1.25;color:var(--navy);}
+.drs-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(0.8125rem,1vw,1.0313rem);line-height:1.25;color:var(--navy);}
 .drs-rel-help-arrow{color:var(--icon-blue);flex:none;}
-.drs-rel-help small{font-size:clamp(11px,.72vw,12.5px);line-height:1.4;color:var(--gray-text);}
+.drs-rel-help small{font-size:clamp(0.6875rem,.72vw,0.7813rem);line-height:1.4;color:var(--gray-text);}
 
 /* ---------- Why us + FAQ ----------
    copy | checklist | FAQ accordion (native <details>, no JS). */
@@ -396,11 +396,11 @@
   column-gap:clamp(20px,2.4vw,46px);
   padding-block:clamp(22px,1.7vw,34px);
 }
-.drs-why-copy p{font-size:clamp(13.5px,.93vw,16px);line-height:1.5;color:var(--gray-text);}
+.drs-why-copy p{font-size:clamp(0.8438rem,.93vw,1rem);line-height:1.5;color:var(--gray-text);}
 .drs-checks{display:grid;gap:clamp(9px,.95vw,16px);}
 .drs-checks li{
   display:flex;align-items:center;gap:clamp(10px,1.1vw,18px);
-  font-size:clamp(13.5px,.93vw,16px);
+  font-size:clamp(0.8438rem,.93vw,1rem);
   color:#34506A;
 }
 .drs-checks li::before{
@@ -415,7 +415,7 @@
   padding-left:clamp(18px,2.6vw,48px);
   border-left:1px solid #DCE8F3;
 }
-.drs-faq h2{font-size:clamp(19px,1.42vw,26px);letter-spacing:-.02em;margin-bottom:clamp(6px,.6vw,10px);}
+.drs-faq h2{font-size:clamp(1.1875rem,1.42vw,1.625rem);letter-spacing:-.02em;margin-bottom:clamp(6px,.6vw,10px);}
 .drs-faq details{
   background:#fff;
   border:1px solid #D9E6F2;
@@ -426,7 +426,7 @@
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:clamp(7px,.55vw,10px) clamp(12px,.9vw,16px);
   font-weight:500;
-  font-size:clamp(13px,.86vw,15px);
+  font-size:clamp(0.8125rem,.86vw,0.9375rem);
   cursor:pointer;
   list-style:none;
 }
@@ -442,7 +442,7 @@
 .drs-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
 .drs-faq details p{
   padding:0 clamp(12px,.9vw,16px) 12px;
-  font-size:clamp(13px,.86vw,14.5px);
+  font-size:clamp(0.8125rem,.86vw,0.9063rem);
   line-height:1.55;
   color:var(--gray-text);
 }
@@ -484,8 +484,8 @@
   padding-left:max(var(--wide-pad), 23.6% - max(0px, (100% - 1920px) / 2));
   padding-right:calc(var(--wide-pad) + clamp(0px,1.6vw,30px));
 }
-.drs-cta h2{color:#fff;font-size:clamp(22px,1.86vw,34px);letter-spacing:-.02em;margin-bottom:6px;}
-.drs-cta p{font-size:clamp(14px,.93vw,16.5px);color:rgba(255,255,255,.9);}
+.drs-cta h2{color:#fff;font-size:clamp(1.375rem,1.86vw,2.125rem);letter-spacing:-.02em;margin-bottom:6px;}
+.drs-cta p{font-size:clamp(0.875rem,.93vw,1.0313rem);color:rgba(255,255,255,.9);}
 .drs-cta-actions{display:flex;gap:clamp(10px,1.4vw,24px);flex-wrap:wrap;}
 .drs-cta-actions .btn{padding:clamp(13px,1.05vw,18px) clamp(24px,2.2vw,40px);}
 .drs-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);}
@@ -570,9 +570,9 @@
 
 @media (max-width:640px){
   .drs-hero-inner{padding-top:34px;padding-bottom:28px;}
-  .drs-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .drs-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .drs-hero h1 br{display:none;}
-  .drs-hero-sub{font-size:14.5px;}
+  .drs-hero-sub{font-size:0.9063rem;}
   .drs-hero-actions .btn,.drs-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   /* Show the scuffed bow rather than the tagline, which would sit under the copy. */
   .drs-hero-img{object-position:28% center;}

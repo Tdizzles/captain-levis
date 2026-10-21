@@ -1,0 +1,472 @@
+{
+  "_readme": "Page registry used by scripts/build.mjs. parent = breadcrumb parent slug (null = top level). order = position among siblings for prev/next. service = default value of the quote form's Service select. lead = contact-section lead sentence (auto-filled from the page the first time it is built; edit here afterwards). label = breadcrumb/pager text. Pages missing from this file are registered automatically on build.",
+  "services": [
+    {
+      "value": "",
+      "label": "Service Needed *"
+    },
+    {
+      "value": "fiberglass-repair",
+      "label": "Fiberglass Repair (not sure which)"
+    },
+    {
+      "value": "structural-fiberglass",
+      "label": "Structural Fiberglass Repair"
+    },
+    {
+      "value": "hull-repairs",
+      "label": "Hull Repairs"
+    },
+    {
+      "value": "deck-repairs",
+      "label": "Deck Repairs"
+    },
+    {
+      "value": "transom-replacement",
+      "label": "Transom Repair / Replacement"
+    },
+    {
+      "value": "stringer-repairs",
+      "label": "Stringer Repairs"
+    },
+    {
+      "value": "bulkhead-repairs",
+      "label": "Bulkhead Repairs"
+    },
+    {
+      "value": "custom-fabrication",
+      "label": "Custom Fabrication"
+    },
+    {
+      "value": "gelcoat-repair",
+      "label": "Gelcoat Repair & Color Matching"
+    },
+    {
+      "value": "boat-detailing",
+      "label": "Boat Detailing"
+    },
+    {
+      "value": "boat-restoration",
+      "label": "Boat Restoration"
+    },
+    {
+      "value": "boat-yard",
+      "label": "Boat Yard / Storage / Haul-Out"
+    },
+    {
+      "value": "pwc-repair",
+      "label": "Jet Ski / Sea-Doo / WaveRunner"
+    },
+    {
+      "value": "kayak-repair",
+      "label": "Kayak Repair"
+    },
+    {
+      "value": "insurance-claim",
+      "label": "Insurance Claim Repair"
+    },
+    {
+      "value": "other",
+      "label": "Other / Not Sure"
+    }
+  ],
+  "pages": {
+    "404": {
+      "label": "Page Not Found",
+      "parent": null,
+      "legal": true,
+      "noindex": true
+    },
+    "index": {
+      "label": "Home",
+      "parent": null,
+      "variant": "full",
+      "service": "",
+      "lead": "Have a question, need a quote, or ready to schedule a repair? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "fiberglass-boat-repair": {
+      "label": "Services",
+      "parent": null,
+      "service": "fiberglass-repair",
+      "hub": true,
+      "lead": "Not sure which repair you need? Pick the closest option, tell us what you see, and we&rsquo;ll point you to the right fix &mdash; at our Largo yard or at your dock."
+    },
+    "about": {
+      "label": "About",
+      "parent": null,
+      "service": "",
+      "lead": "Want to talk to the family that will actually work on your boat? Fill out the form or give us a call &mdash; Captain Dave or Levi will get back to you as soon as possible."
+    },
+    "contact": {
+      "label": "Contact & Free Quote",
+      "parent": null,
+      "variant": "full",
+      "formKind": "quote",
+      "service": "",
+      "lead": "This is the fastest way to reach us. Tell us about your boat, add a few photos of the damage, and we&rsquo;ll get back to you as soon as we can with the next step."
+    },
+    "privacy-policy": {
+      "label": "Privacy Policy",
+      "parent": null,
+      "legal": true
+    },
+    "terms": {
+      "label": "Terms of Use",
+      "parent": null,
+      "legal": true
+    },
+    "cookie-policy": {
+      "label": "Cookie Policy",
+      "parent": null,
+      "legal": true
+    },
+    "sitemap": {
+      "label": "Sitemap",
+      "parent": null,
+      "legal": true
+    },
+    "structural-fiberglass-repair": {
+      "label": "Structural Fiberglass Repair",
+      "parent": "fiberglass-boat-repair",
+      "order": 0,
+      "service": "structural-fiberglass",
+      "lead": "Have a question about a structural repair, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "hull-repairs": {
+      "label": "Hull Repairs",
+      "parent": "fiberglass-boat-repair",
+      "order": 1,
+      "service": "hull-repairs",
+      "lead": "Have a question about a hull repair, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "deck-repairs": {
+      "label": "Deck Repairs",
+      "parent": "fiberglass-boat-repair",
+      "order": 2,
+      "service": "deck-repairs",
+      "lead": "Have a soft spot, a spongy deck or a question about a deck rebuild, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "transom-replacement": {
+      "label": "Transom Replacement",
+      "parent": "fiberglass-boat-repair",
+      "order": 3,
+      "service": "transom-replacement",
+      "lead": "Have a soft or cracked transom, a loose engine mount or a question about a transom rebuild, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "stringer-repairs": {
+      "label": "Stringer Repairs",
+      "parent": "fiberglass-boat-repair",
+      "order": 4,
+      "service": "stringer-repairs",
+      "lead": "Have a soft or flexing deck, a stringer you&rsquo;re worried about, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "bulkhead-repairs": {
+      "label": "Bulkhead Repairs",
+      "parent": "fiberglass-boat-repair",
+      "order": 5,
+      "service": "bulkhead-repairs",
+      "lead": "Have a cracked, rotted or loose bulkhead, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "custom-fabrication": {
+      "label": "Custom Fabrication",
+      "parent": "fiberglass-boat-repair",
+      "order": 6,
+      "service": "custom-fabrication",
+      "lead": "Have a custom part in mind, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "gelcoat-repair": {
+      "label": "Gelcoat Repair",
+      "parent": "fiberglass-boat-repair",
+      "order": 7,
+      "service": "gelcoat-repair",
+      "lead": "Have gelcoat damage you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "full-boat-restoration": {
+      "label": "Full Boat Restoration",
+      "parent": "fiberglass-boat-repair",
+      "order": 8,
+      "service": "boat-restoration",
+      "lead": "Want your whole boat brought back to a like-new finish, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "boat-detailing": {
+      "label": "Boat Detailing",
+      "parent": "fiberglass-boat-repair",
+      "order": 9,
+      "service": "boat-detailing",
+      "lead": "Want your boat compounded, polished and waxed at our yard or at your slip? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "boat-yard": {
+      "label": "Boat Yard",
+      "parent": "fiberglass-boat-repair",
+      "order": 10,
+      "service": "boat-yard",
+      "lead": "Need a haul-out, pick-up, storage or a repair at the yard? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "jet-ski-pwc-repair": {
+      "label": "Jet Ski & PWC Repair",
+      "parent": "fiberglass-boat-repair",
+      "order": 11,
+      "service": "pwc-repair",
+      "lead": "Have a cracked, punctured or faded jet ski, Sea-Doo or WaveRunner, or an insurance claim to repair? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your craft deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "kayak-repair": {
+      "label": "Kayak Repair",
+      "parent": "fiberglass-boat-repair",
+      "order": 12,
+      "service": "kayak-repair",
+      "lead": "Have a cracked, leaking or worn fiberglass kayak you want repaired? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your kayak deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "hull-crack-repair": {
+      "label": "Hull Crack Repair",
+      "parent": "hull-repairs",
+      "order": 0,
+      "service": "hull-repairs",
+      "lead": "Have a hull crack you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "impact-collision-damage": {
+      "label": "Impact & Collision Damage",
+      "parent": "hull-repairs",
+      "order": 1,
+      "service": "hull-repairs",
+      "lead": "Have impact or collision damage you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "soft-spots-delamination": {
+      "label": "Soft Spots & Delamination",
+      "parent": "hull-repairs",
+      "order": 2,
+      "service": "hull-repairs",
+      "lead": "Have a soft spot or delamination you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "keel-bottom-repair": {
+      "label": "Keel & Bottom Repair",
+      "parent": "hull-repairs",
+      "order": 3,
+      "service": "hull-repairs",
+      "lead": "Have keel or bottom damage you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "hull-blister-osmosis-repair": {
+      "label": "Blister & Osmosis Repair",
+      "parent": "hull-repairs",
+      "order": 4,
+      "service": "hull-repairs",
+      "lead": "Have hull blisters you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "structural-hull-rebuilds": {
+      "label": "Structural Hull Rebuilds",
+      "parent": "hull-repairs",
+      "order": 5,
+      "service": "hull-repairs",
+      "lead": "Have a hull that needs structural work, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "hull-step-repair": {
+      "label": "Hull Step Repair",
+      "parent": "hull-repairs",
+      "order": 6,
+      "service": "hull-repairs",
+      "lead": "Have a stepped hull that is delaminating at the steps or chines? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "custom-consoles-dash-panels": {
+      "label": "Custom Consoles & Dash Panels",
+      "parent": "custom-fabrication",
+      "order": 0,
+      "service": "custom-fabrication",
+      "lead": "Planning a new console or dash panel, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "hatches-lids-access-panels": {
+      "label": "Hatches, Lids & Access Panels",
+      "parent": "custom-fabrication",
+      "order": 1,
+      "service": "custom-fabrication",
+      "lead": "Got a cracked lid, a leaking hatch or a panel that won&rsquo;t stay shut? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "storage-compartments": {
+      "label": "Storage Compartments",
+      "parent": "custom-fabrication",
+      "order": 2,
+      "service": "custom-fabrication",
+      "lead": "Have a cracked, leaking or worn-out storage compartment, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "livewell-fish-box-modifications": {
+      "label": "Livewell & Fish Box Modifications",
+      "parent": "custom-fabrication",
+      "order": 3,
+      "service": "custom-fabrication",
+      "lead": "Planning a new livewell or fish box, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "seating-bases-custom-structures": {
+      "label": "Seating Bases & Custom Structures",
+      "parent": "custom-fabrication",
+      "order": 4,
+      "service": "custom-fabrication",
+      "lead": "Got a cracked seat base or planning a new leaning post, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "bulkheads-structural-fabrication": {
+      "label": "Bulkheads & Structural Fabrication",
+      "parent": "custom-fabrication",
+      "order": 5,
+      "service": "custom-fabrication",
+      "lead": "Got a soft deck, a loose console or a rotten bulkhead, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "engine-rigging-access-modifications": {
+      "label": "Engine & Rigging Access",
+      "parent": "custom-fabrication",
+      "order": 6,
+      "service": "custom-fabrication",
+      "lead": "Planning a larger engine hatch or a new access panel, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "one-off-fiberglass-parts": {
+      "label": "One-Off Fiberglass Parts",
+      "parent": "custom-fabrication",
+      "order": 7,
+      "service": "custom-fabrication",
+      "lead": "Need a part that doesn&rsquo;t exist anymore, want a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "scratch-gouge-repair": {
+      "label": "Scratch & Gouge Repair",
+      "parent": "gelcoat-repair",
+      "order": 0,
+      "service": "gelcoat-repair",
+      "lead": "Have scratches or gouges you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "gelcoat-chip-repair": {
+      "label": "Gelcoat Chip Repair",
+      "parent": "gelcoat-repair",
+      "order": 1,
+      "service": "gelcoat-repair",
+      "lead": "Got a chip, nick or gouge you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "crack-repair": {
+      "label": "Gelcoat Crack Repair",
+      "parent": "gelcoat-repair",
+      "order": 2,
+      "service": "gelcoat-repair",
+      "lead": "Have a crack or spider crack you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "oxidation-restoration": {
+      "label": "Oxidation Restoration",
+      "parent": "gelcoat-repair",
+      "order": 3,
+      "service": "gelcoat-repair",
+      "lead": "Have a chalky or faded finish you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "dock-trailer-damage": {
+      "label": "Dock & Trailer Damage",
+      "parent": "gelcoat-repair",
+      "order": 4,
+      "service": "gelcoat-repair",
+      "lead": "Have dock rash or trailer damage you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "small-chip-repair": {
+      "label": "Small Chip Repair",
+      "parent": "gelcoat-chip-repair",
+      "order": 0,
+      "service": "gelcoat-repair",
+      "lead": "Got a small chip or nick you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "moderate-chip-repair": {
+      "label": "Moderate Chip Repair",
+      "parent": "gelcoat-chip-repair",
+      "order": 1,
+      "service": "gelcoat-repair",
+      "lead": "Have a gelcoat chip that&rsquo;s through to the fiberglass, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "edge-rub-rail-repair": {
+      "label": "Edge & Rub Rail Repair",
+      "parent": "gelcoat-chip-repair",
+      "order": 2,
+      "service": "gelcoat-repair",
+      "lead": "Have chips or scrapes along a rub rail or edge you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "waterline-chip-repair": {
+      "label": "Waterline Chip Repair",
+      "parent": "gelcoat-chip-repair",
+      "order": 3,
+      "service": "gelcoat-repair",
+      "lead": "Have waterline chips you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "multiple-chips-pitting-repair": {
+      "label": "Multiple Chips & Pitting",
+      "parent": "gelcoat-chip-repair",
+      "order": 4,
+      "service": "gelcoat-repair",
+      "lead": "Have chipped or pitted gelcoat you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "surface-scratch-repair": {
+      "label": "Surface Scratch Repair",
+      "parent": "scratch-gouge-repair",
+      "order": 0,
+      "service": "gelcoat-repair",
+      "lead": "Have surface scratches or scuffs you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "dock-rash-scuff-repair": {
+      "label": "Dock Rash & Scuff Repair",
+      "parent": "scratch-gouge-repair",
+      "order": 1,
+      "service": "gelcoat-repair",
+      "lead": "Have dock rash or scuffs you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "deep-gouge-repair": {
+      "label": "Deep Gouge Repair",
+      "parent": "scratch-gouge-repair",
+      "order": 2,
+      "service": "gelcoat-repair",
+      "lead": "Have a deep gouge you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "impact-mark-repair": {
+      "label": "Impact Mark Repair",
+      "parent": "scratch-gouge-repair",
+      "order": 3,
+      "service": "gelcoat-repair",
+      "lead": "Have an impact mark, puncture or collision damage you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "blended-gelcoat-repair": {
+      "label": "Blended Gelcoat Repair",
+      "parent": "scratch-gouge-repair",
+      "order": 4,
+      "service": "gelcoat-repair",
+      "lead": "Have gelcoat damage you want blended out, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "stress-crack-repair": {
+      "label": "Stress Crack Repair",
+      "parent": "crack-repair",
+      "order": 0,
+      "service": "gelcoat-repair",
+      "lead": "Have stress cracks you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "oxidation-removal": {
+      "label": "Oxidation Removal",
+      "parent": "oxidation-restoration",
+      "order": 0,
+      "service": "boat-detailing",
+      "lead": "Chalky, faded gelcoat you want brought back, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "color-restoration": {
+      "label": "Color Restoration",
+      "parent": "oxidation-restoration",
+      "order": 1,
+      "service": "gelcoat-repair",
+      "lead": "Have a faded or chalky finish you want brought back, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "waterline-stain-removal": {
+      "label": "Waterline Stain Removal",
+      "parent": "oxidation-restoration",
+      "order": 2,
+      "service": "boat-detailing",
+      "lead": "Have waterline stains you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "dock-rash-repair": {
+      "label": "Dock Rash Repair",
+      "parent": "dock-trailer-damage",
+      "order": 0,
+      "service": "gelcoat-repair",
+      "lead": "Have dock rash you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    },
+    "trailer-bunk-damage-repair": {
+      "label": "Trailer Bunk Damage Repair",
+      "parent": "dock-trailer-damage",
+      "order": 1,
+      "service": "gelcoat-repair",
+      "lead": "Have trailer bunk scratches or gouges you want looked at, need a quote, or ready to schedule? Fill out the form or give us a call &mdash; we&rsquo;ll get back to you as soon as possible. Your boat deserves the best, and we&rsquo;re here to make it happen."
+    }
+  }
+}

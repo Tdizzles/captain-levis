@@ -2,3 +2,13 @@
 Thumbs.db
 node_modules/
 .env
+
+# backend (api/, lib/) — see docs/BACKEND.md
+.env.*
+!.env.example
+.data/
+.vercel/
+coverage/
+
+.vercel
+.env*

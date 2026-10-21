@@ -1,0 +1,694 @@
+/* ==========================================================================
+   Engine & Rigging Access Modifications — page-specific styles (a sub-page
+   of Custom Fabrication, linked from its Engine & Rigging Access
+   Modifications card). Loads after styles.css and reuses its tokens,
+   buttons, eyebrows, cards, header, footer and contact form. Everything here
+   is prefixed .era-; the only unprefixed rules are the shared .sfr-ba slider
+   styles, which every page that uses the slider defines for itself. Started
+   as a copy of seating-bases-custom-structures.css, whose comp has the same
+   layout; the process photo's trailing edge is a lopsided arc here, traced
+   like bulkheads-structural-fabrication.css's.
+   ========================================================================== */
+
+/* The comp runs its bands nearly edge to edge: a 1760px frame whose content
+   edge sits 57px in at 1536 (the comp's 38px). --era-edge is that edge, for
+   bands that bleed a photo to the viewport instead. */
+.era-hero,.era-intro,.era-process,.era-cta{
+  --era-gutter:clamp(18px,3.7vw,64px);
+  --era-edge:max(var(--era-gutter), calc((100% - 1760px) / 2 + var(--era-gutter)));
+}
+.era-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,3.7vw,64px);
+}
+.era-eyebrow{
+  color:var(--icon-blue);
+  font-size:0.75rem;
+  letter-spacing:2.2px;
+  gap:14px;
+  margin-bottom:8px;
+}
+.era-eyebrow i{background:var(--icon-blue);width:34px;}
+
+/* ---------- Hero ----------
+   era-hero.jpg (the comp's photo right of the copy) covers the right of the
+   band, feathered into the navy on its left over the strip where the copy's
+   line ends were painted out. It stops above the trust strip, which sits on
+   the navy. The copy is indented past the eyebrow's rule, as in the comp. */
+.era-hero{
+  --era-indent:76px;                /* eyebrow rule (47px) + its gap (29px) */
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.era-hero-main{position:relative;overflow:hidden;}
+.era-hero-img{
+  position:absolute;top:0;right:0;
+  width:57%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 13%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 13%);
+}
+.era-hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,22,46,.62) 0%,
+    rgba(0,22,46,.42) 42%,
+    rgba(0,22,46,0) 56%);
+}
+.era-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(22px,1.75vw,32px);
+  padding-bottom:clamp(20px,1.2vw,24px);
+}
+.era-hero-content{max-width:780px;padding-left:var(--era-indent);}
+.era-hero-eyebrow{
+  margin-left:calc(-1 * var(--era-indent));
+  margin-bottom:10px;
+  font-size:0.8125rem;
+  letter-spacing:2.1px;
+  gap:29px;
+  color:#E6F6FE;
+}
+.era-hero-eyebrow i{width:47px;}
+.era-hero-eyebrow em{font-style:normal;color:var(--accent);}
+.era-hero h1{
+  font-size:clamp(1.875rem,3.38vw,3.5rem);
+  letter-spacing:-1.1px;
+  line-height:.96;
+  color:#fff;
+  margin-bottom:12px;
+}
+.era-hero h1 .accent{color:var(--accent);}
+.era-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(0.9063rem,1.24vw,1.2813rem);
+  line-height:1.25;
+  max-width:30.6em;                 /* breaks after "panels,", as in the comp */
+  margin-bottom:10px;
+}
+.era-hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.era-hero-actions .btn{padding:clamp(13px,1vw,16px) clamp(24px,1.95vw,34px);font-size:clamp(0.9063rem,1.02vw,1.0313rem);}
+
+.era-trust-bar{
+  background:linear-gradient(180deg,rgba(0,26,54,.82) 0%,rgba(0,20,42,.96) 100%);
+}
+.era-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:14px 24px;
+  padding-block:clamp(10px,.68vw,13px);
+  padding-left:clamp(0px,5.3vw,92px);
+  padding-right:clamp(0px,2.9vw,50px);
+}
+.era-trust li{display:flex;align-items:center;gap:16px;color:#fff;}
+.era-trust-icon{flex:none;display:flex;color:var(--accent);}
+.era-trust strong{display:block;font-family:var(--font-head);font-size:clamp(0.8438rem,1vw,1rem);line-height:1.25;}
+.era-trust small{display:block;font-size:clamp(0.75rem,.88vw,0.875rem);line-height:1.3;color:rgba(255,255,255,.78);}
+
+/* ---------- Intro: copy | diagram bleeding to the right edge ----------
+   The copy keeps the frame's content edge; the photo is a grid cell that
+   runs to the viewport edge and sets the band's height. */
+.era-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) min(59.43%, 1145px);
+  align-items:center;
+  column-gap:clamp(12px,1vw,20px);
+  padding-left:var(--era-edge);
+  background:var(--light-bg);
+}
+.era-intro-copy{position:relative;z-index:1;padding-block:clamp(12px,.8vw,16px);}
+.era-intro h2{
+  font-size:clamp(1.5rem,2.48vw,2.625rem);
+  letter-spacing:-.8px;
+  line-height:1.06;
+  margin-bottom:10px;
+}
+/* As in the comp, the paragraph runs a little past the column, to the
+   diagram's faded left edge, which is what lets "reinforcing," end its
+   first line. The breaks after "components." and "easier," are the comp's
+   forced ones. */
+.era-intro-copy > p{
+  font-size:clamp(0.9375rem,1.2vw,1.25rem);
+  line-height:1.26;
+  color:var(--gray-text);
+  max-width:32.6em;
+  margin-right:-1.2vw;
+  margin-bottom:clamp(16px,1.3vw,22px);
+}
+.era-intro-copy .btn{padding:clamp(12px,.95vw,15px) clamp(22px,2vw,34px);font-size:clamp(0.9063rem,1.02vw,1.0313rem);}
+
+/* Diagram: the comp's photo with its pins and leader lines kept and its six
+   callout cards whitened. Live cards are laid over the comp's in % of the
+   photo, with type in container query units, so the whole diagram scales as
+   one. Each card stops 3 comp px short of its pin side, so the comp's pins,
+   drawn on the card edges, stay whole. */
+.era-diagram{
+  position:relative;
+  container-type:inline-size;
+  margin:0;
+}
+.era-diagram > img{
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%);
+          mask-image:linear-gradient(90deg,transparent,#000 4%);
+}
+.era-callouts{list-style:none;margin:0;padding:0;}
+.era-callout{
+  position:absolute;
+  background:#fff;
+  border-radius:clamp(4px,.75cqw,7px);
+  box-shadow:0 10px 22px -14px rgba(0,38,75,.45);
+  padding:1cqw .4cqw 1cqw 1.88cqw;
+  display:flex;flex-direction:column;justify-content:center;
+}
+/* Comp px: the diagram is x 438-1024, y 340-571 of the comp. */
+.era-co-hatch     {left:2.90%;top:9.52%;width:24.23%;min-height:24.24%;}
+.era-co-fiberglass{left:2.90%;top:39.39%;width:24.23%;min-height:24.24%;}
+.era-co-finish    {left:2.90%;top:69.26%;width:24.23%;min-height:25.11%;}
+.era-co-access    {left:71.16%;top:4.76%;width:24.74%;min-height:24.68%;}
+.era-co-hardware  {left:72.70%;top:33.77%;width:23.21%;min-height:29.00%;}
+.era-co-custom    {left:72.70%;top:67.53%;width:23.21%;min-height:28.57%;}
+/* The right-hand cards start 3 comp px in, so their text sits as in the comp. */
+.era-co-access,.era-co-hardware,.era-co-custom{padding-left:1.45cqw;}
+.era-callout strong{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(0.5938rem,1.63cqw,1rem);
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:.29em;
+}
+.era-callout small{
+  display:block;
+  font-size:clamp(0.5313rem,1.5cqw,0.9375rem);
+  line-height:1.25;
+  color:var(--gray-text);
+}
+@container (max-width:620px){
+  /* Too small for the descriptions to fit their cards; the titles stay. */
+  .era-callout{padding:4px 6px 4px 8px;}
+  .era-callout small{display:none;}
+  .era-callout strong{margin:0;font-size:clamp(0.5938rem,2.5cqw,0.8125rem);}
+}
+
+/* ---------- Common services: five fg-cards without links ---------- */
+.era-options{background:linear-gradient(180deg,#F4FAFE 0%,#F9FBFE 100%);}
+/* The comp's diagram runs almost to the eyebrow. */
+.era-options .era-wide{padding-block:clamp(3px,.2vw,4px) clamp(12px,.88vw,15px);}
+.era-opt-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(12px,1.08vw,18px);
+}
+.era-opt{border-radius:8px;}
+.era-opt:hover{transform:none;}
+.era-opt .fg-card-media img{aspect-ratio:182/88;}
+/* The comp's titles nearly fill the card (14 comp px in, 9 out), so the
+   right padding is the smaller one. The descriptions wrap at ~150 comp px,
+   which 14.8em reproduces at every size. */
+.era-opt .fg-card-body{padding:clamp(12px,.95vw,16px) clamp(10px,.85vw,14px) clamp(13px,1vw,17px) clamp(14px,1.37vw,23px);}
+.era-opt .fg-card-body h3{font-size:clamp(0.9063rem,1.03vw,1.0625rem);letter-spacing:-.3px;margin-bottom:clamp(3px,.3vw,5px);}
+.era-opt .fg-card-body p{font-size:clamp(0.8125rem,.98vw,1rem);line-height:1.25;margin-bottom:0;max-width:14.8em;}
+
+/* ---------- Shared slider (script.js binds every .sfr-ba) ----------
+   Each image is one half of the comp's pair plus its mirror, so at rest the
+   seam sits on the handle and the frame matches the comp. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:308/86;
+  border-radius:7px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(34px,2.8vw,46px);height:clamp(34px,2.8vw,46px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+/* The comp's tags sit almost on the bottom edge. */
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(2px,.2vw,4px);
+  width:24.9%;
+  text-align:center;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(0.6875rem,.95vw,0.9375rem);
+  letter-spacing:.8px;
+  padding:clamp(5px,.5vw,8px) 0;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:3.9%;background:rgba(0,22,46,.92);color:#fff;}
+.sfr-ba-tag-after{right:3.9%;background:#1E9BF0;color:#fff;}
+
+/* ---------- Process band ----------
+   Photo bleeding off the left edge with a lopsided arc on its trailing side
+   (x 363 at the top, 377 40% of the way down, 342 at the bottom of the
+   comp's 194px band), then copy and four step cards. The section's right
+   padding reproduces .era-wide's content edge. */
+.era-process{
+  display:grid;
+  /* The photo is 36.9% of the comp's frame and runs to the viewport's left
+     edge; the steps stop 2.05% short of the frame's right edge, past the
+     other bands' content edge, as in the comp. */
+  --era-side:max(0px, (100vw - 1760px) / 2);
+  grid-template-columns:clamp(260px, calc(var(--era-side) + min(36.9vw, 649px)), 1100px) minmax(0,1fr);
+  padding-right:calc(var(--era-side) + min(2.05vw, 36px));
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(28,148,220,.16), transparent 60%),
+    linear-gradient(100deg,var(--navy) 0%,#062F5A 55%,var(--navy-2) 100%);
+}
+.era-process-photo{
+  position:relative;
+  /* The comp's edge, traced through its points every 10% of the height:
+     15px in at the top, flush 40% of the way down, 36px in at the bottom
+     (of a 378px photo at 1024). */
+  --bulge:9.52%;
+  clip-path:polygon(0 0,
+    calc(100% - var(--bulge) * .42) 0,
+    calc(100% - var(--bulge) * .25) 10%,
+    calc(100% - var(--bulge) * .11) 20%,
+    calc(100% - var(--bulge) * .04) 30%,
+    100% 40%,
+    calc(100% - var(--bulge) * .08) 50%,
+    calc(100% - var(--bulge) * .19) 60%,
+    calc(100% - var(--bulge) * .33) 70%,
+    calc(100% - var(--bulge) * .53) 80%,
+    calc(100% - var(--bulge) * .78) 90%,
+    calc(100% - var(--bulge)) 100%,
+    0 100%);
+}
+.era-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+}
+.era-process-body{
+  padding:clamp(8px,.5vw,9px) 0 clamp(6px,.45vw,8px) clamp(6px,.68vw,12px);
+}
+.era-process-head{margin-left:clamp(10px,1.07vw,18px);}
+/* As in the comp, the eyebrow's rule hangs left of the heading. */
+.era-process-eyebrow{
+  color:var(--accent);
+  font-size:0.75rem;
+  letter-spacing:2.2px;
+  margin-bottom:0;
+  margin-left:-48px;
+}
+.era-process-eyebrow i{background:var(--accent);width:34px;}
+.era-process h2{
+  color:#fff;
+  font-size:clamp(1.375rem,1.87vw,1.9375rem);
+  letter-spacing:-.6px;
+  line-height:1.15;
+  margin-bottom:2px;
+}
+.era-process-lead{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(0.875rem,1.155vw,1.1875rem);
+  line-height:1.28;
+  max-width:none;                   /* breaks after "clean,", as in the comp */
+  margin-bottom:clamp(12px,1.12vw,19px);
+}
+.era-steps{
+  --step-gap:clamp(24px,1.95vw,34px);
+  list-style:none;
+  display:grid;
+  /* The comp's cards are not equal: 135, 148, 146 and 131px wide. */
+  grid-template-columns:135fr 148fr 146fr 131fr;
+  gap:24px var(--step-gap);
+}
+.era-step{
+  --step-pl:clamp(12px,1.25vw,21px);
+  --step-pr:clamp(6px,.45vw,8px);
+  position:relative;
+  padding:6px var(--step-pr) clamp(8px,.52vw,9px) var(--step-pl);
+  border:1px solid rgba(94,205,250,.2);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 100%);
+}
+/* Arrow between cards, centred in the gap. */
+.era-step + .era-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-.5 * var(--step-gap) - 12px);
+  top:50%;
+  width:24px;height:24px;
+  margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity:.9;
+}
+/* As in the comp, the number badge sits in the card's top-left corner and
+   the icon is centred across the whole card. */
+.era-step-top{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  height:clamp(32px,2.87vw,46px);
+  margin:0 calc(-1 * var(--step-pr)) clamp(4px,.42vw,7px) calc(-1 * var(--step-pl));
+}
+.era-step-num{
+  position:absolute;left:4px;top:0;
+  width:clamp(32px,2.87vw,46px);height:clamp(32px,2.87vw,46px);
+  border-radius:50%;
+  background:#1E8BF0;
+  box-shadow:0 0 0 4px rgba(28,148,220,.22);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(1rem,1.3vw,1.3125rem);
+  display:flex;align-items:center;justify-content:center;
+}
+.era-step-icon{display:flex;color:#fff;}
+.era-step h3{color:#fff;font-size:clamp(0.9063rem,1.06vw,1.0938rem);line-height:1.25;letter-spacing:-.2px;margin-bottom:clamp(4px,.4vw,6px);text-align:center;}
+.era-step p{color:rgba(255,255,255,.8);font-size:clamp(0.7813rem,.88vw,0.9063rem);line-height:1.24;}
+
+/* ---------- Before & after ---------- */
+.era-results{
+  background:linear-gradient(180deg,#F8FBFE 0%,var(--light-bg) 100%);
+}
+.era-results-inner{padding-block:clamp(12px,.95vw,16px) clamp(12px,.8vw,14px);}
+.era-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:12px 40px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(8px,.55vw,10px);
+}
+.era-head h2{
+  font-size:clamp(1.4375rem,1.95vw,2.0625rem);
+  letter-spacing:-.7px;
+  line-height:1.12;
+}
+.era-head .btn{
+  align-self:flex-start;
+  margin-top:clamp(2px,.3vw,5px);
+  padding:clamp(9px,.62vw,11px) clamp(20px,1.6vw,28px);
+  font-size:clamp(0.8438rem,.98vw,0.9688rem);
+}
+.era-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.65vw,28px);
+}
+
+/* ---------- Other boat repair services ----------
+   Head row (copy | button), then six title-only cards and a "can't find
+   it" card. The card widths follow the comp; each card is one link. */
+.era-related{background:linear-gradient(180deg,#F6FBFD 0%,#F3F9FE 100%);}
+.era-related-inner{padding-block:clamp(10px,.75vw,13px) clamp(12px,.75vw,14px);}
+.era-related-grid{
+  display:grid;
+  grid-template-columns:108fr 115fr 121fr 104fr 103fr 214fr 142fr;
+  gap:clamp(10px,.85vw,14px);
+}
+.era-rel-card{position:relative;border:1px solid #E6EFF7;border-radius:8px;}
+.era-rel-card:hover{transform:translateY(-2px);}
+.era-rel-card .fg-card-media img{aspect-ratio:auto;height:clamp(76px,6.05vw,101px);}
+.era-rel-card .fg-card-body{padding:clamp(9px,.68vw,12px) clamp(10px,1vw,16px) clamp(10px,.72vw,12px);}
+.era-rel-card h3{font-size:clamp(0.7813rem,.95vw,0.9375rem);letter-spacing:-.3px;line-height:1.3;margin:0;}
+.era-rel-card h3 a{color:inherit;}
+/* The title's link covers the whole card. */
+.era-rel-card h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.era-rel-card h3 a:focus-visible{outline:none;}
+.era-rel-card:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.era-rel-help{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  gap:clamp(3px,.3vw,5px);
+  padding:clamp(10px,.8vw,14px) clamp(10px,.8vw,14px);
+  border-radius:10px;
+  background:#E6F2FD;
+}
+.era-rel-help-icon{
+  width:clamp(32px,2.25vw,38px);height:clamp(32px,2.25vw,38px);
+  border-radius:50%;
+  background:#fff;
+  color:#1E8BF0;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:2px;
+}
+.era-rel-help a{font-family:var(--font-head);font-weight:800;font-size:clamp(0.875rem,1.1vw,1.0938rem);line-height:1.18;letter-spacing:-.3px;color:var(--navy);}
+.era-rel-help a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.era-rel-help a:focus-visible{outline:none;}
+.era-rel-help:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.era-rel-help p{font-size:clamp(0.75rem,.88vw,0.875rem);line-height:1.25;color:var(--gray-text);}
+
+/* ---------- Why choose us + FAQ ----------
+   copy | four features | FAQ, the first two set off by a rule. Questions
+   use native <details>, so they work without script. */
+.era-why{background:linear-gradient(180deg,#F7FBFE 0%,#F2F8FD 100%);}
+.era-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,37.4%) minmax(0,1fr) minmax(0,34.2%);
+  align-items:center;
+  padding-block:clamp(12px,.9vw,16px) clamp(12px,.8vw,14px);
+}
+.era-why-copy{padding-right:clamp(16px,1.4vw,24px);}
+.era-why h2{
+  font-size:clamp(1.375rem,1.75vw,1.8125rem);
+  letter-spacing:-.6px;
+  line-height:1.16;
+  margin-bottom:4px;
+}
+.era-why-copy p{font-size:clamp(0.8438rem,.983vw,1.0313rem);line-height:1.36;color:var(--gray-text);}
+.era-features{
+  align-self:stretch;
+  display:grid;align-content:center;
+  gap:clamp(12px,1.05vw,18px);
+  padding-left:clamp(20px,1.7vw,30px);
+  padding-right:clamp(16px,1.6vw,28px);
+  border-left:1px solid #DCE7F1;
+}
+.era-features li{display:flex;align-items:center;gap:clamp(14px,1.3vw,22px);}
+.era-feature-icon{flex:none;display:flex;justify-content:center;width:32px;color:#1E8BF0;}
+.era-features strong{display:block;font-family:var(--font-head);font-size:clamp(0.875rem,.98vw,1rem);line-height:1.25;color:var(--navy);}
+.era-features small{display:block;font-size:clamp(0.8125rem,.9vw,0.9063rem);line-height:1.3;color:var(--gray-text);}
+.era-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.era-faq h2{font-size:clamp(1.1875rem,1.54vw,1.5938rem);letter-spacing:-.5px;margin-bottom:6px;}
+.era-faq-list{display:grid;gap:3px;}
+.era-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;box-shadow:0 4px 10px -8px rgba(0,38,75,.3);}
+.era-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:2px 14px;
+  line-height:1.4;
+  font-size:clamp(0.8438rem,.874vw,0.9063rem);
+  font-weight:500;
+  color:var(--navy);
+  cursor:pointer;
+  list-style:none;
+}
+.era-faq summary::-webkit-details-marker{display:none;}
+.era-faq summary::after{
+  content:"";flex:none;
+  width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.era-faq details[open] summary::after{transform:rotate(45deg);}
+.era-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.era-faq details p{padding:0 16px 14px;font-size:0.875rem;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ----------
+   The comp's boat and skyline at the left edge, feathered into the navy;
+   the faint skyline on the right is the faded end of results-marina.jpg.
+   Copy | two buttons. */
+.era-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy) 55%,#0B3A66 100%);
+}
+.era-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+  opacity:.22;
+  -webkit-mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+          mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+}
+.era-cta-boat{
+  position:absolute;top:0;bottom:0;left:0;
+  width:clamp(200px,33.7vw,592px);
+  -webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+}
+.era-cta-boat img{width:100%;height:100%;object-fit:cover;object-position:left center;}
+.era-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px clamp(12px,.9vw,16px);
+  flex-wrap:wrap;
+  min-height:clamp(90px,6.64vw,117px);
+  padding-block:clamp(12px,.9vw,16px);
+  /* The copy starts just past the boat (the comp's x 343 of 1024, a little
+     less here to leave the row some slack). */
+  padding-left:max(var(--era-gutter), calc(33.2vw - max(0px, (100vw - 1760px) / 2)));
+}
+/* The heading, lead and buttons are set ~3% under the comp's sizes so the
+   row keeps one line in a 1536px window that has a scrollbar. */
+.era-cta h2{color:#fff;font-size:clamp(1.1875rem,1.33vw,1.4063rem);letter-spacing:-.5px;line-height:1.15;margin-bottom:2px;}
+.era-cta p{font-size:clamp(0.7813rem,.98vw,1rem);color:rgba(255,255,255,.85);}
+.era-cta-actions{display:flex;gap:clamp(10px,1.05vw,18px);flex-wrap:wrap;margin-left:auto;}
+.era-cta-actions .btn{padding:clamp(12px,.95vw,15px) clamp(20px,1.5vw,28px);font-size:clamp(0.875rem,.98vw,1rem);}
+.era-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);border-color:rgba(94,205,250,.7);}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, so the later block wins).
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* The comp's forced breaks in the steps and the why copy only fit down to
+     here; below it those lines wrap on their own. */
+  .era-step p br,.era-process-lead br,.era-why-copy p br{display:none;}
+  /* Hero: the copy no longer fits left of the photo, so the photo narrows
+     and fades in over a longer run and the scrim reaches further. */
+  .era-hero-img{
+    width:54%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);
+            mask-image:linear-gradient(90deg,transparent 0%,#000 38%);
+  }
+  .era-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.7) 0%, rgba(0,22,46,.55) 50%, rgba(0,22,46,0) 72%);
+  }
+  /* Related: the help card becomes a strip under the six service cards. */
+  .era-related-grid{grid-template-columns:repeat(6,minmax(0,1fr));}
+  .era-rel-help{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    grid-template-areas:"icon title" "icon copy";
+    align-items:center;
+    column-gap:16px;row-gap:2px;
+    text-align:left;
+    padding:12px 20px;
+  }
+  .era-rel-help-icon{grid-area:icon;margin:0;}
+  .era-rel-help a{grid-area:title;}
+  .era-rel-help p{grid-area:copy;}
+  .era-rel-help a br{display:none;}
+}
+
+@media (max-width:1240px){
+  .era-opt-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  /* The comp's description breaks belong to the five-up row. */
+  .era-opt .fg-card-body p{max-width:none;}
+  .era-opt .fg-card-body p br{display:none;}
+  .era-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .era-step p{font-size:0.8438rem;}
+  .era-step:nth-child(3)::before{display:none;}
+  .era-related-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  /* Why: copy | features on top, the FAQ full width below. */
+  .era-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:24px;padding-block:28px;}
+  .era-features{padding-right:0;}
+  .era-faq{grid-column:1 / -1;border-top:1px solid #DCE7F1;padding-top:22px;}
+  /* The CTA copy wraps under the boat; the buttons drop below it. */
+  .era-cta-inner{padding-left:clamp(200px,33.7vw,592px);}
+  .era-cta-actions{margin-left:0;}
+}
+
+@media (max-width:1100px){
+  /* Intro stacks: the diagram becomes a full-width row under the copy so its
+     callouts keep room for their descriptions. */
+  .era-intro{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .era-intro-copy{padding:clamp(28px,4vw,40px) var(--era-edge) 8px;}
+  .era-intro-copy > p{margin-right:0;}
+  .era-intro-copy > p br{display:none;}
+  .era-diagram{width:100%;max-width:900px;justify-self:end;}
+}
+
+@media (max-width:1024px){
+  .era-hero-img{width:100%;object-position:70% center;-webkit-mask-image:none;mask-image:none;}
+  .era-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.76) 60%, rgba(0,22,46,.5) 100%);
+  }
+  /* Back to .era-wide's gutter, so the icons clear the screen edge. */
+  .era-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:clamp(24px,6vw,64px);padding-inline:clamp(18px,3.7vw,64px);}
+  .era-process{grid-template-columns:minmax(0,1fr);padding-right:0;}
+  /* The banner loses the curve, so the navy the image carries beyond the
+     comp's arc (up to its right 9.5%) is pushed out of the frame. */
+  .era-process-photo{clip-path:none;aspect-ratio:2.4/1;overflow:hidden;}
+  .era-process-photo img{width:110.5%;max-width:none;object-position:center 40%;}
+  .era-process-body{padding:clamp(24px,4vw,36px) var(--pad) clamp(26px,4vw,40px);}
+  .era-process-head{margin-left:0;}
+  .era-process-eyebrow{margin-left:0;}
+  .era-step h3{text-align:left;}
+  .era-cta-boat{width:40%;opacity:.45;}
+  .era-cta-inner{padding-block:24px;padding-left:var(--era-gutter);}
+}
+
+@media (max-width:820px){
+  .era-opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .era-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .era-rel-card h3{font-size:0.9375rem;}
+  .era-why-inner{grid-template-columns:minmax(0,1fr);}
+  .era-why-copy{padding-right:0;}
+  .era-features{border-left:0;padding-inline:0;}
+  .era-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .era-hero{--era-indent:0px;}
+  .era-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .era-hero-eyebrow{font-size:0.6875rem;letter-spacing:1.6px;gap:10px;}
+  .era-hero-eyebrow i{width:24px;}
+  .era-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
+  .era-hero h1 br,.era-hero-sub br{display:none;}
+  .era-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
+  .era-hero-img{object-position:62% center;}
+  .era-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
+  }
+  .era-hero-actions,.era-cta-actions{width:100%;gap:10px;}
+  .era-hero-actions .btn,.era-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .era-trust{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;}
+  .era-intro h2 br{display:none;}
+  .era-intro-copy .btn{width:100%;justify-content:center;}
+  .era-opt-grid{grid-template-columns:minmax(0,1fr);}
+  .era-steps{grid-template-columns:minmax(0,1fr);}
+  .era-step + .era-step::before{display:none;}
+  .era-head .btn{width:100%;justify-content:center;margin-top:0;}
+  .era-ba-grid{grid-template-columns:minmax(0,1fr);max-width:520px;}
+  .sfr-ba{aspect-ratio:2.6/1;}
+  .era-why h2 br{display:none;}
+  .era-faq summary{padding-block:10px;}
+  .era-cta-boat{width:70%;opacity:.3;}
+}
+
+@media (max-width:400px){
+  .era-trust{grid-template-columns:minmax(0,1fr);}
+  .era-related-grid{grid-template-columns:minmax(0,1fr);}
+}

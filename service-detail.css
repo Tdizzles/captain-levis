@@ -56,7 +56,7 @@
 }
 .sd-eyebrow{
   color:#1A86F0;
-  font-size:13px;
+  font-size:0.8125rem;
   letter-spacing:2px;
   gap:14px;
   margin-bottom:8px;
@@ -102,7 +102,7 @@
 .sd-hero-eyebrow{
   margin-left:calc(-1 * var(--sd-indent));
   margin-bottom:10px;
-  font-size:13px;
+  font-size:0.8125rem;
   letter-spacing:2.1px;
   gap:29px;
   color:#E6F6FE;
@@ -110,7 +110,7 @@
 .sd-hero-eyebrow i{width:47px;}
 .sd-hero-eyebrow em{font-style:normal;color:var(--accent);}
 .sd-hero h1{
-  font-size:clamp(30px,3.25vw,54px);
+  font-size:clamp(1.875rem,3.25vw,3.375rem);
   letter-spacing:-1.1px;
   line-height:1.01;
   color:#fff;
@@ -119,13 +119,13 @@
 .sd-hero h1 .accent{color:var(--accent);}
 .sd-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(14.5px,1.21vw,19.5px);
+  font-size:clamp(0.9063rem,1.21vw,1.2188rem);
   line-height:1.3;
   max-width:615px;
   margin-bottom:13px;
 }
 .sd-hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
-.sd-hero-actions .btn{padding:clamp(13px,1vw,16px) clamp(24px,1.95vw,34px);font-size:clamp(14.5px,1.02vw,16.5px);}
+.sd-hero-actions .btn{padding:clamp(13px,1vw,16px) clamp(24px,1.95vw,34px);font-size:clamp(0.9063rem,1.02vw,1.0313rem);}
 
 .sd-trust-bar{
   position:relative;
@@ -145,8 +145,8 @@
 .sd-trust li{display:flex;align-items:center;gap:clamp(12px,1.5vw,24px);color:#fff;}
 .sd-trust-icon{flex:none;display:flex;color:var(--accent);}
 .sd-trust-icon svg{width:clamp(28px,2.5vw,40px);height:auto;}
-.sd-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13.5px,1.08vw,17px);line-height:1.25;}
-.sd-trust small{display:block;font-size:clamp(12px,.93vw,15px);line-height:1.3;color:rgba(255,255,255,.78);}
+.sd-trust strong{display:block;font-family:var(--font-head);font-size:clamp(0.8438rem,1.08vw,1.0625rem);line-height:1.25;}
+.sd-trust small{display:block;font-size:clamp(0.75rem,.93vw,0.9375rem);line-height:1.3;color:rgba(255,255,255,.78);}
 
 /* ---------- Intro: copy | diagram bleeding to the right edge ----------
    The copy keeps the frame's content edge; the diagram is a grid cell that
@@ -161,19 +161,19 @@
 }
 .sd-intro-copy{padding-block:clamp(12px,.8vw,16px);}
 .sd-intro h2{
-  font-size:clamp(24px,2.45vw,42px);
+  font-size:clamp(1.5rem,2.45vw,2.625rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:4px;
 }
 .sd-intro-copy > p{
-  font-size:clamp(15px,1.24vw,20px);
+  font-size:clamp(0.9375rem,1.24vw,1.25rem);
   line-height:1.21;
   color:var(--gray-text);
   max-width:610px;
   margin-bottom:clamp(12px,.75vw,14px);
 }
-.sd-intro-copy .btn{padding:clamp(11px,.72vw,13px) clamp(22px,2vw,34px);font-size:clamp(14.5px,1.02vw,16.5px);}
+.sd-intro-copy .btn{padding:clamp(11px,.72vw,13px) clamp(22px,2vw,34px);font-size:clamp(0.9063rem,1.02vw,1.0313rem);}
 
 /* Diagram: a photo plus live markup. The leader lines are an SVG in the
    image's own pixel space (viewBox = its natural size), the pins and cards
@@ -234,14 +234,14 @@
   display:block;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(9.5px,1.72cqw,17px);
+  font-size:clamp(0.5938rem,1.72cqw,1.0625rem);
   line-height:1.2;
   color:var(--navy);
   margin-bottom:.25em;
 }
 .sd-callout small{
   display:block;
-  font-size:clamp(8.5px,1.54cqw,15px);
+  font-size:clamp(0.5313rem,1.54cqw,0.9375rem);
   line-height:1.22;
   color:var(--gray-text);
 }
@@ -307,8 +307,8 @@
     color:#fff;
     font:800 11px/1 var(--font-head);
   }
-  .sd-callout strong{font-size:15px;}
-  .sd-callout small{font-size:13.5px;line-height:1.35;}
+  .sd-callout strong{font-size:0.9375rem;}
+  .sd-callout small{font-size:0.8438rem;line-height:1.35;}
 }
 
 /* ---------- Common services: fg-cards without links ----------
@@ -325,8 +325,8 @@
 .sd-opt:hover{transform:none;}
 .sd-opt .fg-card-media img{aspect-ratio:181/76;}
 .sd-opt .fg-card-body{padding:clamp(9px,.6vw,10px) clamp(14px,1.15vw,20px) clamp(12px,.95vw,16px);}
-.sd-opt .fg-card-body h3{font-size:clamp(14.5px,1.165vw,19px);letter-spacing:-.3px;margin-bottom:clamp(3px,.35vw,6px);}
-.sd-opt .fg-card-body p{font-size:clamp(13px,1.03vw,16.5px);line-height:1.25;margin-bottom:0;}
+.sd-opt .fg-card-body h3{font-size:clamp(0.9063rem,1.165vw,1.1875rem);letter-spacing:-.3px;margin-bottom:clamp(3px,.35vw,6px);}
+.sd-opt .fg-card-body p{font-size:clamp(0.8125rem,1.03vw,1.0313rem);line-height:1.25;margin-bottom:0;}
 
 /* ---------- Shared slider (script.js binds every .sfr-ba) ----------
    The handle starts at 50%, so a placeholder pair is built with its seam on
@@ -374,7 +374,7 @@
   text-align:center;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(11px,.95vw,15px);
+  font-size:clamp(0.6875rem,.95vw,0.9375rem);
   letter-spacing:.8px;
   padding:clamp(5px,.5vw,8px) 0;
   border-radius:5px 5px 0 0;
@@ -415,7 +415,7 @@
 /* As in the comp, the eyebrow's rule hangs left of the heading. */
 .sd-process-eyebrow{
   color:var(--accent);
-  font-size:12px;
+  font-size:0.75rem;
   letter-spacing:2.2px;
   margin-bottom:0;
   margin-left:-42px;
@@ -424,14 +424,14 @@
 .sd-process-eyebrow i{background:var(--accent);width:32px;}
 .sd-process h2{
   color:#fff;
-  font-size:clamp(22px,1.95vw,32px);
+  font-size:clamp(1.375rem,1.95vw,2rem);
   letter-spacing:-.6px;
   line-height:1.15;
   margin-bottom:4px;
 }
 .sd-process-lead{
   color:rgba(255,255,255,.9);
-  font-size:clamp(14px,1.15vw,19px);
+  font-size:clamp(0.875rem,1.15vw,1.1875rem);
   line-height:1.25;
   max-width:760px;
   margin-bottom:clamp(14px,1vw,17px);
@@ -474,13 +474,13 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(16px,1.2vw,20px);
+  font-size:clamp(1rem,1.2vw,1.25rem);
   display:flex;align-items:center;justify-content:center;
 }
 .sd-step-icon{display:flex;color:#fff;}
 .sd-step-icon svg{width:clamp(22px,2.1vw,34px);height:auto;}
-.sd-step h3{color:#fff;font-size:clamp(14px,1.04vw,17px);letter-spacing:-.2px;margin-bottom:4px;text-align:center;}
-.sd-step p{color:rgba(255,255,255,.8);font-size:clamp(13px,.92vw,15px);line-height:1.25;}
+.sd-step h3{color:#fff;font-size:clamp(0.875rem,1.04vw,1.0625rem);letter-spacing:-.2px;margin-bottom:4px;text-align:center;}
+.sd-step p{color:rgba(255,255,255,.8);font-size:clamp(0.8125rem,.92vw,0.9375rem);line-height:1.25;}
 
 /* ---------- Before & after ---------- */
 .sd-results{
@@ -494,7 +494,7 @@
   margin-bottom:clamp(8px,.55vw,10px);
 }
 .sd-head h2{
-  font-size:clamp(23px,2vw,33px);
+  font-size:clamp(1.4375rem,2vw,2.0625rem);
   letter-spacing:-.7px;
   line-height:1.12;
 }
@@ -502,7 +502,7 @@
   align-self:flex-start;
   margin-top:clamp(2px,.3vw,5px);
   padding:clamp(9px,.62vw,11px) clamp(18px,1.5vw,26px);
-  font-size:clamp(13px,.92vw,15px);
+  font-size:clamp(0.8125rem,.92vw,0.9375rem);
 }
 .sd-ba-grid{
   display:grid;
@@ -529,7 +529,7 @@
 .sd-rel-card:hover{transform:translateY(-2px);}
 .sd-rel-card .fg-card-media img{aspect-ratio:auto;height:clamp(76px,6vw,100px);}
 .sd-rel-card .fg-card-body{padding:clamp(10px,.85vw,14px) clamp(10px,1vw,16px) clamp(12px,.9vw,15px);}
-.sd-rel-card h3{font-size:clamp(12.5px,.95vw,15px);letter-spacing:-.3px;line-height:1.3;margin:0;}
+.sd-rel-card h3{font-size:clamp(0.7813rem,.95vw,0.9375rem);letter-spacing:-.3px;line-height:1.3;margin:0;}
 .sd-rel-card h3 a{color:inherit;}
 /* The title's link covers the whole card. */
 .sd-rel-card h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
@@ -552,11 +552,11 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:clamp(2px,.4vw,7px);
 }
-.sd-rel-help a{font-family:var(--font-head);font-weight:800;font-size:clamp(14px,1.18vw,19px);line-height:1.15;letter-spacing:-.3px;color:var(--navy);}
+.sd-rel-help a{font-family:var(--font-head);font-weight:800;font-size:clamp(0.875rem,1.18vw,1.1875rem);line-height:1.15;letter-spacing:-.3px;color:var(--navy);}
 .sd-rel-help a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
 .sd-rel-help a:focus-visible{outline:none;}
 .sd-rel-help:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
-.sd-rel-help p{font-size:clamp(12px,.88vw,14px);line-height:1.25;color:var(--gray-text);}
+.sd-rel-help p{font-size:clamp(0.75rem,.88vw,0.875rem);line-height:1.25;color:var(--gray-text);}
 
 /* ---------- Why choose us + FAQ ----------
    copy | features | FAQ, the first two set off by a rule. Questions use
@@ -570,13 +570,13 @@
 }
 .sd-why-copy{align-self:start;padding-right:clamp(16px,1.4vw,24px);}
 .sd-why h2{
-  font-size:clamp(22px,1.76vw,29px);
+  font-size:clamp(1.375rem,1.76vw,1.8125rem);
   letter-spacing:-.6px;
   line-height:1.12;
   margin-bottom:4px;
 }
-.sd-why-copy p{font-size:clamp(14px,.97vw,16px);line-height:1.42;color:var(--gray-text);}
-.sd-why .sd-eyebrow{font-size:10.5px;letter-spacing:1.5px;}
+.sd-why-copy p{font-size:clamp(0.875rem,.97vw,1rem);line-height:1.42;color:var(--gray-text);}
+.sd-why .sd-eyebrow{font-size:0.6563rem;letter-spacing:1.5px;}
 .sd-features{
   align-self:stretch;
   display:grid;align-content:center;
@@ -588,20 +588,20 @@
 .sd-features li{display:flex;align-items:center;gap:clamp(14px,1.9vw,30px);}
 .sd-feature-icon{flex:none;display:flex;justify-content:center;width:clamp(28px,2.5vw,40px);color:#1E8BF0;}
 .sd-feature-icon svg{width:clamp(26px,2.4vw,38px);height:auto;}
-.sd-features strong{display:block;font-family:var(--font-head);font-size:clamp(14px,.98vw,16px);line-height:1.25;color:var(--navy);}
-.sd-features small{display:block;font-size:clamp(13px,.9vw,14.5px);line-height:1.3;color:var(--gray-text);}
+.sd-features strong{display:block;font-family:var(--font-head);font-size:clamp(0.875rem,.98vw,1rem);line-height:1.25;color:var(--navy);}
+.sd-features small{display:block;font-size:clamp(0.8125rem,.9vw,0.9063rem);line-height:1.3;color:var(--gray-text);}
 .sd-faq{
   align-self:stretch;
   display:flex;flex-direction:column;justify-content:center;
 }
-.sd-faq h2{font-size:clamp(19px,1.45vw,24px);letter-spacing:-.5px;margin-bottom:6px;}
+.sd-faq h2{font-size:clamp(1.1875rem,1.45vw,1.5rem);letter-spacing:-.5px;margin-bottom:6px;}
 .sd-faq-list{display:grid;gap:4px;}
 .sd-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;box-shadow:0 4px 10px -8px rgba(0,38,75,.3);}
 .sd-faq summary{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:3px 14px;
   line-height:1.4;
-  font-size:clamp(13.5px,.9vw,15px);
+  font-size:clamp(0.8438rem,.9vw,0.9375rem);
   font-weight:500;
   color:var(--navy);
   cursor:pointer;
@@ -618,7 +618,7 @@
 }
 .sd-faq details[open] summary::after{transform:rotate(45deg);}
 .sd-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
-.sd-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+.sd-faq details p{padding:0 16px 14px;font-size:0.875rem;line-height:1.6;color:var(--gray-text);}
 
 /* ---------- Closing CTA band ----------
    A photo at the left edge, faded into the navy by a mask; an optional faint
@@ -659,10 +659,10 @@
   padding-left:max(var(--sd-gutter), calc(var(--photo-w) + 22px - max(0px, (100vw - 1760px) / 2)));
 }
 .sd-cta-copy{flex:1 1 300px;}
-.sd-cta h2{color:#fff;font-size:clamp(19px,1.5vw,25px);letter-spacing:-.5px;line-height:1.15;margin-bottom:3px;}
-.sd-cta p{font-size:clamp(12.5px,.8vw,14px);color:rgba(255,255,255,.85);}
+.sd-cta h2{color:#fff;font-size:clamp(1.1875rem,1.5vw,1.5625rem);letter-spacing:-.5px;line-height:1.15;margin-bottom:3px;}
+.sd-cta p{font-size:clamp(0.7813rem,.8vw,0.875rem);color:rgba(255,255,255,.85);}
 .sd-cta-actions{display:flex;gap:clamp(10px,1.05vw,18px);flex-wrap:wrap;margin-left:auto;}
-.sd-cta-actions .btn{padding:clamp(12px,.95vw,15px) clamp(22px,1.8vw,32px);font-size:clamp(14px,.98vw,16px);}
+.sd-cta-actions .btn{padding:clamp(12px,.95vw,15px) clamp(22px,1.8vw,32px);font-size:clamp(0.875rem,.98vw,1rem);}
 .sd-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);border-color:rgba(94,205,250,.7);}
 
 /* ==========================================================================
@@ -750,7 +750,7 @@
 @media (max-width:820px){
   .sd-opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .sd-rel-card{flex-basis:calc((100% - var(--gap)) / 2);}
-  .sd-rel-card h3{font-size:15px;}
+  .sd-rel-card h3{font-size:0.9375rem;}
   .sd-why-inner{grid-template-columns:minmax(0,1fr);}
   .sd-why-copy{padding-right:0;}
   .sd-features{border-left:0;padding-inline:0;}
@@ -760,11 +760,11 @@
 @media (max-width:640px){
   .sd-hero{--sd-indent:0px;}
   .sd-hero-inner{padding-top:34px;padding-bottom:28px;}
-  .sd-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .sd-hero-eyebrow{font-size:0.6875rem;letter-spacing:1.6px;gap:10px;}
   .sd-hero-eyebrow i{width:24px;}
-  .sd-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .sd-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .sd-hero h1 br{display:none;}
-  .sd-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .sd-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
   .sd-hero-scrim{
     background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
   }

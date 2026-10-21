@@ -1,0 +1,39 @@
+<div class="chat-widget" id="chat-widget" data-page="{{slug}}" data-page-title="{{pageTitle}}" data-page-context="{{context}}">
+  <div class="chat-panel" id="chat-panel" role="dialog" aria-label="Chat with Captain Levi" hidden>
+    <div class="chat-panel-header">
+      <img src="assets/captain-chat-sm.png" alt="" class="chat-panel-avatar" width="256" height="256">
+      <div class="chat-panel-heading">
+        <strong>Captain Levi</strong>
+        <span><i aria-hidden="true"></i>AI assistant &middot; a real crew member follows up</span>
+      </div>
+      <button type="button" class="chat-close" id="chat-close" aria-label="Close chat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="chat-messages" id="chat-messages" aria-live="polite" aria-relevant="additions"></div>
+    <div class="chat-quick-replies" id="chat-quick-replies"></div>
+    <form class="chat-input-row" id="chat-form" novalidate>
+      <label for="chat-upload" class="chat-attach" title="Add a photo of the damage">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.7"/><circle cx="8.5" cy="10" r="1.6" fill="currentColor"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <span class="sr-only">Add a photo</span>
+        <input type="file" id="chat-upload" accept="image/jpeg,image/png,image/webp" multiple hidden>
+      </label>
+      <input type="text" id="chat-input" placeholder="Type a message&hellip;" autocomplete="off" maxlength="1000" aria-label="Message Captain Levi">
+      <button type="submit" class="chat-send" aria-label="Send message">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+    <p class="chat-disclosure">Captain Levi is an AI assistant. Chats may be saved so our crew can follow up. Nothing here is a confirmed quote. <a href="privacy-policy.html#chatbot">Privacy</a></p>
+  </div>
+
+  <div class="text-size" role="group" aria-label="Text size">
+    <button type="button" class="text-size-btn" id="text-smaller" aria-label="Decrease text size">&minus;</button>
+    <button type="button" class="text-size-btn" id="text-larger" aria-label="Increase text size">+</button>
+    <span class="sr-only" id="text-size-status" aria-live="polite"></span>
+  </div>
+
+  <button type="button" class="chat-toggle" id="chat-toggle" aria-label="Chat with Captain Levi" aria-expanded="false" aria-controls="chat-panel">
+    <img src="assets/captain-chat-sm.png" alt="" width="256" height="256">
+    <span class="chat-toggle-badge" aria-hidden="true">1</span>
+  </button>
+</div>

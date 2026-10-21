@@ -815,6 +815,31 @@ node --check script.js
   the shared footer and quote form. The results band says "Real Results"
   although the pairs are placeholders, and the FAQ answers are drafted
   copy. Check both with the owner.
+- **`seating-bases-custom-structures.html`** (sub-page of Custom
+  Fabrication, `.sbc-` prefix, linked from its Seating Bases & Custom
+  Structures card) is not in the nav dropdown. Its stylesheet started as a
+  copy of `custom-consoles-dash-panels.css`, whose comp has the same layout.
+  Its `sbc-*` images are cropped from a 1024px comp and saved at 2×, so they
+  are soft. The hero photo is the comp's photo right of x 440; the end of the
+  paragraph's first line that reached into it was inpainted (OpenCV, a
+  throwaway install, not a repo dependency). The process photo's trailing
+  edge is an arc, clipped with `ellipse(100% 130% at 0 50%)`. The diagram
+  (`sbc-diagram.jpg`) keeps the comp's pins and leader lines; its six
+  callout cards were whitened and live cards sit over them in % of the photo
+  with `cqw` type, each stopping 3 comp px short of its pin side so the pins
+  stay whole. Re-crop the image only together with those positions. All
+  three before/after pairs are placeholders built like the surface scratch
+  page's (one comp half plus its mirror, tags and handle painted out), so
+  they match the comp at rest but show the mirror when dragged. The hero,
+  intro, process lead, step 2, option and why copy break on the comp's words
+  from 1280 to 1536, some through `<br>`s that are hidden where the layout
+  changes. The intro paragraph runs 2.6vw past its column into the
+  diagram's faded edge, as in the comp. The option titles (1.03vw) and the
+  CTA type stay on one line in a 1536px window with a scrollbar. "View More
+  Results" goes to the homepage's `#repairs`. The comp's slim footer is not
+  used; the page keeps the shared footer and quote form. The results band
+  says "Real Results" although the pairs are placeholders, and the FAQ
+  answers are drafted copy. Check both with the owner.
 - **`hatches-lids-access-panels.html`** (sub-page of Custom Fabrication,
   linked from its Hatches, Lids & Access Panels card) is not in the nav
   dropdown. It is the first page on `service-detail.css` (`.sd-` prefix),
@@ -907,3 +932,41 @@ node --check script.js
   used; the page keeps the shared footer and quote form. The results band
   says "Real Results" although the pairs are placeholders, and the FAQ
   answers are drafted copy. Check both with the owner.
+- **`engine-rigging-access-modifications.html`** (sub-page of Custom
+  Fabrication, `.era-` prefix, linked from its Engine & Rigging Access
+  Modifications card) is not in the nav dropdown. Its stylesheet started as
+  a copy of `seating-bases-custom-structures.css`, whose comp has the same
+  layout. The process photo's curved edge is traced like
+  `bulkheads-structural-fabrication.css`'s (flush 40% of the way down,
+  `--bulge` at the bottom); below 1024px the banner image is widened 10.5%
+  to push the navy beyond the arc out of frame. The process band's steps run
+  2.05vw short of the viewport's right edge, past the other bands' content
+  edge, and its four cards keep the comp's unequal widths (135:148:146:131).
+  Each card's number badge sits in its top-left corner and the icon is
+  centred across the card, as in the comp. Its `era-*` images are cropped
+  from a 1024px comp and saved at 2x, so they are soft. The hero photo is
+  the comp's photo right of x 440; the line ends of "Modifications" and the
+  paragraph's first three lines that reached into it were inpainted
+  (OpenCV, a throwaway install, not a repo dependency). The diagram
+  (`era-diagram.jpg`) keeps the comp's pins and leader lines; its six
+  callout cards were whitened and live cards sit over them in % of the
+  photo with `cqw` type, each stopping 3 comp px short of its pin side, so
+  re-crop the image only together with those positions. The callout
+  descriptions break through `<br>`s, as in the comp. All three
+  before/after pairs are placeholders built like the surface scratch
+  page's (one comp half plus its mirror, tags and handle painted out), so
+  they match the comp at rest but show the mirror when dragged. The hero,
+  intro, option, step, process lead and why copy break on the comp's words
+  from 1401 to 1536; the step, process lead and why `<br>`s are hidden at
+  1400px and below, where those lines no longer fit. The CTA type and
+  buttons are set ~3% under the comp so the row stays on one line in a
+  1536px window with a scrollbar. Unlike the seating bases page, the trust
+  strip keeps its gutter below 1024px, so its icons clear the screen edge on
+  phones. "View More Results" goes to the homepage's `#repairs`; the
+  related row's Hatches, Lids & Access Panels card goes to
+  `hatches-lids-access-panels.html`. The comp's slim footer is not used;
+  the page keeps the shared footer and quote form. The step icons for Cut &
+  Reinforce and Install & Fit are drawn for this page (the comp's are
+  unclear). The results band says "Real Results" although the pairs are
+  placeholders, and the FAQ answers are drafted copy. Check both with the
+  owner.

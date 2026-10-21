@@ -16,7 +16,7 @@
 }
 .gcc-eyebrow{
   color:var(--icon-blue);
-  font-size:11.5px;
+  font-size:0.7188rem;
   letter-spacing:1.8px;
   margin-bottom:8px;
 }
@@ -56,9 +56,9 @@
   padding-bottom:clamp(20px,1.6vw,28px);
 }
 .gcc-hero-content{max-width:600px;padding-left:clamp(0px,6vw,136px);box-sizing:content-box;}
-.gcc-hero-eyebrow{margin-bottom:12px;font-size:12px;letter-spacing:1.8px;}
+.gcc-hero-eyebrow{margin-bottom:12px;font-size:0.75rem;letter-spacing:1.8px;}
 .gcc-hero h1{
-  font-size:clamp(32px,2.75vw,50px);
+  font-size:clamp(2rem,2.75vw,3.125rem);
   letter-spacing:-1.2px;
   line-height:1.02;
   color:#fff;
@@ -67,7 +67,7 @@
 .gcc-hero h1 .accent{display:block;color:var(--accent);}
 .gcc-hero-sub{
   color:rgba(255,255,255,.9);
-  font-size:15px;
+  font-size:0.9375rem;
   line-height:1.5;
   max-width:560px;
   margin-bottom:20px;
@@ -91,8 +91,8 @@
   color:var(--accent);
   display:flex;align-items:center;justify-content:center;
 }
-.gcc-trust strong{display:block;font-family:var(--font-head);font-size:13px;line-height:1.25;}
-.gcc-trust small{display:block;font-size:11.5px;color:rgba(255,255,255,.78);}
+.gcc-trust strong{display:block;font-family:var(--font-head);font-size:0.8125rem;line-height:1.25;}
+.gcc-trust small{display:block;font-size:0.7188rem;color:rgba(255,255,255,.78);}
 
 /* ---------- Services ----------
    Reuses .fg-grid / .fg-card, five-up. The comp's cards have no overlapping
@@ -108,19 +108,19 @@
 }
 .gcc-services-head > div{padding-left:clamp(0px,2.6vw,44px);}
 .gcc-services-head h2{
-  font-size:clamp(23px,1.85vw,34px);
+  font-size:clamp(1.4375rem,1.85vw,2.125rem);
   letter-spacing:-.7px;
   line-height:1.15;
 }
-.gcc-services-head > p{font-size:13.5px;line-height:1.55;color:var(--gray-text);max-width:640px;}
+.gcc-services-head > p{font-size:0.8438rem;line-height:1.55;color:var(--gray-text);max-width:640px;}
 
 .gcc-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
 .gcc-grid .fg-card{border:1px solid #E6EFF7;}
 .gcc-grid .fg-card-media img{aspect-ratio:262/74;}
 .gcc-grid .fg-card-body{padding:14px 20px 16px;}
-.gcc-grid .fg-card-body h3{font-size:15px;margin-bottom:6px;}
-.gcc-grid .fg-card-body p{font-size:13px;line-height:1.5;margin-bottom:12px;}
-.gcc-grid .fg-card-link{font-size:13px;}
+.gcc-grid .fg-card-body h3{font-size:0.9375rem;margin-bottom:6px;}
+.gcc-grid .fg-card-body p{font-size:0.8125rem;line-height:1.5;margin-bottom:12px;}
+.gcc-grid .fg-card-link{font-size:0.8125rem;}
 
 /* ---------- Why repair chips ----------
    copy | four benefits | photo bleeding to the viewport's right edge. The
@@ -146,12 +146,12 @@
 }
 .gcc-why-copy{padding-left:clamp(0px,.4vw,8px);}
 .gcc-why-copy h2{
-  font-size:clamp(23px,1.75vw,32px);
+  font-size:clamp(1.4375rem,1.75vw,2rem);
   letter-spacing:-.7px;
   line-height:1.08;
   margin-bottom:10px;
 }
-.gcc-why-copy p{font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+.gcc-why-copy p{font-size:0.8438rem;line-height:1.55;color:var(--gray-text);}
 @media (min-width:1025px){
   .gcc-why-copy .eyebrow span{white-space:nowrap;}
 }
@@ -174,8 +174,8 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:10px;
 }
-.gcc-benefits strong{font-family:var(--font-head);font-size:14px;line-height:1.2;color:var(--navy);margin-bottom:8px;}
-.gcc-benefits small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:170px;}
+.gcc-benefits strong{font-family:var(--font-head);font-size:0.875rem;line-height:1.2;color:var(--navy);margin-bottom:8px;}
+.gcc-benefits small{font-size:0.7813rem;line-height:1.45;color:var(--gray-text);max-width:170px;}
 .gcc-why-photo{
   align-self:stretch;
   position:relative;
@@ -205,15 +205,15 @@
   padding-block:clamp(26px,2.2vw,38px);
 }
 .gcc-process-copy{padding-left:clamp(0px,1.4vw,24px);}
-.gcc-process-copy .eyebrow{margin-bottom:10px;font-size:11px;letter-spacing:1.6px;}
+.gcc-process-copy .eyebrow{margin-bottom:10px;font-size:0.6875rem;letter-spacing:1.6px;}
 .gcc-process-copy h2{
   color:#fff;
-  font-size:clamp(24px,1.8vw,33px);
+  font-size:clamp(1.5rem,1.8vw,2.0625rem);
   letter-spacing:-.8px;
   margin-bottom:12px;
 }
 .gcc-process-copy h2 .accent{color:var(--accent);}
-.gcc-process-copy p{color:rgba(255,255,255,.82);font-size:13.5px;line-height:1.55;max-width:360px;}
+.gcc-process-copy p{color:rgba(255,255,255,.82);font-size:0.8438rem;line-height:1.55;max-width:360px;}
 @media (min-width:1025px){
   .gcc-process-copy .eyebrow span,.gcc-process-copy h2{white-space:nowrap;}
 }
@@ -249,12 +249,12 @@
   border:2px solid #fff;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:17px;
+  font-size:1.0625rem;
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
-.gcc-step h3{color:#fff;font-size:14.5px;letter-spacing:-.2px;margin-bottom:3px;}
-.gcc-step p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.35;}
+.gcc-step h3{color:#fff;font-size:0.9063rem;letter-spacing:-.2px;margin-bottom:3px;}
+.gcc-step p{color:rgba(255,255,255,.8);font-size:0.8125rem;line-height:1.35;}
 
 /* ---------- Before & after ---------- */
 .gcc-results{background:#fff;}
@@ -267,7 +267,7 @@
 }
 .gcc-results-copy{padding-left:clamp(0px,.7vw,12px);}
 .gcc-results-copy h2{
-  font-size:clamp(21px,1.5vw,27px);
+  font-size:clamp(1.3125rem,1.5vw,1.6875rem);
   letter-spacing:-.6px;
   line-height:1.12;
   margin-bottom:6px;
@@ -275,8 +275,8 @@
 @media (min-width:1025px){
   .gcc-results-copy h2{white-space:nowrap;}
 }
-.gcc-results-copy p{font-size:12.5px;line-height:1.45;color:var(--gray-text);margin-bottom:12px;}
-.gcc-results-copy .btn{font-size:13px;padding:8px 18px;}
+.gcc-results-copy p{font-size:0.7813rem;line-height:1.45;color:var(--gray-text);margin-bottom:12px;}
+.gcc-results-copy .btn{font-size:0.8125rem;padding:8px 18px;}
 .gcc-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -325,7 +325,7 @@
   position:absolute;bottom:6px;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:10px;
+  font-size:0.625rem;
   letter-spacing:1px;
   line-height:1;
   padding:5px 14px;
@@ -354,7 +354,7 @@
   padding-right:0;
 }
 .gcc-choose-copy h2{
-  font-size:clamp(21px,1.5vw,27px);
+  font-size:clamp(1.3125rem,1.5vw,1.6875rem);
   letter-spacing:-.6px;
   line-height:1.08;
 }
@@ -379,8 +379,8 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:8px;
 }
-.gcc-features strong{font-family:var(--font-head);font-size:13px;line-height:1.25;color:var(--navy);margin-bottom:3px;}
-.gcc-features small{font-size:11.5px;line-height:1.4;color:var(--gray-text);max-width:180px;}
+.gcc-features strong{font-family:var(--font-head);font-size:0.8125rem;line-height:1.25;color:var(--navy);margin-bottom:3px;}
+.gcc-features small{font-size:0.7188rem;line-height:1.4;color:var(--gray-text);max-width:180px;}
 
 .gcc-cta{
   align-self:stretch;
@@ -404,10 +404,10 @@
   text-align:center;
   box-shadow:0 20px 40px -24px rgba(0,0,0,.7);
 }
-.gcc-cta-card h2{font-size:clamp(17px,1.2vw,21px);letter-spacing:-.4px;margin-bottom:3px;}
-.gcc-cta-card p{font-size:12.5px;color:var(--gray-text);margin-bottom:12px;}
+.gcc-cta-card h2{font-size:clamp(1.0625rem,1.2vw,1.3125rem);letter-spacing:-.4px;margin-bottom:3px;}
+.gcc-cta-card p{font-size:0.7813rem;color:var(--gray-text);margin-bottom:12px;}
 .gcc-cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.gcc-cta-actions .btn{font-size:13px;padding:10px 20px;}
+.gcc-cta-actions .btn{font-size:0.8125rem;padding:10px 20px;}
 
 /* ==========================================================================
    Responsive — widest first (see the recipe: equal specificity, later wins)
@@ -482,9 +482,9 @@
 
 @media (max-width:640px){
   .gcc-hero-inner{padding-top:34px;padding-bottom:28px;}
-  .gcc-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .gcc-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .gcc-hero h1 br{display:none;}
-  .gcc-hero-sub{font-size:14.5px;}
+  .gcc-hero-sub{font-size:0.9063rem;}
   .gcc-hero-actions{gap:10px;}
   .gcc-hero-actions .btn,.gcc-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   .gcc-hero-scrim{
@@ -493,7 +493,7 @@
   .gcc-trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
   .gcc-why-copy h2 br,.gcc-benefits strong br{display:none;}
   .gcc-grid .fg-card-body{padding:12px 12px 14px;}
-  .gcc-grid .fg-card-body h3{font-size:14px;}
+  .gcc-grid .fg-card-body h3{font-size:0.875rem;}
   .gcc-steps{grid-template-columns:minmax(0,1fr);}
   .gcc-step + .gcc-step::before{display:none;}
   .gcc-step-num{left:8px;}

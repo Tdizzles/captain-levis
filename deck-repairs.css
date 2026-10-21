@@ -44,7 +44,7 @@
 .dr-hero-content{max-width:660px;}
 .dr-hero-eyebrow{margin-bottom:16px;}
 .dr-hero h1{
-  font-size:clamp(31px,3.9vw,52px);
+  font-size:clamp(1.9375rem,3.9vw,3.25rem);
   letter-spacing:-1.2px;
   line-height:1.08;
   color:#fff;
@@ -52,7 +52,7 @@
 }
 .dr-hero-sub{
   color:rgba(255,255,255,.87);
-  font-size:17px;
+  font-size:1.0625rem;
   line-height:1.62;
   max-width:560px;
   margin-bottom:30px;
@@ -70,13 +70,13 @@
 .dr-section-head .eyebrow{justify-content:center;margin-bottom:14px;color:var(--icon-blue);}
 .dr-section-head .eyebrow i{background:var(--accent);}
 .dr-section-head h2{
-  font-size:clamp(26px,3.1vw,40px);
+  font-size:clamp(1.625rem,3.1vw,2.5rem);
   letter-spacing:-.9px;
   margin-bottom:14px;
 }
 .dr-section-head h2 .accent{color:var(--icon-blue);}
 .dr-section-head p{
-  font-size:16px;
+  font-size:1rem;
   line-height:1.6;
   color:var(--gray-text);
   max-width:900px;
@@ -122,13 +122,13 @@
 .dr-process-copy .eyebrow{margin-bottom:14px;}
 .dr-process-copy h2{
   color:#fff;
-  font-size:clamp(24px,2.1vw,32px);
+  font-size:clamp(1.5rem,2.1vw,2rem);
   letter-spacing:-.8px;
   margin-bottom:14px;
 }
 .dr-process-copy p{
   color:rgba(255,255,255,.76);
-  font-size:15px;
+  font-size:0.9375rem;
   line-height:1.62;
   max-width:440px;
 }
@@ -163,7 +163,7 @@
   color:var(--navy-2);
   font-family:var(--font-head);
   font-weight:800;
-  font-size:15px;
+  font-size:0.9375rem;
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
@@ -178,13 +178,13 @@
 }
 .dr-step h3{
   color:#fff;
-  font-size:15px;
+  font-size:0.9375rem;
   letter-spacing:-.2px;
   margin-bottom:7px;
 }
 .dr-step p{
   color:rgba(255,255,255,.7);
-  font-size:13.5px;
+  font-size:0.8438rem;
   line-height:1.5;
 }
 
@@ -212,17 +212,17 @@
   padding-right:clamp(20px,2.4vw,40px);
 }
 .dr-layers-copy h2{
-  font-size:clamp(23px,1.9vw,29px);
+  font-size:clamp(1.4375rem,1.9vw,1.8125rem);
   letter-spacing:-.7px;
   margin-bottom:12px;
 }
 .dr-layers-copy p{
-  font-size:14.5px;
+  font-size:0.9063rem;
   line-height:1.6;
   color:var(--gray-text);
   margin-bottom:20px;
 }
-.dr-layers-copy .btn{font-size:14px;padding:12px 20px;gap:8px;}
+.dr-layers-copy .btn{font-size:0.875rem;padding:12px 20px;gap:8px;}
 
 /* The cutaway photo carries the leader lines; the labels sit where each line
    ends. Their --y values are the line heights in deck-layers.jpg. */
@@ -252,12 +252,12 @@
   display:block;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:13px;
+  font-size:0.8125rem;
   color:var(--navy);
 }
 .dr-diagram-labels small{
   display:block;
-  font-size:11.5px;
+  font-size:0.7188rem;
   color:var(--gray-text);
 }
 
@@ -267,7 +267,7 @@
 }
 .dr-rule-head{
   display:flex;align-items:center;gap:14px;
-  font-size:clamp(20px,1.6vw,24px);
+  font-size:clamp(1.25rem,1.6vw,1.5rem);
   letter-spacing:-.5px;
   margin-bottom:8px;
 }
@@ -277,7 +277,7 @@
   background:var(--icon-blue);
 }
 .dr-ba-lead{
-  font-size:14.5px;
+  font-size:0.9063rem;
   color:var(--gray-text);
   margin-bottom:18px;
 }
@@ -309,7 +309,7 @@
   position:absolute;bottom:8px;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:10px;
+  font-size:0.625rem;
   letter-spacing:1.1px;
   padding:4px 10px;
   border-radius:999px;
@@ -336,7 +336,7 @@
 }
 .dr-signs{padding-block:clamp(34px,3.4vw,52px);padding-right:clamp(20px,2.4vw,40px);}
 .dr-signs-lead{
-  font-size:14.5px;
+  font-size:0.9063rem;
   line-height:1.6;
   color:var(--gray-text);
   max-width:640px;
@@ -350,7 +350,7 @@
 }
 .dr-signs-grid > li:not(.dr-signs-note){
   display:flex;align-items:center;gap:10px;
-  font-size:12.5px;
+  font-size:0.7813rem;
   line-height:1.45;
   color:var(--navy);
 }
@@ -374,17 +374,17 @@
 .dr-signs-note strong{
   display:block;
   font-family:var(--font-head);
-  font-size:13.5px;
+  font-size:0.8438rem;
   color:var(--navy);
   margin-bottom:4px;
 }
 .dr-signs-note p{
-  font-size:12.5px;
+  font-size:0.7813rem;
   line-height:1.45;
   color:var(--gray-text);
   margin-bottom:8px;
 }
-.dr-signs-note .fg-card-link{font-size:13px;}
+.dr-signs-note .fg-card-link{font-size:0.8125rem;}
 
 .dr-areas{
   align-self:stretch;
@@ -393,7 +393,7 @@
   padding:clamp(34px,3.4vw,52px) clamp(10px,1vw,16px) clamp(34px,3.4vw,52px) clamp(20px,2.4vw,40px);
 }
 .dr-areas > p{
-  font-size:14.5px;
+  font-size:0.9063rem;
   line-height:1.6;
   color:var(--gray-text);
   margin-bottom:18px;
@@ -407,7 +407,7 @@
 }
 .dr-pins li{
   display:flex;align-items:center;gap:9px;
-  font-size:14px;
+  font-size:0.875rem;
   color:var(--navy);
   white-space:nowrap;
 }
@@ -455,17 +455,17 @@
 .dr-cta-copy .eyebrow{margin-bottom:10px;}
 .dr-cta-copy h2{
   color:#fff;
-  font-size:clamp(25px,2.4vw,36px);
+  font-size:clamp(1.5625rem,2.4vw,2.25rem);
   letter-spacing:-.8px;
   margin-bottom:8px;
 }
-.dr-cta-copy p{color:rgba(255,255,255,.82);font-size:15.5px;line-height:1.55;}
+.dr-cta-copy p{color:rgba(255,255,255,.82);font-size:0.9688rem;line-height:1.55;}
 .dr-cta-side{display:flex;flex-direction:column;gap:16px;padding-block:24px;}
 .dr-cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
 .dr-cta-meta{display:flex;flex-wrap:wrap;gap:6px 0;}
 .dr-cta-meta li{
   display:flex;align-items:center;gap:8px;
-  font-size:13px;
+  font-size:0.8125rem;
   color:rgba(255,255,255,.85);
 }
 .dr-cta-meta li + li{border-left:1px solid rgba(255,255,255,.3);margin-left:14px;padding-left:14px;}
@@ -530,16 +530,16 @@
   .dr-hero-scrim{
     background:linear-gradient(90deg, rgba(0,22,46,.95) 0%, rgba(0,22,46,.85) 55%, rgba(0,22,46,.55) 100%);
   }
-  .dr-hero-sub{font-size:16px;}
-  .dr-section-head p{font-size:15px;}
+  .dr-hero-sub{font-size:1rem;}
+  .dr-section-head p{font-size:0.9375rem;}
   .dr-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
 }
 
 @media (max-width:640px){
   .dr-hero-inner{padding-top:40px;padding-bottom:40px;}
-  .dr-hero h1{font-size:clamp(26px,7.4vw,34px);letter-spacing:-.7px;margin-bottom:14px;}
+  .dr-hero h1{font-size:clamp(1.625rem,7.4vw,2.125rem);letter-spacing:-.7px;margin-bottom:14px;}
   .dr-hero h1 br{display:none;}
-  .dr-hero-sub{font-size:15px;line-height:1.55;margin-bottom:22px;}
+  .dr-hero-sub{font-size:0.9375rem;line-height:1.55;margin-bottom:22px;}
   .dr-hero-actions{gap:10px;}
   .dr-hero-actions .btn{flex:1 1 100%;justify-content:center;}
   .dr-hero-scrim{
@@ -547,32 +547,32 @@
   }
 
   .dr-section-head{padding-top:32px;padding-bottom:18px;}
-  .dr-section-head h2{font-size:clamp(22px,6vw,28px);margin-bottom:10px;}
-  .dr-section-head p{font-size:14.5px;}
+  .dr-section-head h2{font-size:clamp(1.375rem,6vw,1.75rem);margin-bottom:10px;}
+  .dr-section-head p{font-size:0.9063rem;}
 
   .dr-process-body{padding:34px var(--pad) 30px;}
-  .dr-process-copy h2{font-size:23px;}
+  .dr-process-copy h2{font-size:1.4375rem;}
   .dr-process-copy h2 br{display:none;}
-  .dr-process-copy p{font-size:14px;}
+  .dr-process-copy p{font-size:0.875rem;}
   .dr-steps{grid-template-columns:minmax(0,1fr);row-gap:32px;margin-top:10px;}
   .dr-step::after{display:none;}
   .dr-step{padding:34px 15px 17px;}
 
   .dr-results-inner{padding-block:30px;row-gap:28px;}
-  .dr-layers-copy h2{font-size:23px;}
-  .dr-layers-copy p{font-size:14px;}
+  .dr-layers-copy h2{font-size:1.4375rem;}
+  .dr-layers-copy p{font-size:0.875rem;}
   .dr-layers-copy .btn{width:100%;justify-content:center;white-space:normal;}
   .dr-ba-grid{grid-template-columns:minmax(0,1fr);gap:14px;}
-  .dr-rule-head{font-size:19px;gap:10px;}
+  .dr-rule-head{font-size:1.1875rem;gap:10px;}
   .dr-rule-head i{width:24px;}
 
   .dr-signs-grid{grid-template-columns:minmax(0,1fr);gap:12px;}
-  .dr-signs-lead,.dr-areas > p{font-size:14px;}
+  .dr-signs-lead,.dr-areas > p{font-size:0.875rem;}
   .dr-pins{column-gap:16px;}
-  .dr-pins li{font-size:13.5px;}
+  .dr-pins li{font-size:0.8438rem;}
 
-  .dr-cta-copy h2{font-size:24px;}
-  .dr-cta-copy p{font-size:14.5px;}
+  .dr-cta-copy h2{font-size:1.5rem;}
+  .dr-cta-copy p{font-size:0.9063rem;}
   .dr-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   .dr-cta-meta{flex-direction:column;gap:8px;}
   .dr-cta-meta li + li{border-left:0;margin-left:0;padding-left:0;}

@@ -12,7 +12,7 @@
 
 .fbr-eyebrow{
   color:var(--icon-blue);
-  font-size:clamp(11px,.76vw,11.5px);
+  font-size:clamp(0.6875rem,.76vw,0.7188rem);
   letter-spacing:2px;
   gap:18px;
   margin-bottom:8px;
@@ -71,12 +71,12 @@
 .fbr-hero-tag strong{
   font-family:var(--font-head);
   font-weight:700;
-  font-size:max(10px,1.8cqw);
+  font-size:max(0.625rem,1.8cqw);
   letter-spacing:.02em;
   line-height:1.1;
   text-transform:uppercase;
 }
-.fbr-hero-tag small{font-size:max(8px,1.42cqw);line-height:1.3;margin-top:.2cqw;}
+.fbr-hero-tag small{font-size:max(0.5rem,1.42cqw);line-height:1.3;margin-top:.2cqw;}
 .fbr-hero-tag-before{left:19.6cqw;width:23.4cqw;background:rgba(40,40,42,.92);}
 .fbr-hero-tag-after{left:71.9cqw;width:22.3cqw;background:#168BF0;}
 
@@ -91,14 +91,14 @@
 }
 .fbr-hero-content{max-width:640px;}
 .fbr-hero-eyebrow{
-  font-size:clamp(11px,.8vw,12.2px);
+  font-size:clamp(0.6875rem,.8vw,0.7625rem);
   letter-spacing:2.2px;
   gap:18px;
   margin-bottom:9px;
   margin-left:calc(-40px - 18px);
 }
 .fbr-hero h1{
-  font-size:clamp(32px,3.07vw,47px);
+  font-size:clamp(2rem,3.07vw,2.9375rem);
   letter-spacing:-1px;
   line-height:1.1;
   color:#fff;
@@ -107,13 +107,13 @@
 .fbr-hero h1 .accent{color:var(--accent);}
 .fbr-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(15px,1.075vw,16.5px);
+  font-size:clamp(0.9375rem,1.075vw,1.0313rem);
   line-height:1.5;
   max-width:32.6em;
   margin-bottom:clamp(18px,1.45vw,22.2px);
 }
 .fbr-hero-actions{display:flex;gap:14px clamp(14px,1.05vw,16px);flex-wrap:wrap;}
-.fbr-hero-actions .btn{padding:16px 30px;font-size:15.5px;}
+.fbr-hero-actions .btn{padding:16px 30px;font-size:0.9688rem;}
 .fbr-trust{
   display:grid;
   grid-template-columns:minmax(0,188fr) minmax(0,234fr) minmax(0,261fr) minmax(0,165fr);
@@ -124,8 +124,8 @@
 .fbr-trust li{display:flex;align-items:center;gap:14px;color:#fff;}
 .fbr-trust-icon{color:var(--accent);display:flex;flex:none;}
 .fbr-trust-icon svg{width:auto;height:34px;}
-.fbr-trust strong{display:block;font-family:var(--font-head);font-size:14.5px;line-height:1.35;margin-bottom:2px;white-space:nowrap;}
-.fbr-trust small{display:block;font-size:12.5px;color:rgba(255,255,255,.8);white-space:nowrap;}
+.fbr-trust strong{display:block;font-family:var(--font-head);font-size:0.9063rem;line-height:1.35;margin-bottom:2px;white-space:nowrap;}
+.fbr-trust small{display:block;font-size:0.7813rem;color:rgba(255,255,255,.8);white-space:nowrap;}
 
 /* ---------- Icon row (intro features) ----------
    Centred columns, a pale-blue icon circle, hairline dividers between. */
@@ -146,12 +146,12 @@
 .fbr-icon svg{width:52%;height:52%;}
 .fbr-icons strong{
   font-family:var(--font-head);
-  font-size:clamp(13.5px,.98vw,15px);
+  font-size:clamp(0.8438rem,.98vw,0.9375rem);
   line-height:1.2;
   color:var(--navy);
   margin-bottom:5px;
 }
-.fbr-icons small{font-size:clamp(12.5px,.86vw,13.2px);line-height:1.36;color:var(--gray-text);max-width:10.6em;}
+.fbr-icons small{font-size:clamp(0.7813rem,.86vw,0.825rem);line-height:1.36;color:var(--gray-text);max-width:10.6em;}
 
 /* ---------- Intro: copy + features | callout diagram ---------- */
 .fbr-intro{background:var(--light-bg);}
@@ -163,13 +163,13 @@
 }
 .fbr-intro-copy{position:relative;z-index:1;}   /* its feature row runs over the diagram's empty margin */
 .fbr-intro-copy h2{
-  font-size:clamp(28px,2.65vw,40.5px);
+  font-size:clamp(1.75rem,2.65vw,2.5313rem);
   letter-spacing:-.9px;
   line-height:1.04;
   margin-bottom:10px;
 }
 .fbr-intro-copy > p{
-  font-size:clamp(15px,1.33vw,20.4px);
+  font-size:clamp(0.9375rem,1.33vw,1.275rem);
   line-height:1.4;
   color:var(--gray-text);
   max-width:30.3em;
@@ -244,7 +244,7 @@
 }
 .fbr-process-copy{padding-left:clamp(0px,1.3vw,19.5px);}
 .fbr-process-eyebrow{
-  font-size:clamp(11px,.8vw,12.2px);
+  font-size:clamp(0.6875rem,.8vw,0.7625rem);
   letter-spacing:2.4px;
   gap:18px;
   margin-bottom:8px;
@@ -252,7 +252,7 @@
 }
 .fbr-process-copy h2{
   color:#fff;
-  font-size:clamp(26px,2.45vw,37.5px);
+  font-size:clamp(1.625rem,2.45vw,2.3438rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:8px;
@@ -260,7 +260,7 @@
 .fbr-process-copy h2 .accent{color:var(--accent);}
 .fbr-process-copy p{
   color:rgba(255,255,255,.88);
-  font-size:clamp(14px,1.08vw,16.5px);
+  font-size:clamp(0.875rem,1.08vw,1.0313rem);
   line-height:1.36;
   max-width:40em;
   margin-bottom:clamp(12px,1vw,15.3px);
@@ -304,12 +304,12 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:clamp(15px,1.1vw,17px);
+  font-size:clamp(0.9375rem,1.1vw,1.0625rem);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
-.fbr-step h3{color:#fff;font-size:clamp(14.5px,1.05vw,16px);letter-spacing:-.2px;margin-bottom:3px;}
-.fbr-step p{color:rgba(255,255,255,.82);font-size:clamp(13px,.86vw,13.2px);line-height:1.24;}
+.fbr-step h3{color:#fff;font-size:clamp(0.9063rem,1.05vw,1rem);letter-spacing:-.2px;margin-bottom:3px;}
+.fbr-step p{color:rgba(255,255,255,.82);font-size:clamp(0.8125rem,.86vw,0.825rem);line-height:1.24;}
 
 /* ---------- Before & after ---------- */
 .fbr-results{background:var(--light-bg);}
@@ -319,20 +319,20 @@
   margin-bottom:clamp(12px,.95vw,14.5px);
 }
 .fbr-results-head h2{
-  font-size:clamp(25px,2.15vw,33px);
+  font-size:clamp(1.5625rem,2.15vw,2.0625rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:5px;
 }
-.fbr-results-head p{font-size:clamp(14px,1.02vw,15.6px);line-height:1.45;color:var(--gray-text);}
-.fbr-results-head .btn{margin-top:clamp(4px,.2vw,3px);font-size:14px;padding:13px 28px;}
+.fbr-results-head p{font-size:clamp(0.875rem,1.02vw,0.975rem);line-height:1.45;color:var(--gray-text);}
+.fbr-results-head .btn{margin-top:clamp(4px,.2vw,3px);font-size:0.875rem;padding:13px 28px;}
 .fbr-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(12px,1.5vw,23px);
 }
-.fbr-ba-item h3{font-size:clamp(14.5px,1.02vw,15.6px);letter-spacing:-.2px;margin-top:clamp(10px,.95vw,14.5px);}
-.fbr-ba-item p{font-size:clamp(13px,.9vw,13.8px);line-height:1.4;color:var(--gray-text);margin-top:2px;}
+.fbr-ba-item h3{font-size:clamp(0.9063rem,1.02vw,0.975rem);letter-spacing:-.2px;margin-top:clamp(10px,.95vw,14.5px);}
+.fbr-ba-item p{font-size:clamp(0.8125rem,.9vw,0.8625rem);line-height:1.4;color:var(--gray-text);margin-top:2px;}
 
 /* The shared slider (script.js binds every .sfr-ba). Each image is the comp's
    half plus a mirror of it at the slider's own aspect (see the markup
@@ -385,7 +385,7 @@
   display:flex;align-items:center;justify-content:center;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:max(9px,3.05cqw);
+  font-size:max(0.5625rem,3.05cqw);
   letter-spacing:.04em;
   border-radius:1.3cqw;
   pointer-events:none;
@@ -403,18 +403,18 @@
   padding-block:clamp(16px,1.2vw,18.4px) clamp(16px,1.1vw,17px);
 }
 .fbr-included-copy h2{
-  font-size:clamp(23px,1.95vw,30px);
+  font-size:clamp(1.4375rem,1.95vw,1.875rem);
   letter-spacing:-.7px;
   line-height:1.12;
   margin-bottom:4px;
 }
 .fbr-included-copy > p,
-.fbr-related > p{font-size:clamp(14px,1.02vw,15.6px);line-height:1.4;color:var(--gray-text);}
+.fbr-related > p{font-size:clamp(0.875rem,1.02vw,0.975rem);line-height:1.4;color:var(--gray-text);}
 .fbr-included-copy > p{margin-bottom:clamp(12px,1.05vw,16px);}
 .fbr-checks{display:grid;gap:clamp(4px,.33vw,5px);}
 .fbr-checks li{
   display:flex;align-items:center;gap:14px;
-  font-size:clamp(13.5px,1.02vw,15.6px);
+  font-size:clamp(0.8438rem,1.02vw,0.975rem);
   line-height:1.3;
   color:var(--gray-text);
 }
@@ -439,7 +439,7 @@
 }
 .fbr-related h2{
   display:flex;align-items:center;gap:clamp(14px,1.6vw,24px);
-  font-size:clamp(20px,1.62vw,24.8px);
+  font-size:clamp(1.25rem,1.62vw,1.55rem);
   letter-spacing:-.6px;
   line-height:1.15;
   margin-bottom:3px;
@@ -466,7 +466,7 @@
 .fbr-rel-body strong{
   display:block;
   font-family:var(--font-head);
-  font-size:clamp(13px,.95vw,14.5px);
+  font-size:clamp(0.8125rem,.95vw,0.9063rem);
   line-height:1.25;
   color:var(--navy);
   margin-bottom:clamp(4px,.4vw,6px);
@@ -475,7 +475,7 @@
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:clamp(12px,.8vw,12.2px);
+  font-size:clamp(0.75rem,.8vw,0.7625rem);
   color:var(--icon-blue);
 }
 .fbr-rel-link svg{transition:transform .15s ease;}
@@ -490,14 +490,14 @@
   column-gap:clamp(20px,2.2vw,33.7px);
   padding-block:clamp(14px,1.05vw,16px) clamp(16px,1.15vw,17.5px);
 }
-.fbr-why-eyebrow{font-size:clamp(10px,.72vw,11px);letter-spacing:1.6px;}
+.fbr-why-eyebrow{font-size:clamp(0.625rem,.72vw,0.6875rem);letter-spacing:1.6px;}
 .fbr-why-copy h2{
-  font-size:clamp(24px,1.95vw,30px);
+  font-size:clamp(1.5rem,1.95vw,1.875rem);
   letter-spacing:-.8px;
   line-height:1.08;
   margin-bottom:6px;
 }
-.fbr-why-copy p{font-size:clamp(13.5px,.98vw,15px);line-height:1.3;max-width:31.5em;color:var(--gray-text);}
+.fbr-why-copy p{font-size:clamp(0.8438rem,.98vw,0.9375rem);line-height:1.3;max-width:31.5em;color:var(--gray-text);}
 @media (min-width:1025px){
   .fbr-why-copy .eyebrow span{white-space:nowrap;}
 }
@@ -510,7 +510,7 @@
   align-content:center;
   gap:clamp(4px,.4vw,6px);
 }
-.fbr-faq h2{font-size:clamp(19px,1.5vw,23px);letter-spacing:-.5px;margin-bottom:0;}
+.fbr-faq h2{font-size:clamp(1.1875rem,1.5vw,1.4375rem);letter-spacing:-.5px;margin-bottom:0;}
 .fbr-faq details{
   background:#fff;
   border:1px solid #DDE8F4;
@@ -519,7 +519,7 @@
 .fbr-faq summary{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:clamp(4px,.4vw,6px) clamp(12px,1vw,15.3px);
-  font-family:var(--font-head);font-weight:500;font-size:clamp(13.5px,.93vw,14.3px);
+  font-family:var(--font-head);font-weight:500;font-size:clamp(0.8438rem,.93vw,0.8938rem);
   line-height:1.3;
   color:var(--navy);
   cursor:pointer;list-style:none;
@@ -532,7 +532,7 @@
 }
 .fbr-faq details[open] summary::after{transform:rotate(45deg);}
 .fbr-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
-.fbr-faq details p{padding:0 clamp(12px,1vw,15.3px) 12px;font-size:14px;line-height:1.55;color:var(--gray-text);}
+.fbr-faq details p{padding:0 clamp(12px,1vw,15.3px) 12px;font-size:0.875rem;line-height:1.55;color:var(--gray-text);}
 
 /* ---------- Closing CTA band ---------- */
 .fbr-cta{
@@ -557,11 +557,11 @@
   padding-left:max(var(--pad), calc(25.1% - max(0px, (100% - var(--container)) / 2)));
   padding-right:max(var(--pad), calc(7.8% - max(0px, (100% - var(--container)) / 2)));
 }
-.fbr-cta h2{color:#fff;font-size:clamp(23px,1.95vw,30px);letter-spacing:-.6px;margin-bottom:6px;}
-.fbr-cta p{font-size:clamp(14px,1.02vw,15.6px);color:rgba(255,255,255,.88);}
+.fbr-cta h2{color:#fff;font-size:clamp(1.4375rem,1.95vw,1.875rem);letter-spacing:-.6px;margin-bottom:6px;}
+.fbr-cta p{font-size:clamp(0.875rem,1.02vw,0.975rem);color:rgba(255,255,255,.88);}
 .fbr-cta-copy{min-width:0;}
 .fbr-cta-actions{display:flex;flex:none;gap:clamp(12px,1.2vw,18px);flex-wrap:wrap;}
-.fbr-cta-actions .btn{font-size:15.5px;padding:15px 30px;}
+.fbr-cta-actions .btn{font-size:0.9688rem;padding:15px 30px;}
 
 /* ==========================================================================
    Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
@@ -628,8 +628,8 @@
 
 @media (max-width:640px){
   .fbr-hero-inner{padding-top:32px;}
-  .fbr-hero h1{font-size:clamp(28px,8.4vw,36px);letter-spacing:-.7px;}
-  .fbr-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .fbr-hero h1{font-size:clamp(1.75rem,8.4vw,2.25rem);letter-spacing:-.7px;}
+  .fbr-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
   .fbr-hero-actions{gap:10px;}
   .fbr-hero-actions .btn,.fbr-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   .fbr-cta-actions{width:100%;}
@@ -662,8 +662,8 @@
     background:#1E8CF0;color:#fff;
     font:700 11px/20px var(--font-head);text-align:center;
   }
-  .fbr-callout strong{font-size:14px;}
-  .fbr-callout span{font-size:13px;margin-top:2px;}
+  .fbr-callout strong{font-size:0.875rem;}
+  .fbr-callout span{font-size:0.8125rem;margin-top:2px;}
   .fbr-callout span br{display:none;}
   .fbr-included-list{grid-template-rows:none;grid-auto-flow:row;grid-template-columns:minmax(0,1fr);}
   .fbr-steps{grid-template-columns:minmax(0,1fr);}
@@ -678,4 +678,74 @@
   .fbr-icons li{padding-inline:4px;}
   .fbr-rel-body{padding-inline:10px;}
   .fbr-callouts{grid-template-columns:minmax(0,1fr);}
+}
+
+
+/* ---------- Classic fiberglass restoration (merged from the legacy site) ----------
+   White band between the results band and the included band: copy and
+   Captain Dave's quote on the left, the legacy yard photo and three scope
+   tiles on the right. */
+.fbr-classic{background:#fff;border-top:1px solid #E6EFF7;}
+.fbr-classic-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);
+  column-gap:clamp(24px,3vw,56px);
+  align-items:center;
+  padding-block:clamp(30px,3vw,48px);
+}
+.fbr-classic-copy h2{
+  font-size:clamp(1.4375rem,1.95vw,1.875rem);
+  letter-spacing:-.7px;
+  line-height:1.12;
+  margin-bottom:12px;
+}
+.fbr-classic-copy > p{font-size:clamp(0.875rem,1.02vw,0.975rem);line-height:1.55;color:var(--gray-text);margin-bottom:14px;}
+.fbr-classic-quote{
+  margin:0 0 16px;
+  padding:14px 18px;
+  border-left:4px solid var(--icon-blue);
+  background:var(--light-bg);
+  border-radius:0 12px 12px 0;
+}
+.fbr-classic-quote p{
+  font-family:var(--font-head);
+  font-weight:600;
+  font-size:clamp(1rem,1.15vw,1.125rem);
+  line-height:1.4;
+  color:var(--navy);
+  margin-bottom:6px;
+}
+.fbr-classic-quote cite{font-style:normal;font-size:0.8125rem;color:var(--icon-blue);font-weight:600;}
+.fbr-classic-side{display:grid;gap:14px;}
+.fbr-classic-photo{
+  margin:0;
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--light-bg);
+  border:1px solid #DCE8F3;
+}
+.fbr-classic-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;}
+.fbr-classic-photo figcaption{padding:10px 14px;font-size:0.8125rem;line-height:1.45;color:var(--gray-text);}
+.fbr-classic-scope{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+.fbr-classic-scope li{
+  background:var(--light-bg);
+  border:1px solid #DCE8F3;
+  border-radius:10px;
+  padding:12px 14px;
+}
+.fbr-classic-scope strong{display:block;font-family:var(--font-head);font-size:0.875rem;color:var(--navy);margin-bottom:4px;}
+.fbr-classic-scope small{display:block;font-size:0.7813rem;line-height:1.45;color:var(--gray-text);}
+
+@media (max-width:1240px){
+  .fbr-classic-inner{grid-template-columns:minmax(0,1fr);row-gap:24px;}
+  .fbr-classic-side{max-width:640px;}
+}
+@media (max-width:640px){
+  .fbr-classic-inner{padding-block:30px;}
+  .fbr-classic-copy h2 br{display:none;}
+  .fbr-classic-scope{grid-template-columns:minmax(0,1fr);}
 }

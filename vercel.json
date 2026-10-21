@@ -1,0 +1,55 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/**/*.ts": { "maxDuration": 30, "memory": 1024 }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=()" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }]
+    },
+    {
+      "source": "/(.*)\\.(css|js)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+    }
+  ],
+  "redirects": [
+    { "source": "/index", "destination": "/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "permanent": true },
+
+    { "source": "/boat-transom-repair", "destination": "/transom-replacement", "permanent": true },
+    { "source": "/boat-stringer-repair", "destination": "/stringer-repairs", "permanent": true },
+    { "source": "/boat-bulkhead-repair", "destination": "/bulkhead-repairs", "permanent": true },
+    { "source": "/gel-coat-repair", "destination": "/gelcoat-repair", "permanent": true },
+    { "source": "/boat-osmosis-repair", "destination": "/hull-blister-osmosis-repair", "permanent": true },
+    { "source": "/boat-hull-step-repair", "destination": "/hull-step-repair", "permanent": true },
+    { "source": "/boat-restoration", "destination": "/full-boat-restoration", "permanent": true },
+    { "source": "/sea-doo-repair", "destination": "/jet-ski-pwc-repair", "permanent": true },
+    { "source": "/wave-runner-yamaha-repair", "destination": "/jet-ski-pwc-repair", "permanent": true },
+    { "source": "/detailing", "destination": "/boat-detailing", "permanent": true },
+    { "source": "/services", "destination": "/fiberglass-boat-repair", "permanent": true },
+
+    { "source": "/blog/:slug", "destination": "/about", "permanent": true },
+    { "source": "/pages/cookie-policy", "destination": "/cookie-policy", "permanent": true },
+
+    { "source": "/resources", "destination": "/fiberglass-boat-repair", "permanent": true },
+    { "source": "/resources-:topic", "destination": "/fiberglass-boat-repair", "permanent": true },
+    { "source": "/boatfueltankreplacement", "destination": "/boat-yard", "permanent": true }
+  ]
+}

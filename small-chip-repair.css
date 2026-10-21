@@ -16,7 +16,7 @@
 }
 .scn-eyebrow{
   color:var(--icon-blue);
-  font-size:11.5px;
+  font-size:0.7188rem;
   letter-spacing:2px;
   margin-bottom:10px;
 }
@@ -58,12 +58,12 @@
 .scn-hero-eyebrow{
   margin-left:calc(-1 * var(--scn-indent));
   margin-bottom:14px;
-  font-size:12px;
+  font-size:0.75rem;
   letter-spacing:2.2px;
 }
 .scn-hero-eyebrow i{width:36px;}
 .scn-hero h1{
-  font-size:clamp(34px,3.25vw,58px);
+  font-size:clamp(2.125rem,3.25vw,3.625rem);
   letter-spacing:-1.4px;
   line-height:1.02;
   color:#fff;
@@ -72,7 +72,7 @@
 .scn-hero h1 .accent{color:var(--accent);}
 .scn-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(15px,1.05vw,17.5px);
+  font-size:clamp(0.9375rem,1.05vw,1.0938rem);
   line-height:1.5;
   max-width:540px;
   margin-bottom:26px;
@@ -93,8 +93,8 @@
 }
 .scn-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
 .scn-trust-icon{flex:none;display:flex;color:var(--accent);}
-.scn-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
-.scn-trust small{display:block;font-size:12px;line-height:1.3;color:rgba(255,255,255,.78);}
+.scn-trust strong{display:block;font-family:var(--font-head);font-size:0.8438rem;line-height:1.25;}
+.scn-trust small{display:block;font-size:0.75rem;line-height:1.3;color:rgba(255,255,255,.78);}
 
 /* ---------- Intro: copy + four benefits | before/after slider ---------- */
 .scn-intro{
@@ -111,14 +111,14 @@
 }
 .scn-intro-copy{padding-left:clamp(0px,1.4vw,28px);}
 .scn-intro h2{
-  font-size:clamp(25px,2.05vw,36px);
+  font-size:clamp(1.5625rem,2.05vw,2.25rem);
   letter-spacing:-.8px;
   line-height:1.12;
   margin-bottom:12px;
 }
 .scn-intro h2 .accent{color:var(--icon-blue);}
 .scn-intro-copy > p{
-  font-size:clamp(14.5px,1vw,16px);
+  font-size:clamp(0.9063rem,1vw,1rem);
   line-height:1.6;
   color:var(--gray-text);
   max-width:680px;
@@ -141,8 +141,8 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:12px;
 }
-.scn-benefits strong{font-family:var(--font-head);font-size:14px;line-height:1.25;color:var(--navy);margin-bottom:6px;}
-.scn-benefits small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:150px;}
+.scn-benefits strong{font-family:var(--font-head);font-size:0.875rem;line-height:1.25;color:var(--navy);margin-bottom:6px;}
+.scn-benefits small{font-size:0.7813rem;line-height:1.45;color:var(--gray-text);max-width:150px;}
 
 /* ---------- Shared slider (script.js binds every .sfr-ba) ----------
    Each image is one half of the comp's pair plus its mirror, so at rest the
@@ -187,7 +187,7 @@
   position:absolute;bottom:10px;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:11px;
+  font-size:0.6875rem;
   letter-spacing:1.1px;
   padding:5px 18px;
   border-radius:5px;
@@ -205,7 +205,7 @@
 .scn-ba-lg .sfr-ba-handle{width:clamp(40px,3vw,54px);height:clamp(40px,3vw,54px);}
 .scn-ba-lg .sfr-ba-tag{
   bottom:clamp(12px,1.2vw,20px);
-  font-size:clamp(12px,.85vw,14px);
+  font-size:clamp(0.75rem,.85vw,0.875rem);
   padding:clamp(7px,.6vw,10px) clamp(22px,2.4vw,44px);
   border-radius:6px;
 }
@@ -241,14 +241,14 @@
 }
 .scn-process-copy{padding-left:clamp(0px,1.4vw,28px);max-width:640px;}
 .scn-process h2{
-  font-size:clamp(25px,2.05vw,36px);
+  font-size:clamp(1.5625rem,2.05vw,2.25rem);
   letter-spacing:-.8px;
   line-height:1.12;
   margin-bottom:10px;
 }
 .scn-process h2 .accent{color:var(--icon-blue);}
 .scn-process-copy p{
-  font-size:clamp(14.5px,1vw,16px);
+  font-size:clamp(0.9063rem,1vw,1rem);
   line-height:1.55;
   color:var(--gray-text);
 }
@@ -291,12 +291,12 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:17px;
+  font-size:1.0625rem;
   display:flex;align-items:center;justify-content:center;
 }
 .scn-step-icon{display:flex;color:var(--navy);margin:6px 0 12px;}
-.scn-step h3{font-size:clamp(15px,1vw,16.5px);letter-spacing:-.2px;margin-bottom:6px;}
-.scn-step p{font-size:13.5px;line-height:1.5;color:var(--gray-text);}
+.scn-step h3{font-size:clamp(0.9375rem,1vw,1.0313rem);letter-spacing:-.2px;margin-bottom:6px;}
+.scn-step p{font-size:0.8438rem;line-height:1.5;color:var(--gray-text);}
 
 /* ---------- Before & after ---------- */
 .scn-results{
@@ -311,13 +311,13 @@
   padding-inline:clamp(0px,1.4vw,28px);
 }
 .scn-results h2{
-  font-size:clamp(23px,1.9vw,33px);
+  font-size:clamp(1.4375rem,1.9vw,2.0625rem);
   letter-spacing:-.8px;
   line-height:1.12;
   margin-bottom:8px;
 }
 .scn-results-copy p{
-  font-size:clamp(14px,.98vw,15.5px);
+  font-size:clamp(0.875rem,.98vw,0.9688rem);
   line-height:1.55;
   color:var(--gray-text);
   max-width:780px;
@@ -348,14 +348,14 @@
   margin-bottom:8px;
   box-shadow:0 6px 14px -8px rgba(0,38,75,.45);
 }
-.scn-ba-help h3{font-size:14.5px;letter-spacing:-.2px;line-height:1.25;margin-bottom:4px;}
-.scn-ba-help small{display:block;font-size:12.5px;line-height:1.45;color:var(--gray-text);}
+.scn-ba-help h3{font-size:0.9063rem;letter-spacing:-.2px;line-height:1.25;margin-bottom:4px;}
+.scn-ba-help small{display:block;font-size:0.7813rem;line-height:1.45;color:var(--gray-text);}
 .scn-help-link{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:6px;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:13px;
+  font-size:0.8125rem;
   color:var(--icon-blue);
 }
 
@@ -374,13 +374,13 @@
 }
 .scn-related-copy{padding-left:clamp(0px,1.4vw,28px);}
 .scn-related h2{
-  font-size:clamp(23px,1.9vw,33px);
+  font-size:clamp(1.4375rem,1.9vw,2.0625rem);
   letter-spacing:-.8px;
   line-height:1.12;
   margin-bottom:10px;
 }
 .scn-related-copy p{
-  font-size:clamp(14px,.98vw,15.5px);
+  font-size:clamp(0.875rem,.98vw,0.9688rem);
   line-height:1.55;
   color:var(--gray-text);
   max-width:560px;
@@ -404,14 +404,14 @@
 .scn-rel-card:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
 .scn-rel-card img{width:100%;aspect-ratio:131/48;object-fit:cover;}
 .scn-rel-body{display:flex;flex-direction:column;flex:1;padding:12px 14px 14px;}
-.scn-rel-card h3{font-size:14px;letter-spacing:-.2px;line-height:1.25;margin-bottom:6px;}
-.scn-rel-card small{display:block;font-size:12.5px;line-height:1.45;color:var(--gray-text);margin-bottom:10px;}
+.scn-rel-card h3{font-size:0.875rem;letter-spacing:-.2px;line-height:1.25;margin-bottom:6px;}
+.scn-rel-card small{display:block;font-size:0.7813rem;line-height:1.45;color:var(--gray-text);margin-bottom:10px;}
 .scn-rel-more{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:auto;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:13px;
+  font-size:0.8125rem;
   color:var(--icon-blue);
 }
 .scn-rel-help{
@@ -422,7 +422,7 @@
   border-color:#DCEAF8;
 }
 .scn-rel-help .scn-help-icon{width:48px;height:48px;color:var(--navy);margin-bottom:10px;}
-.scn-rel-help h3{font-size:14.5px;margin-bottom:2px;}
+.scn-rel-help h3{font-size:0.9063rem;margin-bottom:2px;}
 .scn-rel-help-arrow{color:var(--icon-blue);margin:2px 0 6px;}
 .scn-rel-help small{margin-bottom:6px;}
 
@@ -439,14 +439,14 @@
 }
 .scn-why-copy{padding-left:clamp(0px,1.4vw,28px);}
 .scn-why h2{
-  font-size:clamp(23px,1.9vw,33px);
+  font-size:clamp(1.4375rem,1.9vw,2.0625rem);
   letter-spacing:-.7px;
   line-height:1.1;
   margin-bottom:10px;
 }
-.scn-why-copy p{font-size:14px;line-height:1.55;color:var(--gray-text);}
+.scn-why-copy p{font-size:0.875rem;line-height:1.55;color:var(--gray-text);}
 .scn-checks{display:grid;gap:clamp(10px,.9vw,14px);}
-.scn-checks li{display:flex;align-items:center;gap:12px;font-size:clamp(14px,.95vw,15.5px);line-height:1.35;color:#2A4560;}
+.scn-checks li{display:flex;align-items:center;gap:12px;font-size:clamp(0.875rem,.95vw,0.9688rem);line-height:1.35;color:#2A4560;}
 .scn-checks li::before{
   content:"";flex:none;
   width:22px;height:22px;
@@ -460,13 +460,13 @@
   padding-right:clamp(0px,1.4vw,28px);
   border-left:1px solid #DCE7F1;
 }
-.scn-faq h2{font-size:clamp(19px,1.35vw,24px);letter-spacing:-.4px;margin-bottom:12px;}
+.scn-faq h2{font-size:clamp(1.1875rem,1.35vw,1.5rem);letter-spacing:-.4px;margin-bottom:12px;}
 .scn-faq-list{display:grid;gap:8px;}
 .scn-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;}
 .scn-faq summary{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:10px 16px;
-  font-size:14px;
+  font-size:0.875rem;
   font-weight:500;
   color:var(--navy);
   cursor:pointer;
@@ -483,7 +483,7 @@
 }
 .scn-faq details[open] summary::after{transform:rotate(45deg);}
 .scn-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
-.scn-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+.scn-faq details p{padding:0 16px 14px;font-size:0.875rem;line-height:1.6;color:var(--gray-text);}
 
 /* ---------- Closing CTA band ----------
    scn-cta-boat.jpg (the comp's boat and skyline) sits at the left and fades
@@ -516,14 +516,14 @@
 .scn-cta-kicker{
   font-family:var(--font-head);
   font-weight:700;
-  font-size:12px;
+  font-size:0.75rem;
   letter-spacing:3px;
   text-transform:uppercase;
   color:var(--accent);
   margin-bottom:8px;
 }
-.scn-cta h2{color:#fff;font-size:clamp(24px,2.1vw,37px);letter-spacing:-.7px;line-height:1.1;margin-bottom:8px;}
-.scn-cta-copy p:last-child{font-size:clamp(14.5px,1vw,16.5px);color:rgba(255,255,255,.9);}
+.scn-cta h2{color:#fff;font-size:clamp(1.5rem,2.1vw,2.3125rem);letter-spacing:-.7px;line-height:1.1;margin-bottom:8px;}
+.scn-cta-copy p:last-child{font-size:clamp(0.9063rem,1vw,1.0313rem);color:rgba(255,255,255,.9);}
 .scn-cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
 
 /* ==========================================================================
@@ -607,10 +607,10 @@
 @media (max-width:640px){
   .scn-hero{--scn-indent:0px;}
   .scn-hero-inner{padding-top:34px;padding-bottom:28px;}
-  .scn-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .scn-hero-eyebrow{font-size:0.6875rem;letter-spacing:1.6px;gap:10px;}
   .scn-hero-eyebrow i{width:24px;}
-  .scn-hero h1{font-size:clamp(30px,9vw,38px);letter-spacing:-.8px;}
-  .scn-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .scn-hero h1{font-size:clamp(1.875rem,9vw,2.375rem);letter-spacing:-.8px;}
+  .scn-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
   .scn-hero-scrim{
     background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.72) 100%);
   }

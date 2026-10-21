@@ -1,0 +1,36 @@
+{
+  "name": "captain-levis-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Captain Levi's marketing site: static pages plus Vercel serverless functions (quote intake, chat, uploads, email).",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "tsx scripts/dev-server.mjs",
+    "test": "vitest run --dir test --testTimeout 60000 --hookTimeout 60000",
+    "typecheck": "tsc --noEmit",
+    "migrate": "tsx lib/migrate.ts",
+    "build:knowledge": "node scripts/build-knowledge.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0",
+    "@electric-sql/pglite": "^0.5.10",
+    "busboy": "^1.6.0",
+    "file-type": "^22.2.0",
+    "pg": "^8.23.1",
+    "resend": "^6.34.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.5",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
+    "@vercel/node": "^26.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

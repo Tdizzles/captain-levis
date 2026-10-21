@@ -15,7 +15,7 @@
 }
 .dtd-eyebrow{
   color:var(--icon-blue);
-  font-size:11.5px;
+  font-size:0.7188rem;
   letter-spacing:1.8px;
   margin-bottom:10px;
 }
@@ -57,9 +57,9 @@
   padding-bottom:clamp(22px,1.8vw,30px);
 }
 .dtd-hero-content{max-width:680px;}
-.dtd-hero-eyebrow{margin-bottom:14px;font-size:12.5px;letter-spacing:2px;}
+.dtd-hero-eyebrow{margin-bottom:14px;font-size:0.7813rem;letter-spacing:2px;}
 .dtd-hero h1{
-  font-size:clamp(32px,3.2vw,52px);
+  font-size:clamp(2rem,3.2vw,3.25rem);
   letter-spacing:-1.2px;
   line-height:1.05;
   color:#fff;
@@ -68,7 +68,7 @@
 .dtd-hero h1 .accent{color:var(--accent);}
 .dtd-hero-sub{
   color:rgba(255,255,255,.9);
-  font-size:clamp(15px,1.15vw,17px);
+  font-size:clamp(0.9375rem,1.15vw,1.0625rem);
   line-height:1.5;
   max-width:600px;
   margin-bottom:24px;
@@ -92,8 +92,8 @@
   color:var(--accent);
   display:flex;align-items:center;justify-content:center;
 }
-.dtd-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
-.dtd-trust small{display:block;font-size:12px;color:rgba(255,255,255,.78);}
+.dtd-trust strong{display:block;font-family:var(--font-head);font-size:0.8438rem;line-height:1.25;}
+.dtd-trust small{display:block;font-size:0.75rem;color:rgba(255,255,255,.78);}
 
 /* ---------- Services ----------
    Reuses .fg-grid / .fg-card, five-up instead of six. The comp's cards have no
@@ -109,19 +109,19 @@
 }
 .dtd-services-head > div{padding-left:clamp(0px,.4vw,8px);}
 .dtd-services-head h2{
-  font-size:clamp(24px,2.1vw,36px);
+  font-size:clamp(1.5rem,2.1vw,2.25rem);
   letter-spacing:-.8px;
   line-height:1.12;
 }
-.dtd-services-head > p{font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+.dtd-services-head > p{font-size:0.8438rem;line-height:1.55;color:var(--gray-text);}
 
 .dtd-grid{grid-template-columns:repeat(5,minmax(0,1fr));}
 .dtd-grid .fg-card{border:1px solid #E6EFF7;}
 .dtd-grid .fg-card-media img{aspect-ratio:217/90;}
 .dtd-grid .fg-card-body{padding:14px 16px 16px;}
-.dtd-grid .fg-card-body h3{font-size:15px;margin-bottom:6px;}
-.dtd-grid .fg-card-body p{font-size:13px;line-height:1.5;margin-bottom:12px;}
-.dtd-grid .fg-card-link{font-size:13px;}
+.dtd-grid .fg-card-body h3{font-size:0.9375rem;margin-bottom:6px;}
+.dtd-grid .fg-card-body p{font-size:0.8125rem;line-height:1.5;margin-bottom:12px;}
+.dtd-grid .fg-card-link{font-size:0.8125rem;}
 
 /* ---------- Why repair it ----------
    copy | four benefits | photo bleeding to the viewport's right edge (see the
@@ -145,12 +145,12 @@
   padding-right:0;
 }
 .dtd-why-copy h2{
-  font-size:clamp(23px,1.95vw,34px);
+  font-size:clamp(1.4375rem,1.95vw,2.125rem);
   letter-spacing:-.7px;
   line-height:1.08;
   margin-bottom:12px;
 }
-.dtd-why-copy p{font-size:13.5px;line-height:1.6;color:var(--gray-text);}
+.dtd-why-copy p{font-size:0.8438rem;line-height:1.6;color:var(--gray-text);}
 @media (min-width:1025px){
   .dtd-why-copy .eyebrow span{white-space:nowrap;}
 }
@@ -171,8 +171,8 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:12px;
 }
-.dtd-benefits strong{font-family:var(--font-head);font-size:14px;line-height:1.25;color:var(--navy);margin-bottom:8px;max-width:130px;}
-.dtd-benefits small{font-size:12.5px;line-height:1.45;color:var(--gray-text);max-width:150px;}
+.dtd-benefits strong{font-family:var(--font-head);font-size:0.875rem;line-height:1.25;color:var(--navy);margin-bottom:8px;max-width:130px;}
+.dtd-benefits small{font-size:0.7813rem;line-height:1.45;color:var(--gray-text);max-width:150px;}
 .dtd-why-photo{
   align-self:stretch;
   position:relative;
@@ -202,15 +202,15 @@
   padding-block:clamp(30px,2.6vw,44px);
 }
 .dtd-process-copy{padding-left:clamp(0px,.4vw,8px);}
-.dtd-process-copy .eyebrow{margin-bottom:10px;font-size:11.5px;letter-spacing:1.8px;}
+.dtd-process-copy .eyebrow{margin-bottom:10px;font-size:0.7188rem;letter-spacing:1.8px;}
 .dtd-process-copy h2{
   color:#fff;
-  font-size:clamp(24px,2.1vw,36px);
+  font-size:clamp(1.5rem,2.1vw,2.25rem);
   letter-spacing:-.8px;
   margin-bottom:12px;
 }
 .dtd-process-copy h2 .accent{color:var(--accent);}
-.dtd-process-copy p{color:rgba(255,255,255,.84);font-size:14px;line-height:1.6;max-width:380px;}
+.dtd-process-copy p{color:rgba(255,255,255,.84);font-size:0.875rem;line-height:1.6;max-width:380px;}
 .dtd-steps{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -243,12 +243,12 @@
   border:2px solid #fff;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:17px;
+  font-size:1.0625rem;
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
-.dtd-step h3{color:#fff;font-size:15px;letter-spacing:-.2px;margin-bottom:5px;}
-.dtd-step p{color:rgba(255,255,255,.8);font-size:13px;line-height:1.5;}
+.dtd-step h3{color:#fff;font-size:0.9375rem;letter-spacing:-.2px;margin-bottom:5px;}
+.dtd-step p{color:rgba(255,255,255,.8);font-size:0.8125rem;line-height:1.5;}
 
 /* ---------- Before & after ---------- */
 .dtd-results{background:linear-gradient(180deg,#fff 0%,var(--light-bg) 100%);}
@@ -261,13 +261,13 @@
 }
 .dtd-results-copy{padding-left:clamp(0px,.4vw,8px);}
 .dtd-results-copy h2{
-  font-size:clamp(23px,1.85vw,32px);
+  font-size:clamp(1.4375rem,1.85vw,2rem);
   letter-spacing:-.7px;
   line-height:1.1;
   margin-bottom:10px;
 }
-.dtd-results-copy p{font-size:13px;line-height:1.55;color:var(--gray-text);margin-bottom:16px;}
-.dtd-results-copy .btn{font-size:13px;padding:9px 18px;}
+.dtd-results-copy p{font-size:0.8125rem;line-height:1.55;color:var(--gray-text);margin-bottom:16px;}
+.dtd-results-copy .btn{font-size:0.8125rem;padding:9px 18px;}
 .dtd-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -314,7 +314,7 @@
   position:absolute;bottom:10px;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:10.5px;
+  font-size:0.6563rem;
   letter-spacing:1.3px;
   padding:5px 14px;
   border-radius:5px;
@@ -339,12 +339,12 @@
 }
 .dtd-choose-copy{padding-left:clamp(0px,.4vw,8px);}
 .dtd-choose-copy h2{
-  font-size:clamp(22px,1.85vw,32px);
+  font-size:clamp(1.375rem,1.85vw,2rem);
   letter-spacing:-.7px;
   line-height:1.08;
 }
 @media (min-width:1025px){
-  .dtd-choose-copy .eyebrow span{white-space:nowrap;font-size:11px;letter-spacing:1.3px;}
+  .dtd-choose-copy .eyebrow span{white-space:nowrap;font-size:0.6875rem;letter-spacing:1.3px;}
   .dtd-choose-copy .eyebrow i{width:22px;}
 }
 .dtd-features{
@@ -365,8 +365,8 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:9px;
 }
-.dtd-features strong{font-family:var(--font-head);font-size:12.5px;line-height:1.25;color:var(--navy);margin-bottom:4px;}
-.dtd-features small{font-size:11.5px;line-height:1.4;color:var(--gray-text);max-width:150px;}
+.dtd-features strong{font-family:var(--font-head);font-size:0.7813rem;line-height:1.25;color:var(--navy);margin-bottom:4px;}
+.dtd-features small{font-size:0.7188rem;line-height:1.4;color:var(--gray-text);max-width:150px;}
 .dtd-choose-photo{
   align-self:stretch;
   position:relative;
@@ -392,10 +392,10 @@
   text-align:center;
   box-shadow:0 20px 40px -24px rgba(0,0,0,.7);
 }
-.dtd-cta-card h2{font-size:clamp(17px,1.35vw,22px);letter-spacing:-.4px;margin-bottom:4px;}
-.dtd-cta-card p{font-size:12.5px;color:var(--gray-text);margin-bottom:12px;}
+.dtd-cta-card h2{font-size:clamp(1.0625rem,1.35vw,1.375rem);letter-spacing:-.4px;margin-bottom:4px;}
+.dtd-cta-card p{font-size:0.7813rem;color:var(--gray-text);margin-bottom:12px;}
 .dtd-cta-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
-.dtd-cta-actions .btn{font-size:13.5px;padding:11px 20px;}
+.dtd-cta-actions .btn{font-size:0.8438rem;padding:11px 20px;}
 
 /* ==========================================================================
    Responsive — widest first (see the recipe: equal specificity, later wins)
@@ -464,9 +464,9 @@
 
 @media (max-width:640px){
   .dtd-hero-inner{padding-top:34px;padding-bottom:30px;}
-  .dtd-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .dtd-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .dtd-hero h1 br{display:none;}
-  .dtd-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .dtd-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
   .dtd-hero-actions{gap:10px;}
   .dtd-hero-actions .btn,.dtd-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   .dtd-hero-scrim{
@@ -475,7 +475,7 @@
   .dtd-trust{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
   .dtd-why-copy h2 br{display:none;}
   .dtd-grid .fg-card-body{padding:12px 12px 14px;}
-  .dtd-grid .fg-card-body h3{font-size:14px;}
+  .dtd-grid .fg-card-body h3{font-size:0.875rem;}
   .dtd-steps{grid-template-columns:minmax(0,1fr);}
   .dtd-step + .dtd-step::before{display:none;}
   .dtd-step-num{left:8px;}

@@ -1,0 +1,54 @@
+      <div class="contact-card contact-info-card">
+        <div class="card-head">
+          <span class="card-head-icon card-head-icon-lg"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div class="card-head-text">
+            <h3>Contact Information</h3>
+            <p>Prefer to reach out another way? Here&rsquo;s how to find us.</p>
+          </div>
+        </div>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div>
+              <strong>Phone</strong>
+              <a href="{{phoneHref}}">{{phone}}</a>
+              <small>Call or text for fast response</small>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon info-icon-bright"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="#fff"/><path d="M3.8 6.2L12 12.6l8.2-6.4" stroke="#1B7FD0" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div>
+              <strong>Email</strong>
+              <a href="mailto:{{email}}">{{email}}</a>
+              <small>We&rsquo;ll get back to you ASAP</small>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-7.4 7-12.6A7 7 0 0 0 5 9.4C5 14.6 12 22 12 22z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="9.2" r="2.4" stroke="#fff" stroke-width="1.7"/></svg></span>
+            <div>
+              <strong>Location</strong>
+              <a href="{{mapsUrl}}" target="_blank" rel="noopener">{{street}}, {{city}}, {{state}} {{zip}}</a>
+              <small>Shop &amp; boat yard in Largo, FL</small>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.7"/><path d="M12 7v5l3.5 2" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div>
+              <strong>Business Hours</strong>
+              <span>{{hours}}</span>
+              <small>{{hoursNote}}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-map" data-consent-embed>
+          <div class="consent-placeholder">
+            <p>The map is loaded from Google Maps once you allow embedded content.</p>
+            <button type="button" class="btn btn-navy" data-consent-allow="embeds">Show map</button>
+            <a class="consent-placeholder-link" href="{{mapsUrl}}" target="_blank" rel="noopener">Open in Google Maps</a>
+          </div>
+          <template>
+            <iframe src="{{mapsEmbed}}" title="Captain Levi's location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </template>
+        </div>
+      </div>

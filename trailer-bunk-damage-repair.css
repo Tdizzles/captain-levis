@@ -24,7 +24,7 @@
 }
 .tbd-eyebrow{
   color:var(--icon-blue);
-  font-size:11.5px;
+  font-size:0.7188rem;
   letter-spacing:2px;
   margin-bottom:10px;
 }
@@ -64,12 +64,12 @@
 .tbd-hero-eyebrow{
   margin-left:calc(-1 * var(--tbd-indent));
   margin-bottom:14px;
-  font-size:12px;
+  font-size:0.75rem;
   letter-spacing:2.2px;
 }
 .tbd-hero-eyebrow i{width:36px;}
 .tbd-hero h1{
-  font-size:clamp(30px,3.05vw,56px);
+  font-size:clamp(1.875rem,3.05vw,3.5rem);
   letter-spacing:-1.2px;
   line-height:1.03;
   color:#fff;
@@ -78,7 +78,7 @@
 .tbd-hero h1 .accent{color:var(--accent);}
 .tbd-hero-sub{
   color:rgba(255,255,255,.9);
-  font-size:clamp(14.5px,1.04vw,18px);
+  font-size:clamp(0.9063rem,1.04vw,1.125rem);
   line-height:1.4;
   max-width:520px;
   margin-bottom:18px;
@@ -100,8 +100,8 @@
 }
 .tbd-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
 .tbd-trust-icon{flex:none;display:flex;color:var(--accent);}
-.tbd-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;line-height:1.25;}
-.tbd-trust small{display:block;font-size:12px;line-height:1.3;color:rgba(255,255,255,.75);}
+.tbd-trust strong{display:block;font-family:var(--font-head);font-size:0.8438rem;line-height:1.25;}
+.tbd-trust small{display:block;font-size:0.75rem;line-height:1.3;color:rgba(255,255,255,.75);}
 
 /* ---------- Intro: copy | diagram bleeding to the right edge ----------
    The copy keeps the frame's content edge; the photo is a grid cell that
@@ -116,13 +116,13 @@
 }
 .tbd-intro-copy{padding-block:clamp(20px,1.6vw,30px);}
 .tbd-intro h2{
-  font-size:clamp(24px,2.34vw,42px);
+  font-size:clamp(1.5rem,2.34vw,2.625rem);
   letter-spacing:-.9px;
   line-height:1.12;
   margin-bottom:10px;
 }
 .tbd-intro-copy > p{
-  font-size:clamp(14.5px,1.14vw,20px);
+  font-size:clamp(0.9063rem,1.14vw,1.25rem);
   line-height:1.36;
   color:var(--gray-text);
   max-width:600px;
@@ -186,14 +186,14 @@
   display:block;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(9.5px,1.62cqw,17px);
+  font-size:clamp(0.5938rem,1.62cqw,1.0625rem);
   line-height:1.2;
   color:var(--navy);
   margin-bottom:.2em;
 }
 .tbd-callout small{
   display:block;
-  font-size:clamp(8.5px,1.42cqw,15px);
+  font-size:clamp(0.5313rem,1.42cqw,0.9375rem);
   line-height:1.3;
   color:var(--gray-text);
 }
@@ -201,7 +201,7 @@
   /* Too small for the descriptions to fit their cards; the titles stay. */
   .tbd-callout{padding:4px 6px 4px 8px;}
   .tbd-callout small{display:none;}
-  .tbd-callout strong{margin:0;font-size:clamp(9.5px,2.6cqw,13px);}
+  .tbd-callout strong{margin:0;font-size:clamp(0.5938rem,2.6cqw,0.8125rem);}
 }
 
 /* ---------- Common examples: five fg-cards without links ---------- */
@@ -218,8 +218,8 @@
 .tbd-ex:hover{transform:none;}
 .tbd-ex .fg-card-media img{aspect-ratio:173/82;}
 .tbd-ex .fg-card-body{padding:clamp(12px,.85vw,16px) clamp(14px,1.3vw,24px) clamp(12px,.95vw,18px);}
-.tbd-ex .fg-card-body h3{font-size:clamp(14.5px,1.02vw,19px);letter-spacing:-.3px;margin-bottom:clamp(3px,.25vw,5px);}
-.tbd-ex .fg-card-body p{font-size:clamp(13px,.86vw,15.5px);line-height:1.38;margin-bottom:0;}
+.tbd-ex .fg-card-body h3{font-size:clamp(0.9063rem,1.02vw,1.1875rem);letter-spacing:-.3px;margin-bottom:clamp(3px,.25vw,5px);}
+.tbd-ex .fg-card-body p{font-size:clamp(0.8125rem,.86vw,0.9688rem);line-height:1.38;margin-bottom:0;}
 
 /* ---------- Shared slider (script.js binds every .sfr-ba) ----------
    Each image is one half of the comp's pair plus its mirror, so at rest the
@@ -264,7 +264,7 @@
   position:absolute;bottom:clamp(8px,.75vw,13px);
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(11px,.8vw,13.5px);
+  font-size:clamp(0.6875rem,.8vw,0.8438rem);
   letter-spacing:1.1px;
   padding:clamp(5px,.5vw,9px) clamp(18px,2vw,36px);
   border-radius:5px;
@@ -303,14 +303,14 @@
 }
 .tbd-process-eyebrow{
   color:rgba(255,255,255,.88);
-  font-size:11.5px;
+  font-size:0.7188rem;
   letter-spacing:2.2px;
   margin-bottom:10px;
   margin-left:clamp(0px,1.6vw,30px);
 }
 .tbd-process h2{
   color:#fff;
-  font-size:clamp(22px,2.24vw,40px);
+  font-size:clamp(1.375rem,2.24vw,2.5rem);
   letter-spacing:-.9px;
   margin-bottom:6px;
   margin-left:clamp(0px,1.6vw,30px);
@@ -318,7 +318,7 @@
 .tbd-process h2 .accent{color:var(--accent);}
 .tbd-process-lead{
   color:rgba(255,255,255,.88);
-  font-size:clamp(14px,1.08vw,19px);
+  font-size:clamp(0.875rem,1.08vw,1.1875rem);
   line-height:1.38;
   max-width:560px;
   margin-bottom:clamp(14px,1.1vw,20px);
@@ -360,12 +360,12 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:clamp(16px,1.2vw,20px);
+  font-size:clamp(1rem,1.2vw,1.25rem);
   display:flex;align-items:center;justify-content:center;
 }
 .tbd-step-icon{display:flex;color:#fff;}
-.tbd-step h3{color:#fff;font-size:clamp(14.5px,1.05vw,18px);letter-spacing:-.2px;margin-bottom:4px;}
-.tbd-step p{color:rgba(255,255,255,.8);font-size:clamp(13px,.85vw,15px);line-height:1.36;}
+.tbd-step h3{color:#fff;font-size:clamp(0.9063rem,1.05vw,1.125rem);letter-spacing:-.2px;margin-bottom:4px;}
+.tbd-step p{color:rgba(255,255,255,.8);font-size:clamp(0.8125rem,.85vw,0.9375rem);line-height:1.36;}
 
 /* ---------- Before & after ---------- */
 .tbd-results{
@@ -380,13 +380,13 @@
   padding-inline:clamp(0px,1.4vw,28px);
 }
 .tbd-results h2{
-  font-size:clamp(23px,2.05vw,37px);
+  font-size:clamp(1.4375rem,2.05vw,2.3125rem);
   letter-spacing:-.8px;
   line-height:1.12;
   margin-bottom:4px;
 }
 .tbd-results-copy p{
-  font-size:clamp(14px,1.02vw,17px);
+  font-size:clamp(0.875rem,1.02vw,1.0625rem);
   line-height:1.5;
   color:var(--gray-text);
   max-width:840px;
@@ -410,12 +410,12 @@
   padding-block:clamp(16px,1.3vw,26px);
 }
 .tbd-related h2{
-  font-size:clamp(22px,1.66vw,30px);
+  font-size:clamp(1.375rem,1.66vw,1.875rem);
   letter-spacing:-.04em;
   line-height:1.14;
   margin-bottom:clamp(8px,.7vw,12px);
 }
-.tbd-related-copy p{font-size:clamp(13.5px,.92vw,16px);line-height:1.45;color:var(--gray-text);}
+.tbd-related-copy p{font-size:clamp(0.8438rem,.92vw,1rem);line-height:1.45;color:var(--gray-text);}
 .tbd-related-grid{
   display:grid;
   grid-template-columns:repeat(5,minmax(0,1fr));
@@ -424,9 +424,9 @@
 .tbd-rel-card{border:1px solid #E6EFF7;border-radius:8px;}
 .tbd-rel-card .fg-card-media img{aspect-ratio:2.05/1;}
 .tbd-rel-card .fg-card-body{padding:clamp(10px,.85vw,16px) clamp(10px,.82vw,15px) clamp(10px,.8vw,15px);}
-.tbd-rel-card .fg-card-body h3{font-size:clamp(12.5px,.8vw,14.5px);letter-spacing:-.35px;margin-bottom:5px;}
-.tbd-rel-card .fg-card-body p{font-size:clamp(11.5px,.76vw,13.5px);line-height:1.35;margin-bottom:clamp(8px,.7vw,12px);}
-.tbd-rel-card .fg-card-link{font-size:clamp(12px,.8vw,14.5px);}
+.tbd-rel-card .fg-card-body h3{font-size:clamp(0.7813rem,.8vw,0.9063rem);letter-spacing:-.35px;margin-bottom:5px;}
+.tbd-rel-card .fg-card-body p{font-size:clamp(0.7188rem,.76vw,0.8438rem);line-height:1.35;margin-bottom:clamp(8px,.7vw,12px);}
+.tbd-rel-card .fg-card-link{font-size:clamp(0.75rem,.8vw,0.9063rem);}
 .tbd-rel-help{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
@@ -443,12 +443,12 @@
   display:flex;align-items:center;justify-content:center;
   margin-bottom:2px;
 }
-.tbd-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(13px,.98vw,17px);line-height:1.15;letter-spacing:-.2px;color:var(--navy);}
-.tbd-rel-help p{font-size:clamp(11.5px,.76vw,13.5px);line-height:1.35;color:var(--gray-text);}
+.tbd-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(0.8125rem,.98vw,1.0625rem);line-height:1.15;letter-spacing:-.2px;color:var(--navy);}
+.tbd-rel-help p{font-size:clamp(0.7188rem,.76vw,0.8438rem);line-height:1.35;color:var(--gray-text);}
 .tbd-rel-help-link{
   display:inline-flex;align-items:center;gap:6px;
   font-family:var(--font-head);font-weight:700;
-  font-size:clamp(12px,.8vw,14.5px);
+  font-size:clamp(0.75rem,.8vw,0.9063rem);
   color:var(--icon-blue);
 }
 .tbd-rel-help-link svg{transition:transform .15s ease;}
@@ -466,12 +466,12 @@
 }
 .tbd-why-copy{padding-inline:clamp(0px,1.4vw,28px) clamp(20px,2.6vw,48px);}
 .tbd-why h2{
-  font-size:clamp(23px,1.95vw,35px);
+  font-size:clamp(1.4375rem,1.95vw,2.1875rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:10px;
 }
-.tbd-why-copy p{font-size:clamp(14px,.98vw,16.5px);line-height:1.5;color:var(--gray-text);}
+.tbd-why-copy p{font-size:clamp(0.875rem,.98vw,1.0313rem);line-height:1.5;color:var(--gray-text);}
 .tbd-checks{
   align-self:stretch;
   display:grid;align-content:center;
@@ -479,7 +479,7 @@
   padding-inline:clamp(20px,2.6vw,48px);
   border-left:1px solid #DCE7F1;
 }
-.tbd-checks li{display:flex;align-items:center;gap:12px;font-size:clamp(14px,.92vw,15.5px);line-height:1.35;color:#2A4560;}
+.tbd-checks li{display:flex;align-items:center;gap:12px;font-size:clamp(0.875rem,.92vw,0.9688rem);line-height:1.35;color:#2A4560;}
 .tbd-checks li::before{
   content:"";flex:none;
   width:22px;height:22px;
@@ -493,13 +493,13 @@
   padding-right:clamp(0px,1.4vw,28px);
   border-left:1px solid #DCE7F1;
 }
-.tbd-faq h2{font-size:clamp(19px,1.45vw,26px);letter-spacing:-.5px;margin-bottom:8px;}
+.tbd-faq h2{font-size:clamp(1.1875rem,1.45vw,1.625rem);letter-spacing:-.5px;margin-bottom:8px;}
 .tbd-faq-list{display:grid;gap:6px;}
 .tbd-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;}
 .tbd-faq summary{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:clamp(6px,.5vw,9px) 14px;
-  font-size:clamp(13.5px,.9vw,15px);
+  font-size:clamp(0.8438rem,.9vw,0.9375rem);
   font-weight:500;
   color:var(--navy);
   cursor:pointer;
@@ -516,7 +516,7 @@
 }
 .tbd-faq details[open] summary::after{transform:rotate(45deg);}
 .tbd-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
-.tbd-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+.tbd-faq details p{padding:0 16px 14px;font-size:0.875rem;line-height:1.6;color:var(--gray-text);}
 
 /* ---------- Closing CTA band ----------
    The comp's boat at the left edge, feathered into the navy; the skyline is
@@ -554,8 +554,8 @@
      against the full-width section. */
   padding-left:max(clamp(18px,2.6vw,44px), clamp(200px,23vw,440px) + 8px - max(0px, (100% - 1760px) / 2));
 }
-.tbd-cta h2{color:#fff;font-size:clamp(21px,1.82vw,34px);letter-spacing:-.6px;line-height:1.15;margin-bottom:6px;}
-.tbd-cta p{font-size:clamp(14px,1.02vw,17.5px);color:rgba(255,255,255,.9);}
+.tbd-cta h2{color:#fff;font-size:clamp(1.3125rem,1.82vw,2.125rem);letter-spacing:-.6px;line-height:1.15;margin-bottom:6px;}
+.tbd-cta p{font-size:clamp(0.875rem,1.02vw,1.0938rem);color:rgba(255,255,255,.9);}
 .tbd-cta-actions{display:flex;gap:clamp(10px,1vw,18px);flex-wrap:wrap;}
 .tbd-cta-actions .btn{padding:clamp(13px,1.1vw,19px) clamp(24px,2.3vw,42px);}
 .tbd-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);}
@@ -629,9 +629,9 @@
   .tbd-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   /* Two-up cards are wide enough for body-size type again. */
   .tbd-rel-card .fg-card-body{padding:14px 16px 14px;}
-  .tbd-rel-card .fg-card-body h3{font-size:15px;}
-  .tbd-rel-card .fg-card-body p{font-size:13.5px;}
-  .tbd-rel-card .fg-card-link{font-size:14px;}
+  .tbd-rel-card .fg-card-body h3{font-size:0.9375rem;}
+  .tbd-rel-card .fg-card-body p{font-size:0.8438rem;}
+  .tbd-rel-card .fg-card-link{font-size:0.875rem;}
   .tbd-why-inner{grid-template-columns:minmax(0,1fr);}
   .tbd-why-copy{padding-inline:0;}
   .tbd-checks{border-left:0;padding-inline:0;}
@@ -642,11 +642,11 @@
 @media (max-width:640px){
   .tbd-hero{--tbd-indent:0px;}
   .tbd-hero-inner{padding-top:34px;padding-bottom:28px;}
-  .tbd-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .tbd-hero-eyebrow{font-size:0.6875rem;letter-spacing:1.6px;gap:10px;}
   .tbd-hero-eyebrow i{width:24px;}
-  .tbd-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .tbd-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .tbd-hero h1 br{display:none;}
-  .tbd-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .tbd-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
   /* Show the gouges beside the bunk rather than the tagline, which would sit
      under the copy. */
   .tbd-hero-img{object-position:45% center;}

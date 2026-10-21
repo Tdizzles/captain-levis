@@ -16,7 +16,7 @@
 }
 .dg-eyebrow{
   color:var(--icon-blue);
-  font-size:11.5px;
+  font-size:0.7188rem;
   letter-spacing:2px;
   margin-bottom:10px;
 }
@@ -56,9 +56,9 @@
   padding-bottom:clamp(20px,1.6vw,26px);
 }
 .dg-hero-content{max-width:640px;}
-.dg-hero-eyebrow{margin-bottom:12px;font-size:12px;letter-spacing:2.2px;}
+.dg-hero-eyebrow{margin-bottom:12px;font-size:0.75rem;letter-spacing:2.2px;}
 .dg-hero h1{
-  font-size:clamp(32px,2.8vw,45px);
+  font-size:clamp(2rem,2.8vw,2.8125rem);
   letter-spacing:-1px;
   line-height:1.05;
   color:#fff;
@@ -67,7 +67,7 @@
 .dg-hero h1 .accent{color:var(--accent);}
 .dg-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(15px,1.05vw,16.5px);
+  font-size:clamp(0.9375rem,1.05vw,1.0313rem);
   line-height:1.45;
   max-width:520px;
   margin-bottom:22px;
@@ -83,8 +83,8 @@
 }
 .dg-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
 .dg-trust-icon{flex:none;display:flex;color:var(--accent);}
-.dg-trust strong{display:block;font-family:var(--font-head);font-size:13.5px;font-weight:700;line-height:1.25;}
-.dg-trust small{display:block;font-size:12.5px;color:rgba(255,255,255,.82);line-height:1.3;}
+.dg-trust strong{display:block;font-family:var(--font-head);font-size:0.8438rem;font-weight:700;line-height:1.25;}
+.dg-trust small{display:block;font-size:0.7813rem;color:rgba(255,255,255,.82);line-height:1.3;}
 
 /* ---------- Intro: copy + four points | before/after ---------- */
 .dg-intro{background:linear-gradient(180deg,#F8FBFE 0%,#EEF5FC 100%);overflow:hidden;}
@@ -96,12 +96,12 @@
   padding-block:clamp(26px,1.8vw,30px);
 }
 .dg-intro h2{
-  font-size:clamp(26px,2.3vw,36px);
+  font-size:clamp(1.625rem,2.3vw,2.25rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:12px;
 }
-.dg-intro-copy > p{font-size:clamp(15px,1.02vw,16px);line-height:1.5;color:var(--gray-text);max-width:640px;}
+.dg-intro-copy > p{font-size:clamp(0.9375rem,1.02vw,1rem);line-height:1.5;color:var(--gray-text);max-width:640px;}
 .dg-points{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -123,8 +123,8 @@
   color:var(--icon-blue);
   margin-bottom:10px;
 }
-.dg-points strong{font-family:var(--font-head);font-size:14px;font-weight:800;line-height:1.25;margin-bottom:4px;}
-.dg-points small{font-size:12.5px;line-height:1.4;color:var(--gray-text);}
+.dg-points strong{font-family:var(--font-head);font-size:0.875rem;font-weight:800;line-height:1.25;margin-bottom:4px;}
+.dg-points small{font-size:0.7813rem;line-height:1.4;color:var(--gray-text);}
 
 /* ---------- The shared slider (script.js binds every .sfr-ba) ----------
    Each dg-*-before/after image is the comp's half plus its mirror, so at the
@@ -170,7 +170,7 @@
   position:absolute;bottom:10px;
   font-family:var(--font-head);
   font-weight:800;
-  font-size:12px;
+  font-size:0.75rem;
   letter-spacing:1.2px;
   padding:7px 20px;
   border-radius:5px;
@@ -182,7 +182,7 @@
 /* The intro pair is the page's big one: taller, with larger handle and chips. */
 .dg-intro-ba{aspect-ratio:447/246;border-radius:14px;}
 .dg-intro-ba .sfr-ba-handle{width:54px;height:54px;}
-.dg-intro-ba .sfr-ba-tag{bottom:clamp(12px,1.2vw,18px);font-size:clamp(12px,1.05vw,17px);padding:clamp(7px,.75vw,11px) clamp(18px,2.1vw,34px);border-radius:7px;}
+.dg-intro-ba .sfr-ba-tag{bottom:clamp(12px,1.2vw,18px);font-size:clamp(0.75rem,1.05vw,1.0625rem);padding:clamp(7px,.75vw,11px) clamp(18px,2.1vw,34px);border-radius:7px;}
 .dg-intro-ba .sfr-ba-tag-before{left:clamp(12px,1.4vw,22px);}
 .dg-intro-ba .sfr-ba-tag-after{right:clamp(12px,1.4vw,22px);padding-inline:clamp(24px,2.6vw,44px);}
 
@@ -213,12 +213,12 @@
 .dg-process-eyebrow i{background:var(--accent);}
 .dg-process h2{
   color:#fff;
-  font-size:clamp(26px,2.2vw,34px);
+  font-size:clamp(1.625rem,2.2vw,2.125rem);
   letter-spacing:-.8px;
   margin-bottom:10px;
 }
 .dg-process h2 .accent{color:var(--accent);}
-.dg-process-lead{font-size:15px;line-height:1.5;color:rgba(255,255,255,.86);margin-bottom:clamp(18px,1.5vw,24px);}
+.dg-process-lead{font-size:0.9375rem;line-height:1.5;color:rgba(255,255,255,.86);margin-bottom:clamp(18px,1.5vw,24px);}
 .dg-steps{
   --step-gap:clamp(22px,2vw,32px);
   display:grid;
@@ -251,11 +251,11 @@
   border-radius:50%;
   background:#1E86F0;
   box-shadow:0 0 0 4px rgba(30,134,240,.22);
-  font-family:var(--font-head);font-weight:800;font-size:16px;color:#fff;
+  font-family:var(--font-head);font-weight:800;font-size:1rem;color:#fff;
 }
 .dg-step-icon{display:flex;color:#fff;}
-.dg-step h3{color:#fff;font-size:15.5px;letter-spacing:-.2px;margin-bottom:6px;}
-.dg-step p{font-size:13.5px;line-height:1.5;color:rgba(255,255,255,.84);}
+.dg-step h3{color:#fff;font-size:0.9688rem;letter-spacing:-.2px;margin-bottom:6px;}
+.dg-step p{font-size:0.8438rem;line-height:1.5;color:rgba(255,255,255,.84);}
 
 /* ---------- Results ---------- */
 .dg-results{background:var(--light-bg);padding-block:clamp(24px,1.8vw,30px);}
@@ -265,13 +265,13 @@
   margin-bottom:clamp(12px,1vw,16px);
 }
 .dg-results h2,.dg-why h2,.dg-related h2,.dg-choose-copy h2{
-  font-size:clamp(24px,2vw,31px);
+  font-size:clamp(1.5rem,2vw,1.9375rem);
   letter-spacing:-.7px;
   line-height:1.12;
   margin-bottom:8px;
 }
-.dg-results-head p{font-size:14.5px;color:var(--gray-text);}
-.dg-results-head .btn{font-size:14px;padding:12px 24px;}
+.dg-results-head p{font-size:0.9063rem;color:var(--gray-text);}
+.dg-results-head .btn{font-size:0.875rem;padding:12px 24px;}
 .dg-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -287,7 +287,7 @@
   gap:clamp(20px,2.4vw,40px);
   padding-block:clamp(24px,2vw,32px);
 }
-.dg-why-copy > p{font-size:15px;line-height:1.5;color:var(--gray-text);}
+.dg-why-copy > p{font-size:0.9375rem;line-height:1.5;color:var(--gray-text);}
 .dg-risks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));}
 .dg-risks li{
   display:flex;flex-direction:column;align-items:center;
@@ -303,8 +303,8 @@
   color:#1E86F0;
   margin-bottom:12px;
 }
-.dg-risks strong{font-family:var(--font-head);font-size:15px;font-weight:800;margin-bottom:6px;}
-.dg-risks small{font-size:13.5px;line-height:1.45;color:var(--gray-text);max-width:210px;}
+.dg-risks strong{font-family:var(--font-head);font-size:0.9375rem;font-weight:800;margin-bottom:6px;}
+.dg-risks small{font-size:0.8438rem;line-height:1.45;color:var(--gray-text);max-width:210px;}
 
 /* ---------- Related services: copy | four cards + help card ---------- */
 .dg-related{background:linear-gradient(180deg,#F4F9FE 0%,#EFF6FD 100%);}
@@ -315,7 +315,7 @@
   gap:clamp(20px,2.4vw,40px);
   padding-block:clamp(22px,1.8vw,28px);
 }
-.dg-related-copy > p{font-size:14.5px;line-height:1.5;color:var(--gray-text);}
+.dg-related-copy > p{font-size:0.9063rem;line-height:1.5;color:var(--gray-text);}
 .dg-related-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.93fr);
@@ -327,13 +327,13 @@
 .dg-rel-card h3{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
   width:100%;
-  font-size:14.5px;
+  font-size:0.9063rem;
   letter-spacing:-.2px;
   margin-bottom:6px;
 }
 .dg-rel-card h3 svg{flex:none;color:var(--icon-blue);transition:transform .15s ease;}
 .dg-rel-card:hover h3 svg{transform:translateX(3px);}
-.dg-rel-card .fg-card-body p{font-size:13px;line-height:1.45;margin-bottom:0;}
+.dg-rel-card .fg-card-body p{font-size:0.8125rem;line-height:1.45;margin-bottom:0;}
 .dg-rel-card:focus-visible,.dg-help-card:focus-visible{outline:3px solid var(--icon-blue);outline-offset:3px;}
 .dg-help-card{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
@@ -345,9 +345,9 @@
 }
 .dg-help-card:hover{transform:translateY(-3px);}
 .dg-help-icon{display:flex;color:var(--navy);margin-bottom:8px;}
-.dg-help-card strong{font-family:var(--font-head);font-size:15.5px;font-weight:800;line-height:1.2;}
+.dg-help-card strong{font-family:var(--font-head);font-size:0.9688rem;font-weight:800;line-height:1.2;}
 .dg-help-arrow{color:var(--icon-blue);margin:4px 0;}
-.dg-help-card small{font-size:12.5px;line-height:1.4;color:var(--gray-text);}
+.dg-help-card small{font-size:0.7813rem;line-height:1.4;color:var(--gray-text);}
 
 /* ---------- Why choose us | checklist | FAQ ---------- */
 .dg-choose{background:#fff;}
@@ -358,16 +358,16 @@
   gap:clamp(20px,2.4vw,40px);
   padding-block:clamp(22px,1.8vw,28px);
 }
-.dg-choose-copy > p{font-size:14.5px;line-height:1.5;color:var(--gray-text);}
+.dg-choose-copy > p{font-size:0.9063rem;line-height:1.5;color:var(--gray-text);}
 .dg-checks{display:grid;gap:10px;}
-.dg-checks li{display:flex;align-items:center;gap:14px;font-size:15px;line-height:1.35;color:#2A4560;}
+.dg-checks li{display:flex;align-items:center;gap:14px;font-size:0.9375rem;line-height:1.35;color:#2A4560;}
 .dg-checks li::before{
   content:"";flex:none;
   width:22px;height:22px;border-radius:50%;
   background:#1E86F0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") no-repeat center/13px;
 }
 .dg-faq{align-self:stretch;padding-left:clamp(20px,2.6vw,42px);border-left:1px solid #DCE7F1;}
-.dg-faq h2{font-size:clamp(20px,1.45vw,23px);letter-spacing:-.4px;margin-bottom:10px;}
+.dg-faq h2{font-size:clamp(1.25rem,1.45vw,1.4375rem);letter-spacing:-.4px;margin-bottom:10px;}
 .dg-faq details{
   border:1px solid #DCE7F1;
   border-radius:6px;
@@ -378,7 +378,7 @@
 .dg-faq summary{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:8px 14px;
-  font-size:14px;font-weight:500;color:var(--navy);
+  font-size:0.875rem;font-weight:500;color:var(--navy);
   cursor:pointer;list-style:none;
 }
 .dg-faq summary::-webkit-details-marker{display:none;}
@@ -389,7 +389,7 @@
 }
 .dg-faq details[open] summary::after{transform:rotate(45deg);}
 .dg-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
-.dg-faq details p{padding:0 14px 12px;font-size:13.5px;line-height:1.55;color:var(--gray-text);}
+.dg-faq details p{padding:0 14px 12px;font-size:0.8438rem;line-height:1.55;color:var(--gray-text);}
 
 /* ---------- Closing CTA band ---------- */
 .dg-cta{
@@ -412,8 +412,8 @@
      container's own edge so it holds at every viewport width. */
   padding-left:max(var(--pad),calc(26% - max(0px,(100% - var(--container)) / 2)));
 }
-.dg-cta h2{color:#fff;font-size:clamp(24px,2vw,31px);letter-spacing:-.6px;margin-bottom:4px;}
-.dg-cta p{font-size:15.5px;color:rgba(255,255,255,.88);}
+.dg-cta h2{color:#fff;font-size:clamp(1.5rem,2vw,1.9375rem);letter-spacing:-.6px;margin-bottom:4px;}
+.dg-cta p{font-size:0.9688rem;color:rgba(255,255,255,.88);}
 .dg-cta-actions{display:flex;gap:14px;flex-wrap:wrap;}
 
 /* ==========================================================================
@@ -432,7 +432,7 @@
      points so their titles keep to two lines. */
   .dg-intro-inner{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);}
   .dg-points li{padding-inline:6px;}
-  .dg-points strong{font-size:13.5px;}
+  .dg-points strong{font-size:0.8438rem;}
   .dg-related-inner{grid-template-columns:minmax(0,1fr);}
   .dg-related-copy{max-width:760px;}
   .dg-related-copy h2 br{display:none;}
@@ -481,9 +481,9 @@
 }
 @media (max-width:640px){
   .dg-hero-inner{padding-top:32px;padding-bottom:26px;}
-  .dg-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .dg-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .dg-hero h1 br{display:none;}
-  .dg-hero-sub{font-size:14.5px;}
+  .dg-hero-sub{font-size:0.9063rem;}
   .dg-hero-scrim{
     background:linear-gradient(180deg,rgba(0,22,46,.9) 0%,rgba(0,22,46,.82) 55%,rgba(0,22,46,.74) 100%);
   }

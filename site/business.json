@@ -1,0 +1,38 @@
+{
+  "name": "Captain Levi's",
+  "legalName": "Boat Yard Captain Levi's LLC",
+  "tagline": "Tampa Bay Fiberglass Boat Repair",
+  "phone": "727-391-7639",
+  "phoneHref": "tel:7273917639",
+  "email": "captainlevis@yahoo.com",
+  "address": {
+    "street": "11600 66th St N",
+    "city": "Largo",
+    "state": "FL",
+    "zip": "33773",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=11600+66th+St+N,+Largo,+FL+33773",
+    "mapsEmbed": "https://www.google.com/maps?q=11600+66th+St+N,+Largo,+FL+33773&output=embed",
+    "lat": 27.8869,
+    "lng": -82.7285
+  },
+  "hours": {
+    "display": "Mon – Sat: 7:30 AM – 3:30 PM",
+    "short": "Mon–Sat 7:30am–3:30pm",
+    "note": "Closed Sunday",
+    "schema": [
+      { "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "07:30", "closes": "15:30" }
+    ],
+    "timezone": "America/New_York"
+  },
+  "yearsClaim": "50+ Years",
+  "serviceArea": [
+    "Largo", "Clearwater", "St. Petersburg", "Seminole", "Pinellas Park", "Tarpon Springs", "Safety Harbor",
+    "Dunedin", "Oldsmar", "Belleair", "Belleair Beach", "Belleair Bluffs", "Belleair Shore", "Gulfport",
+    "Indian Rocks Beach", "Indian Shores", "Kenneth City", "Madeira Beach", "North Redington Beach",
+    "Redington Beach", "Redington Shores", "South Pasadena", "St. Pete Beach", "Treasure Island", "Tampa"
+  ],
+  "siteUrl": "https://www.captainlevis.com",
+  "social": {},
+  "turnstileSiteKey": "1x00000000000000000000AA",
+  "turnstileNote": "1x00000000000000000000AA is Cloudflare's public ALWAYS-PASS test key. Replace with the real site key before launch (server secret goes in TURNSTILE_SECRET_KEY)."
+}

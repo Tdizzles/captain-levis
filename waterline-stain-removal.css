@@ -21,7 +21,7 @@
 .wsr-eyebrow{
   gap:clamp(10px,1.3vw,20px);
   color:var(--icon-blue);
-  font-size:clamp(11px,.78vw,13px);
+  font-size:clamp(0.6875rem,.78vw,0.8125rem);
   letter-spacing:1.9px;
   margin-bottom:clamp(8px,.7vw,12px);
 }
@@ -73,12 +73,12 @@
 .wsr-hero-content,.wsr-trust{margin-left:clamp(0px,5vw,96px);}
 .wsr-hero-content{max-width:760px;}
 .wsr-hero-eyebrow{
-  font-size:clamp(11px,.8vw,13px);
+  font-size:clamp(0.6875rem,.8vw,0.8125rem);
   letter-spacing:2px;
   margin-bottom:clamp(8px,.6vw,12px);
 }
 .wsr-hero h1{
-  font-size:clamp(32px,3.1vw,58px);
+  font-size:clamp(2rem,3.1vw,3.625rem);
   letter-spacing:-.02em;
   line-height:1.04;
   color:#fff;
@@ -87,7 +87,7 @@
 .wsr-hero h1 .accent{color:var(--accent);}
 .wsr-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(15px,1.12vw,19px);
+  font-size:clamp(0.9375rem,1.12vw,1.1875rem);
   line-height:1.42;
   max-width:31em;
   margin-bottom:clamp(16px,1.6vw,30px);
@@ -103,8 +103,8 @@
 }
 .wsr-trust li{display:flex;align-items:center;gap:12px;color:#fff;}
 .wsr-trust-icon{color:var(--accent);display:flex;flex:none;}
-.wsr-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13px,.9vw,15px);line-height:1.25;}
-.wsr-trust small{display:block;font-size:clamp(11.5px,.8vw,13px);color:rgba(255,255,255,.8);}
+.wsr-trust strong{display:block;font-family:var(--font-head);font-size:clamp(0.8125rem,.9vw,0.9375rem);line-height:1.25;}
+.wsr-trust small{display:block;font-size:clamp(0.7188rem,.8vw,0.8125rem);color:rgba(255,255,255,.8);}
 
 /* ---------- Overview ----------
    copy + four benefits | "What causes" card with the labelled diagram. */
@@ -118,14 +118,14 @@
 }
 .wsr-intro-copy{padding-top:clamp(0px,.3vw,6px);}
 .wsr-intro h2{
-  font-size:clamp(26px,2.5vw,48px);
+  font-size:clamp(1.625rem,2.5vw,3rem);
   letter-spacing:-.02em;
   line-height:1.1;
   margin-bottom:clamp(10px,1vw,18px);
 }
 .wsr-intro h2 .accent,.wsr-results h2 .accent{color:var(--icon-blue);}
 .wsr-intro-copy > p{
-  font-size:clamp(14.5px,1.16vw,22px);
+  font-size:clamp(0.9063rem,1.16vw,1.375rem);
   line-height:1.5;
   color:var(--gray-text);
 }
@@ -151,12 +151,12 @@
 .wsr-benefit-icon svg{width:50%;height:auto;}
 .wsr-benefits strong{
   font-family:var(--font-head);
-  font-size:clamp(13px,1vw,17px);
+  font-size:clamp(0.8125rem,1vw,1.0625rem);
   line-height:1.18;
   color:var(--navy);
   margin-bottom:6px;
 }
-.wsr-benefits small{font-size:clamp(11.5px,.83vw,14px);line-height:1.4;color:var(--gray-text);}
+.wsr-benefits small{font-size:clamp(0.7188rem,.83vw,0.875rem);line-height:1.4;color:var(--gray-text);}
 
 /* "What causes" card. Its figure is one image the full width of the card
    (the comp's card colour, #F2F9FE, is the image's background too). The
@@ -173,13 +173,13 @@
   padding-top:clamp(10px,.75vw,14px);
 }
 .wsr-cause h2{
-  font-size:clamp(18px,1.6vw,30px);
+  font-size:clamp(1.125rem,1.6vw,1.875rem);
   letter-spacing:-.02em;
   line-height:1.2;
   margin:0 var(--cause-pad) clamp(3px,.25vw,5px);
 }
 .wsr-cause > p{
-  font-size:clamp(13px,1vw,18px);
+  font-size:clamp(0.8125rem,1vw,1.125rem);
   line-height:1.35;
   color:var(--gray-text);
   margin-inline:var(--cause-pad);
@@ -257,15 +257,15 @@
   padding:clamp(24px,2.1vw,40px) clamp(18px,2.6vw,48px) clamp(18px,1.1vw,22px) clamp(12px,1.6vw,30px);
 }
 .wsr-process-copy{position:relative;z-index:1;padding-left:clamp(0px,1.66vw,32px);}
-.wsr-process-copy .eyebrow{font-size:clamp(11px,.78vw,13px);letter-spacing:1.9px;margin-bottom:clamp(8px,.7vw,12px);}
+.wsr-process-copy .eyebrow{font-size:clamp(0.6875rem,.78vw,0.8125rem);letter-spacing:1.9px;margin-bottom:clamp(8px,.7vw,12px);}
 .wsr-process h2{
   color:#fff;
-  font-size:clamp(24px,2.1vw,40px);
+  font-size:clamp(1.5rem,2.1vw,2.5rem);
   letter-spacing:-.02em;
   margin-bottom:clamp(8px,.55vw,10px);
 }
 .wsr-process h2 .accent{color:var(--accent);}
-.wsr-process-copy p{color:rgba(255,255,255,.86);font-size:clamp(13px,1.05vw,19px);line-height:1.42;}
+.wsr-process-copy p{color:rgba(255,255,255,.86);font-size:clamp(0.8125rem,1.05vw,1.1875rem);line-height:1.42;}
 .wsr-steps{
   --step-gap:clamp(18px,2vw,38px);
   display:grid;
@@ -299,7 +299,7 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:clamp(13px,1.1vw,20px);
+  font-size:clamp(0.8125rem,1.1vw,1.25rem);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
@@ -311,8 +311,8 @@
   display:flex;
 }
 .wsr-step-icon svg{width:clamp(20px,2vw,36px);height:auto;}
-.wsr-step h3{color:#fff;font-size:clamp(14px,.98vw,18px);letter-spacing:-.3px;margin-bottom:5px;}
-.wsr-step p{color:rgba(255,255,255,.8);font-size:clamp(12.5px,.83vw,15px);line-height:1.3;}
+.wsr-step h3{color:#fff;font-size:clamp(0.875rem,.98vw,1.125rem);letter-spacing:-.3px;margin-bottom:5px;}
+.wsr-step p{color:rgba(255,255,255,.8);font-size:clamp(0.7813rem,.83vw,0.9375rem);line-height:1.3;}
 
 /* ---------- Before & after ---------- */
 .wsr-results{background:var(--light-bg);}
@@ -326,22 +326,22 @@
 }
 .wsr-results-head .btn{margin-top:clamp(0px,.2vw,4px);}
 .wsr-results h2{
-  font-size:clamp(22px,2.05vw,38px);
+  font-size:clamp(1.375rem,2.05vw,2.375rem);
   letter-spacing:-.02em;
   line-height:1.12;
   margin-bottom:6px;
 }
-.wsr-results-head p{font-size:clamp(13px,.95vw,17px);line-height:1.5;color:var(--gray-text);}
+.wsr-results-head p{font-size:clamp(0.8125rem,.95vw,1.0625rem);line-height:1.5;color:var(--gray-text);}
 .wsr-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(12px,1.6vw,30px);
 }
-.wsr-ba-item figcaption{margin-top:clamp(8px,.8vw,14px);font-size:clamp(12.5px,.86vw,15px);line-height:1.4;color:var(--gray-text);}
+.wsr-ba-item figcaption{margin-top:clamp(8px,.8vw,14px);font-size:clamp(0.7813rem,.86vw,0.9375rem);line-height:1.4;color:var(--gray-text);}
 .wsr-ba-item figcaption strong{
   display:block;
   font-family:var(--font-head);
-  font-size:clamp(14px,1.05vw,19px);
+  font-size:clamp(0.875rem,1.05vw,1.1875rem);
   letter-spacing:-.2px;
   color:var(--navy);
   margin-bottom:2px;
@@ -394,7 +394,7 @@
   height:8cqw;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:max(10px,3.3cqw);
+  font-size:max(0.625rem,3.3cqw);
   letter-spacing:.04em;
   border-radius:1.2cqw;
   pointer-events:none;
@@ -413,12 +413,12 @@
   padding-block:clamp(18px,1.2vw,24px) clamp(16px,1.1vw,22px);
 }
 .wsr-related h2,.wsr-why-copy h2{
-  font-size:clamp(22px,1.8vw,33px);
+  font-size:clamp(1.375rem,1.8vw,2.0625rem);
   letter-spacing:-.02em;
   line-height:1.16;
   margin-bottom:clamp(8px,.8vw,14px);
 }
-.wsr-related-copy p{font-size:clamp(13.5px,1.05vw,19px);line-height:1.5;color:var(--gray-text);max-width:32em;}
+.wsr-related-copy p{font-size:clamp(0.8438rem,1.05vw,1.1875rem);line-height:1.5;color:var(--gray-text);max-width:32em;}
 .wsr-related-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,1.15fr);
@@ -428,12 +428,12 @@
 .wsr-rel-card .fg-card-media img{aspect-ratio:2.2/1;}
 .wsr-rel-card .fg-card-body{padding:clamp(9px,.85vw,16px) clamp(10px,.9vw,16px) clamp(9px,.75vw,14px);}
 .wsr-rel-card .fg-card-body h3{
-  font-size:clamp(13px,.86vw,16px);
+  font-size:clamp(0.8125rem,.86vw,1rem);
   letter-spacing:-.2px;
   margin-bottom:4px;
 }
-.wsr-rel-card .fg-card-body p{font-size:clamp(12px,.76vw,14px);line-height:1.32;margin-bottom:clamp(8px,.8vw,14px);}
-.wsr-rel-card .fg-card-link{font-size:clamp(12px,.78vw,14px);gap:6px;}
+.wsr-rel-card .fg-card-body p{font-size:clamp(0.75rem,.76vw,0.875rem);line-height:1.32;margin-bottom:clamp(8px,.8vw,14px);}
+.wsr-rel-card .fg-card-link{font-size:clamp(0.75rem,.78vw,0.875rem);gap:6px;}
 .wsr-rel-help{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
@@ -447,8 +447,8 @@
 .wsr-rel-help:hover{transform:translateY(-3px);}
 .wsr-rel-help-icon{color:var(--icon-blue);display:flex;margin-bottom:4px;}
 .wsr-rel-help-icon svg{width:clamp(28px,2.2vw,40px);height:auto;}
-.wsr-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(13px,.98vw,18px);line-height:1.22;color:var(--navy);}
-.wsr-rel-help small{font-size:clamp(11px,.74vw,13.5px);line-height:1.35;color:var(--gray-text);}
+.wsr-rel-help strong{font-family:var(--font-head);font-weight:800;font-size:clamp(0.8125rem,.98vw,1.125rem);line-height:1.22;color:var(--navy);}
+.wsr-rel-help small{font-size:clamp(0.6875rem,.74vw,0.8438rem);line-height:1.35;color:var(--gray-text);}
 
 /* ---------- Why us + FAQ ----------
    copy | checklist | FAQ accordion (native <details>, no JS). */
@@ -465,11 +465,11 @@
   column-gap:clamp(20px,2.4vw,46px);
   padding-block:clamp(18px,1.2vw,24px) clamp(22px,1.6vw,32px);
 }
-.wsr-why-copy p{font-size:clamp(13.5px,.98vw,17.5px);line-height:1.5;color:var(--gray-text);}
+.wsr-why-copy p{font-size:clamp(0.8438rem,.98vw,1.0938rem);line-height:1.5;color:var(--gray-text);}
 .wsr-checks{display:grid;gap:clamp(9px,.62vw,12px);}
 .wsr-checks li{
   display:flex;align-items:center;gap:clamp(10px,1.1vw,18px);
-  font-size:clamp(13.5px,.98vw,17.5px);
+  font-size:clamp(0.8438rem,.98vw,1.0938rem);
   color:#34506A;
 }
 .wsr-checks li::before{
@@ -484,7 +484,7 @@
   padding-left:clamp(18px,2.2vw,42px);
   border-left:1px solid #DCE8F3;
 }
-.wsr-faq h2{font-size:clamp(19px,1.5vw,28px);letter-spacing:-.02em;margin-bottom:clamp(4px,.25vw,6px);}
+.wsr-faq h2{font-size:clamp(1.1875rem,1.5vw,1.75rem);letter-spacing:-.02em;margin-bottom:clamp(4px,.25vw,6px);}
 .wsr-faq details{
   background:#fff;
   border:1px solid #D9E6F2;
@@ -495,7 +495,7 @@
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:clamp(6px,.3vw,7px) clamp(12px,1vw,18px);
   font-weight:500;
-  font-size:clamp(13px,.86vw,15.5px);
+  font-size:clamp(0.8125rem,.86vw,0.9688rem);
   cursor:pointer;
   list-style:none;
 }
@@ -511,7 +511,7 @@
 .wsr-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
 .wsr-faq details p{
   padding:0 clamp(12px,1vw,18px) 12px;
-  font-size:clamp(13px,.86vw,14.5px);
+  font-size:clamp(0.8125rem,.86vw,0.9063rem);
   line-height:1.55;
   color:var(--gray-text);
 }
@@ -562,8 +562,8 @@
   padding-left:max(var(--wide-pad), 24.7% - max(0px, (100% - 1920px) / 2));
   padding-right:calc(var(--wide-pad) + clamp(0px,3.85vw,74px));
 }
-.wsr-cta h2{color:#fff;font-size:clamp(22px,1.8vw,34px);letter-spacing:-.02em;margin-bottom:4px;}
-.wsr-cta p{font-size:clamp(14px,1.05vw,19px);color:rgba(255,255,255,.9);}
+.wsr-cta h2{color:#fff;font-size:clamp(1.375rem,1.8vw,2.125rem);letter-spacing:-.02em;margin-bottom:4px;}
+.wsr-cta p{font-size:clamp(0.875rem,1.05vw,1.1875rem);color:rgba(255,255,255,.9);}
 .wsr-cta-actions{display:flex;gap:clamp(10px,1.1vw,20px);flex-wrap:wrap;}
 .wsr-cta-actions .btn{padding:clamp(13px,1.05vw,18px) clamp(24px,2.2vw,40px);}
 .wsr-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);}
@@ -646,9 +646,9 @@
 
 @media (max-width:640px){
   .wsr-hero-inner{padding-top:34px;padding-bottom:28px;}
-  .wsr-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .wsr-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
   .wsr-hero h1 br{display:none;}
-  .wsr-hero-sub{font-size:14.5px;}
+  .wsr-hero-sub{font-size:0.9063rem;}
   .wsr-hero-actions .btn,.wsr-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   /* Show the stained hull rather than the tagline, which would sit under the copy. */
   .wsr-hero-img{object-position:30% center;}
@@ -661,8 +661,8 @@
      a list, and the figure crops off its empty label column (the left 33%). */
   .wsr-cause-art{overflow:hidden;aspect-ratio:325/242;}
   .wsr-cause-art img{width:149%;max-width:none;margin-left:-49%;}
-  .wsr-cause-tag{top:auto;bottom:8px;width:auto;height:auto;padding:6px 12px;border-radius:6px;font-size:12px;}
-  .wsr-cause-tag small{font-size:10.5px;}
+  .wsr-cause-tag{top:auto;bottom:8px;width:auto;height:auto;padding:6px 12px;border-radius:6px;font-size:0.75rem;}
+  .wsr-cause-tag small{font-size:0.6563rem;}
   .wsr-cause-tag-before{left:8px;}
   .wsr-cause-tag-after{left:auto;right:8px;}
   .wsr-cause-labels{
@@ -671,8 +671,8 @@
     gap:14px 16px;
     padding:16px var(--cause-pad) 18px;
   }
-  .wsr-cause-labels li{position:static;width:auto;font-size:13px;line-height:1.4;}
-  .wsr-cause-labels strong{font-size:14px;white-space:normal;}
+  .wsr-cause-labels li{position:static;width:auto;font-size:0.8125rem;line-height:1.4;}
+  .wsr-cause-labels strong{font-size:0.875rem;white-space:normal;}
   .wsr-process h2 .accent{display:block;}
   .wsr-steps{grid-template-columns:minmax(0,1fr);}
   .wsr-step + .wsr-step::before{display:none;}

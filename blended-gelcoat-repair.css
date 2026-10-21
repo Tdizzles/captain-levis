@@ -11,7 +11,7 @@
 
 .bgr-eyebrow{
   color:var(--icon-blue);
-  font-size:clamp(11px,.76vw,11.5px);
+  font-size:clamp(0.6875rem,.76vw,0.7188rem);
   letter-spacing:2px;
   gap:18px;
   margin-bottom:8px;
@@ -66,14 +66,14 @@
 }
 .bgr-hero-content{max-width:640px;}
 .bgr-hero-eyebrow{
-  font-size:clamp(11px,.8vw,12.2px);
+  font-size:clamp(0.6875rem,.8vw,0.7625rem);
   letter-spacing:2.2px;
   gap:18px;
   margin-bottom:9px;
   margin-left:calc(-40px - 18px);
 }
 .bgr-hero h1{
-  font-size:clamp(32px,3.07vw,47px);
+  font-size:clamp(2rem,3.07vw,2.9375rem);
   letter-spacing:-1px;
   line-height:1;
   color:#fff;
@@ -82,7 +82,7 @@
 .bgr-hero h1 .accent{color:var(--accent);}
 .bgr-hero-sub{
   color:rgba(255,255,255,.92);
-  font-size:clamp(15px,1.055vw,16px);
+  font-size:clamp(0.9375rem,1.055vw,1rem);
   line-height:1.39;
   max-width:30.9em;
   margin-bottom:clamp(18px,1.45vw,22.2px);
@@ -100,8 +100,8 @@
 .bgr-trust li{display:flex;align-items:center;gap:14px;color:#fff;}
 .bgr-trust-icon{color:var(--accent);display:flex;flex:none;}
 .bgr-trust-icon svg{width:auto;height:34px;}
-.bgr-trust strong{display:block;font-family:var(--font-head);font-size:14.5px;line-height:1.35;margin-bottom:2px;}
-.bgr-trust small{display:block;font-size:12.5px;color:rgba(255,255,255,.8);}
+.bgr-trust strong{display:block;font-family:var(--font-head);font-size:0.9063rem;line-height:1.35;margin-bottom:2px;}
+.bgr-trust small{display:block;font-size:0.7813rem;color:rgba(255,255,255,.8);}
 
 /* ---------- Icon rows (intro features + "right solution" features) ----------
    Centred columns, a pale-blue icon circle, hairline dividers between. */
@@ -122,12 +122,12 @@
 .bgr-icon svg{width:54%;height:54%;}
 .bgr-icons strong{
   font-family:var(--font-head);
-  font-size:clamp(13.5px,.94vw,14.4px);
+  font-size:clamp(0.8438rem,.94vw,0.9rem);
   line-height:1.25;
   color:var(--navy);
   margin-bottom:4px;
 }
-.bgr-icons small{font-size:clamp(12.5px,.88vw,13.5px);line-height:1.36;color:var(--gray-text);}
+.bgr-icons small{font-size:clamp(0.7813rem,.88vw,0.8438rem);line-height:1.36;color:var(--gray-text);}
 
 /* ---------- Intro: copy + features | big before/after ---------- */
 .bgr-intro{background:var(--light-bg);}
@@ -139,13 +139,13 @@
   padding-block:clamp(20px,1.5vw,23px) clamp(20px,1.45vw,22.2px);
 }
 .bgr-intro-copy h2{
-  font-size:clamp(28px,2.6vw,39.9px);
+  font-size:clamp(1.75rem,2.6vw,2.4937rem);
   letter-spacing:-.9px;
   line-height:1.07;
   margin-bottom:10px;
 }
 .bgr-intro-copy > p{
-  font-size:clamp(15px,1.2vw,18.4px);
+  font-size:clamp(0.9375rem,1.2vw,1.15rem);
   line-height:1.3;
   color:var(--gray-text);
   margin-bottom:clamp(18px,1.4vw,21.5px);
@@ -156,7 +156,7 @@
   .bgr-intro-features{margin-inline:-14px -34px;}
   .bgr-intro-features li{padding-inline:4px;}
 }
-.bgr-intro-features strong{font-size:clamp(13.5px,.91vw,13.9px);}
+.bgr-intro-features strong{font-size:clamp(0.8438rem,.91vw,0.8688rem);}
 .bgr-intro-features small{max-width:150px;}
 
 /* ---------- Process band ----------
@@ -189,7 +189,7 @@
 }
 .bgr-process-copy{padding-left:calc(40px + 18px);}
 .bgr-process-eyebrow{
-  font-size:clamp(11px,.8vw,12.2px);
+  font-size:clamp(0.6875rem,.8vw,0.7625rem);
   letter-spacing:2.4px;
   gap:18px;
   margin-bottom:8px;
@@ -197,7 +197,7 @@
 }
 .bgr-process-copy h2{
   color:#fff;
-  font-size:clamp(26px,2.27vw,34.8px);
+  font-size:clamp(1.625rem,2.27vw,2.175rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:8px;
@@ -205,7 +205,7 @@
 .bgr-process-copy h2 .accent{color:var(--accent);}
 .bgr-process-copy p{
   color:rgba(255,255,255,.88);
-  font-size:clamp(13.5px,.9vw,13.8px);
+  font-size:clamp(0.8438rem,.9vw,0.8625rem);
   line-height:1.3;
   max-width:31.5em;
   margin-bottom:clamp(10px,.75vw,11.5px);
@@ -249,12 +249,12 @@
   color:#fff;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:clamp(15px,1.2vw,18.4px);
+  font-size:clamp(0.9375rem,1.2vw,1.15rem);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 6px 14px -6px rgba(0,0,0,.55);
 }
-.bgr-step h3{color:#fff;font-size:clamp(14.5px,1.05vw,16px);letter-spacing:-.2px;margin-bottom:5px;}
-.bgr-step p{color:rgba(255,255,255,.82);font-size:clamp(13px,.94vw,14.4px);line-height:1.25;}
+.bgr-step h3{color:#fff;font-size:clamp(0.9063rem,1.05vw,1rem);letter-spacing:-.2px;margin-bottom:5px;}
+.bgr-step p{color:rgba(255,255,255,.82);font-size:clamp(0.8125rem,.94vw,0.9rem);line-height:1.25;}
 
 /* ---------- Before & after ---------- */
 .bgr-results{background:var(--light-bg);}
@@ -264,13 +264,13 @@
   margin-bottom:clamp(12px,.9vw,13.8px);
 }
 .bgr-results-head h2{
-  font-size:clamp(25px,2.26vw,34.5px);
+  font-size:clamp(1.5625rem,2.26vw,2.1563rem);
   letter-spacing:-.8px;
   line-height:1.1;
   margin-bottom:6px;
 }
-.bgr-results-head p{font-size:clamp(14px,1.08vw,16.5px);line-height:1.45;color:var(--gray-text);}
-.bgr-results-head .btn{margin-top:clamp(4px,.6vw,9px);font-size:14px;padding:13px 26px;}
+.bgr-results-head p{font-size:clamp(0.875rem,1.08vw,1.0313rem);line-height:1.45;color:var(--gray-text);}
+.bgr-results-head .btn{margin-top:clamp(4px,.6vw,9px);font-size:0.875rem;padding:13px 26px;}
 .bgr-ba-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
@@ -328,7 +328,7 @@
   display:flex;align-items:center;justify-content:center;
   font-family:var(--font-head);
   font-weight:700;
-  font-size:max(9px,3.15cqw);
+  font-size:max(0.5625rem,3.15cqw);
   letter-spacing:.04em;
   border-radius:1.3cqw;
   pointer-events:none;
@@ -339,7 +339,7 @@
 /* The intro's big slider: its own proportions and chip geometry. */
 .bgr-intro-ba{aspect-ratio:444/273;border-radius:10px;box-shadow:0 22px 44px -26px rgba(0,38,75,.6);}
 .bgr-intro-ba .sfr-ba-handle{width:max(34px,9.2cqw);height:max(34px,9.2cqw);}
-.bgr-intro-ba .sfr-ba-tag{bottom:3cqw;height:7.1cqw;font-size:max(11px,2.85cqw);border-radius:1.2cqw;}
+.bgr-intro-ba .sfr-ba-tag{bottom:3cqw;height:7.1cqw;font-size:max(0.6875rem,2.85cqw);border-radius:1.2cqw;}
 .bgr-intro-ba .sfr-ba-tag-before{left:2.4cqw;width:21.4cqw;}
 .bgr-intro-ba .sfr-ba-tag-after{right:2.6cqw;width:21.4cqw;}
 
@@ -359,13 +359,13 @@
 }
 .bgr-fit-copy h2,
 .bgr-related-copy h2{
-  font-size:clamp(25px,2.15vw,33px);
+  font-size:clamp(1.5625rem,2.15vw,2.0625rem);
   letter-spacing:-.8px;
   line-height:1.06;
   margin-bottom:8px;
 }
-.bgr-related-copy h2{font-size:clamp(25px,2.1vw,32.2px);}
-.bgr-fit-copy p{font-size:clamp(14px,1.06vw,16.2px);line-height:1.3;max-width:27.5em;color:var(--gray-text);}
+.bgr-related-copy h2{font-size:clamp(1.5625rem,2.1vw,2.0125rem);}
+.bgr-fit-copy p{font-size:clamp(0.875rem,1.06vw,1.0125rem);line-height:1.3;max-width:27.5em;color:var(--gray-text);}
 .bgr-fit-features li{border-left:1px solid #DCE8F3;}
 .bgr-fit-features li:first-child{border-left:1px solid #DCE8F3;}
 .bgr-fit-features small{max-width:12em;}
@@ -382,7 +382,7 @@
   column-gap:clamp(16px,1.2vw,18.4px);
   padding-block:clamp(10px,.7vw,10.7px);
 }
-.bgr-related-copy p{font-size:13px;line-height:1.55;max-width:31em;color:var(--gray-text);}
+.bgr-related-copy p{font-size:0.8125rem;line-height:1.55;max-width:31em;color:var(--gray-text);}
 .bgr-related-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1.07fr)) minmax(0,1fr);
@@ -403,14 +403,14 @@ a.bgr-rel-card:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3
 .bgr-rel-body strong{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
   font-family:var(--font-head);
-  font-size:clamp(13.5px,.9vw,13.8px);
+  font-size:clamp(0.8438rem,.9vw,0.8625rem);
   line-height:1.25;
   color:var(--navy);
   margin-bottom:5px;
 }
 .bgr-rel-body strong svg{flex:none;color:var(--icon-blue);transition:transform .15s ease;}
 a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
-.bgr-rel-body small{display:block;font-size:12.5px;line-height:1.35;color:var(--gray-text);}
+.bgr-rel-body small{display:block;font-size:0.7813rem;line-height:1.35;color:var(--gray-text);}
 .bgr-rel-help{
   align-items:center;justify-content:center;text-align:center;
   background:#E6F3FD;
@@ -427,12 +427,12 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
 }
 .bgr-rel-help strong{
   font-family:var(--font-head);
-  font-size:clamp(14px,.96vw,14.5px);
+  font-size:clamp(0.875rem,.96vw,0.9063rem);
   line-height:1.2;
   color:var(--navy);
   margin-bottom:5px;
 }
-.bgr-rel-help small{font-size:12.5px;line-height:1.35;color:var(--gray-text);}
+.bgr-rel-help small{font-size:0.7813rem;line-height:1.35;color:var(--gray-text);}
 .bgr-rel-help small a{color:var(--icon-blue);font-weight:600;}
 
 /* ---------- Why boaters choose us + FAQ ---------- */
@@ -445,19 +445,19 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
   padding-block:clamp(12px,.8vw,12.2px) clamp(16px,1.15vw,17.5px);
 }
 .bgr-why-copy h2{
-  font-size:clamp(24px,1.87vw,28.5px);
+  font-size:clamp(1.5rem,1.87vw,1.7813rem);
   letter-spacing:-.8px;
   line-height:1.08;
   margin-bottom:10px;
 }
-.bgr-why-copy p{font-size:clamp(13px,.885vw,13.5px);line-height:1.45;max-width:29.5em;color:var(--gray-text);}
+.bgr-why-copy p{font-size:clamp(0.8125rem,.885vw,0.8438rem);line-height:1.45;max-width:29.5em;color:var(--gray-text);}
 @media (min-width:1025px){
   .bgr-why-copy .eyebrow span{white-space:nowrap;}
 }
 .bgr-checks{display:grid;gap:clamp(4px,.33vw,5px);}
 .bgr-checks li{
   display:flex;align-items:center;gap:14px;
-  font-size:clamp(13.5px,.96vw,14.5px);
+  font-size:clamp(0.8438rem,.96vw,0.9063rem);
   line-height:1.3;
   color:var(--gray-text);
 }
@@ -475,7 +475,7 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
   align-content:center;
   gap:4px;
 }
-.bgr-faq h2{font-size:clamp(19px,1.43vw,21.9px);letter-spacing:-.5px;margin-bottom:4px;}
+.bgr-faq h2{font-size:clamp(1.1875rem,1.43vw,1.3687rem);letter-spacing:-.5px;margin-bottom:4px;}
 .bgr-faq details{
   background:#fff;
   border:1px solid #DDE8F4;
@@ -484,7 +484,7 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
 .bgr-faq summary{
   display:flex;align-items:center;justify-content:space-between;gap:16px;
   padding:3px clamp(12px,1vw,15.3px);
-  font-family:var(--font-head);font-weight:500;font-size:clamp(13.5px,.91vw,13.9px);
+  font-family:var(--font-head);font-weight:500;font-size:clamp(0.8438rem,.91vw,0.8688rem);
   line-height:1.3;
   color:var(--navy);
   cursor:pointer;list-style:none;
@@ -497,7 +497,7 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
 }
 .bgr-faq details[open] summary::after{transform:rotate(45deg);}
 .bgr-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
-.bgr-faq details p{padding:0 clamp(12px,1vw,15.3px) 12px;font-size:14px;line-height:1.55;color:var(--gray-text);}
+.bgr-faq details p{padding:0 clamp(12px,1vw,15.3px) 12px;font-size:0.875rem;line-height:1.55;color:var(--gray-text);}
 
 /* ---------- Closing CTA band ---------- */
 .bgr-cta{
@@ -521,11 +521,11 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
      full-width section, so take off .container's centring margin. */
   padding-left:max(var(--pad), calc(25.7% - max(0px, (100% - var(--container)) / 2)));
 }
-.bgr-cta h2{color:#fff;font-size:clamp(23px,1.9vw,29px);letter-spacing:-.6px;margin-bottom:6px;}
-.bgr-cta p{font-size:clamp(14px,.98vw,15px);color:rgba(255,255,255,.88);}
+.bgr-cta h2{color:#fff;font-size:clamp(1.4375rem,1.9vw,1.8125rem);letter-spacing:-.6px;margin-bottom:6px;}
+.bgr-cta p{font-size:clamp(0.875rem,.98vw,0.9375rem);color:rgba(255,255,255,.88);}
 .bgr-cta-copy{min-width:0;}
 .bgr-cta-actions{display:flex;flex:none;gap:clamp(12px,1.1vw,16.8px);flex-wrap:wrap;}
-.bgr-cta-actions .btn{font-size:16px;padding:15px 29px;}
+.bgr-cta-actions .btn{font-size:1rem;padding:15px 29px;}
 
 /* ==========================================================================
    Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
@@ -590,8 +590,8 @@ a.bgr-rel-card:hover .bgr-rel-body strong svg{transform:translateX(3px);}
 
 @media (max-width:640px){
   .bgr-hero-inner{padding-top:32px;padding-bottom:28px;}
-  .bgr-hero h1{font-size:clamp(28px,8.4vw,36px);letter-spacing:-.7px;}
-  .bgr-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .bgr-hero h1{font-size:clamp(1.75rem,8.4vw,2.25rem);letter-spacing:-.7px;}
+  .bgr-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
   .bgr-hero-actions{gap:10px;}
   .bgr-hero-actions .btn,.bgr-cta-actions .btn{flex:1 1 100%;justify-content:center;}
   .bgr-cta-actions{width:100%;}
