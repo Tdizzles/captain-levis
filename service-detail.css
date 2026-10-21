@@ -1,0 +1,791 @@
+/* ==========================================================================
+   Service detail — the shared template for single-service pages.
+   First used by hatches-lids-access-panels.html; written so later pages that
+   have no mockup can reuse it unchanged. Loads after styles.css and reuses
+   its tokens, buttons, eyebrows, cards, header, footer and contact form.
+   Everything here is prefixed .sd-; the only unprefixed rules are the shared
+   .sfr-ba slider styles, which every page that uses the slider defines for
+   itself. Started as a copy of custom-consoles-dash-panels.css, whose comp
+   has the same layout.
+
+   This file holds no image URLs, no page copy and no per-photo tuning. A
+   page swaps its photos by editing only its own HTML:
+
+     Hero photo     <img class="sd-hero-img" style="--pos:…; --pos-sm:…">
+                    --pos is its object-position on desktop, --pos-sm once it
+                    fills the band (1024px and below); optional --w (photo
+                    width on desktop, default 61%) and --fade (length of the
+                    fade into the navy, default 16%) on the same element.
+     Diagram        pins:  <span class="sd-pin" style="--x:…%;--y:…%"><b>1</b>
+                    cards: <li class="sd-callout" style="--x:…%;--y:…%;--w:…%;
+                           --h:…%"> (left, top, width, min-height in % of the
+                           photo) with a <span class="sd-callout-num">
+                    lines: <svg class="sd-leaders" viewBox="0 0 W H"
+                           preserveAspectRatio="none"> with W×H the image's
+                           natural size; leave it out and the pins and cards
+                           are numbered instead.
+                    phone: under 700px the cards become a numbered list; add
+                           .sd-diagram--zoom with --zoom, --zoom-x and --ar on
+                           the figure to crop the photo in on the pins there.
+     Process photo  <img style="--pos:…; --pos-sm:…"> inside .sd-process-photo
+                    (its arc edge is a clip-path, so any photo works)
+     Sliders        background-image (and background-position, if the seam or
+                    subject is off-centre) inline on each .sfr-ba-img
+     CTA photo      <img style="--pos:…"> inside .sd-cta-photo; the strip's
+                    width is --photo-w on .sd-cta, and the copy follows it
+     Card rows      any number of service cards, steps and sliders: one
+                    column each on desktop
+     Related row    --cols on .sd-related-grid when it has other than six
+                    service cards plus the help card
+
+   Fades between a photo and the navy are CSS masks/overlays, never baked
+   into an image, so any photo can go in any slot.
+   ========================================================================== */
+
+/* The comp runs its bands nearly edge to edge: a 1760px frame whose content
+   edge sits 57px in at 1536 (the comp's 38px). --sd-edge is that edge, for
+   bands that bleed a photo to the viewport instead. */
+.sd-hero,.sd-intro,.sd-process,.sd-cta{
+  --sd-gutter:clamp(18px,3.7vw,64px);
+  --sd-edge:max(var(--sd-gutter), calc((100% - 1760px) / 2 + var(--sd-gutter)));
+}
+.sd-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,3.7vw,64px);
+}
+.sd-eyebrow{
+  color:#1A86F0;
+  font-size:13px;
+  letter-spacing:2px;
+  gap:14px;
+  margin-bottom:8px;
+}
+.sd-eyebrow i{background:#1A86F0;width:34px;}
+
+/* ---------- Hero ----------
+   The photo covers the right of the band, behind the trust strip too, and
+   fades into the navy on its left through a mask. A scrim keeps the copy
+   readable where the two overlap; the trust strip carries its own wash. The
+   copy is indented past the eyebrow's rule, as in the comp. */
+.sd-hero{
+  --sd-indent:76px;                 /* eyebrow rule (47px) + its gap (29px) */
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.sd-hero-img{
+  position:absolute;top:0;right:0;
+  width:var(--w,61%);height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:var(--pos,center);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 var(--fade,16%));
+          mask-image:linear-gradient(90deg,transparent 0%,#000 var(--fade,16%));
+}
+.sd-hero-main{position:relative;}
+.sd-hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(0,24,50,0) 68%,rgba(0,24,50,.5) 100%),
+    linear-gradient(90deg,
+      rgba(0,22,46,.62) 0%,
+      rgba(0,22,46,.42) 42%,
+      rgba(0,22,46,0) 58%);
+}
+.sd-hero-inner{
+  position:relative;
+  padding-top:clamp(22px,1.8vw,33px);
+  padding-bottom:clamp(14px,1vw,18px);
+}
+.sd-hero-content{max-width:780px;padding-left:var(--sd-indent);}
+.sd-hero-eyebrow{
+  margin-left:calc(-1 * var(--sd-indent));
+  margin-bottom:10px;
+  font-size:13px;
+  letter-spacing:2.1px;
+  gap:29px;
+  color:#E6F6FE;
+}
+.sd-hero-eyebrow i{width:47px;}
+.sd-hero-eyebrow em{font-style:normal;color:var(--accent);}
+.sd-hero h1{
+  font-size:clamp(30px,3.25vw,54px);
+  letter-spacing:-1.1px;
+  line-height:1.01;
+  color:#fff;
+  margin-bottom:6px;
+}
+.sd-hero h1 .accent{color:var(--accent);}
+.sd-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(14.5px,1.21vw,19.5px);
+  line-height:1.3;
+  max-width:615px;
+  margin-bottom:13px;
+}
+.sd-hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.sd-hero-actions .btn{padding:clamp(13px,1vw,16px) clamp(24px,1.95vw,34px);font-size:clamp(14.5px,1.02vw,16.5px);}
+
+.sd-trust-bar{
+  position:relative;
+  background:linear-gradient(180deg,rgba(0,24,50,.5) 0%,rgba(0,22,46,.78) 45%,rgba(0,20,42,.9) 100%);
+}
+.sd-trust{
+  display:grid;
+  grid-auto-flow:column;
+  justify-content:space-between;
+  gap:14px 12px;
+  padding-block:clamp(8px,.5vw,10px) clamp(12px,1vw,18px);
+  /* The comp's inset (140px / 86px at 1536), shrinking to the frame's own
+     gutter towards 1024 so the four items always fit on one row. */
+  padding-left:max(clamp(18px,3.7vw,64px), min(27vw - 277px, 150px));
+  padding-right:max(clamp(18px,3.7vw,64px), min(16.8vw - 172px, 96px));
+}
+.sd-trust li{display:flex;align-items:center;gap:clamp(12px,1.5vw,24px);color:#fff;}
+.sd-trust-icon{flex:none;display:flex;color:var(--accent);}
+.sd-trust-icon svg{width:clamp(28px,2.5vw,40px);height:auto;}
+.sd-trust strong{display:block;font-family:var(--font-head);font-size:clamp(13.5px,1.08vw,17px);line-height:1.25;}
+.sd-trust small{display:block;font-size:clamp(12px,.93vw,15px);line-height:1.3;color:rgba(255,255,255,.78);}
+
+/* ---------- Intro: copy | diagram bleeding to the right edge ----------
+   The copy keeps the frame's content edge; the diagram is a grid cell that
+   runs to the viewport edge and sets the band's height. */
+.sd-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) min(59.2%, 1140px);
+  align-items:center;
+  column-gap:clamp(12px,1vw,20px);
+  padding-left:var(--sd-edge);
+  background:var(--light-bg);
+}
+.sd-intro-copy{padding-block:clamp(12px,.8vw,16px);}
+.sd-intro h2{
+  font-size:clamp(24px,2.45vw,42px);
+  letter-spacing:-.8px;
+  line-height:1.1;
+  margin-bottom:4px;
+}
+.sd-intro-copy > p{
+  font-size:clamp(15px,1.24vw,20px);
+  line-height:1.21;
+  color:var(--gray-text);
+  max-width:610px;
+  margin-bottom:clamp(12px,.75vw,14px);
+}
+.sd-intro-copy .btn{padding:clamp(11px,.72vw,13px) clamp(22px,2vw,34px);font-size:clamp(14.5px,1.02vw,16.5px);}
+
+/* Diagram: a photo plus live markup. The leader lines are an SVG in the
+   image's own pixel space (viewBox = its natural size), the pins and cards
+   are placed in % of the photo from inline --x/--y/--w/--h, and the cards'
+   type is in container query units, so the whole diagram scales as one and
+   any photo works. */
+.sd-diagram{
+  position:relative;
+  container-type:inline-size;
+  overflow:clip;
+  margin:0;
+}
+.sd-diagram-photo{position:relative;}
+.sd-diagram-photo > img{
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%);
+          mask-image:linear-gradient(90deg,transparent,#000 4%);
+}
+.sd-leaders{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  overflow:visible;
+  pointer-events:none;
+}
+.sd-leaders path{
+  fill:none;
+  stroke:#fff;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 0 1.5px rgba(0,38,75,.45));
+}
+.sd-pin{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  width:clamp(10px,1.5cqw,16px);aspect-ratio:1;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#1E8BF0;
+  box-shadow:0 0 0 clamp(1.5px,.27cqw,3px) #fff, 0 2px 8px rgba(0,38,75,.4);
+  display:flex;align-items:center;justify-content:center;
+}
+.sd-pin b{display:none;}
+.sd-callouts{list-style:none;margin:0;padding:0;}
+.sd-callout{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  width:var(--w,24%);min-height:var(--h,auto);
+  background:#fff;
+  border-radius:clamp(4px,.75cqw,7px);
+  box-shadow:0 10px 22px -14px rgba(0,38,75,.45);
+  padding:1cqw 1cqw 1cqw 2.05cqw;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.sd-callout-num{display:none;}
+.sd-callout strong{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(9.5px,1.72cqw,17px);
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:.25em;
+}
+.sd-callout small{
+  display:block;
+  font-size:clamp(8.5px,1.54cqw,15px);
+  line-height:1.22;
+  color:var(--gray-text);
+}
+/* No leader lines: the pins and cards carry matching numbers instead. */
+.sd-diagram:not(:has(.sd-leaders)) .sd-pin{width:clamp(16px,2.6cqw,26px);}
+.sd-diagram:not(:has(.sd-leaders)) .sd-pin b{display:block;font:800 clamp(9px,1.35cqw,13px)/1 var(--font-head);color:#fff;}
+.sd-diagram:not(:has(.sd-leaders)) .sd-callout{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  align-content:center;
+  column-gap:1cqw;
+  padding-left:1.3cqw;
+}
+.sd-diagram:not(:has(.sd-leaders)) .sd-callout-num{
+  display:flex;align-items:center;justify-content:center;
+  grid-row:1 / span 2;align-self:start;
+  width:clamp(16px,2.3cqw,24px);aspect-ratio:1;
+  border-radius:50%;
+  background:#1E8BF0;
+  color:#fff;
+  font:800 clamp(9px,1.25cqw,12px)/1 var(--font-head);
+}
+@container (max-width:700px){
+  /* Too small for cards over the photo: the pins take numbers and the cards
+     become a numbered list under it. */
+  .sd-leaders{display:none;}
+  .sd-diagram-photo > img{-webkit-mask-image:none;mask-image:none;}
+  /* Optional crop for the small photo (.sd-diagram--zoom): --zoom (e.g. 1.6)
+     enlarges it around --zoom-x (0 = left edge, .5 = centre, 1 = right
+     edge); --ar is the image's width/height (its attributes, e.g. 1168/454).
+     The photo keeps the figure's width and grows in height, and the pins
+     move with it, so keep every pin inside the cropped area. */
+  .sd-diagram--zoom .sd-diagram-photo{height:calc(100cqw * var(--zoom) / (var(--ar)));}
+  .sd-diagram--zoom .sd-diagram-photo > img{
+    height:100%;
+    object-fit:cover;
+    object-position:calc(var(--zoom-x,.5) * 100%) 50%;
+  }
+  .sd-diagram--zoom .sd-pin{left:calc(var(--zoom) * var(--x) - (var(--zoom) - 1) * var(--zoom-x,.5) * 100%);}
+  .sd-pin,
+  .sd-diagram:not(:has(.sd-leaders)) .sd-pin{width:22px;}
+  .sd-pin b,
+  .sd-diagram:not(:has(.sd-leaders)) .sd-pin b{display:block;font:800 11px/1 var(--font-head);color:#fff;}
+  .sd-callouts{display:grid;gap:10px;padding:14px var(--sd-gutter,18px) 4px;}
+  .sd-callout,
+  .sd-diagram:not(:has(.sd-leaders)) .sd-callout{
+    position:static;
+    display:grid;
+    grid-template-columns:22px minmax(0,1fr);
+    column-gap:12px;
+    width:auto;min-height:0;
+    padding:12px 14px;
+    border-radius:8px;
+    box-shadow:0 6px 16px -12px rgba(0,38,75,.45);
+  }
+  .sd-callout-num,
+  .sd-diagram:not(:has(.sd-leaders)) .sd-callout-num{
+    display:flex;align-items:center;justify-content:center;
+    grid-row:1 / span 2;align-self:start;
+    width:22px;height:22px;
+    border-radius:50%;
+    background:#1E8BF0;
+    color:#fff;
+    font:800 11px/1 var(--font-head);
+  }
+  .sd-callout strong{font-size:15px;}
+  .sd-callout small{font-size:13.5px;line-height:1.35;}
+}
+
+/* ---------- Common services: fg-cards without links ----------
+   One column per card on desktop, however many cards the page has. */
+.sd-options{background:linear-gradient(180deg,#F4FAFE 0%,#F9FBFE 100%);}
+.sd-options .sd-wide{padding-block:clamp(8px,.6vw,11px) clamp(14px,1.1vw,18px);}
+.sd-opt-grid{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(0,1fr);
+  gap:clamp(12px,1.08vw,18px);
+}
+.sd-opt{border-radius:8px;}
+.sd-opt:hover{transform:none;}
+.sd-opt .fg-card-media img{aspect-ratio:181/76;}
+.sd-opt .fg-card-body{padding:clamp(9px,.6vw,10px) clamp(14px,1.15vw,20px) clamp(12px,.95vw,16px);}
+.sd-opt .fg-card-body h3{font-size:clamp(14.5px,1.165vw,19px);letter-spacing:-.3px;margin-bottom:clamp(3px,.35vw,6px);}
+.sd-opt .fg-card-body p{font-size:clamp(13px,1.03vw,16.5px);line-height:1.25;margin-bottom:0;}
+
+/* ---------- Shared slider (script.js binds every .sfr-ba) ----------
+   The handle starts at 50%, so a placeholder pair is built with its seam on
+   the image's centre (or the image is shifted with background-position). */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:310/92;
+  border-radius:7px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(34px,2.8vw,44px);height:clamp(34px,2.8vw,44px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+/* The comp's tags sit on the bottom edge. */
+.sfr-ba-tag{
+  position:absolute;bottom:0;
+  width:24.9%;
+  text-align:center;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(11px,.95vw,15px);
+  letter-spacing:.8px;
+  padding:clamp(5px,.5vw,8px) 0;
+  border-radius:5px 5px 0 0;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:3.2%;background:rgba(0,22,46,.94);color:#fff;}
+.sfr-ba-tag-after{right:3.9%;background:#1E9BF0;color:#fff;}
+
+/* ---------- Process band ----------
+   Photo bleeding off the left edge with a convex arc on its trailing side
+   (a CSS clip, so any photo works), then copy and the step cards. The
+   section's right padding reproduces .sd-wide's content edge. */
+.sd-process{
+  display:grid;
+  /* 37.1% of the viewport, as in the comp: the % resolves against the
+     content box, which loses the right padding. */
+  grid-template-columns:clamp(260px,37.8%,720px) minmax(0,1fr);
+  padding-right:clamp(16px,1.85vw,34px);
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(28,148,220,.16), transparent 60%),
+    linear-gradient(100deg,var(--navy) 0%,#062F5A 55%,var(--navy-2) 100%);
+}
+.sd-process-photo{
+  position:relative;
+  clip-path:ellipse(100% 156% at 0% 50%);
+}
+.sd-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:var(--pos,center);
+}
+.sd-process-body{
+  padding:clamp(10px,.8vw,13px) 0 clamp(6px,.45vw,8px) clamp(10px,1.4vw,21px);
+}
+.sd-process-head{margin-left:clamp(0px,.3vw,5px);}
+/* As in the comp, the eyebrow's rule hangs left of the heading. */
+.sd-process-eyebrow{
+  color:var(--accent);
+  font-size:12px;
+  letter-spacing:2.2px;
+  margin-bottom:0;
+  margin-left:-42px;
+  gap:10px;
+}
+.sd-process-eyebrow i{background:var(--accent);width:32px;}
+.sd-process h2{
+  color:#fff;
+  font-size:clamp(22px,1.95vw,32px);
+  letter-spacing:-.6px;
+  line-height:1.15;
+  margin-bottom:4px;
+}
+.sd-process-lead{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(14px,1.15vw,19px);
+  line-height:1.25;
+  max-width:760px;
+  margin-bottom:clamp(14px,1vw,17px);
+}
+.sd-steps{
+  --step-gap:clamp(20px,1.66vw,30px);
+  list-style:none;
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(0,1fr);
+  gap:24px var(--step-gap);
+}
+.sd-step{
+  --step-pad:clamp(14px,1.4vw,22px);
+  position:relative;
+  padding:clamp(5px,.4vw,7px) clamp(10px,1vw,16px) clamp(8px,.6vw,11px) var(--step-pad);
+  border:1px solid rgba(94,205,250,.2);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 100%);
+}
+/* Arrow between cards, centred in the gap. */
+.sd-step + .sd-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-.5 * var(--step-gap) - 12px);
+  top:50%;
+  width:24px;height:24px;
+  margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity:.9;
+}
+/* As in the comp, the number badge sits tight in the card's top-left corner. */
+.sd-step-top{display:flex;align-items:center;gap:clamp(14px,2.5vw,40px);margin:0 0 3px calc(3px - var(--step-pad));}
+.sd-step-num{
+  flex:none;
+  width:clamp(32px,2.9vw,46px);height:clamp(32px,2.9vw,46px);
+  border-radius:50%;
+  background:#1E8BF0;
+  box-shadow:0 0 0 4px rgba(28,148,220,.22);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(16px,1.2vw,20px);
+  display:flex;align-items:center;justify-content:center;
+}
+.sd-step-icon{display:flex;color:#fff;}
+.sd-step-icon svg{width:clamp(22px,2.1vw,34px);height:auto;}
+.sd-step h3{color:#fff;font-size:clamp(14px,1.04vw,17px);letter-spacing:-.2px;margin-bottom:4px;text-align:center;}
+.sd-step p{color:rgba(255,255,255,.8);font-size:clamp(13px,.92vw,15px);line-height:1.25;}
+
+/* ---------- Before & after ---------- */
+.sd-results{
+  background:linear-gradient(180deg,#F8FBFE 0%,var(--light-bg) 100%);
+}
+.sd-results-inner{padding-block:clamp(8px,.7vw,12px) clamp(12px,.8vw,14px);}
+.sd-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:12px 40px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(8px,.55vw,10px);
+}
+.sd-head h2{
+  font-size:clamp(23px,2vw,33px);
+  letter-spacing:-.7px;
+  line-height:1.12;
+}
+.sd-head .btn{
+  align-self:flex-start;
+  margin-top:clamp(2px,.3vw,5px);
+  padding:clamp(9px,.62vw,11px) clamp(18px,1.5vw,26px);
+  font-size:clamp(13px,.92vw,15px);
+}
+.sd-ba-grid{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(0,1fr);
+  gap:clamp(14px,1.37vw,24px);
+}
+
+/* ---------- Other boat repair services ----------
+   Head row (copy | button), then the title-only service cards and a "can't
+   find it" card. On desktop the default column widths follow the comp's
+   six cards (a page with a different number sets --cols on the grid);
+   below 1400px the row is a wrapping flex row, so any number of cards
+   works. Each card is one link. */
+.sd-related{background:linear-gradient(180deg,#F6FBFD 0%,#F3F9FE 100%);}
+.sd-related-inner{padding-block:clamp(10px,.75vw,13px) clamp(12px,.75vw,14px);}
+.sd-related-grid{
+  --gap:clamp(10px,.85vw,14px);
+  display:grid;
+  grid-template-columns:var(--cols,108fr 115fr 120fr 103fr 102fr 213fr 141fr);
+  gap:var(--gap);
+}
+.sd-rel-card{position:relative;border:1px solid #E6EFF7;border-radius:8px;}
+.sd-rel-card:hover{transform:translateY(-2px);}
+.sd-rel-card .fg-card-media img{aspect-ratio:auto;height:clamp(76px,6vw,100px);}
+.sd-rel-card .fg-card-body{padding:clamp(10px,.85vw,14px) clamp(10px,1vw,16px) clamp(12px,.9vw,15px);}
+.sd-rel-card h3{font-size:clamp(12.5px,.95vw,15px);letter-spacing:-.3px;line-height:1.3;margin:0;}
+.sd-rel-card h3 a{color:inherit;}
+/* The title's link covers the whole card. */
+.sd-rel-card h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.sd-rel-card h3 a:focus-visible{outline:none;}
+.sd-rel-card:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sd-rel-help{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  gap:clamp(3px,.3vw,5px);
+  padding:clamp(6px,.45vw,8px) clamp(10px,.8vw,14px);
+  border-radius:10px;
+  background:#E6F2FD;
+}
+.sd-rel-help-icon{
+  width:clamp(32px,2.4vw,40px);height:clamp(32px,2.4vw,40px);
+  border-radius:50%;
+  background:#fff;
+  color:#1E8BF0;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:clamp(2px,.4vw,7px);
+}
+.sd-rel-help a{font-family:var(--font-head);font-weight:800;font-size:clamp(14px,1.18vw,19px);line-height:1.15;letter-spacing:-.3px;color:var(--navy);}
+.sd-rel-help a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.sd-rel-help a:focus-visible{outline:none;}
+.sd-rel-help:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sd-rel-help p{font-size:clamp(12px,.88vw,14px);line-height:1.25;color:var(--gray-text);}
+
+/* ---------- Why choose us + FAQ ----------
+   copy | features | FAQ, the first two set off by a rule. Questions use
+   native <details>, so they work without script. */
+.sd-why{background:linear-gradient(180deg,#F7FBFE 0%,#F2F8FD 100%);}
+.sd-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,36.6%) minmax(0,1fr) minmax(0,34%);
+  align-items:center;
+  padding-block:clamp(12px,.9vw,16px) clamp(12px,.8vw,14px);
+}
+.sd-why-copy{align-self:start;padding-right:clamp(16px,1.4vw,24px);}
+.sd-why h2{
+  font-size:clamp(22px,1.76vw,29px);
+  letter-spacing:-.6px;
+  line-height:1.12;
+  margin-bottom:4px;
+}
+.sd-why-copy p{font-size:clamp(14px,.97vw,16px);line-height:1.42;color:var(--gray-text);}
+.sd-why .sd-eyebrow{font-size:10.5px;letter-spacing:1.5px;}
+.sd-features{
+  align-self:stretch;
+  display:grid;align-content:center;
+  gap:clamp(12px,1.05vw,18px);
+  padding-left:clamp(20px,2.15vw,40px);
+  padding-right:clamp(16px,1.6vw,28px);
+  border-left:1px solid #DCE7F1;
+}
+.sd-features li{display:flex;align-items:center;gap:clamp(14px,1.9vw,30px);}
+.sd-feature-icon{flex:none;display:flex;justify-content:center;width:clamp(28px,2.5vw,40px);color:#1E8BF0;}
+.sd-feature-icon svg{width:clamp(26px,2.4vw,38px);height:auto;}
+.sd-features strong{display:block;font-family:var(--font-head);font-size:clamp(14px,.98vw,16px);line-height:1.25;color:var(--navy);}
+.sd-features small{display:block;font-size:clamp(13px,.9vw,14.5px);line-height:1.3;color:var(--gray-text);}
+.sd-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.sd-faq h2{font-size:clamp(19px,1.45vw,24px);letter-spacing:-.5px;margin-bottom:6px;}
+.sd-faq-list{display:grid;gap:4px;}
+.sd-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;box-shadow:0 4px 10px -8px rgba(0,38,75,.3);}
+.sd-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:3px 14px;
+  line-height:1.4;
+  font-size:clamp(13.5px,.9vw,15px);
+  font-weight:500;
+  color:var(--navy);
+  cursor:pointer;
+  list-style:none;
+}
+.sd-faq summary::-webkit-details-marker{display:none;}
+.sd-faq summary::after{
+  content:"";flex:none;
+  width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.sd-faq details[open] summary::after{transform:rotate(45deg);}
+.sd-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.sd-faq details p{padding:0 16px 14px;font-size:14px;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ----------
+   A photo at the left edge, faded into the navy by a mask; an optional faint
+   wide photo (.sd-cta-bg) on the right. Copy | two buttons. */
+.sd-cta{
+  --photo-w:clamp(200px,34.2vw,600px);
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy) 55%,#0B3A66 100%);
+}
+.sd-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  max-width:none;
+  object-fit:cover;
+  object-position:var(--pos,center 62%);
+  opacity:.22;
+  -webkit-mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+          mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+}
+.sd-cta-photo{
+  position:absolute;top:0;bottom:0;left:0;
+  width:var(--photo-w);
+  -webkit-mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 72%,transparent 100%);
+}
+.sd-cta-photo img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:var(--pos,left center);}
+.sd-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px clamp(14px,1vw,20px);
+  flex-wrap:wrap;
+  min-height:clamp(84px,6.25vw,108px);
+  padding-right:clamp(18px,3.4vw,60px);
+  padding-block:clamp(12px,.9vw,16px);
+  /* The copy starts just past the photo (the comp's x 365 of 1024); the
+     subtraction undoes the frame's centring above 1760px. */
+  padding-left:max(var(--sd-gutter), calc(var(--photo-w) + 22px - max(0px, (100vw - 1760px) / 2)));
+}
+.sd-cta-copy{flex:1 1 300px;}
+.sd-cta h2{color:#fff;font-size:clamp(19px,1.5vw,25px);letter-spacing:-.5px;line-height:1.15;margin-bottom:3px;}
+.sd-cta p{font-size:clamp(12.5px,.8vw,14px);color:rgba(255,255,255,.85);}
+.sd-cta-actions{display:flex;gap:clamp(10px,1.05vw,18px);flex-wrap:wrap;margin-left:auto;}
+.sd-cta-actions .btn{padding:clamp(12px,.95vw,15px) clamp(22px,1.8vw,32px);font-size:clamp(14px,.98vw,16px);}
+.sd-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);border-color:rgba(94,205,250,.7);}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, so the later block wins).
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* Hero: the copy no longer fits left of the photo, so the photo narrows
+     and fades in over a longer run and the scrim reaches further. */
+  .sd-hero-img{
+    width:min(var(--w,61%),56%);
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);
+            mask-image:linear-gradient(90deg,transparent 0%,#000 38%);
+  }
+  .sd-hero-scrim{
+    background:
+      linear-gradient(180deg,rgba(0,24,50,0) 68%,rgba(0,24,50,.5) 100%),
+      linear-gradient(90deg, rgba(0,22,46,.7) 0%, rgba(0,22,46,.55) 50%, rgba(0,22,46,0) 72%);
+  }
+  .sd-hero-sub{max-width:520px;}
+  /* Related: the service cards share one row and the help card becomes a
+     strip under them. */
+  .sd-related-grid{display:flex;flex-wrap:wrap;}
+  .sd-rel-card{flex:1 1 0;min-width:0;}
+  .sd-rel-help{
+    flex:1 0 100%;
+    display:grid;
+    grid-template-columns:auto minmax(0,1fr);
+    grid-template-areas:"icon title" "icon copy";
+    align-items:center;
+    column-gap:16px;row-gap:2px;
+    text-align:left;
+    padding:12px 20px;
+  }
+  .sd-rel-help-icon{grid-area:icon;margin:0;}
+  .sd-rel-help a{grid-area:title;}
+  .sd-rel-help p{grid-area:copy;}
+  .sd-rel-help a br{display:none;}
+}
+
+@media (max-width:1240px){
+  /* Intro stacks: the diagram becomes a full-width row under the copy so its
+     cards keep room for their descriptions (they turn into a list once the
+     diagram is under 700px wide). */
+  .sd-intro{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .sd-intro-copy{padding:clamp(28px,4vw,40px) var(--sd-edge) 8px;}
+  .sd-diagram{width:100%;max-width:900px;justify-self:end;}
+  .sd-opt-grid{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));}
+  .sd-steps{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));}
+  .sd-step:nth-child(2n+1)::before{display:none;}
+  .sd-rel-card{flex:0 0 calc((100% - 2 * var(--gap)) / 3);}
+  /* Why: copy | features on top, the FAQ full width below. */
+  .sd-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:24px;padding-block:28px;}
+  .sd-features{padding-right:0;}
+  .sd-faq{grid-column:1 / -1;border-top:1px solid #DCE7F1;padding-top:22px;}
+  /* The CTA copy wraps beside the photo; the buttons drop below it. */
+  .sd-cta-inner{padding-left:calc(var(--photo-w) + 8px);}
+  .sd-cta-actions{margin-left:0;}
+}
+
+@media (max-width:1024px){
+  .sd-hero-img{
+    width:100%;
+    object-position:var(--pos-sm,var(--pos,center));
+    -webkit-mask-image:none;mask-image:none;
+  }
+  .sd-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.76) 60%, rgba(0,22,46,.5) 100%);
+  }
+  .sd-trust-bar{background:rgba(0,20,42,.82);}
+  .sd-trust{grid-auto-flow:row;grid-template-columns:repeat(2,auto);justify-content:start;column-gap:clamp(24px,6vw,64px);padding-inline:clamp(18px,3.7vw,64px);}
+  .sd-process{grid-template-columns:minmax(0,1fr);padding-right:0;}
+  .sd-process-photo{clip-path:none;aspect-ratio:2.4/1;}
+  .sd-process-photo img{object-position:var(--pos-sm,var(--pos,center));}
+  .sd-process-body{padding:clamp(24px,4vw,36px) var(--pad) clamp(26px,4vw,40px);}
+  .sd-process-head{margin-left:0;}
+  .sd-process-eyebrow{margin-left:0;}
+  .sd-step h3{text-align:left;}
+  .sd-cta{--photo-w:40%;}
+  .sd-cta-photo{opacity:.45;}
+  .sd-cta-inner{padding-block:24px;padding-left:var(--sd-gutter);}
+}
+
+@media (max-width:820px){
+  .sd-opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .sd-rel-card{flex-basis:calc((100% - var(--gap)) / 2);}
+  .sd-rel-card h3{font-size:15px;}
+  .sd-why-inner{grid-template-columns:minmax(0,1fr);}
+  .sd-why-copy{padding-right:0;}
+  .sd-features{border-left:0;padding-inline:0;}
+  .sd-ba-grid{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .sd-hero{--sd-indent:0px;}
+  .sd-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .sd-hero-eyebrow{font-size:11px;letter-spacing:1.6px;gap:10px;}
+  .sd-hero-eyebrow i{width:24px;}
+  .sd-hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.7px;}
+  .sd-hero h1 br{display:none;}
+  .sd-hero-sub{font-size:14.5px;margin-bottom:22px;}
+  .sd-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
+  }
+  .sd-hero-actions,.sd-cta-actions{width:100%;gap:10px;}
+  .sd-hero-actions .btn,.sd-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .sd-trust{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;}
+  .sd-intro h2 br{display:none;}
+  .sd-intro-copy .btn{width:100%;justify-content:center;}
+  .sd-opt-grid{grid-template-columns:minmax(0,1fr);}
+  .sd-steps{grid-template-columns:minmax(0,1fr);}
+  .sd-step + .sd-step::before{display:none;}
+  .sd-head .btn{width:100%;justify-content:center;margin-top:0;}
+  .sd-ba-grid{grid-template-columns:minmax(0,1fr);max-width:520px;}
+  .sfr-ba{aspect-ratio:2.6/1;}
+  .sd-why h2 br{display:none;}
+  .sd-faq summary{padding-block:10px;}
+  .sd-cta{--photo-w:70%;}
+  .sd-cta-photo{opacity:.3;}
+}
+
+@media (max-width:400px){
+  .sd-trust{grid-template-columns:minmax(0,1fr);}
+  .sd-rel-card{flex-basis:100%;}
+}

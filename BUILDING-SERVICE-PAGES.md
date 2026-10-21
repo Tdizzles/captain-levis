@@ -815,3 +815,35 @@ node --check script.js
   the shared footer and quote form. The results band says "Real Results"
   although the pairs are placeholders, and the FAQ answers are drafted
   copy. Check both with the owner.
+- **`hatches-lids-access-panels.html`** (sub-page of Custom Fabrication,
+  linked from its Hatches, Lids & Access Panels card) is not in the nav
+  dropdown. It is the first page on `service-detail.css` (`.sd-` prefix),
+  a template meant for single-service pages that have no comp. The
+  stylesheet started as a copy of `custom-consoles-dash-panels.css` and
+  holds no image URLs, copy or per-photo tuning: a sibling page swaps its
+  photos in its own HTML (crops via inline `--pos`/`--pos-sm`, diagram pins
+  and cards via inline `--x`/`--y`/`--w`/`--h`, leader lines as an SVG in
+  the image's own pixels). The full API is in the stylesheet's header
+  comment. Delete the diagram's `<svg>` and the pins and cards show matching
+  numbers instead of lines. Its `hla-*` images are cropped from a 1024px
+  comp and saved at 2×, so they are soft. The hero photo is the comp's photo
+  right of the copy, with the heading and paragraph line ends and the trust
+  strip painted out (OpenCV, a throwaway install, not a repo dependency).
+  Its fades into the navy are CSS masks, not pixels, but the comp's own
+  darkening at the photo's left and bottom edges is still in the image. The
+  diagram (`hla-diagram.jpg`) had its six callout cards, pins and leader
+  lines painted out. The area under the cards is a smooth blur, which only
+  shows on phones, where the cards drop below the photo as a numbered list
+  and the photo crops in on the pins (`sd-diagram--zoom`). The comp drew two
+  pins for Custom Fabrication and none for Access Panel Options; the page
+  has one pin per card. All three before/after pairs are placeholders built
+  like the surface scratch page's (one comp half plus its mirror, tags and
+  handle painted out), so they match the comp at rest but show the mirror
+  when dragged. "View More Results" goes to the homepage's `#repairs`. The
+  comp's slim footer is not used; the page keeps the shared footer and quote
+  form. Two fixes here are not in `custom-consoles-dash-panels.css`: that
+  page's trust strip still touches the screen edge on phones, and its intro
+  stacks at 1100px rather than 1240px. The results band says "Real Results"
+  although the pairs are placeholders, and the FAQ answers are drafted copy
+  (including "a hardware or gasket replacement is often done in a day").
+  Check both with the owner.
