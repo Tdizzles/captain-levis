@@ -1,6 +1,7 @@
 // Estimates: list, builder (autosaves; totals always come back from the server), version history, print view.
 import { api, debounce, esc, fmtWhen, h, money, raw, toast, uid } from './util.js'
 import { renderEstimateHtml } from './print/estimate-print.js'
+import { mountLevi } from './levi.js'
 
 const STATUS = { draft: 'Draft', sent: 'Sent', approved: 'Approved', declined: 'Declined' }
 const view = () => document.getElementById('view')
@@ -200,7 +201,7 @@ export async function renderEstimateEditor(id) {
       if (!confirm(`Delete ${state.number}? This cannot be undone.`)) return
       try { await api(`/api/admin/estimates?id=${encodeURIComponent(id)}`, { method: 'DELETE' }); toast('Deleted'); location.hash = '#/estimates' } catch (ex) { toast(ex.message) }
     })
-    document.getElementById('levi-toggle').addEventListener('click', () => { const p = document.getElementById('levi'); p.hidden = !p.hidden; if (!p.hidden) { document.getElementById('levi-input').focus(); window.leviMount?.(state, { draw, refresh: async () => { const out = await api(`/api/admin/estimates?id=${encodeURIComponent(id)}`); state.doc = out.estimate; state.totals = out.totals; state.layout = out.layout; state.versions = out.versions; draw(); document.getElementById('levi').hidden = false } }) } })
+    document.getElementById('levi-toggle').addEventListener('click', () => { const p = document.getElementById('levi'); p.hidden = !p.hidden; if (!p.hidden) { document.getElementById('levi-input').focus(); mountLevi(state, { draw, refresh: async () => { const out = await api(`/api/admin/estimates?id=${encodeURIComponent(id)}`); state.doc = out.estimate; state.totals = out.totals; state.layout = out.layout; state.versions = out.versions; draw(); document.getElementById('levi').hidden = false } }) } })
   }
   const focusLast = () => { const tas = view().querySelectorAll('tr.line textarea'); tas[tas.length - 1]?.focus() }
   const autogrow = (ta) => { ta.style.height = 'auto'; ta.style.height = `${Math.max(ta.scrollHeight, 40)}px` }
