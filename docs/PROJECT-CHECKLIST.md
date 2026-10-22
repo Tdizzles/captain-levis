@@ -22,12 +22,13 @@ session. Brief section numbers refer to the owner's implementation brief (2026-1
 - ☑ Accessibility: `<main>`, skip link, focus-visible, reduced motion, form error messaging (headings/alt pass still per-page)
 - ☑ Text-size − / + controls above chat avatar (5 steps 87.5–137.5%, persisted, header capped at 112.5%) — screenshot still not supplied; placed above the avatar per brief
 - ☑ px→rem conversion (2,632 font-size values in 40 sheets via scripts/px-to-rem.mjs)
-- ☑ SEO: canonical, Open Graph, LocalBusiness + BreadcrumbList JSON-LD, sitemap.xml/html, robots.txt, 301 map in vercel.json (needs Vercel to take effect)
+- ☑ SEO: canonical, Open Graph, LocalBusiness + BreadcrumbList JSON-LD, sitemap.xml/html, robots.txt, 301 map in vercel.json (live and verified on captain-levis.vercel.app 2026-10-21)
 - ☑ Legal drafts: privacy-policy.html, cookie-policy.html, terms.html (attorney-review assumptions in HTML comments); consent banner + footer "Cookie Preferences"; map embed consent-gated
 - ◐ Images: captain-chat avatar shrunk 1.2 MB → 82 KB; favicon/touch icon/OG image generated; WebP/srcset pass not done
 
 ## Phase 3 — Chatbot (§7, §8, §10, §11)
-- ☑ Vercel project `captain-levis` created and linked 2026-10-21 (prj_a3q1YKeo5FfTW8OE1IxJi0IOviW3); not deployed yet
+- ☑ Vercel project `captain-levis` created and linked 2026-10-21 (prj_a3q1YKeo5FfTW8OE1IxJi0IOviW3); **live** at captain-levis.vercel.app from `c29486e` (clean URLs, 301s, headers, API verified)
+- ◐ Vercel configuration: zero env vars, not Git-connected, no custom domain — exact command list in HANDOVER-2026-10-21.md §4a (SESSION_SECRET + ADMIN_API_TOKEN are mintable now; DATABASE_URL via Storage → Neon; Turnstile/Resend/Anthropic keys ⛔ owner)
 - ⛔ Anthropic key + budget cap (decision 5); Turnstile keys (decision 4); Blob store
 - ☐ `api/chat` with sessions, rate limits, length caps, timeouts, cost log, injection hardening
 - ☐ Persona + greeting + three actions; context-aware suggested replies
