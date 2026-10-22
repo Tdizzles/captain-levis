@@ -33,6 +33,6 @@
   ],
   "siteUrl": "https://www.captainlevis.com",
   "social": {},
-  "turnstileSiteKey": "1x00000000000000000000AA",
-  "turnstileNote": "1x00000000000000000000AA is Cloudflare's public ALWAYS-PASS test key. Replace with the real site key before launch (server secret goes in TURNSTILE_SECRET_KEY)."
+  "turnstileSiteKey": "0x4AAAAAAFgLxTYVU77psVcD",
+  "turnstileNote": "Real Cloudflare Turnstile site key for captainlevis.com (set 2026-10-22); the matching secret is the Vercel env TURNSTILE_SECRET_KEY. For local testing swap in Cloudflare's always-pass key 1x00000000000000000000AA."
 }
