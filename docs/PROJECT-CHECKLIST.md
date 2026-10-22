@@ -28,7 +28,7 @@ session. Brief section numbers refer to the owner's implementation brief (2026-1
 
 ## Phase 3 — Chatbot (§7, §8, §10, §11)
 - ☑ Vercel project `captain-levis` created and linked 2026-10-21 (prj_a3q1YKeo5FfTW8OE1IxJi0IOviW3); **live** at captain-levis.vercel.app from `c29486e` (clean URLs, 301s, headers, API verified)
-- ◐ Vercel configuration: zero env vars, not Git-connected, no custom domain — exact command list in HANDOVER-2026-10-21.md §4a (SESSION_SECRET + ADMIN_API_TOKEN are mintable now; DATABASE_URL via Storage → Neon; Turnstile/Resend/Anthropic keys ⛔ owner)
+- ◐ Vercel configuration: zero env vars, not Git-connected, no custom domain (re-checked 2026-10-21 late: `/api/health` on `05d6162` still all `false`). Every write (env add, git connect, domains add, MCP team authorization) is denied to Claude sessions in auto mode, so **Tyler runs `bash scripts/vercel-setup.sh`** (idempotent; mints SESSION_SECRET + ADMIN_API_TOKEN, connects Git, adds domains, redeploys, prints health). DATABASE_URL via dashboard Storage → Neon, then re-run the script to migrate. Turnstile/Resend/Anthropic keys ⛔ owner — pass them as env vars to the same script.
 - ⛔ Anthropic key + budget cap (decision 5); Turnstile keys (decision 4); Blob store
 - ☐ `api/chat` with sessions, rate limits, length caps, timeouts, cost log, injection hardening
 - ☐ Persona + greeting + three actions; context-aware suggested replies
