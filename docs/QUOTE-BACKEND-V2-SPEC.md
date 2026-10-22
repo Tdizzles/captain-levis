@@ -61,7 +61,12 @@ the repo is kept for porting.
 - **Quoting/insurance rules:** owner will supply later; seed from the Rev5 supplement meanwhile.
 - **Where it lives: inside the site repo** (`/app` or similar), same Vercel project `captain-levis`, same Neon DB.
 
-## Not started. Build order when approved
+## Built 2026-10-22 (see `QUOTE-DESK.md`)
+
+All five pieces below exist and are pushed; what remains is configuration (staff password hash, Anthropic key) and
+the owner's real quoting rules. Original build order kept for the record:
+
+## Build order (as executed)
 
 inbox + templated missing-info reply (reuses the live backend) → magic-link auth → builder with Rev5 PDF →
 Captain Levi assistant with estimate tools → knowledge base editing.
