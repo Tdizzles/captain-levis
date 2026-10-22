@@ -32,7 +32,9 @@
     "Redington Beach", "Redington Shores", "South Pasadena", "St. Pete Beach", "Treasure Island", "Tampa"
   ],
   "siteUrl": "https://www.captainlevis.com",
-  "social": {},
+  "social": {
+    "facebook": "https://www.facebook.com/fiberglassboatrepairCaptainLevis/"
+  },
   "turnstileSiteKey": "0x4AAAAAAFgLxTYVU77psVcD",
   "turnstileNote": "Real Cloudflare Turnstile site key for captainlevis.com (set 2026-10-22); the matching secret is the Vercel env TURNSTILE_SECRET_KEY. For local testing swap in Cloudflare's always-pass key 1x00000000000000000000AA."
 }
