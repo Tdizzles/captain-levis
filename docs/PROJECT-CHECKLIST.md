@@ -70,5 +70,6 @@ session. Brief section numbers refer to the owner's implementation brief (2026-1
 ## Owner decisions log
 | Date | Decision | Answer |
 | --- | --- | --- |
+| 2026-10-22 | Estimater direction | Tyler: retire the current estimater ("terminate it, I want a simpler version"). Replacement = inbox (backend + email) → rules-based missing-info check with a templated reply in Captain Levi's voice (non-AI) → link into a simpler quote builder → "Captain Levi" assistant on Claude Opus 5.5 with a quoting/insurance knowledge base that can edit the estimate directly. Spec: `docs/QUOTE-BACKEND-V2-SPEC.md`. Not started; old app stays up until replaced. |
 | 2026-10-22 | Resend + DNS timing | Tyler will supply the Resend API key and all DNS values (Resend sending-domain records and the Network Solutions cutover) on 2026-10-23. Next session: add the key via `scripts/vercel-setup.sh`, resend the queued CL-2026-0001 email, then walk the DNS records. |
 | 2026-10-21 | Decisions 1–10 in `IMPLEMENTATION-PLAN.md` §3 | Owner: "do it all now, I approve" — Vercel move, recommended stack and admin-in-estimater approved; hours Mon–Sat 7:30am–3:30pm, email captainlevis@yahoo.com, "50+ Years" confirmed. Keys/DNS/GSC/staff list still to be supplied. |
