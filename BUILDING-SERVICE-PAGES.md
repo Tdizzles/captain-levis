@@ -970,3 +970,21 @@ node --check script.js
   unclear). The results band says "Real Results" although the pairs are
   placeholders, and the FAQ answers are drafted copy. Check both with the
   owner.
+- **`about.html`** (`.ab-` prefix, in the nav) was rebuilt on 2026-10-22 to
+  the "A Family Legacy on the Water" comp, replacing the first build. The
+  comp is 1024px wide, so every `ab-*` image is a 2x upscale of a comp crop
+  and soft. `ab-hero.jpg` is the comp's hero band above the trust strip
+  with the copy inpainted out (OpenCV, a throwaway install, not a repo
+  dependency); the trust strip is solid navy in the comp, so it is its own
+  band. `ab-johns-pass.jpg` had the comp's home-port card painted out and
+  the live card sits over that spot at every width, so keep it overlaid.
+  `ab-cta.jpg` is the comp's CTA band with its copy painted out. The three
+  credential photos start past the comp's baked descriptions, and the map
+  (`ab-map.jpg`, baked labels and pins kept) starts past the comp's
+  paragraph; both fade in with CSS masks. Captain Dave's and Levi's photos
+  are the comp's (the live site's originals are 344x282 and show a
+  different detailing photo for Levi). The comp's slim footer is not used;
+  the page keeps the shared footer and quote form. Copy follows the comp,
+  which condenses the live site's story; "fifty years", "forty-three
+  years" and the city list are the live site's claims. Check with the
+  owner.

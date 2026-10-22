@@ -15,6 +15,7 @@ session. Brief section numbers refer to the owner's implementation brief (2026-1
 - ☑ Nav: real links (logo, Boat Yard, Detailing, About, Reviews, Contact), services hub, footer legal links
 - ☑ Breadcrumbs on interior pages; prev/next pager within families; aria-current on active page
 - ☑ Build missing pages: about, contact, fiberglass-boat-repair hub, 404, boat-yard, boat-detailing, hull-step-repair, kayak-repair, jet-ski-pwc-repair, sitemap (all stamped, 1 h1, no overflow at 390)
+- ☑ About page rebuilt 1:1 to the "A Family Legacy on the Water" comp (2026-10-22): assets/ab-*.jpg cut from the comp, band heights match at 1536, overflow sweep clean 320–1920; notes in BUILDING-SERVICE-PAGES.md §10
 - ☑ Merge legacy content per inventory (transom, stringer tap-test, bulkheads, gelcoat matching, osmosis resins, restoration; 11 legacy photos pulled from the old site)
 - ☑ Facts pass: hours Mon–Sat 7:30–3:30, captainlevis@yahoo.com, 50+ Years confirmed by owner 2026-10-21 and applied via site/business.json + partials
 - ◐ Mobile/tablet/desktop pass: 390px overflow sweep clean on 22 pages incl. all new ones; desktop chrome verified at 1920; tablet + landscape + remaining sub-pages pending
