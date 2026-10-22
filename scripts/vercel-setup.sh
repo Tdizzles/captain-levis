@@ -78,11 +78,11 @@ else
 fi
 
 log "4. Git connect (auto-deploy from GitHub Tdizzles/captain-levis)"
-if $V project inspect captain-levis 2>/dev/null | grep -qi 'github'; then
-  echo "   already connected"
-else
-  $V git connect https://github.com/Tdizzles/captain-levis.git --yes || echo "   git connect failed — do it in the dashboard: Settings → Git → Connect"
-fi
+# `project inspect` does not print the Git link, so ask git connect itself; "already connected" is success.
+OUT="$($V git connect https://github.com/Tdizzles/captain-levis.git --yes 2>&1 || true)"
+printf '%s
+' "$OUT" | grep -v '^Vercel CLI'
+printf '%s' "$OUT" | grep -qiE 'already connected|Connected GitHub' || echo "   git connect failed — do it in the dashboard: Settings → Git → Connect"
 
 log "5. Domains (harmless before DNS moves; prints the records the registrar needs)"
 for d in captainlevis.com www.captainlevis.com; do
@@ -97,3 +97,6 @@ fi
 log "7. Health"
 curl -s https://captain-levis.vercel.app/api/health; echo
 echo "Expect configured.session_secret:true and admin_token:true now; database:true once Neon is connected."
+echo "DNS is NOT changed by this script. When ready to launch, at the registrar (Network Solutions / worldnic) set:"
+echo "   A     @    64.29.17.1          CNAME  www  cname.vercel-dns.com."
+echo "then: npx vercel domains verify captainlevis.com"
