@@ -94,8 +94,15 @@ if [ "$DEPLOY" = 1 ]; then
   $V --prod --yes
 fi
 
-log "7. Health"
-curl -s https://captain-levis.vercel.app/api/health; echo
+log "7. Health (the alias can lag the deploy by ~20 s, so retry a few times)"
+for i in 1 2 3 4 5 6; do
+  H="$(curl -s https://captain-levis.vercel.app/api/health)"
+  printf '%s
+' "$H" | grep -q '"ok":true' && break
+  [ "$i" = 6 ] || sleep 10
+done
+printf '%s
+' "$H"
 echo "Expect configured.session_secret:true and admin_token:true now; database:true once Neon is connected."
 echo "DNS is NOT changed by this script. When ready to launch, at the registrar (Network Solutions / worldnic) set:"
 echo "   A     @    64.29.17.1          CNAME  www  cname.vercel-dns.com."
