@@ -87,6 +87,7 @@
     "fiberglass-boat-repair": {
       "label": "Services",
       "parent": null,
+      "variant": "full",
       "service": "fiberglass-repair",
       "hub": true,
       "lead": "Not sure which repair you need? Pick the closest option, tell us what you see, and we&rsquo;ll point you to the right fix &mdash; at our Largo yard or at your dock."
