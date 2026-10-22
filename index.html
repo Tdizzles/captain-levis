@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=083b7da7ed">
+<link rel="stylesheet" href="styles.css?v=7bc8d65251">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=bb6352be2a">
 <link rel="canonical" href="https://www.captainlevis.com/">
@@ -80,7 +80,18 @@
 <main id="main" data-build>
 
 <section class="hero">
-  <img src="assets/home-hero.jpg" alt="Fiberglass hull repair in progress in Captain Levi's workshop, with the marina visible through the open bay door" class="hero-img" width="2171" height="724" fetchpriority="high">
+  <video class="hero-img" autoplay muted loop playsinline preload="auto" poster="assets/home-hero.jpg" aria-hidden="true" tabindex="-1">
+    <source src="assets/home-hero.mp4" type="video/mp4">
+    <img src="assets/home-hero.jpg" alt="" width="2171" height="724">
+  </video>
+  <script>
+    (function(){
+      var v=document.querySelector('.hero video.hero-img');if(!v)return;
+      var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+      var apply=function(){ if(mq.matches){v.pause();v.removeAttribute('autoplay');} else { v.play().catch(function(){}); } };
+      apply(); if(mq.addEventListener) mq.addEventListener('change',apply);
+    })();
+  </script>
   <div class="hero-scrim"></div>
   <div class="container hero-inner">
     <div class="hero-content">
