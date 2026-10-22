@@ -8,7 +8,7 @@ import type { Queryable } from './db.js'
 import { env } from './env.js'
 import { costUsd } from './pricing.js'
 
-export type AiKind = 'chat' | 'reply_draft'
+export type AiKind = 'chat' | 'reply_draft' | 'estimate_assistant'
 export const TIMEOUT_MS = 25_000
 
 let client: Anthropic | null = null

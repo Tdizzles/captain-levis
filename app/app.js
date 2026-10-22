@@ -1,33 +1,14 @@
-// Quote Desk: inquiries inbox + sign-in. Plain ES module, hash routes, no build step.
-//   #/login · #/inquiries[?status=new] · #/inquiries/<id> · #/estimates (builder, next milestone)
+// Quote Desk: sign-in, inquiries inbox, estimates. Plain ES modules, hash routes, no build step.
+//   #/login · #/inquiries[?status=] · #/inquiries/<id> · #/estimates[?status=] · #/estimates/new?inquiry= · #/estimates/<id> · #/estimates/<id>/print
+import { api, ago, esc, fmtWhen, h, raw, session, toast } from './util.js'
+import { leavePrint, renderEstimateEditor, renderEstimateNew, renderEstimatePrint, renderEstimates } from './estimates.js'
 const view = document.getElementById('view')
 const top = document.getElementById('top')
 const whoEl = document.getElementById('who')
-const toastEl = document.getElementById('toast')
-let me = null
-
-// ---------- helpers ----------
-const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
-const h = (strings, ...vals) => strings.reduce((out, str, i) => out + str + (i < vals.length ? (vals[i] && vals[i].__html !== undefined ? vals[i].__html : esc(vals[i])) : ''), '')
-const raw = (html) => ({ __html: html })
-const fmtWhen = (d) => new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }).format(new Date(d))
-const ago = (d) => { const m = Math.round((Date.now() - new Date(d).getTime()) / 60000); if (m < 60) return `${m} min ago`; const hrs = Math.round(m / 60); if (hrs < 48) return `${hrs} h ago`; return `${Math.round(hrs / 24)} d ago` }
 const boatOf = (i) => [i.boat_year, i.boat_make, i.boat_model].filter(Boolean).join(' ') || i.boat_raw || ''
 const SERVICE_LABELS = { 'fiberglass-repair': 'Fiberglass Repair', 'structural-fiberglass': 'Structural Fiberglass', 'hull-repairs': 'Hull Repairs', 'deck-repairs': 'Deck Repairs', 'transom-replacement': 'Transom Replacement', 'stringer-repairs': 'Stringer Repairs', 'bulkhead-repairs': 'Bulkhead Repairs', 'custom-fabrication': 'Custom Fabrication', 'gelcoat-repair': 'Gelcoat Repair', 'boat-detailing': 'Boat Detailing', 'boat-restoration': 'Boat Restoration', 'boat-yard': 'Boat Yard', 'pwc-repair': 'Jet Ski / PWC', 'kayak-repair': 'Kayak Repair', 'insurance-claim': 'Insurance Claim', other: 'Other' }
 const serviceLabel = (v) => SERVICE_LABELS[v] || v
 const STATUS_LABEL = { new: 'New', contacted: 'Contacted', quoted: 'Quoted', closed: 'Closed' }
-
-let toastTimer
-function toast(msg) { toastEl.textContent = msg; toastEl.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => (toastEl.hidden = true), 2600) }
-
-async function api(path, opts = {}) {
-  const res = await fetch(path, { credentials: 'same-origin', headers: { ...(opts.body ? { 'Content-Type': 'application/json' } : {}), ...(opts.headers || {}) }, method: opts.method || (opts.body ? 'POST' : 'GET'), body: opts.body ? JSON.stringify(opts.body) : undefined })
-  let json = null
-  try { json = await res.json() } catch { /* empty */ }
-  if (res.status === 401 && !path.startsWith('/api/auth/')) { me = null; location.hash = '#/login'; throw new Error('Signed out') }
-  if (!res.ok) throw new Error((json && json.error) || `Request failed (${res.status})`)
-  return json
-}
 
 // ---------- routing ----------
 function parseHash() {
@@ -38,15 +19,19 @@ function parseHash() {
 
 async function render() {
   const { segs, params } = parseHash()
-  if (!me) { try { me = (await api('/api/auth/me')).staff } catch { me = null } }
-  if (!me) { renderLogin(); return }
+  leavePrint()
+  if (!session.me) { try { session.me = (await api('/api/auth/me')).staff } catch { session.me = null } }
+  if (!session.me) { renderLogin(); return }
   top.hidden = false
-  whoEl.textContent = me.email
+  whoEl.textContent = session.me.email
   for (const a of document.querySelectorAll('[data-nav]')) a.toggleAttribute('aria-current', a.dataset.nav === segs[0]) || (a.dataset.nav === segs[0] ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'))
   if (segs[0] === 'login') { location.hash = '#/inquiries'; return }
   if (segs[0] === 'inquiries' && segs[1]) return renderInquiry(segs[1])
   if (segs[0] === 'inquiries') return renderInbox(params.get('status') || '')
-  if (segs[0] === 'estimates') return renderComingSoon('Estimates')
+  if (segs[0] === 'estimates' && segs[1] === 'new') return renderEstimateNew(params)
+  if (segs[0] === 'estimates' && segs[1] && segs[2] === 'print') return renderEstimatePrint(segs[1])
+  if (segs[0] === 'estimates' && segs[1]) return renderEstimateEditor(segs[1])
+  if (segs[0] === 'estimates') return renderEstimates(params.get('status') || '')
   location.hash = '#/inquiries'
 }
 
@@ -67,14 +52,14 @@ function renderLogin() {
     const btn = form.querySelector('button'); btn.disabled = true
     try {
       const r = await api('/api/auth/login', { body: { email: form.email.value, password: form.password.value } })
-      me = r.staff
+      session.me = r.staff
       location.hash = '#/inquiries'
       render()
     } catch (ex) { err.textContent = ex.message; err.hidden = false } finally { btn.disabled = false }
   })
 }
 
-document.getElementById('signout').addEventListener('click', async () => { try { await api('/api/auth/logout', { method: 'POST', body: {} }) } catch { /* ignore */ } me = null; location.hash = '#/login'; render() })
+document.getElementById('signout').addEventListener('click', async () => { try { await api('/api/auth/logout', { method: 'POST', body: {} }) } catch { /* ignore */ } session.me = null; location.hash = '#/login'; render() })
 
 // ---------- inbox ----------
 async function renderInbox(status) {
@@ -152,10 +137,6 @@ async function renderInquiry(id) {
     b.disabled = true
     try { const out = await api(`/api/admin/retry-email?id=${encodeURIComponent(b.dataset.retry)}`, { method: 'POST', body: {} }); toast(out.ok ? 'Email sent' : `Not sent: ${out.reason || out.delivery.status}`); renderInquiry(id) } catch (ex) { toast(ex.message); b.disabled = false }
   })
-}
-
-function renderComingSoon(what) {
-  view.innerHTML = h`<div class="coming"><h1>${what}</h1><p>The quote builder is the next piece being built. Inquiries already land in the inbox and can be answered from there.</p><a class="qd-btn navy" href="#/inquiries">Back to inquiries</a></div>`
 }
 
 window.addEventListener('hashchange', render)
