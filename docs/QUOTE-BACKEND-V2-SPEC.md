@@ -1,8 +1,8 @@
 # Quote backend v2 — owner spec (captured 2026-10-22, not yet started)
 
 Tyler's direction, in his words first, then what it means against what already exists. **The current estimater
-(`captain-levis-estimater`, Vercel) is to be retired** and replaced by a simpler product. Nothing has been deleted
-yet; the old app stays reachable until the replacement does the job.
+(`captain-levis-estimater`) has been retired**: its Vercel project was deleted on 2026-10-22 at the owner's instruction;
+the repo is kept for porting.
 
 ## Owner's words (2026-10-22)
 
@@ -48,13 +48,18 @@ yet; the old app stays reachable until the replacement does the job.
   buttons; the AI draft slot becomes the templated draft.
 - Rev5 estimate layout, `calcTotals()`, photo appendix, pagination in the old estimater — port, don't rewrite.
 
-## Decisions still needed from the owner
+## Owner decisions (2026-10-22)
 
-- Keep the old estimater reachable until v2 ships (recommended), or take it down now?
-- Which staff emails get the magic-link allow-list?
-- Where does the "how we quote" knowledge start: a sit-down with Captain Dave/Levi, or past estimates + the Rev5
-  supplement as the seed?
-- Does v2 live in the site repo (`/app`, same Vercel project, same DB) or its own repo? Recommended: same repo/DB.
+- **Old estimater: taken down.** Vercel project `captain-levis-estimater` deleted 2026-10-22; the URL now 404s. The
+  GitHub repo `Tdizzles/captain-levis-estimater` and the local checkout are kept (fully pushed at `5722158`) so the
+  Rev5 layout, `calcTotals()` and photo appendix can be ported. Note: its data lived in the browser's localStorage
+  for that origin, so the old drafts (E-1026..E-1028) are no longer reachable through the app.
+- **Staff accounts:** tyler.salta@icloud.com and captainlevis@yahoo.com. Owner chose **password sign-in** (same
+  password for both, supplied in chat — NOT recorded here or anywhere in the repo; it will be stored only as a
+  bcrypt hash in a Vercel env var set by the owner via `scripts/vercel-setup.sh`). Recommend changing it after first
+  login since it was typed into a chat session.
+- **Quoting/insurance rules:** owner will supply later; seed from the Rev5 supplement meanwhile.
+- **Where it lives: inside the site repo** (`/app` or similar), same Vercel project `captain-levis`, same Neon DB.
 
 ## Not started. Build order when approved
 
