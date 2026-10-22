@@ -6,6 +6,7 @@ import { requireMethod, route, sendJson } from '../lib/http.js'
 import { knowledgePages } from '../lib/chat/knowledge.js'
 import { migrationStatus } from '../lib/migrate.js'
 import { monthSpend } from '../lib/ai.js'
+import { staffLoginConfigured } from '../lib/staff.js'
 
 export default route(async (req, res) => {
   requireMethod(req, 'GET', 'HEAD')
@@ -18,6 +19,7 @@ export default route(async (req, res) => {
     turnstile: !!env.turnstileSecret,
     session_secret: effectiveSecret().configured,
     admin_token: !!env.adminToken,
+    staff_login: staffLoginConfigured(),
   }
   const out: Record<string, unknown> = {
     ok: dbOk,

@@ -65,5 +65,7 @@ export function serviceLabel(value: string): string {
 }
 
 export function siteUrl(): string { return env.siteUrl || business().siteUrl.replace(/\/$/, '') }
+/** Base URL of the staff app (quote inbox + builder). */
+export function appUrl(): string { return env.adminBaseUrl || `${siteUrl()}/app` }
 
 export function phoneDigits(): string { return business().phone.replace(/\D/g, '') }

@@ -8,6 +8,7 @@
 # Owner keys can be passed as env vars whenever they arrive; each one is added only if set and not already present:
 #
 #   TURNSTILE_SECRET_KEY=... RESEND_API_KEY=... ANTHROPIC_API_KEY=... bash scripts/vercel-setup.sh
+#   STAFF_PASSWORD='...' bash scripts/vercel-setup.sh      # Quote Desk sign-in: hashed here, only the hash goes to Vercel
 #
 # Safe to re-run: existing variables are never overwritten, git connect / domains add are skipped when already done.
 # DATABASE_URL is NOT created here (Vercel dashboard → Storage → Create → Neon → connect to captain-levis).
@@ -61,10 +62,21 @@ log "2. Owner-supplied keys (only those passed in the environment)"
 [ -n "${RESEND_API_KEY:-}" ] && add_env RESEND_API_KEY production "$RESEND_API_KEY" \
   && echo "   remember: SPF/DKIM for inquiries@captainlevis.com in the Resend dashboard"
 [ -n "${ANTHROPIC_API_KEY:-}" ] && add_env ANTHROPIC_API_KEY production "$ANTHROPIC_API_KEY"
+if [ -n "${STAFF_PASSWORD:-}" ]; then
+  HASH="$(STAFF_PASSWORD="$STAFF_PASSWORD" node scripts/hash-password.mjs)"
+  if has_env STAFF_PASSWORD_HASH; then
+    echo "   STAFF_PASSWORD_HASH already set → replacing it with the new password"
+    $V env rm STAFF_PASSWORD_HASH production --yes >/dev/null 2>&1 || true
+  fi
+  printf '%s' "$HASH" | $V env add STAFF_PASSWORD_HASH production --sensitive
+  echo "   set STAFF_PASSWORD_HASH (Quote Desk sign-in at /app for ${STAFF_EMAILS:-the two owner emails})"
+  if [ -n "${STAFF_EMAILS:-}" ] && ! has_env STAFF_EMAILS; then printf '%s' "$STAFF_EMAILS" | $V env add STAFF_EMAILS production; fi
+fi
 ENV_LIST="$($V env ls 2>/dev/null || true)"
 has_env TURNSTILE_SECRET_KEY || echo "   TURNSTILE_SECRET_KEY not set yet → /api/inquiries keeps answering 503 'call us' in production"
 has_env RESEND_API_KEY || echo "   RESEND_API_KEY not set yet → inquiries are stored, emails wait as pending_config"
 has_env ANTHROPIC_API_KEY || echo "   ANTHROPIC_API_KEY not set yet → chat runs in scripted mode"
+has_env STAFF_PASSWORD_HASH || echo "   STAFF_PASSWORD_HASH not set yet → Quote Desk (/app) sign-in disabled; run with STAFF_PASSWORD='...'"
 
 log "3. Database"
 if has_env DATABASE_URL; then

@@ -1,10 +1,11 @@
 // Branded quote-request email: table layout, inline CSS, ≤600px, dark-mode safe, plus a plain-text part.
 // Every customer-supplied string goes through esc(); newlines become <br>.
-import { business, serviceLabel, siteUrl } from '../business.js'
+import { appUrl, business, serviceLabel, siteUrl } from '../business.js'
 import { describeBoat } from '../boat.js'
 import { env } from '../env.js'
 import type { InquiryRow } from '../inquiries.js'
 import { signPhotoUrl, type PhotoRow } from '../photos.js'
+import type { TemplatedReply } from '../quote/reply.js'
 
 export const NAVY = '#00264B'
 export const CYAN = '#5ECDFA'
@@ -21,6 +22,7 @@ export interface RenderInput {
   photos: PhotoRow[]
   chat?: ChatSummary | null
   draftReply?: string | null
+  reply?: TemplatedReply | null
   now?: Date
 }
 
@@ -56,13 +58,13 @@ function button(href: string, label: string, bg: string, color: string): string 
 }
 
 export function renderInquiryEmail(input: RenderInput): { html: string; text: string; subject: string } {
-  const { inquiry: i, photos, chat, draftReply } = input
+  const { inquiry: i, photos, chat, draftReply, reply } = input
   const biz = business()
   const when = formatWhen(i.created_at)
   const boat = describeBoat({ make: i.boat_make, model: i.boat_model, year: i.boat_year, raw: i.boat_raw })
-  const adminUrl = `${env.adminBaseUrl}/#/inquiries/${i.id}`
+  const adminUrl = `${appUrl()}/#/inquiries/${i.id}`
   const telHref = `tel:${i.phone.replace(/[^\d+]/g, '')}`
-  const replySubject = encodeURIComponent(`Re: your quote request ${i.ref} — ${biz.name}`)
+  const replySubject = encodeURIComponent(reply?.subject || `Re: your quote request ${i.ref} — ${biz.name}`)
   const mailto = `mailto:${encodeURIComponent(i.email)}?subject=${replySubject}`
   const base = siteUrl()
   const photoUrls = photos.map((p) => ({ p, url: signPhotoUrl(p.id, 7 * 24 * 3600, base) }))
@@ -70,7 +72,7 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
   const photosHtml = photoUrls.length
     ? `<tr><td style="padding:4px 0;">${photoUrls.map(({ p, url }) =>
       `<a href="${esc(url)}" style="display:inline-block;margin:0 8px 8px 0;"><img src="${esc(url)}" width="140" alt="Customer photo ${esc(p.filename)}" style="display:block;width:140px;max-width:100%;height:auto;border-radius:8px;border:1px solid #d6e0ea;"></a>`).join('')}
-      <p style="margin:6px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Links work for 7 days. Open the inquiry in the Estimater for permanent access.</p></td></tr>`
+      <p style="margin:6px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Links work for 7 days. Open the inquiry in the quote builder for permanent access.</p></td></tr>`
     : row('Photos', '<span style="color:#8a99a8;">No photos attached</span>')
 
   const chatHtml = chat
@@ -78,10 +80,25 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
         Collected through the website chat (${chat.turns} turn${chat.turns === 1 ? '' : 's'}, started ${esc(formatWhen(chat.started))}).
         ${chat.excerpt.length ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:8px;">${chat.excerpt.map((m) =>
           `<tr><td style="padding:3px 0;font:400 13px/1.45 ${FONT};color:${m.role === 'user' ? '#1a2633' : '#5a6b7d'};"><strong>${m.role === 'user' ? 'Customer' : 'Captain Levi'}:</strong> ${nl2br(m.text)}</td></tr>`).join('')}</table>` : ''}
-        <p style="margin:8px 0 0 0;"><a href="${esc(adminUrl)}" style="color:${NAVY};font:600 13px/1.4 ${FONT};">Full transcript in the Estimater</a></p>
+        <p style="margin:8px 0 0 0;"><a href="${esc(adminUrl)}" style="color:${NAVY};font:600 13px/1.4 ${FONT};">Full transcript in the quote builder</a></p>
       </td></tr>`
     : ''
 
+  const gaps = reply?.assessment.gaps || []
+  const needHtml = reply ? section(gaps.length ? 'What we still need to quote' : 'Ready to quote', gaps.length
+    ? `<tr><td style="padding:4px 0;"><ul style="margin:0;padding-left:18px;font:400 14px/1.6 ${FONT};color:#1a2633;">${gaps.map((g) => `<li><strong>${esc(g.label)}</strong> <span class="muted" style="color:#5a6b7d;">— ${esc(g.why)}</span></li>`).join('')}</ul>
+      <p class="muted" style="margin:8px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Readiness: ${esc(reply.assessment.readiness.replace('_', ' '))}${reply.assessment.insurance ? ' · insurance claim' : ''}</p></td></tr>`
+    : `<tr><td style="padding:4px 0;font:400 14px/1.5 ${FONT};color:#1a2633;">The customer gave everything the crew needs for a first estimate.${reply.assessment.insurance ? ' Insurance claim: write it as a supplement.' : ''}</td></tr>`) : ''
+  const replyHtml = reply
+    ? `<tr><td style="padding:0 28px 22px 28px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #b8c7d6;border-radius:10px;background:#f4f9fd;">
+      <tr><td style="padding:14px 16px;">
+        <p style="margin:0 0 6px 0;font:700 12px/1.3 ${FONT};letter-spacing:.12em;text-transform:uppercase;color:${NAVY};">Reply to send (Captain Levi’s words — edit as you like)</p>
+        <p style="margin:0;font:400 14px/1.55 ${FONT};color:#1a2633;">${nl2br(reply.body)}</p>
+        <p class="muted" style="margin:10px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Written by the site from fixed rules, not AI. Asks only for what is missing; no prices, dates or promises. Hit “Reply to customer” and paste it.</p>
+      </td></tr>
+    </table></td></tr>`
+    : ''
   const draftHtml = draftReply
     ? `<tr><td style="padding:0 28px 22px 28px;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px dashed #b8c7d6;border-radius:10px;background:#f4f9fd;">
@@ -129,7 +146,7 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
   <tr><td class="pad" style="padding:22px 28px 10px 28px;">
     <p style="margin:0 0 4px 0;font:800 20px/1.3 ${FONT};color:${NAVY};">${esc(i.name)} needs ${esc(serviceLabel(i.service))}</p>
     <p class="muted" style="margin:0 0 14px 0;font:400 13px/1.4 ${FONT};color:#5a6b7d;">Received ${esc(when)} · via ${i.source === 'chat' ? 'website chat' : 'website form'}${i.page ? ` · page: ${esc(i.page)}` : ''}</p>
-    ${button(adminUrl, 'Open in Estimater', NAVY, '#ffffff')}${button(mailto, 'Reply to customer', CYAN, NAVY)}
+    ${button(adminUrl, 'Open in Quote Builder', NAVY, '#ffffff')}${button(mailto, 'Reply to customer', CYAN, NAVY)}
   </td></tr>
   <tr><td style="padding:8px 0 0 0;"></td></tr>
   ${section('Customer', row('Name', esc(i.name)) + row('Email', `<a href="mailto:${esc(i.email)}" style="color:${NAVY};">${esc(i.email)}</a>`) + row('Phone', `<a href="${esc(telHref)}" style="color:${NAVY};">${esc(i.phone)}</a>`))}
@@ -138,6 +155,8 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-left:4px solid ${CYAN};padding:8px 14px;font:400 15px/1.55 ${FONT};color:#1a2633;background:#f4f9fd;border-radius:0 8px 8px 0;" class="draft">${nl2br(i.message)}</td></tr></table></td></tr>`)}
   ${section('Photos', photosHtml)}
   ${chat ? section('Chat', chatHtml) : ''}
+  ${needHtml}
+  ${replyHtml}
   ${draftHtml}
   <tr><td class="pad" style="padding:6px 28px 24px 28px;border-top:1px solid #e3eaf1;">
     <p class="muted" style="margin:14px 0 0 0;font:400 12px/1.5 ${FONT};color:#5a6b7d;">Sent by the ${esc(biz.name)} website to ${esc(env.emailTo)}. Reply to this email to answer the customer directly (Reply-To is set to them). ${esc(biz.legalName)} · ${esc(biz.address.street)}, ${esc(biz.address.city)}, ${esc(biz.address.state)} ${esc(biz.address.zip)} · ${esc(biz.phone)}</p>
@@ -172,9 +191,10 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
     'PHOTOS',
     ...(photoUrls.length ? photoUrls.map(({ url }) => `  ${url}`) : ['  No photos attached']),
     ...(chat ? ['', 'CHAT', `  Collected through the website chat (${chat.turns} turns). Transcript: ${adminUrl}`] : []),
-    ...(draftReply ? ['', 'SUGGESTED REPLY (DRAFT — review before sending)', ...draftReply.split(/\r?\n/).map((l) => `  ${l}`)] : []),
+    ...(reply ? ['', gaps.length ? 'WHAT WE STILL NEED TO QUOTE' : 'READY TO QUOTE', ...(gaps.length ? gaps.map((g) => `  - ${g.label}: ${g.why}`) : ['  The customer gave everything the crew needs for a first estimate.']), '', 'REPLY TO SEND (Captain Levi\'s words — edit as you like)', ...reply.body.split(/\r?\n/).map((l) => `  ${l}`)] : []),
+    ...(draftReply ? ['', 'AI SUGGESTED REPLY (DRAFT — review before sending)', ...draftReply.split(/\r?\n/).map((l) => `  ${l}`)] : []),
     '',
-    `Open in Estimater: ${adminUrl}`,
+    `Open in Quote Builder: ${adminUrl}`,
     `Reply to customer: ${i.email}`,
   ].join('\n')
 

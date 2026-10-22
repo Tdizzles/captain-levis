@@ -6,6 +6,7 @@ import { env } from '../env.js'
 import { getInquiry, type InquiryRow } from '../inquiries.js'
 import { listPhotos } from '../photos.js'
 import { draftReply } from './draft.js'
+import { templatedReply } from '../quote/reply.js'
 import { renderInquiryEmail, type ChatSummary } from './render.js'
 
 export const RESEND_TIMEOUT_MS = 10_000
@@ -50,9 +51,10 @@ async function sendViaResend(args: { to: string; subject: string; html: string; 
 export async function enqueueAndSendInquiryEmail(db: Db, inquiry: InquiryRow): Promise<SendOutcome> {
   const photos = await listPhotos(db, { inquiryId: inquiry.id })
   const chat = await chatSummaryFor(db, inquiry)
+  const reply = templatedReply(inquiry, photos.length)
   let draft: string | null = null
-  try { draft = await draftReply(db, inquiry) } catch (e) { console.warn('[email] draft failed', (e as Error).message) }
-  const { html, text, subject } = renderInquiryEmail({ inquiry, photos, chat, draftReply: draft })
+  if (env.aiReplyDraft) { try { draft = await draftReply(db, inquiry) } catch (e) { console.warn('[email] draft failed', (e as Error).message) } }
+  const { html, text, subject } = renderInquiryEmail({ inquiry, photos, chat, draftReply: draft, reply })
   const to = env.emailTo
   const initialStatus = env.resendKey ? 'pending' : 'pending_config'
   const ins = await db.query<DeliveryRow>(
@@ -94,7 +96,7 @@ export async function retryDelivery(db: Db, deliveryId: string): Promise<SendOut
   }
   const photos = await listPhotos(db, { inquiryId: inquiry.id })
   const chat = await chatSummaryFor(db, inquiry)
-  const { html, text } = renderInquiryEmail({ inquiry, photos, chat, draftReply: null })
+  const { html, text } = renderInquiryEmail({ inquiry, photos, chat, draftReply: null, reply: templatedReply(inquiry, photos.length) })
   await db.query(`UPDATE email_deliveries SET status = 'pending', "to" = $2 WHERE id = $1`, [delivery.id, env.emailTo])
   return attemptSend(db, { ...delivery, to: env.emailTo }, { html, text, replyTo: inquiry.email })
 }

@@ -17,7 +17,9 @@ export const env = {
   get resendKey() { return process.env.RESEND_API_KEY || '' },
   get emailFrom() { return process.env.EMAIL_FROM || "Captain Levi's Website <inquiries@captainlevis.com>" },
   get emailTo() { return process.env.EMAIL_TO || 'captainlevis@yahoo.com' },
-  get adminBaseUrl() { return (process.env.ADMIN_BASE_URL || 'https://captain-levis-estimater.vercel.app').replace(/\/$/, '') },
+  get adminBaseUrl() { return (process.env.ADMIN_BASE_URL || '').replace(/\/$/, '') }, // '' → <site>/app (lib/business.ts appUrl)
+  get aiReplyDraft() { return bool(process.env.AI_REPLY_DRAFT, false) },
+  get staffPasswordHash() { return process.env.STAFF_PASSWORD_HASH || '' },
   get anthropicKey() { return process.env.ANTHROPIC_API_KEY || '' },
   get anthropicModel() { return process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5' },
   get aiMonthlyBudgetUsd() { return num(process.env.AI_MONTHLY_BUDGET_USD, 25) },

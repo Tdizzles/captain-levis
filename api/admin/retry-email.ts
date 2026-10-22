@@ -9,7 +9,7 @@ import { isUuid } from '../../lib/session.js'
 
 export default route(async (req, res) => {
   requireMethod(req, 'GET', 'POST')
-  requireAdmin(req)
+  const actor = requireAdmin(req)
   const db = await getDb()
   const q = query(req)
   if (req.method === 'GET') {
@@ -22,6 +22,6 @@ export default route(async (req, res) => {
   if (!isUuid(id)) throw new HttpError(400, 'id must be a delivery uuid.')
   const out = await retryDelivery(db, id)
   if (!out) throw new HttpError(404, 'Delivery not found.')
-  await audit(db, 'admin', 'email.retry', 'email_delivery', id, { sent: out.sent, status: out.delivery.status, reason: out.reason || null })
+  await audit(db, actor.label, 'email.retry', 'email_delivery', id, { sent: out.sent, status: out.delivery.status, reason: out.reason || null })
   sendJson(res, out.sent ? 200 : 202, { ok: out.sent, delivery: out.delivery, reason: out.reason || null })
 })

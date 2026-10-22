@@ -27,7 +27,7 @@ describe('GET /api/health', () => {
     const json: any = await res.json()
     expect(res.status).toBe(200)
     expect(json.ok).toBe(true)
-    expect(json.configured).toEqual({ database: false, anthropic: false, resend: false, turnstile: false, session_secret: false, admin_token: false })
+    expect(json.configured).toEqual({ database: false, anthropic: false, resend: false, turnstile: false, session_secret: false, admin_token: false, staff_login: false })
     expect(json.missing).toEqual(expect.arrayContaining(['anthropic', 'resend', 'turnstile', 'session_secret']))
     expect(json.database).toEqual({ mode: 'pglite', reachable: true })
     expect(json.knowledge.pages).toBeGreaterThan(10)

@@ -1,0 +1,494 @@
+/* The printed estimate (Rev. 5 paper). Port of the retired ESTIMATER's document.css, trimmed to the
+   estimate and paginated by the browser (break-inside / break-before) instead of measured in JS.
+   US Letter: 816 px wide on screen on a light gray backdrop; @page letter with 0.5 in margins. */
+
+:root {
+  --doc-navy: #00264b;
+  --doc-ink: #1f2a37;
+  --doc-ink-2: #3a4756;
+  --doc-ink-3: #4b5866;
+  --doc-muted: #6a7785;
+  --doc-line: #dde3ea;
+  --doc-line-2: #c9d3df;
+  --doc-box-line: #c5d0dd;
+  --doc-field-line: #b9c5d3;
+  --doc-tint: #f3f7fc;
+  --doc-tint-2: #e9eff7;
+  --doc-font: Inter, 'Plus Jakarta Sans', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Screen backdrop around the sheet */
+.doc-stage {
+  background: #e6e9ee;
+  padding: 24px 16px;
+  overflow-x: auto;
+}
+
+.paper {
+  position: relative;
+  width: 816px;
+  max-width: 100%;
+  min-height: 1056px;
+  margin: 0 auto;
+  background: #fff;
+  color: var(--doc-ink);
+  font-family: var(--doc-font);
+  font-size: 11px;
+  line-height: 1.35;
+  padding: 40px 48px 30px;
+  box-shadow: 0 1px 3px rgba(11, 31, 58, 0.12), 0 8px 26px rgba(11, 31, 58, 0.08);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.paper * {
+  box-sizing: border-box;
+}
+.paper a {
+  color: inherit;
+}
+
+/* Header */
+.doc-head {
+  text-align: center;
+  break-inside: avoid;
+}
+.doc-logo {
+  width: 74px;
+  display: inline-block;
+}
+.doc-biz {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--doc-navy);
+  margin-top: 8px;
+}
+.doc-contact {
+  font-size: 10.5px;
+  color: var(--doc-ink-2);
+  margin-top: 2px;
+}
+.doc-rule {
+  height: 3px;
+  background: var(--doc-navy);
+  margin: 10px 0;
+}
+.doc-titlebar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--doc-line-2);
+  break-inside: avoid;
+}
+.doc-title {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--doc-navy);
+  white-space: nowrap;
+}
+.doc-subtitle {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--doc-navy);
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.doc-meta {
+  display: grid;
+  grid-template-columns: auto 150px;
+  gap: 2px 8px;
+  font-size: 10.5px;
+  color: var(--doc-ink-3);
+  text-align: right;
+}
+.doc-meta .v {
+  text-align: left;
+  color: var(--doc-ink);
+  font-weight: 600;
+  border-bottom: 1px solid #8fa1b5;
+  min-height: 14px;
+  padding: 0 2px;
+}
+
+/* Customer / vessel / insurance boxes */
+.doc-boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+  break-inside: avoid;
+}
+.doc-box {
+  border: 1px solid var(--doc-box-line);
+  border-radius: 4px;
+  padding: 8px 10px 9px;
+  break-inside: avoid;
+}
+.doc-box-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--doc-navy);
+  padding-bottom: 5px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e8ef;
+}
+.doc-fields {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 1px 8px;
+  align-items: end;
+}
+.doc-fields .k {
+  color: #5b6876;
+  font-size: 10.5px;
+  padding: 2px 0;
+}
+.doc-fields .v {
+  border-bottom: 1px solid var(--doc-field-line);
+  min-height: 16px;
+  padding: 2px 2px 1px;
+  font-weight: 500;
+  color: var(--doc-ink);
+  overflow-wrap: anywhere;
+}
+.doc-sub {
+  display: block;
+}
+.doc-insurance {
+  margin-top: 10px;
+  border: 1.5px solid var(--doc-navy);
+  border-radius: 4px;
+  background: var(--doc-tint);
+  padding: 7px 10px 8px;
+  break-inside: avoid;
+}
+.doc-insurance .doc-box-title {
+  border-bottom-color: #d5dfeb;
+}
+.doc-insurance .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+
+/* Line table */
+.doc-table {
+  width: 100%;
+  margin-top: 12px;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  table-layout: fixed;
+}
+.doc-table thead {
+  display: table-header-group;
+}
+.doc-table th {
+  background: var(--doc-navy);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px;
+  text-align: right;
+}
+.doc-table th.l {
+  text-align: left;
+}
+.doc-table tr {
+  break-inside: avoid;
+}
+.doc-table td {
+  border-bottom: 1px solid var(--doc-line);
+  padding: 5px 6px;
+  height: 25px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  vertical-align: middle;
+}
+.doc-table td.l {
+  text-align: left;
+}
+.doc-table td.idx {
+  color: var(--doc-ink-3);
+  text-align: left;
+}
+.doc-table td.total {
+  font-weight: 700;
+}
+.doc-table tr.doc-sec {
+  break-after: avoid;
+}
+.doc-table tr.doc-sec td {
+  background: var(--doc-tint-2);
+  color: var(--doc-navy);
+  font-weight: 700;
+  font-size: 10.5px;
+  text-align: left;
+  height: 22px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #cbd6e3;
+}
+.doc-line-title {
+  font-weight: 700;
+  color: var(--doc-ink);
+}
+.doc-line-body {
+  color: var(--doc-ink-2);
+  font-size: 10px;
+  line-height: 1.4;
+  margin-top: 1px;
+  white-space: pre-wrap;
+}
+.doc-dim {
+  color: #8a96a3;
+}
+.doc-photo-ref {
+  color: var(--doc-navy);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--doc-navy);
+}
+
+/* Notes + totals */
+.doc-bottom {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 22px;
+  margin-top: 12px;
+  break-inside: avoid;
+}
+.doc-notes-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--doc-navy);
+  margin-bottom: 4px;
+}
+.doc-notes {
+  white-space: pre-wrap;
+  font-size: 10.5px;
+  min-height: 46px;
+  color: #26323f;
+}
+.doc-notes.empty-lines {
+  background-image: linear-gradient(var(--doc-field-line) 1px, transparent 1px);
+  background-size: 100% 16px;
+  background-position: 0 15px;
+}
+.doc-pricing-note {
+  margin-top: 10px;
+  font-size: 10.5px;
+  color: #26323f;
+}
+.doc-payable {
+  margin-top: 10px;
+  font-size: 10.5px;
+}
+.doc-totals .t-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--doc-line);
+  font-variant-numeric: tabular-nums;
+}
+.doc-totals .t-row .v {
+  min-width: 96px;
+  text-align: right;
+}
+.doc-totals .t-total {
+  background: var(--doc-navy);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 7px 8px;
+  border: 0;
+  margin: 2px 0;
+}
+.doc-totals .t-bold {
+  font-weight: 700;
+}
+
+/* Terms + signatures */
+.doc-terms {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid var(--doc-line-2);
+  font-size: 9.5px;
+  color: var(--doc-ink-2);
+  line-height: 1.45;
+  break-inside: avoid;
+  break-after: avoid;
+}
+.doc-terms strong {
+  color: var(--doc-navy);
+}
+.doc-sigs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  margin-top: 52px;
+  break-inside: avoid;
+}
+.doc-sig {
+  position: relative;
+}
+.doc-sig .line {
+  border-top: 1px solid #36424f;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 3px;
+  font-size: 9.5px;
+  color: var(--doc-ink-3);
+}
+
+/* Direction to Pay page */
+.doc-dtp,
+.doc-appendix {
+  break-before: page;
+  page-break-before: always;
+  padding-top: 4px;
+}
+.doc-page-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--doc-navy);
+  padding-bottom: 6px;
+  border-bottom: 2.5px solid var(--doc-navy);
+  margin: 0 0 10px;
+  break-after: avoid;
+}
+.doc-dtp-rows {
+  break-inside: avoid;
+}
+.doc-dtp-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 12px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--doc-line);
+  font-size: 11px;
+}
+.doc-dtp-row .k {
+  color: #5b6876;
+}
+.doc-dtp-text {
+  margin: 14px 0 0;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--doc-ink);
+}
+.doc-dtp-box {
+  margin-top: 12px;
+  border: 1.5px solid var(--doc-navy);
+  border-radius: 4px;
+  background: var(--doc-tint);
+  padding: 10px 14px;
+  font-size: 11px;
+  line-height: 1.7;
+  break-inside: avoid;
+}
+.doc-dtp-sigs {
+  margin-top: 64px;
+}
+
+/* Photo appendix */
+.doc-fig {
+  margin: 0 0 12px;
+  border: 1px solid var(--doc-box-line);
+  border-radius: 4px;
+  padding: 8px 10px 6px;
+  break-inside: avoid;
+}
+.doc-fig-title {
+  font-weight: 700;
+  color: var(--doc-navy);
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+.doc-fig-img {
+  height: 330px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.doc-fig-img img {
+  max-width: 408px;
+  max-height: 330px;
+  object-fit: contain;
+  display: block;
+}
+.doc-fig-back {
+  text-align: right;
+  font-size: 9.5px;
+  margin-top: 4px;
+}
+.doc-fig-back a {
+  color: var(--doc-navy);
+  text-decoration: none;
+}
+
+/* Running footer (one, at the end — CSS pagination has no per-page footer) */
+.doc-foot {
+  margin-top: 24px;
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 9.5px;
+  color: var(--doc-muted);
+}
+
+/* Screen: keep the two-column boxes readable on a narrow window */
+@media screen and (max-width: 640px) {
+  .doc-boxes,
+  .doc-insurance .cols,
+  .doc-bottom {
+    grid-template-columns: 1fr;
+  }
+  .doc-titlebar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Print */
+@page {
+  size: letter;
+  margin: 0.5in;
+}
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  .doc-stage {
+    background: none;
+    padding: 0;
+    overflow: visible;
+  }
+  .paper {
+    width: auto;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .doc-photo-ref,
+  .doc-fig-back a {
+    border-bottom: 0;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

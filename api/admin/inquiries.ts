@@ -1,6 +1,6 @@
-// /api/admin/inquiries  (Authorization: Bearer ADMIN_API_TOKEN)
+// /api/admin/inquiries  (staff cookie from /api/auth/login, or Authorization: Bearer ADMIN_API_TOKEN)
 //   GET  ?status=&limit=&offset=      list (newest first) with signed photo URLs and delivery status
-//   GET  ?id=<uuid>                   one inquiry + photos + deliveries + chat transcript
+//   GET  ?id=<uuid>                   one inquiry + photos + deliveries + chat transcript + missing-info assessment + templated reply
 //   PATCH ?id=<uuid>  {status}        update status (audited)
 // api/admin/inquiries/[id].ts maps /api/admin/inquiries/<id> onto the same handler.
 import { z } from 'zod'
@@ -11,6 +11,8 @@ import { HttpError, query, readJson, requireMethod, route, sendJson } from '../.
 import { getInquiry, INQUIRY_COLS, setStatus, STATUSES, type InquiryRow } from '../../lib/inquiries.js'
 import { listPhotos, signPhotoUrl } from '../../lib/photos.js'
 import { isUuid } from '../../lib/session.js'
+import { assessInquiry } from '../../lib/quote/missing.js'
+import { templatedReply } from '../../lib/quote/reply.js'
 
 function present(i: InquiryRow, photos: { id: string; filename: string; mime: string; width: number; height: number; size: number }[]) {
   const { ip_hash: _ip, ...rest } = i
@@ -23,7 +25,7 @@ async function deliveries(db: Db, inquiryId: string) {
 
 export default route(async (req, res) => {
   requireMethod(req, 'GET', 'PATCH')
-  requireAdmin(req)
+  const actor = requireAdmin(req)
   const db = await getDb()
   const q = query(req)
   const id = q.get('id') || ''
@@ -35,7 +37,7 @@ export default route(async (req, res) => {
     const before = await getInquiry(db, id)
     if (!before) throw new HttpError(404, 'Not found.')
     const after = await setStatus(db, id, body.data.status)
-    await audit(db, 'admin', 'inquiry.status', 'inquiry', id, { from: before.status, to: body.data.status })
+    await audit(db, actor.label, 'inquiry.status', 'inquiry', id, { from: before.status, to: body.data.status })
     sendJson(res, 200, { ok: true, inquiry: present(after!, await listPhotos(db, { inquiryId: id })) })
     return
   }
@@ -50,7 +52,8 @@ export default route(async (req, res) => {
       const r = await db.query('SELECT id, state, slots, messages, created_at, last_seen_at, cost_usd::float8 AS cost_usd FROM chat_sessions WHERE id = $1', [i.chat_session_id])
       chat = r.rows[0] || null
     }
-    sendJson(res, 200, { ok: true, inquiry: present(i, photos), deliveries: await deliveries(db, id), chat })
+    const reply = templatedReply(i, photos.length)
+    sendJson(res, 200, { ok: true, inquiry: present(i, photos), deliveries: await deliveries(db, id), chat, assessment: reply.assessment, reply: { subject: reply.subject, body: reply.body } })
     return
   }
 
@@ -65,6 +68,6 @@ export default route(async (req, res) => {
   const ids = rows.map((r) => r.id)
   const photoRows = ids.length ? (await db.query<{ id: string; inquiry_id: string; filename: string; mime: string; width: number; height: number; size: number }>('SELECT id, inquiry_id, filename, mime, width, height, size FROM photos WHERE inquiry_id = ANY($1::uuid[]) ORDER BY created_at', [ids])).rows : []
   const emailRows = ids.length ? (await db.query<{ inquiry_id: string; status: string }>('SELECT inquiry_id, status FROM email_deliveries WHERE inquiry_id = ANY($1::uuid[])', [ids])).rows : []
-  const items = rows.map((r) => ({ ...present(r, photoRows.filter((p) => p.inquiry_id === r.id)), email_status: emailRows.find((e) => e.inquiry_id === r.id)?.status || null }))
+  const items = rows.map((r) => { const ph = photoRows.filter((p) => p.inquiry_id === r.id); const a = assessInquiry(r, ph.length); return { ...present(r, ph), email_status: emailRows.find((e) => e.inquiry_id === r.id)?.status || null, readiness: a.readiness, gap_count: a.gaps.length, insurance: a.insurance } })
   sendJson(res, 200, { ok: true, total, items })
 })

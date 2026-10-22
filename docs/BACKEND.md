@@ -75,7 +75,10 @@ state; the model only sees the visitor's words in user turns and only ever retur
 | `ALLOW_UNVERIFIED_FORMS` | accept forms in production without Turnstile | `false` |
 | `RESEND_API_KEY` | send the quote email | inquiry still stored; delivery row `pending_config`; retry later via admin |
 | `EMAIL_FROM` / `EMAIL_TO` | sender (verified domain) / recipient | `Captain Levi's Website <inquiries@captainlevis.com>` / `captainlevis@yahoo.com` |
-| `ADMIN_BASE_URL` | "Open in Estimater" link | `https://captain-levis-estimater.vercel.app` |
+| `ADMIN_BASE_URL` | "Open in Quote Builder" link | `<SITE_URL>/app` |
+| `STAFF_PASSWORD_HASH` | Quote Desk sign-in (`/app`, `/api/auth/*`); scrypt hash from `scripts/hash-password.mjs` | sign-in disabled (503) |
+| `STAFF_EMAILS` | who may sign in | owner addresses from business.json |
+| `AI_REPLY_DRAFT` | add a Claude-written draft to the inquiry email besides the rules-based reply | `false` |
 | `ANTHROPIC_API_KEY` | chat language + reply drafts | scripted chat, no drafts |
 | `ANTHROPIC_MODEL` | model id | `claude-sonnet-5-5` |
 | `AI_MONTHLY_BUDGET_USD` | hard monthly AI ceiling | `25` |
@@ -170,3 +173,18 @@ per IP → 429 · non-image renamed `.jpg` rejected · uploads: `.exe` as `.jpg`
 submit), transom link on index but not on transom-replacement, hours from business.json, prompt-injection keeps state,
 foreign sessionId ignored, knowledge answer, 20/min session limit · events allow-list · health · admin auth/list/patch/
 retry · signed photo URLs (valid / tampered / expired).
+
+## Quote Desk (`/app`) — added 2026-10-22
+
+Static staff app (`app/index.html`, `app/app.js`, `app/app.css`, hash routes, no build step) on top of the same API:
+
+- `POST /api/auth/login` `{email,password}` → `cl_staff` cookie (12 h, HttpOnly). `POST /api/auth/logout`, `GET /api/auth/me`.
+  10 attempts / IP / 15 min. Allow-list `STAFF_EMAILS`; the shared password lives only as `STAFF_PASSWORD_HASH` (scrypt).
+- `/api/admin/*` accepts the staff cookie or the bearer token; audit rows carry the staff email.
+- `GET /api/admin/inquiries` list rows now carry `readiness` (`ready|nearly|needs_info`), `gap_count`, `insurance`;
+  the detail adds `assessment` (lib/quote/missing.ts: photos, boat, year, area, size, location, in/out of water,
+  insurance details, timing) and `reply` (lib/quote/reply.ts: the rules-based first reply in Captain Levi's voice —
+  numbered questions for the gaps, no prices/dates, never auto-sent).
+- The inquiry email (lib/email/render.ts) shows "What we still need to quote" and "Reply to send", with "Open in Quote
+  Builder" → `<ADMIN_BASE_URL>/#/inquiries/<id>`. The Claude draft is off unless `AI_REPLY_DRAFT=true`.
+- Estimate model/math/print (ported from the retired estimater): `lib/estimates/` + `app/print/` (see lib/estimates/README.md).
