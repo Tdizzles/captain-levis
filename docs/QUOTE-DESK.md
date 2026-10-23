@@ -7,7 +7,7 @@ owner decisions: `QUOTE-BACKEND-V2-SPEC.md`. Backend reference: `BACKEND.md` ("Q
 
 | Piece | Where | Status |
 | --- | --- | --- |
-| Staff sign-in (email + shared password, 12 h cookie, 10 tries / 15 min) | `lib/staff.ts`, `api/auth/*`, `app/app.js` | done; **needs `STAFF_PASSWORD_HASH` on Vercel** |
+| Staff sign-in (email + shared password, 12 h cookie, 10 tries / 15 min) | `lib/staff.ts`, `api/auth/*`, `app/app.js` | done; `STAFF_PASSWORD_HASH` set on Vercel 2026-10-23 (owner ran the script) |
 | Inquiries inbox (list with readiness, detail with photos, status, email retry) | `app/app.js`, `api/admin/inquiries.ts` | done |
 | Missing-info rules + Captain Levi's templated first reply (no AI) | `lib/quote/missing.ts`, `lib/quote/reply.ts` | done; in the inbox and in the shop email |
 | Inquiry email: "What we still need", "Reply to send", "Open in Quote Builder" | `lib/email/render.ts` | done; sends once Resend is set |
