@@ -1,0 +1,687 @@
+/* ==========================================================================
+   Impact & Collision Damage — page-specific styles (a sub-page of Hull
+   Repairs, linked from its Impact & Collision Damage card), built to the
+   "Collision Repair Landing Page" comp. Loads after styles.css and reuses
+   its tokens, buttons, eyebrows, cards, header, footer and contact form.
+   Everything here is prefixed .icd-; the only unprefixed rules are the
+   shared .sfr-ba slider styles, which every page that uses the slider
+   defines for itself. Started as a copy of one-off-fiberglass-parts.css,
+   whose comp has the same layout.
+   ========================================================================== */
+
+/* The comp runs its bands nearly edge to edge: a 1760px frame whose content
+   edge sits 57px in at 1536 (the comp's 38px). --icd-edge is that edge, for
+   bands that bleed a photo to the viewport instead. */
+.icd-hero,.icd-intro,.icd-process,.icd-cta{
+  --icd-gutter:clamp(18px,3.7vw,64px);
+  --icd-edge:max(var(--icd-gutter), calc((100% - 1760px) / 2 + var(--icd-gutter)));
+}
+.icd-wide{
+  max-width:1760px;
+  margin-inline:auto;
+  padding-inline:clamp(18px,3.7vw,64px);
+}
+.icd-eyebrow{
+  color:var(--icon-blue);
+  font-size:0.7875rem;
+  letter-spacing:2.4px;
+  gap:14px;
+  margin-bottom:8px;
+}
+.icd-eyebrow i{background:var(--icon-blue);width:34px;}
+
+/* ---------- Hero ----------
+   icd-hero.jpg (the comp's photo from x 400 of 1024, with the paragraph's
+   line ends that reached into it inpainted) covers the right of the band,
+   feathered into the navy on its left. It stops above the trust strip,
+   which sits on the navy. The copy is indented
+   past the eyebrow's rule, as in the comp. */
+.icd-hero{
+  --icd-indent:76px;                /* eyebrow rule (47px) + its gap (29px) */
+  background:linear-gradient(100deg,#001A36 0%,var(--navy-2) 40%,#0B3A66 100%);
+}
+.icd-hero-main{position:relative;overflow:hidden;}
+.icd-hero-img{
+  position:absolute;top:0;right:0;
+  width:60.95%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 22%);
+          mask-image:linear-gradient(90deg,transparent 0%,#000 22%);
+}
+.icd-hero-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,
+    rgba(0,22,46,.62) 0%,
+    rgba(0,22,46,.42) 40%,
+    rgba(0,22,46,0) 54%);
+}
+.icd-hero-inner{
+  position:relative;z-index:2;
+  padding-top:clamp(22px,1.75vw,32px);
+  /* The comp's buttons sit right on the trust strip at 1536. */
+  padding-bottom:clamp(2px,calc(30px - 1.82vw),14px);
+}
+.icd-hero-content{max-width:780px;padding-left:var(--icd-indent);}
+.icd-hero-eyebrow{
+  margin-left:calc(-1 * var(--icd-indent));
+  margin-bottom:7px;
+  font-size:0.8125rem;
+  letter-spacing:2.1px;
+  gap:29px;
+  color:#E6F6FE;
+}
+.icd-hero-eyebrow i{width:47px;}
+.icd-hero-eyebrow em{font-style:normal;color:var(--accent);}
+.icd-hero h1{
+  font-size:clamp(1.875rem,3.33vw,3.375rem);
+  letter-spacing:-1.1px;
+  line-height:.94;
+  color:#fff;
+  margin-bottom:7px;
+}
+.icd-hero h1 .accent{color:var(--accent);}
+.icd-hero-sub{
+  color:rgba(255,255,255,.92);
+  font-size:clamp(0.9063rem,1.237vw,1.25rem);
+  line-height:1.237;
+  /* Breaks after "appearance," as in the comp. */
+  max-width:590px;
+  margin-bottom:9px;
+}
+.icd-hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+.icd-hero-actions .btn{padding:clamp(13px,1vw,16px) clamp(24px,1.95vw,34px);font-size:clamp(0.9063rem,1.02vw,1.0313rem);}
+.icd-hero-actions .btn-outline-light{gap:clamp(10px,1.07vw,16px);}
+.icd-hero-actions .btn-outline-light svg{width:clamp(15px,1.24vw,19px);height:clamp(15px,1.24vw,19px);}
+
+.icd-trust-bar{
+  background:linear-gradient(180deg,rgba(0,26,54,.82) 0%,rgba(0,20,42,.96) 100%);
+}
+.icd-trust{
+  display:grid;
+  grid-template-columns:repeat(4,auto);
+  justify-content:space-between;
+  gap:14px 24px;
+  padding-block:clamp(12px,1.1vw,19px);
+  /* Overrides .icd-wide's side padding: the comp's first icon starts at
+     x 88 of 1024 and the last item ends at x 941. */
+  padding-left:clamp(0px,8.56vw,150px);
+  padding-right:clamp(0px,8.1vw,142px);
+}
+.icd-trust li{display:flex;align-items:center;gap:clamp(14px,1.33vw,23px);color:#fff;}
+.icd-trust-icon{flex:none;display:flex;color:var(--accent);}
+/* The comp's icons are drawn large: ~40px tall at 1536. */
+.icd-trust-icon svg{width:clamp(30px,3.1vw,54px);height:clamp(30px,3.1vw,54px);}
+.icd-trust strong{display:block;font-family:var(--font-head);font-size:clamp(0.8438rem,1.03vw,1.0625rem);line-height:1.25;}
+.icd-trust small{display:block;margin-top:clamp(1px,.26vw,4px);font-size:clamp(0.75rem,.88vw,0.875rem);line-height:1.3;color:rgba(255,255,255,.78);}
+
+/* ---------- Intro: copy | diagram bleeding to the right edge ----------
+   The copy keeps the frame's content edge; the photo is a grid cell that
+   runs to the viewport edge and sets the band's height. */
+.icd-intro{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) min(59.2%, 1140px);
+  align-items:center;
+  column-gap:clamp(12px,1vw,20px);
+  padding-left:var(--icd-edge);
+  background:var(--light-bg);
+}
+.icd-intro-copy{padding-block:clamp(12px,.8vw,16px);}
+.icd-intro h2{
+  font-size:clamp(1.5rem,2.46vw,2.625rem);
+  letter-spacing:-.8px;
+  line-height:1.02;
+  margin-bottom:8px;
+}
+.icd-intro-copy > p{
+  font-size:clamp(0.9375rem,1.257vw,1.25rem);
+  line-height:1.18;
+  color:var(--gray-text);
+  /* From 1401px up the comp's line breaks are pinned with .icd-dbr. */
+  max-width:620px;
+  margin-bottom:clamp(14px,1.1vw,18px);
+  /* As in the comp, the last line runs into the gap before the diagram. */
+  margin-right:calc(-1 * clamp(12px,1vw,20px));
+}
+.icd-intro-copy .btn{padding:clamp(9px,.57vw,10px) clamp(22px,2.35vw,40px);font-size:clamp(0.9063rem,1.08vw,1.125rem);}
+
+/* Diagram: the comp's broken-open bow with its pins and leader lines kept
+   and its six callout cards whitened. Live cards sit exactly on the comp's,
+   in % of the photo (584x220 comp px), each stopping 3 comp px short of its
+   pin side
+   so the pins stay whole, with type in container query units, so the whole
+   diagram scales as one. */
+.icd-diagram{
+  position:relative;
+  container-type:inline-size;
+  margin:0;
+}
+.icd-diagram > img{
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 4%);
+          mask-image:linear-gradient(90deg,transparent,#000 4%);
+}
+.icd-callouts{list-style:none;margin:0;padding:0;}
+.icd-callout{
+  position:absolute;
+  background:#fff;
+  border-radius:clamp(4px,.75cqw,7px);
+  box-shadow:0 10px 22px -14px rgba(0,38,75,.45);
+  padding:1cqw 1.2cqw 1cqw 2.05cqw;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.icd-co-gelcoat  {left:2.23%;top:6.82%;width:24.83%;min-height:23.64%;}
+.icd-co-glass    {left:2.23%;top:35.45%;width:24.49%;min-height:24.55%;}
+.icd-co-struct   {left:2.23%;top:65.91%;width:24.14%;min-height:29.55%;}
+.icd-co-shape    {left:73.97%;top:5.91%;width:21.58%;min-height:23.18%;}
+.icd-co-color    {left:72.09%;top:33.64%;width:23.46%;min-height:24.55%;}
+.icd-co-restore  {left:74.14%;top:63.18%;width:21.4%;min-height:29.55%;}
+/* The right-hand cards lose 3px on their pin side, so their text keeps the
+   comp's inset from the comp's card edge. */
+.icd-co-shape,.icd-co-color,.icd-co-restore{padding-left:1.6cqw;}
+.icd-callout strong{
+  display:block;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(0.5938rem,1.68cqw,1.0625rem);
+  line-height:1.2;
+  color:var(--navy);
+  margin-bottom:.25em;
+}
+.icd-callout small{
+  display:block;
+  font-size:clamp(0.5313rem,1.58cqw,0.9688rem);
+  line-height:1.24;
+  color:var(--gray-text);
+}
+@container (max-width:620px){
+  /* Too small for the descriptions to fit their cards; the titles stay. */
+  .icd-callout{padding:4px 6px 4px 8px;}
+  .icd-callout small{display:none;}
+  .icd-callout strong{margin:0;font-size:clamp(0.5938rem,2.5cqw,0.8125rem);}
+}
+
+/* ---------- Damage examples: five fg-cards without links ---------- */
+.icd-options{background:linear-gradient(180deg,#F4FAFE 0%,#F9FBFE 100%);}
+.icd-options .icd-wide{padding-block:max(2px, calc(14px - .78vw)) clamp(12px,.88vw,15px);}
+.icd-options .icd-eyebrow{margin-bottom:clamp(8px,.8vw,13px);}
+.icd-opt-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(10px,.77vw,13px);
+}
+.icd-opt{border-radius:8px;}
+.icd-opt:hover{transform:none;}
+.icd-opt .fg-card-media img{aspect-ratio:183/81;}
+/* The comp's breaks are inconsistent between cards, so from 1401px up they
+   are pinned with .icd-dbr; below that the text wraps naturally. */
+.icd-opt .fg-card-body{padding:clamp(8px,.55vw,9px) clamp(12px,1vw,18px) clamp(9px,.62vw,10px) clamp(14px,1.46vw,25px);}
+.icd-opt .fg-card-body h3{font-size:clamp(0.9063rem,1.165vw,1.2188rem);letter-spacing:-.3px;margin-bottom:clamp(3px,.3vw,5px);}
+.icd-opt .fg-card-body p{font-size:clamp(0.8125rem,1.05vw,1.0625rem);line-height:1.24;margin-bottom:0;}
+
+/* ---------- Shared slider (script.js binds every .sfr-ba) ----------
+   Each image is one half of the comp's pair plus its mirror, so at rest the
+   seam sits on the handle and the frame matches the comp. */
+.sfr-ba{
+  position:relative;
+  aspect-ratio:307/79;
+  border-radius:7px;
+  overflow:hidden;
+  box-shadow:0 14px 30px -20px rgba(0,38,75,.6);
+  cursor:ew-resize;
+  touch-action:none;
+  user-select:none;
+}
+.sfr-ba:focus-visible{outline:2px solid var(--icon-blue);outline-offset:3px;}
+.sfr-ba-img{
+  position:absolute;inset:0;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.sfr-ba-after{clip-path:inset(0 0 0 50%);}
+.sfr-ba-line{
+  position:absolute;top:0;bottom:0;left:50%;
+  width:2px;margin-left:-1px;
+  background:#fff;
+  box-shadow:0 0 8px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:clamp(34px,2.8vw,46px);height:clamp(34px,2.8vw,46px);
+  border-radius:50%;
+  background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.3);
+  pointer-events:none;
+}
+.sfr-ba-handle svg{display:block;}
+/* The comp's tags sit almost on the bottom edge. */
+.sfr-ba-tag{
+  position:absolute;bottom:clamp(2px,.2vw,4px);
+  width:25.5%;
+  text-align:center;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(0.6875rem,.95vw,0.9375rem);
+  letter-spacing:.8px;
+  padding:clamp(5px,.5vw,8px) 0;
+  border-radius:5px;
+  pointer-events:none;
+}
+.sfr-ba-tag-before{left:3.6%;background:rgba(0,22,46,.92);color:#fff;}
+.sfr-ba-tag-after{right:3.6%;background:#1E9BF0;color:#fff;}
+
+/* ---------- Process band ----------
+   Photo bleeding off the left edge with a curved trailing side, then copy
+   and four step cards. The section's right padding reproduces .icd-wide's
+   content edge. */
+.icd-process{
+  --bulge:6%;
+  display:grid;
+  /* 37.4% of the viewport, as in the comp: the % resolves against the
+     content box, which loses the right padding. */
+  grid-template-columns:clamp(260px,38.25%,740px) minmax(0,1fr);
+  /* The comp's step cards run to 28px from the window edge at 1536. */
+  padding-right:max(16px, calc(var(--icd-edge) - clamp(0px,1.86vw,32px)));
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(28,148,220,.16), transparent 60%),
+    linear-gradient(100deg,var(--navy) 0%,#062F5A 55%,var(--navy-2) 100%);
+}
+.icd-process-photo{
+  position:relative;
+  /* The comp's edge is a lopsided arc: 23px in at the top, flush 55% of the
+     way down, 19px in at the bottom (of a 383px photo at 1024), traced
+     through its points every 10% of the height. */
+  clip-path:polygon(0 0,
+    calc(100% - var(--bulge)) 0,
+    calc(100% - var(--bulge) * .83) 10%,
+    calc(100% - var(--bulge) * .5) 20%,
+    calc(100% - var(--bulge) * .26) 30%,
+    calc(100% - var(--bulge) * .13) 40%,
+    calc(100% - var(--bulge) * .04) 50%,
+    100% 55%,
+    calc(100% - var(--bulge) * .04) 60%,
+    calc(100% - var(--bulge) * .17) 70%,
+    calc(100% - var(--bulge) * .3) 80%,
+    calc(100% - var(--bulge) * .6) 90%,
+    calc(100% - var(--bulge) * .83) 100%,
+    0 100%);
+}
+.icd-process-photo img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:right center;
+}
+.icd-process-body{
+  padding:clamp(10px,.6vw,11px) 0 clamp(8px,.6vw,10px) clamp(10px,1.33vw,23px);
+}
+.icd-process-head{margin-left:clamp(4px,.3vw,6px);}
+/* As in the comp, the eyebrow's rule hangs left of the heading. */
+.icd-process-eyebrow{
+  color:var(--accent);
+  font-size:0.75rem;
+  letter-spacing:2.2px;
+  margin-bottom:clamp(2px,.26vw,4px);
+  margin-left:-48px;
+}
+.icd-process-eyebrow i{background:var(--accent);width:34px;}
+.icd-process h2{
+  color:#fff;
+  font-size:clamp(1.375rem,1.965vw,2rem);
+  letter-spacing:-.6px;
+  line-height:1.15;
+  margin-bottom:clamp(4px,.45vw,7px);
+}
+.icd-process-lead{
+  color:rgba(255,255,255,.9);
+  font-size:clamp(0.875rem,1.16vw,1.1875rem);
+  line-height:1.24;
+  max-width:800px;
+  margin-bottom:clamp(6px,.49vw,9px);
+}
+.icd-steps{
+  --step-gap:clamp(24px,1.82vw,32px);
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:24px var(--step-gap);
+}
+.icd-step{
+  position:relative;
+  /* The number badge sits in the card's top-left corner and the icon is
+     centred across the card, as in the comp. */
+  --num:clamp(34px,2.9vw,50px);
+  --step-pl:clamp(14px,1.82vw,32px);
+  --step-pr:clamp(8px,.6vw,11px);
+  padding:0 var(--step-pr) clamp(8px,.6vw,10px) var(--step-pl);
+  border:1px solid rgba(94,205,250,.2);
+  border-radius:8px;
+  background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.02) 100%);
+}
+/* Arrow between cards, centred in the gap. */
+.icd-step + .icd-step::before{
+  content:"";
+  position:absolute;
+  left:calc(-.5 * var(--step-gap) - 12px);
+  top:50%;
+  width:24px;height:24px;
+  margin-top:-12px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12h17M14 6l6 6-6 6'/%3E%3C/svg%3E") no-repeat center/contain;
+  opacity:.9;
+}
+.icd-step-top{
+  display:flex;align-items:center;justify-content:center;
+  height:calc(var(--num) + clamp(6px,.6vw,10px));
+  margin-left:calc(-1 * var(--step-pl));
+  margin-right:calc(-1 * var(--step-pr));
+}
+.icd-step-num{
+  position:absolute;
+  top:clamp(3px,.3vw,5px);left:clamp(2px,.2vw,4px);
+  width:var(--num);height:var(--num);
+  border-radius:50%;
+  background:#1E8BF0;
+  box-shadow:0 0 0 4px rgba(28,148,220,.22);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(1.0625rem,1.45vw,1.5rem);
+  display:flex;align-items:center;justify-content:center;
+}
+.icd-step-icon{display:flex;color:#fff;}
+.icd-step-icon svg{width:clamp(24px,2.1vw,36px);height:clamp(24px,2.1vw,36px);}
+/* Centred across the whole card, not the copy's offset column. */
+.icd-step h3{color:#fff;font-size:clamp(0.9063rem,1.087vw,1.125rem);letter-spacing:-.2px;margin:0 0 clamp(4px,.5vw,8px) calc(var(--step-pr) - var(--step-pl));text-align:center;}
+.icd-step p{color:rgba(255,255,255,.8);font-size:clamp(0.8125rem,.88vw,0.9375rem);line-height:1.3;}
+
+/* ---------- Before & after ---------- */
+.icd-results{
+  background:linear-gradient(180deg,#F8FBFE 0%,var(--light-bg) 100%);
+}
+.icd-results-inner{padding-block:clamp(4px,.33vw,6px) clamp(4px,.26vw,5px);}
+.icd-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  gap:12px 40px;
+  flex-wrap:wrap;
+  margin-bottom:clamp(8px,.55vw,10px);
+}
+.icd-head .icd-eyebrow{margin-bottom:6px;}
+.icd-head h2{
+  font-size:clamp(1.4375rem,2.05vw,2.125rem);
+  letter-spacing:-.7px;
+  line-height:1.12;
+}
+.icd-head .btn{
+  align-self:flex-start;
+  margin-top:clamp(4px,.59vw,10px);
+  padding:clamp(9px,.62vw,11px) clamp(20px,1.6vw,28px);
+  font-size:clamp(0.8125rem,.88vw,0.9063rem);
+}
+.icd-ba-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.65vw,28px);
+}
+
+/* ---------- Other boat repair services ----------
+   Head row (copy | button), then seven title-only cards and a "can't find
+   it" card. The card widths follow the comp; each card is one link. */
+.icd-related{background:linear-gradient(180deg,#F6FBFD 0%,#F3F9FE 100%);}
+.icd-related-inner{padding-block:clamp(10px,1.03vw,18px) clamp(4px,.26vw,5px);}
+.icd-related-grid{
+  display:grid;
+  grid-template-columns:109fr 116fr 122fr 104fr 104fr 104fr 105fr 142fr;
+  gap:clamp(10px,.72vw,13px);
+}
+.icd-rel-card{position:relative;border:1px solid #E6EFF7;border-radius:8px;}
+.icd-rel-card:hover{transform:translateY(-2px);}
+.icd-rel-card .fg-card-media img{aspect-ratio:auto;height:clamp(64px,5.66vw,96px);}
+.icd-rel-card .fg-card-body{padding:clamp(8px,.83vw,14px) clamp(10px,1vw,16px) clamp(10px,1.07vw,18px);}
+.icd-rel-card h3{font-size:clamp(0.7813rem,.95vw,0.9375rem);letter-spacing:-.3px;line-height:1.24;margin:0;}
+.icd-rel-card h3 a{color:inherit;}
+/* The title's link covers the whole card. */
+.icd-rel-card h3 a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.icd-rel-card h3 a:focus-visible{outline:none;}
+.icd-rel-card:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.icd-rel-help{
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  gap:clamp(3px,.3vw,5px);
+  padding:clamp(8px,.6vw,10px) clamp(10px,.8vw,14px);
+  border-radius:10px;
+  background:#E6F2FD;
+}
+.icd-rel-help-icon{
+  width:clamp(32px,2.2vw,38px);height:clamp(32px,2.2vw,38px);
+  border-radius:50%;
+  background:#fff;
+  color:#1E8BF0;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:2px;
+}
+.icd-rel-help a{font-family:var(--font-head);font-weight:800;font-size:clamp(0.875rem,1.02vw,1.0313rem);line-height:1.2;letter-spacing:-.3px;color:var(--navy);}
+.icd-rel-help a::after{content:"";position:absolute;inset:0;border-radius:inherit;}
+.icd-rel-help a:focus-visible{outline:none;}
+.icd-rel-help:has(a:focus-visible){outline:2px solid var(--icon-blue);outline-offset:3px;}
+.icd-rel-help p{font-size:clamp(0.75rem,.85vw,0.8438rem);line-height:1.22;color:var(--gray-text);}
+
+/* ---------- Why choose us + FAQ ----------
+   copy | four features | FAQ, the first two set off by a rule. Questions
+   use native <details>, so they work without script. */
+.icd-why{background:linear-gradient(180deg,#F7FBFE 0%,#F2F8FD 100%);}
+.icd-why-inner{
+  display:grid;
+  grid-template-columns:minmax(0,37%) minmax(0,1fr) minmax(0,34%);
+  align-items:center;
+  padding-block:0 clamp(14px,2.17vw,34px);
+}
+/* Top-aligned a little below the FAQ heading, as in the comp. */
+.icd-why-copy{align-self:start;margin-top:clamp(0px,.39vw,7px);padding-right:clamp(8px,.55vw,10px);}
+.icd-why-copy .icd-eyebrow{margin-bottom:7px;}
+.icd-why .icd-why-copy h2{font-size:clamp(1.375rem,1.86vw,1.875rem);line-height:1.2;margin-bottom:4px;}
+.icd-why h2{
+  font-size:clamp(1.375rem,1.68vw,1.75rem);
+  letter-spacing:-.6px;
+  line-height:1.12;
+  margin-bottom:4px;
+}
+.icd-why-copy p{font-size:clamp(0.875rem,1.074vw,1.125rem);line-height:1.3;color:var(--gray-text);}
+.icd-features{
+  align-self:stretch;
+  display:grid;align-content:center;
+  gap:clamp(10px,.81vw,14px);
+  /* The comp's features sit a little below the band's centre. */
+  padding-top:clamp(0px,1.82vw,30px);
+  padding-left:clamp(20px,2.5vw,42px);
+  padding-right:clamp(16px,1.6vw,28px);
+  border-left:1px solid #DCE7F1;
+}
+.icd-features li{display:flex;align-items:center;gap:clamp(14px,1.3vw,22px);}
+.icd-feature-icon{flex:none;display:flex;justify-content:center;width:32px;color:#1E8BF0;}
+.icd-features strong{display:block;font-family:var(--font-head);font-size:clamp(0.875rem,1.01vw,1.0625rem);line-height:1.25;color:var(--navy);}
+.icd-features small{display:block;margin-top:2px;font-size:clamp(0.8125rem,.876vw,0.9063rem);line-height:1.3;color:var(--gray-text);}
+.icd-faq{
+  align-self:stretch;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.icd-faq h2{font-size:clamp(1.1875rem,1.54vw,1.5938rem);letter-spacing:-.5px;margin-bottom:6px;}
+.icd-faq-list{display:grid;gap:2px;}
+.icd-faq details{background:#fff;border:1px solid #DCE7F1;border-radius:6px;box-shadow:0 4px 10px -8px rgba(0,38,75,.3);}
+.icd-faq summary{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:2.5px 14px;
+  line-height:1.4;
+  font-size:clamp(0.8438rem,.895vw,0.9375rem);
+  font-weight:500;
+  color:var(--navy);
+  cursor:pointer;
+  list-style:none;
+}
+.icd-faq summary::-webkit-details-marker{display:none;}
+.icd-faq summary::after{
+  content:"";flex:none;
+  width:13px;height:13px;
+  background:
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/13px 2px no-repeat,
+    linear-gradient(var(--icon-blue),var(--icon-blue)) center/2px 13px no-repeat;
+  transition:transform .2s ease;
+}
+.icd-faq details[open] summary::after{transform:rotate(45deg);}
+.icd-faq summary:focus-visible{outline:2px solid var(--icon-blue);outline-offset:2px;border-radius:6px;}
+.icd-faq details p{padding:0 16px 14px;font-size:0.875rem;line-height:1.6;color:var(--gray-text);}
+
+/* ---------- Closing CTA band ----------
+   The comp's boat and skyline at the left edge, feathered into the navy;
+   the faint skyline on the right is the faded end of results-marina.jpg.
+   Copy | two buttons. */
+.icd-cta{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(100deg,#001A36 0%,var(--navy) 55%,#0B3A66 100%);
+}
+.icd-cta-bg{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:center 62%;
+  opacity:.22;
+  -webkit-mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+          mask-image:linear-gradient(90deg,transparent 45%,#000 95%);
+}
+.icd-cta-boat{
+  position:absolute;top:0;bottom:0;left:0;
+  width:clamp(200px,35.35vw,620px);
+  -webkit-mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+          mask-image:linear-gradient(90deg,#000 70%,transparent 100%);
+}
+.icd-cta-boat img{width:100%;height:100%;object-fit:cover;object-position:left center;}
+.icd-cta-inner{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px clamp(20px,1.5vw,28px);
+  flex-wrap:wrap;
+  min-height:clamp(84px,6.25vw,110px);
+  padding-block:clamp(12px,.9vw,16px);
+  /* The copy starts just past the boat (the comp's x 370 of 1024). */
+  padding-left:max(var(--icd-gutter), calc(36.13vw - max(0px, (100vw - 1760px) / 2)));
+}
+.icd-cta h2{color:#fff;font-size:clamp(1.1875rem,1.45vw,1.5rem);letter-spacing:-.5px;line-height:1.15;margin-bottom:4px;}
+.icd-cta p{font-size:clamp(0.8125rem,.83vw,0.875rem);color:rgba(255,255,255,.85);}
+.icd-cta-actions{display:flex;gap:clamp(10px,1.05vw,18px);flex-wrap:wrap;margin-left:auto;}
+.icd-cta-actions .btn{padding:clamp(12px,.95vw,15px) clamp(22px,1.8vw,32px);font-size:clamp(0.875rem,.98vw,1rem);}
+.icd-cta-actions .btn-outline-light{background:rgba(0,22,46,.55);border-color:rgba(94,205,250,.7);gap:clamp(10px,1.07vw,16px);}
+.icd-cta-actions .btn-outline-light svg{width:clamp(15px,1.24vw,19px);height:clamp(15px,1.24vw,19px);}
+
+/* ==========================================================================
+   Responsive — widest first (see BUILDING-SERVICE-PAGES.md §7: equal
+   specificity, so the later block wins).
+   ========================================================================== */
+
+@media (max-width:1400px){
+  /* The comp's pinned line breaks hold only from 1401px up. */
+  .icd-dbr{display:none;}
+  /* Hero: the copy no longer fits left of the photo, so the photo narrows
+     and fades in over a longer run and the scrim reaches further. */
+  .icd-hero-img{
+    width:54%;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%);
+            mask-image:linear-gradient(90deg,transparent 0%,#000 38%);
+  }
+  .icd-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.7) 0%, rgba(0,22,46,.55) 50%, rgba(0,22,46,0) 72%);
+  }
+  .icd-hero-sub{max-width:500px;}
+  /* Related: seven cards plus the help card fill two rows of four. */
+  .icd-related-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .icd-rel-card .fg-card-media img{height:auto;aspect-ratio:16/7;}
+}
+
+@media (max-width:1240px){
+  .icd-opt-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .icd-steps{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .icd-step:nth-child(3)::before{display:none;}
+  /* Step 1's <br> only reproduces the comp's break in the four-card row. */
+  .icd-step br{display:none;}
+  /* Why: copy | features on top, the FAQ full width below. */
+  .icd-why-inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);row-gap:24px;padding-block:28px;}
+  .icd-features{padding-right:0;padding-top:0;}
+  .icd-faq{grid-column:1 / -1;border-top:1px solid #DCE7F1;padding-top:22px;}
+  /* The CTA copy wraps under the boat; the buttons drop below it. */
+  .icd-cta-inner{padding-left:clamp(200px,35.35vw,620px);}
+  .icd-cta-actions{margin-left:0;}
+}
+
+@media (max-width:1100px){
+  /* Intro stacks: the diagram becomes a full-width row under the copy so its
+     callouts keep room for their descriptions. */
+  .icd-intro{grid-template-columns:minmax(0,1fr);padding-inline:0;}
+  .icd-intro-copy{padding:clamp(28px,4vw,40px) var(--icd-edge) 8px;}
+  .icd-intro-copy > p{margin-right:0;}
+  .icd-diagram{width:100%;max-width:900px;justify-self:end;}
+}
+
+@media (max-width:1024px){
+  .icd-hero-img{width:100%;object-position:70% center;-webkit-mask-image:none;mask-image:none;}
+  .icd-hero-scrim{
+    background:linear-gradient(90deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.76) 60%, rgba(0,22,46,.5) 100%);
+  }
+  /* Keeps .icd-wide's side padding, so the icons clear the screen edge. */
+  .icd-trust{grid-template-columns:repeat(2,auto);justify-content:start;column-gap:clamp(24px,6vw,64px);padding-inline:clamp(18px,3.7vw,64px);}
+  .icd-process{grid-template-columns:minmax(0,1fr);padding-right:0;}
+  .icd-process-photo{clip-path:none;aspect-ratio:2.4/1;}
+  .icd-process-photo img{object-position:center 40%;}
+  .icd-process-body{padding:clamp(24px,4vw,36px) var(--pad) clamp(26px,4vw,40px);}
+  .icd-process-head{margin-left:0;}
+  .icd-process-eyebrow{margin-left:0;}
+  .icd-step h3{text-align:left;margin-left:0;}
+  .icd-cta-boat{width:40%;opacity:.45;}
+  .icd-cta-inner{padding-block:24px;padding-left:var(--icd-gutter);}
+}
+
+@media (max-width:820px){
+  .icd-opt-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .icd-related-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .icd-rel-card h3{font-size:0.9375rem;}
+  .icd-why-inner{grid-template-columns:minmax(0,1fr);}
+  .icd-why-copy{padding-right:0;}
+  .icd-features{border-left:0;padding-inline:0;}
+  .icd-ba-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+
+@media (max-width:640px){
+  .icd-hero{--icd-indent:0px;}
+  .icd-hero-inner{padding-top:34px;padding-bottom:28px;}
+  .icd-hero-eyebrow{font-size:0.6875rem;letter-spacing:1.6px;gap:10px;}
+  .icd-hero-eyebrow i{width:24px;}
+  .icd-hero h1{font-size:clamp(1.75rem,8vw,2.25rem);letter-spacing:-.7px;}
+  .icd-hero h1 br{display:none;}
+  .icd-hero-sub{font-size:0.9063rem;margin-bottom:22px;}
+  .icd-hero-img{object-position:62% center;}
+  .icd-hero-scrim{
+    background:linear-gradient(180deg, rgba(0,22,46,.9) 0%, rgba(0,22,46,.82) 55%, rgba(0,22,46,.74) 100%);
+  }
+  .icd-hero-actions,.icd-cta-actions{width:100%;gap:10px;}
+  .icd-hero-actions .btn,.icd-cta-actions .btn{flex:1 1 100%;justify-content:center;}
+  .icd-trust{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;}
+  .icd-intro h2 br{display:none;}
+  .icd-intro-copy .btn{width:100%;justify-content:center;}
+  .icd-opt-grid{grid-template-columns:minmax(0,1fr);}
+  .icd-steps{grid-template-columns:minmax(0,1fr);}
+  .icd-step + .icd-step::before{display:none;}
+  .icd-head .btn{width:100%;justify-content:center;margin-top:0;}
+  .icd-ba-grid{grid-template-columns:minmax(0,1fr);max-width:520px;}
+  .sfr-ba{aspect-ratio:2.6/1;}
+  .icd-why h2 br{display:none;}
+  .icd-faq summary{padding-block:10px;}
+  .icd-cta-boat{width:70%;opacity:.3;}
+}
+
+@media (max-width:400px){
+  .icd-trust{grid-template-columns:minmax(0,1fr);}
+  .icd-related-grid{grid-template-columns:minmax(0,1fr);}
+}

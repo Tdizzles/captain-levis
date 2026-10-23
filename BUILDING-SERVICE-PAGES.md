@@ -988,3 +988,28 @@ node --check script.js
   which condenses the live site's story; "fifty years", "forty-three
   years" and the city list are the live site's claims. Check with the
   owner.
+- **`impact-collision-damage.html`** (sub-page of Hull Repairs, `.icd-`
+  prefix) was rebuilt on 2026-10-23 to the "Collision Repair Landing Page"
+  comp and no longer uses `hull-subpage.css`; the other five hull sub-pages
+  still do. Its stylesheet started as a copy of
+  `one-off-fiberglass-parts.css`, whose comp has the same layout. Its `icd-*`
+  images are cropped from a 1024px comp and saved at 2x, so they are soft.
+  The hero photo starts at the comp's x 400, with the paragraph's line ends
+  inpainted (OpenCV, a throwaway install, not a repo dependency). The
+  diagram (`icd-diagram.jpg`) keeps the comp's pins and leader lines; its
+  six callout cards were whitened and live cards sit over them in % of the
+  photo with `cqw` type, so re-crop the image only together with those
+  positions. The process photo's trailing edge is a lopsided arc (flush 55%
+  of the way down). The intro paragraph, example cards, step cards and why
+  copy break on the comp's words from 1401px up through `<br
+  class="icd-dbr">`, hidden at 1400px and below. The related row has seven
+  cards: the comp repeats "Hull Damage Repair", so the second goes to
+  `hull-crack-repair.html` as "Hull Crack Repair"; below 1400px the row is
+  two rows of four with the help card as the eighth. All three before/after
+  pairs are placeholders built like the surface scratch page's (one comp
+  half plus its mirror, tags and handle painted out). The comp's slim
+  footer is not used; the page keeps the shared footer and quote form. The
+  results band says "Real Results" although the pairs are placeholders, and
+  the FAQ answers are drafted copy (the insurance answer only says we
+  document the damage and give a written estimate). Check both with the
+  owner.
