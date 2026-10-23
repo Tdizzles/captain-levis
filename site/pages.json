@@ -98,6 +98,12 @@
       "service": "",
       "lead": "Want to talk to the family that will actually work on your boat? Fill out the form or give us a call &mdash; Captain Dave or Levi will get back to you as soon as possible."
     },
+    "reviews": {
+      "label": "Reviews",
+      "parent": null,
+      "service": "",
+      "lead": "Ready to add your own five-star story? Tell us about your boat, send a few photos of the damage, and we&rsquo;ll get back to you with the next step as soon as we can."
+    },
     "contact": {
       "label": "Contact & Free Quote",
       "parent": null,
