@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { parseBoat } from './boat.js'
 import { serviceValues } from './business.js'
 import type { Db, Queryable } from './db.js'
+import type { InquiryDetails } from './chat/quoteflow.js'
 import { sha256 } from './ip.js'
 
 export const KINDS = ['quote', 'contact', 'insurance', 'yard'] as const
@@ -32,11 +33,13 @@ export interface InquiryRow {
   boat_make: string | null; boat_model: string | null; boat_year: number | null; boat_raw: string | null; boat_location: string | null
   damage_location: string | null; damage_type: string | null; message: string; page: string | null; source: 'form' | 'chat'
   chat_session_id: string | null; idempotency_key: string | null; ip_hash: string | null; user_agent: string | null
+  /** structured quote-flow answers from the chat ({} for form inquiries) */
+  details?: Partial<InquiryDetails>
   created_at: Date | string; updated_at: Date | string
 }
 
 export const INQUIRY_COLS = `id, ref, kind, status, name, email, phone, service, boat_make, boat_model, boat_year, boat_raw, boat_location,
-  damage_location, damage_type, message, page, source, chat_session_id, idempotency_key, ip_hash, user_agent, created_at, updated_at`
+  damage_location, damage_type, message, page, source, chat_session_id, idempotency_key, ip_hash, user_agent, details, created_at, updated_at`
 
 export async function nextRef(tx: Queryable, now = new Date()): Promise<string> {
   const year = now.getFullYear()
@@ -74,6 +77,7 @@ export interface CreateInquiryOpts {
   chatSessionId?: string | null
   damageLocation?: string | null
   damageType?: string | null
+  details?: InquiryDetails | null
   ipHash: string | null
   userAgent: string | null
 }
@@ -86,13 +90,14 @@ export async function createInquiry(db: Db, opts: CreateInquiryOpts): Promise<In
     const ref = await nextRef(tx)
     const r = await tx.query<InquiryRow>(
       `INSERT INTO inquiries (ref, kind, name, email, phone, service, boat_make, boat_model, boat_year, boat_raw, boat_location,
-         damage_location, damage_type, message, message_hash, page, source, chat_session_id, idempotency_key, ip_hash, user_agent)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21)
+         damage_location, damage_type, message, message_hash, page, source, chat_session_id, idempotency_key, ip_hash, user_agent, details)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22::jsonb)
        RETURNING ${INQUIRY_COLS}`,
       [ref, (KINDS as readonly string[]).includes(input.kind) ? input.kind : 'quote', input.name, input.email, input.phone, input.service,
         boat.make, boat.model, boat.year, boat.raw || null, input.boat_location || null,
         opts.damageLocation || null, opts.damageType || null, input.message, messageHash(input.email, input.message), input.page || null,
-        opts.source, opts.chatSessionId || null, input.idempotency_key || null, opts.ipHash, opts.userAgent?.slice(0, 300) || null],
+        opts.source, opts.chatSessionId || null, input.idempotency_key || null, opts.ipHash, opts.userAgent?.slice(0, 300) || null,
+        JSON.stringify(opts.details || {})],
     )
     const row = r.rows[0]
     if (opts.chatSessionId) {

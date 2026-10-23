@@ -1,5 +1,5 @@
-// POST /api/chat — Captain Levi. Body {sessionId, message, page, pageTitle, context, photoIds?, note?}
-// → {sessionId, reply, chips, links?, card?, draft?, navigate?, event?, done?}
+// POST /api/chat — Captain Levi. Body {sessionId, message, page, pageTitle, context, photoIds?, note?, answer?}
+// → {sessionId, reply, chips, links?, card?, draft?, navigate?, event?, done?, widget?, progress?}
 import { z } from 'zod'
 import { getDb } from '../lib/db.js'
 import { header, HttpError, readJson, requireMethod, route, sendJson } from '../lib/http.js'
@@ -18,6 +18,11 @@ const bodySchema = z.object({
   context: z.string().max(600).optional().default(''),
   photoIds: z.array(z.string().uuid()).max(5).optional(),
   note: z.string().max(200).optional(),
+  // a tapped quick-fill answer (tiles, boat card, boat diagram, contact card ...); `message` carries its label
+  answer: z.object({
+    step: z.string().max(40),
+    value: z.union([z.string().max(500), z.array(z.string().max(60)).max(12), z.record(z.string().max(20), z.string().max(200))]),
+  }).optional(),
 })
 
 export default route(async (req, res) => {
@@ -45,7 +50,7 @@ export default route(async (req, res) => {
   }
 
   const out = await runTurn(db, s, {
-    message: body.message, page, pageTitle: body.pageTitle, context: body.context, photoCount, note: body.note,
+    message: body.message, page, pageTitle: body.pageTitle, context: body.context, photoCount, note: body.note, answer: body.answer,
     ipHash: ip, userAgent: header(req, 'user-agent'),
   })
   await saveSession(db, s, { cost: out.cost, tokensIn: out.tokensIn, tokensOut: out.tokensOut, page })

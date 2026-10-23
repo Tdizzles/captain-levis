@@ -1,6 +1,7 @@
 // What a proper quote still needs. Deterministic rules over the inquiry row + its photos; no AI.
 // Priority 1 is the basics (photos, the boat, where it is) and is all the first reply asks for. A long first
 // email loses the customer; everything else (year, size, insurance paperwork, timing) gets picked up later.
+import { svcDef } from '../chat/quoteflow.js'
 import type { InquiryRow } from '../inquiries.js'
 
 export type GapKey = 'photos' | 'boat' | 'boat_year' | 'size' | 'area' | 'location' | 'in_water' | 'insurance' | 'timeline'
@@ -39,11 +40,16 @@ export function assessInquiry(i: InquiryRow, photoCount: number): Assessment {
   const gaps: Gap[] = []
   const have: GapKey[] = []
 
-  const inWater = IN_WATER_RE.test(text) ? true : OUT_WATER_RE.test(text) ? false : null
-  const size = SIZE_RE.test(text)
-  const area = i.damage_location || AREA_WORDS.find(([re]) => re.test(text))?.[1] || null
-  const insurance = i.service === 'insurance-claim' || i.kind === 'insurance' || INSURANCE_RE.test(text)
-  const urgency = URGENCY_RE.test(text)
+  // chat inquiries carry structured answers; they win over guessing from the text (whose "Insurance: No" row
+  // would otherwise read as an insurance job). Jobs that never ask size or area (transom, detailing ...) don't need them.
+  const det = i.details || {}
+  const job = svcDef(det.job)
+  const inWater = typeof det.inWater === 'boolean' ? det.inWater : IN_WATER_RE.test(text) ? true : OUT_WATER_RE.test(text) ? false : null
+  const size = !!det.size || (job ? !job.size : false) || SIZE_RE.test(text)
+  const area = i.damage_location || (job && !job.zones ? job.label.toLowerCase() : null) || AREA_WORDS.find(([re]) => re.test(text))?.[1] || null
+  const insurance = i.service === 'insurance-claim' || i.kind === 'insurance' || (typeof det.insurance === 'boolean' ? det.insurance : INSURANCE_RE.test(text))
+  const urgency = det.timeline === 'asap' || URGENCY_RE.test(text)
+  const timing = urgency || !!det.timeline
 
   if (photoCount === 0) gaps.push({ key: 'photos', priority: 1, label: 'No photos', why: 'Every quote starts from photos of the damage; without them the crew cannot judge size, depth or whether the laminate is involved.',
     question: 'A few photos of the damage (one up close, one from a few feet back)' })
@@ -82,7 +88,7 @@ export function assessInquiry(i: InquiryRow, photoCount: number): Assessment {
     else have.push('insurance')
   }
 
-  if (!urgency) gaps.push({ key: 'timeline', priority: 3, label: 'Timing', why: 'Lets the crew schedule the inspection and tell the customer honestly when it could start.',
+  if (!timing) gaps.push({ key: 'timeline', priority: 3, label: 'Timing', why: 'Lets the crew schedule the inspection and tell the customer honestly when it could start.',
     question: 'Any timing I should know about, like a trip coming up?' })
   else have.push('timeline')
 

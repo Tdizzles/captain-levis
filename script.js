@@ -455,7 +455,7 @@
       persist()
       chipsBox.replaceChildren(...state.chips.map((c) => {
         const b = document.createElement('button'); b.type = 'button'; b.className = 'chat-chip' + (c.primary ? ' chat-chip-primary' : ''); b.textContent = c.label
-        b.addEventListener('click', () => { if (c.href) { if (c.draft) store.sset('cl-quote-draft', c.draft); location.href = c.href; return } send(c.send || c.label) })
+        b.addEventListener('click', () => { if (c.href) { if (c.draft) store.sset('cl-quote-draft', c.draft); location.href = c.href; return } if (c.answer) { send(c.send || c.label, { answer: c.answer }); return } send(c.send || c.label) })
         return b
       }))
     }
@@ -463,10 +463,242 @@
     const showTyping = () => { typingEl = document.createElement('div'); typingEl.className = 'chat-msg-typing'; typingEl.innerHTML = '<span></span><span></span><span></span>'; messages.appendChild(typingEl); messages.scrollTop = messages.scrollHeight }
     const hideTyping = () => { typingEl?.remove(); typingEl = null }
 
+    // ---- quote flow: progress bar + one quick-fill widget per step. The server sends {widget, progress};
+    // a tap goes back as {answer: {step, value}} with the label as the visible message. Typing always works too.
+    const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e }
+    const ICONS = {
+      impact: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/><circle cx="12" cy="12" r="2.2"/>',
+      crack: '<path d="M4 20l5-6-2-3 5-4-1-4M12 7l4 3 4-1M9 14l4 1 2 5"/>',
+      chip: '<circle cx="7" cy="8" r="2"/><circle cx="16" cy="7" r="1.4"/><circle cx="14" cy="15" r="2.6"/><circle cx="6.5" cy="16.5" r="1.2"/>',
+      soft: '<path d="M3 9c3 0 3 3 6 3s3-3 6-3 3 3 6 3M3 15c3 0 3 3 6 3s3-3 6-3 3 3 6 3"/>',
+      transom: '<path d="M3 7h18l-2 9H5L3 7z"/><path d="M12 7V3M8 16v3M16 16v3"/>',
+      stringers: '<path d="M3 6h18M3 18h18M7 6v12M12 6v12M17 6v12"/>',
+      blister: '<circle cx="7" cy="9" r="3"/><circle cx="15.5" cy="7.5" r="2"/><circle cx="15" cy="15.5" r="3.5"/><path d="M3 21h18"/>',
+      sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/>',
+      sparkle: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/>',
+      wrench: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5z"/>',
+      pwc: '<path d="M2 16h16l4-4-6-1-3-4H8l1 4H4l-2 5z"/><path d="M2 20c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1 2-1 4-1"/>',
+      question: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.3-1 .9-1 1.7M12 17h.01"/>',
+      camera: '<path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+      image: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="10" r="1.6"/><path d="M4 17l5-4.5 3.5 3 3-2.5L20 17"/>',
+    }
+    const icon = (name, size = 24) => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ICONS.question}</svg>`
+    const answer = (step, value, label) => send(label, { answer: { step, value } })
+    const pills = (options, { multi = false, onChange } = {}) => {
+      const box = el('div', 'cq-pills'); const picked = new Set()
+      options.forEach(([value, label]) => {
+        const b = el('button', 'cq-pill', label); b.type = 'button'; b.setAttribute('aria-pressed', 'false')
+        b.addEventListener('click', () => {
+          if (picked.has(value)) picked.delete(value); else { if (!multi) picked.clear(); picked.add(value) }
+          box.querySelectorAll('.cq-pill').forEach((p, i) => p.setAttribute('aria-pressed', String(picked.has(options[i][0]))))
+          onChange?.(picked)
+        })
+        box.appendChild(b)
+      })
+      box.picked = picked
+      return box
+    }
+    const labelFor = (options, v) => (options.find((o) => o[0] === v) || [])[1] || ''
+    const nextBtn = (text = 'Next') => { const b = el('button', 'cq-next', text); b.type = 'button'; return b }
+
+    const WIDGETS = {
+      tiles(w) {
+        const card = el('div', 'cq'); const grid = el('div', 'cq-tiles')
+        w.options.forEach((o) => {
+          const b = el('button', 'cq-tile'); b.type = 'button'; b.title = o.hint || ''
+          b.innerHTML = icon(o.icon)
+          b.append(el('strong', '', o.label))
+          if (o.hint) { const sr = el('span', 'sr-only', `, ${o.hint}`); b.append(sr) }
+          b.addEventListener('click', () => answer(w.step, o.value, o.label))
+          grid.appendChild(b)
+        })
+        card.append(grid)
+        return card
+      },
+      multi(w) {
+        const card = el('div', 'cq'); const opts = w.options.map((o) => [o.value, o.label])
+        const done = nextBtn('Done'); done.disabled = true
+        const box = pills(opts, { multi: true, onChange: (p) => { done.disabled = !p.size } })
+        done.addEventListener('click', () => { const v = [...box.picked]; answer(w.step, v, v.map((x) => labelFor(opts, x)).join(', ')) })
+        const actions = el('div', 'cq-actions'); actions.append(done)
+        card.append(el('p', 'cq-label', 'Tap all that apply'), box, actions)
+        return card
+      },
+      size(w) {
+        const card = el('div', 'cq'); const grid = el('div', 'cq-sizes')
+        w.options.forEach((o) => {
+          const b = el('button', 'cq-size'); b.type = 'button'
+          const r = [0, 3, 5, 7.5, 10, 12][o.scale] || 0
+          b.innerHTML = o.scale
+            ? `<svg viewBox="0 0 26 26" width="30" height="30" aria-hidden="true"><circle cx="13" cy="13" r="${r}" fill="currentColor" opacity=".85"/></svg>`
+            : '<svg viewBox="0 0 26 26" width="30" height="30" aria-hidden="true"><circle cx="6" cy="9" r="2.5" fill="currentColor"/><circle cx="17" cy="7" r="2" fill="currentColor"/><circle cx="12" cy="17" r="3" fill="currentColor"/><circle cx="21" cy="17" r="1.6" fill="currentColor"/></svg>'
+          b.append(el('span', '', o.label))
+          const said = o.scale >= 1 && o.scale <= 3 ? `About ${o.label.toLowerCase()} size` : o.scale === 4 ? `About ${o.label}` : o.label
+          b.addEventListener('click', () => answer(w.step, o.value, said))
+          grid.appendChild(b)
+        })
+        card.append(grid)
+        return card
+      },
+      zones(w) {
+        const card = el('div', 'cq'); const picked = new Set()
+        const names = Object.fromEntries(w.options.map((o) => [o.value, o.label]))
+        const fig = el('div', 'cq-boat-wrap')
+        // top view, bow up: port is on the left
+        fig.innerHTML = `<svg class="cq-boat" viewBox="0 0 200 300" role="group" aria-label="Tap the parts of the boat that are damaged">
+          <path class="cq-zone" data-zone="bow" d="M100 8C138 36 160 76 162 112H38C40 76 62 36 100 8z"/>
+          <path class="cq-zone" data-zone="port" d="M38 112h24v148H45C40 220 37 160 38 112z"/>
+          <path class="cq-zone" data-zone="starboard" d="M162 112h-24v148h17c5-40 8-100 7-148z"/>
+          <path class="cq-zone" data-zone="deck" d="M62 112h76v148H62z"/>
+          <rect class="cq-zone" data-zone="console" x="80" y="146" width="40" height="44" rx="7"/>
+          <path class="cq-zone" data-zone="stern" d="M45 260h110l-4 30H49z"/>
+          <text x="100" y="72" text-anchor="middle">Bow</text><text x="50" y="190" text-anchor="middle" transform="rotate(-90 50 190)">Port</text>
+          <text x="150" y="190" text-anchor="middle" transform="rotate(90 150 190)">Starboard</text><text x="100" y="230" text-anchor="middle">Deck</text>
+          <text x="100" y="172" text-anchor="middle">Console</text><text x="100" y="279" text-anchor="middle">Stern / transom</text></svg>`
+        const done = nextBtn('Done'); done.disabled = true
+        const sync = () => {
+          fig.querySelectorAll('[data-zone]').forEach((z) => z.setAttribute('aria-pressed', String(picked.has(z.dataset.zone))))
+          extra.querySelectorAll('.cq-pill').forEach((p) => p.setAttribute('aria-pressed', String(picked.has(p.dataset.zone))))
+          done.disabled = !picked.size
+        }
+        const toggle = (z) => { if (z === 'unsure') { picked.clear(); picked.add(z) } else { picked.delete('unsure'); picked.has(z) ? picked.delete(z) : picked.add(z) } sync() }
+        fig.querySelectorAll('[data-zone]').forEach((z) => {
+          z.setAttribute('tabindex', '0'); z.setAttribute('role', 'button'); z.setAttribute('aria-label', names[z.dataset.zone] || z.dataset.zone); z.setAttribute('aria-pressed', 'false')
+          z.addEventListener('click', () => toggle(z.dataset.zone))
+          z.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(z.dataset.zone) } })
+        })
+        const extra = el('div', 'cq-pills')
+        ;['bottom', 'inside', 'unsure'].forEach((z) => { const b = el('button', 'cq-pill', names[z]); b.type = 'button'; b.dataset.zone = z; b.setAttribute('aria-pressed', 'false'); b.addEventListener('click', () => toggle(z)); extra.appendChild(b) })
+        done.addEventListener('click', () => { const v = [...picked]; answer(w.step, v, v.map((z) => names[z].replace(/ \(.*\)$/, '')).join(', ')) })
+        const actions = el('div', 'cq-actions'); actions.append(done)
+        card.append(fig, extra, actions)
+        return card
+      },
+      boat(w) {
+        const card = el('div', 'cq')
+        const type = pills(w.types), length = pills(w.lengths)
+        const row = el('div', 'cq-row')
+        const make = el('input'); make.placeholder = 'Make (Grady-White, Mako...)'; make.setAttribute('aria-label', 'Boat make'); make.autocomplete = 'off'
+        const listId = 'cq-makes-' + Date.now(); make.setAttribute('list', listId)
+        const dl = el('datalist'); dl.id = listId; w.makes.forEach((m) => { const o = el('option'); o.value = m; dl.appendChild(o) })
+        const year = el('select'); year.setAttribute('aria-label', 'Year')
+        year.append(Object.assign(el('option', '', 'Year'), { value: '' }))
+        for (let y = w.years[0]; y >= w.years[1]; y--) year.append(Object.assign(el('option', '', String(y)), { value: String(y) }))
+        row.append(make, year)
+        const model = el('input'); model.placeholder = 'Model (optional)'; model.setAttribute('aria-label', 'Boat model'); model.autocomplete = 'off'
+        const err = el('p', 'cq-error'); err.hidden = true
+        const go = nextBtn(); const unsure = el('button', 'cq-skip', 'Not sure'); unsure.type = 'button'
+        go.addEventListener('click', () => {
+          const t = [...type.picked][0] || '', l = [...length.picked][0] || ''
+          const v = { type: t, length: l, make: make.value.trim(), model: model.value.trim(), year: year.value }
+          if (!t && !l && !v.make && !v.model && !v.year) { err.textContent = 'Tap at least one thing, or "Not sure".'; err.hidden = false; return }
+          const said = [v.year, v.make, v.model].filter(Boolean).join(' ')
+          answer(w.step, v, [said, labelFor(w.types, t), labelFor(w.lengths, l)].filter(Boolean).join(' · '))
+        })
+        unsure.addEventListener('click', () => answer(w.step, { unsure: 'yes' }, "I'm not sure"))
+        const actions = el('div', 'cq-actions'); actions.append(go, unsure)
+        card.append(el('p', 'cq-label', 'Type'), type, el('p', 'cq-label', 'Length'), length, row, model, dl, err, actions)
+        return card
+      },
+      where(w) {
+        const card = el('div', 'cq'); const statuses = w.options.map((o) => [o.value, o.label])
+        const status = pills(statuses)
+        let city = ''
+        const cities = pills(w.cities.map((c) => [c, c]), { onChange: (p) => { city = [...p][0] || ''; other.value = '' } })
+        const other = el('input'); other.placeholder = 'Another city or marina'; other.setAttribute('aria-label', 'Another city or marina')
+        other.addEventListener('input', () => { if (other.value.trim()) { cities.picked.clear(); cities.querySelectorAll('.cq-pill').forEach((p) => p.setAttribute('aria-pressed', 'false')); city = other.value.trim() } })
+        const err = el('p', 'cq-error'); err.hidden = true
+        const go = nextBtn()
+        go.addEventListener('click', () => {
+          const s = [...status.picked][0] || ''
+          if (!s && !city) { err.textContent = 'Tap where she is, or pick a city.'; err.hidden = false; return }
+          answer(w.step, { status: s, city }, [labelFor(statuses, s), city].filter(Boolean).join(', '))
+        })
+        const actions = el('div', 'cq-actions'); actions.append(go)
+        card.append(el('p', 'cq-label', 'She is'), status, el('p', 'cq-label', 'Near'), cities, other, err, actions)
+        return card
+      },
+      photos(w) {
+        const card = el('div', 'cq'); const btns = el('div', 'cq-photo-btns')
+        const picker = (text, iconName, capture) => {
+          const lab = el('label', 'cq-photo'); lab.innerHTML = icon(iconName, 28)
+          lab.append(el('span', '', text))
+          const inp = el('input'); inp.type = 'file'; inp.accept = 'image/jpeg,image/png,image/webp'; inp.multiple = true; inp.className = 'sr-only'
+          if (capture) inp.setAttribute('capture', 'environment')
+          inp.addEventListener('change', () => { const files = Array.from(inp.files || []); inp.value = ''; if (files.length) uploadFiles(files) })
+          lab.append(inp)
+          return lab
+        }
+        // the camera button only where there is a camera to open (phones and tablets)
+        if (window.matchMedia?.('(pointer: coarse)').matches) btns.append(picker('Take photos', 'camera', true))
+        btns.append(picker('Choose photos', 'image', false))
+        const skip = el('button', 'cq-skip', 'Skip for now'); skip.type = 'button'
+        skip.addEventListener('click', () => answer(w.step, 'skip', 'Skip photos for now'))
+        const actions = el('div', 'cq-actions'); actions.append(skip)
+        card.append(btns, actions)
+        return card
+      },
+      contact(w) {
+        const f = el('form', 'cq'); f.noValidate = true
+        const field = (name, label, type, auto, mode) => {
+          const i = el('input'); i.name = name; i.type = type; i.autocomplete = auto; i.placeholder = label; i.setAttribute('aria-label', label); if (mode) i.inputMode = mode
+          i.value = (w.prefill && w.prefill[name]) || ''
+          return i
+        }
+        const name = field('name', 'Your name', 'text', 'name'), phone = field('phone', 'Phone', 'tel', 'tel', 'tel'), email = field('email', 'Email', 'email', 'email', 'email')
+        const err = el('p', 'cq-error', w.error || ''); err.hidden = !w.error
+        const go = nextBtn('Continue'); go.type = 'submit'
+        f.addEventListener('submit', (e) => {
+          e.preventDefault()
+          const v = { name: name.value.trim(), phone: phone.value.trim(), email: email.value.trim() }
+          const bad = [!v.name && 'your name', v.phone.replace(/\D/g, '').length < 10 && 'a phone number with ten digits', !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email) && 'a complete email'].filter(Boolean)
+          if (bad.length) { err.textContent = `I still need ${bad.join(' and ')}.`; err.hidden = false; return }
+          answer(w.step, v, [v.name, v.phone, v.email].join(' · '))
+        })
+        const actions = el('div', 'cq-actions'); actions.append(go)
+        f.append(name, phone, email, err, actions)
+        return f
+      },
+    }
+    let widgetEl = null
+    const clearWidget = () => { widgetEl?.remove(); widgetEl = null; if (state.widget) { state.widget = null; persist() } }
+    const setWidget = (w) => {
+      clearWidget()
+      panel.classList.toggle('chat-panel-quoting', !!(w || state.progress))
+      if (!w || !WIDGETS[w.type]) return
+      state.widget = w; persist()
+      widgetEl = WIDGETS[w.type](w)
+      widgetEl.classList.add('chat-quickfill')
+      messages.appendChild(widgetEl)
+      // keep the question in view above a tall widget
+      const q = widgetEl.previousElementSibling
+      messages.scrollTop = q && widgetEl.offsetHeight > messages.clientHeight * 0.6
+        ? messages.scrollTop + q.getBoundingClientRect().top - messages.getBoundingClientRect().top - 12
+        : messages.scrollHeight
+      widgetEl.querySelector('input:not([type=file]), button')?.focus({ preventScroll: true })
+    }
+    let progressEl = null
+    const setProgress = (p) => {
+      state.progress = p || null; persist()
+      if (!p) { progressEl?.remove(); progressEl = null; panel.classList.remove('chat-panel-quoting'); return }
+      if (!progressEl) {
+        progressEl = el('div', 'chat-progress')
+        progressEl.innerHTML = '<div class="chat-progress-track" role="progressbar" aria-label="Quote progress"><span></span></div><em></em>'
+        panel.insertBefore(progressEl, messages)
+      }
+      const pct = Math.round(Math.min(1, p.n / p.of) * 100)
+      progressEl.querySelector('span').style.width = pct + '%'
+      progressEl.querySelector('[role=progressbar]').setAttribute('aria-valuenow', String(pct))
+      progressEl.querySelector('em').textContent = `Quote · step ${p.n} of ${p.of}`
+      panel.classList.add('chat-panel-quoting')
+    }
+
     const restore = () => {
       messages.replaceChildren()
       state.log.forEach((e) => addMsg(e, false))
       setChips(state.chips || START_CHIPS)
+      setProgress(state.progress)
+      if (state.widget) setWidget(state.widget)
     }
     const start = () => {
       if (state.started) return
@@ -523,6 +755,7 @@
       input.value = ''
       input.disabled = true
       setChips([])
+      clearWidget()
       showTyping()
       const started = Date.now()
       let data = null, offline = false
@@ -542,7 +775,7 @@
         addMsg({ from: 'bot', text: r.reply }); setChips(r.chips)
       } else if (data?.error && !data.reply) {
         const msg = data.status === 429 ? 'Easy there, matey — too many messages at once. Give it a minute and try again, or call us.' : 'I hit a snag on my end and couldn’t answer that. Try again in a moment, or use the quote form and the crew will follow up.'
-        addMsg({ from: 'error', text: msg }); setChips([{ label: 'Try again', send: text }, { label: 'Open the quote form', href: 'contact.html#quote' }])
+        addMsg({ from: 'error', text: msg }); setChips([{ label: 'Try again', send: text, answer: extra.answer }, { label: 'Open the quote form', href: 'contact.html#quote' }])
       } else {
         if (data.sessionId) state.sessionId = data.sessionId
         if (data.reply) addMsg({ from: 'bot', text: data.reply })
@@ -551,6 +784,8 @@
         if (data.draft) store.sset('cl-quote-draft', data.draft)
         if (data.event) track('chat_' + data.event, {})
         setChips(data.chips || START_CHIPS)
+        setProgress(data.progress)
+        setWidget(data.widget)
         if (data.navigate) setTimeout(() => { location.href = data.navigate }, 600)
       }
       input.disabled = false
@@ -560,13 +795,12 @@
     form.addEventListener('submit', (e) => { e.preventDefault(); send(input.value) })
     input.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(input.value) } })
 
-    // ---- photo upload from chat
-    upload?.addEventListener('change', async () => {
-      const files = Array.from(upload.files || [])
-      upload.value = ''
+    // ---- photo upload from chat (the camera icon in the input row, and the quote flow's photo buttons)
+    async function uploadFiles(files) {
       const { ok, errors } = validateFiles(files, 0)
       if (errors.length) addMsg({ from: 'error', text: errors.join('\n') })
       if (!ok.length) return
+      clearWidget()
       addMsg({ type: 'photos', urls: ok.map((f) => URL.createObjectURL(f)) })
       const fd = new FormData()
       fd.append('sessionId', state.sessionId)
@@ -583,6 +817,11 @@
         addMsg({ from: 'error', text: 'Photo uploads need our server, which isn’t reachable right now. Attach them on the quote form instead.' })
         setChips([{ label: 'Open the quote form', href: 'contact.html#quote' }])
       }
+    }
+    upload?.addEventListener('change', () => {
+      const files = Array.from(upload.files || [])
+      upload.value = ''
+      uploadFiles(files)
     })
   }
 })()

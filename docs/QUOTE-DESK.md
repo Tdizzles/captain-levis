@@ -39,6 +39,26 @@ tyler.salta@icloud.com or captainlevis@yahoo.com. `STAFF_EMAILS` on Vercel chang
    quoted. Edit by hand (autosaves, totals from the server) or ask Captain Levi; every save is a restorable version.
 4. "Print / PDF" renders the Rev5 layout; use the browser's Save as PDF. Status: draft → sent → approved/declined.
 
+## Website chat quote flow (built 2026-10-23)
+The public Captain Levi chat ("I Need a Quote") is a guided, tap-first intake. Questions: `lib/chat/quoteflow.ts`
+(data + pure functions); driver: `lib/chat/machine.ts`; widgets: `script.js` (`WIDGETS`) + `chrome.css` (`.cq-*`).
+- **Order:** job tiles (12 job types) → boat card (type, length, make with typeahead, year) → the job's own follow-ups
+  (collision: how / insurance / taking on water; transom: power / symptoms; gelcoat: depth / spots / color; ...) →
+  tap-the-boat diagram (only for jobs where location varies) → size picker (coin … bigger than 2 ft) → photos
+  (Take photos on phones, Choose photos) → where she is + city (+ "can you bring her in?" for trailer boats) →
+  timing → anything else → one contact card (phone autofill) → review card → send. Progress bar on top.
+- **Dynamic:** the plan is recomputed from the answers every turn, so anything already known (typed in the first
+  message, or answered out of order) is skipped, and changing the job swaps the follow-ups.
+- **Typing always works:** every step also accepts free text (matched to the options; a real question gets answered
+  and the same step is asked again). With the Anthropic key the model adds the wording and any extra fields.
+- **Tapped answers never call the model** (`{answer: {step, value}}` on `/api/chat`, validated against the options).
+- **On send:** inquiry with `details` (migration 003: job, follow-up answers, zones, size, where, timing, in-water,
+  insurance) → shop email → **a draft estimate is created automatically** (`lib/quote/skeleton.ts`: sections and named
+  line items per job, hours/materials 0, nothing priced) by "Captain Levi (website chat)". The inquiry stays `new`;
+  its page shows "Answers from the chat" and an "Open E-NNNN (drafted from the chat)" button. Pricing it is the crew's
+  (or the Quote Desk Captain Levi's) job; once the owner's rates exist, auto-pricing can be added there.
+- The contact form path is unchanged; form inquiries have `details = {}` and keep the one-line draft.
+
 ## Deploy gotchas (both hit on 2026-10-22, both fixed)
 - **12-function cap.** Vercel Hobby rejects a deployment with more than 12 files under `api/`
   (`exceeded_serverless_functions_per_deployment`). Milestones 2–3 took it to 14, so every deploy from 71a1711 to

@@ -1,6 +1,6 @@
 // /api/admin/inquiries  (staff cookie from /api/auth/login, or Authorization: Bearer ADMIN_API_TOKEN)
 //   GET  ?status=&limit=&offset=      list (newest first) with signed photo URLs and delivery status
-//   GET  ?id=<uuid>                   one inquiry + photos + deliveries + chat transcript + missing-info assessment + templated reply
+//   GET  ?id=<uuid>                   one inquiry + photos + deliveries + chat transcript + its estimates + missing-info assessment + templated reply
 //   PATCH ?id=<uuid>  {status}        update status (audited)
 // /api/admin/inquiries/<id> is a vercel.json rewrite onto ?id= (kept out of api/ to stay under the Hobby 12-function cap).
 import { z } from 'zod'
@@ -13,6 +13,7 @@ import { listPhotos, signPhotoUrl } from '../../lib/photos.js'
 import { isUuid } from '../../lib/session.js'
 import { assessInquiry } from '../../lib/quote/missing.js'
 import { templatedReply } from '../../lib/quote/reply.js'
+import { listEstimates } from '../../lib/estimates/store.js'
 
 function present(i: InquiryRow, photos: { id: string; filename: string; mime: string; width: number; height: number; size: number }[]) {
   const { ip_hash: _ip, ...rest } = i
@@ -53,7 +54,9 @@ export default route(async (req, res) => {
       chat = r.rows[0] || null
     }
     const reply = templatedReply(i, photos.length)
-    sendJson(res, 200, { ok: true, inquiry: present(i, photos), deliveries: await deliveries(db, id), chat, assessment: reply.assessment, reply: { subject: reply.subject, body: reply.body } })
+    // chat quotes arrive with a draft estimate already built from the answers (lib/quote/skeleton.ts)
+    const estimates = (await listEstimates(db, { inquiryId: id, limit: 10 })).map((e) => ({ id: e.id, number: e.number, status: e.status, total_cents: e.total_cents, created_by: e.created_by }))
+    sendJson(res, 200, { ok: true, inquiry: present(i, photos), deliveries: await deliveries(db, id), chat, estimates, assessment: reply.assessment, reply: { subject: reply.subject, body: reply.body } })
     return
   }
 

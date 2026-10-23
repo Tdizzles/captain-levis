@@ -7,4 +7,5 @@ const load = (name: string) => readFileSync(new URL(`./${name}.sql`, import.meta
 export const MIGRATIONS: { name: string; sql: string }[] = [
   { name: '001_init', sql: load('001_init') },
   { name: '002_estimates', sql: load('002_estimates') },
+  { name: '003_inquiry_details', sql: load('003_inquiry_details') },
 ]

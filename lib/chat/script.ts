@@ -1,7 +1,8 @@
 // Scripted lines and chips for every state. The machine picks the state; these supply the words
 // when no model is available (and the question text even when one is).
-import { business, phoneDigits, serviceLabel } from '../business.js'
+import { business, phoneDigits } from '../business.js'
 import { describeBoat } from '../boat.js'
+import { choiceChips, composeQuoteMessage, questionFor, reviewRows, svcDef } from './quoteflow.js'
 import type { Chip, Draft, Slots, Step } from './types.js'
 
 const biz = business()
@@ -23,6 +24,9 @@ export const SERVICE_FOR_LOCATION: Record<string, string> = {
 }
 
 export function serviceFor(slots: Slots): string {
+  if (slots.answers?.insurance?.[0] === 'yes') return 'insurance-claim'
+  const svc = svcDef(slots.svc)
+  if (svc) return svc.service
   if (slots.damageLocation && SERVICE_FOR_LOCATION[slots.damageLocation]) return SERVICE_FOR_LOCATION[slots.damageLocation]
   if (slots.damageKind === 'structural') return 'structural-fiberglass'
   if (slots.damageKind === 'cosmetic') return 'gelcoat-repair'
@@ -30,15 +34,7 @@ export function serviceFor(slots: Slots): string {
 }
 
 export function composeMessage(slots: Slots): string {
-  const parts: string[] = []
-  if (slots.damage) parts.push(slots.damage)
-  const meta: string[] = []
-  if (slots.damageLocation && slots.damageLocation !== 'not sure') meta.push(`Area: ${slots.damageLocation}`)
-  if (slots.damageKind && slots.damageKind !== 'not sure') meta.push(`Type: ${slots.damageKind}`)
-  if (slots.boatType) meta.push(`Boat type: ${slots.boatType}`)
-  if (slots.photos) meta.push(`${slots.photos} photo(s) sent through chat`)
-  if (meta.length) parts.push(meta.join('. ') + '.')
-  return parts.join('\n')
+  return composeQuoteMessage(slots)
 }
 
 export function draftFor(slots: Slots): Draft {
@@ -46,7 +42,7 @@ export function draftFor(slots: Slots): Draft {
   if (slots.name) d.name = slots.name
   if (slots.email) d.email = slots.email
   if (slots.phone) d.phone = slots.phone
-  if (slots.damageLocation || slots.damageKind) d.service = serviceFor(slots)
+  if (slots.svc || slots.damageLocation || slots.damageKind) d.service = serviceFor(slots)
   const boat = describeBoat({ make: slots.boatMake, model: slots.boatModel, year: slots.boatYear, raw: slots.boat })
   if (boat && boat !== 'Not sure') d.boat = boat
   if (slots.where) d.boatLocation = slots.where
@@ -56,74 +52,43 @@ export function draftFor(slots: Slots): Draft {
 }
 
 export function question(step: Step, slots: Slots): string {
-  switch (step) {
-    case 'boat': return "First, what are we working on? Give me the make, model and year if you know them (a \"not sure\" is fine too)."
-    case 'damage': return 'What happened to her? Tell me what you are seeing in your own words.'
-    case 'damageLocation': return 'Where on the boat is the damage: hull, deck, transom, stringers, bulkheads, gelcoat, or somewhere else?'
-    case 'damageKind': return 'Would you call it structural (soft, flexing, rotten core), cosmetic (chips, scratches, faded gelcoat), impact damage, or are you not sure?'
-    case 'where': return 'Where is the boat right now: in the water, on a trailer, or at a marina or yard (which one)?'
-    case 'photos': return slots.photos
-      ? `Got ${slots.photos} photo${slots.photos === 1 ? '' : 's'}, thank you. Want to add more, or shall we move on?`
-      : 'Photos help the crew a lot. Use the camera button next to the message box to add a few, or skip for now.'
-    case 'name': return 'Who should the crew ask for? Your name, please.'
-    case 'email': return 'And the best email for the quote?'
-    case 'phone': return 'Last one: a phone number the crew can reach you on.'
-    case 'review': return 'Here is what I have. Does it look right?'
-  }
+  return questionFor(step, slots)
 }
 
 export function ackForStep(step: Step | undefined, slots: Slots, extractedKeys: string[]): string {
-  // short, scripted acknowledgement of what was just captured (no-key mode)
+  // short, scripted acknowledgement of what was just captured from typed text (no-key mode)
   if (!step) return ''
-  if (extractedKeys.includes('email') && step === 'email') return 'Got it.'
-  if (extractedKeys.includes('phone') && step === 'phone') return 'Perfect.'
-  if (extractedKeys.includes('name') && step === 'name') return `Thanks, ${slots.name?.split(' ')[0]}.`
-  if (step === 'boat' && extractedKeys.includes('boat')) {
+  if (step === 'contact') return extractedKeys.includes('name') && slots.name ? `Thanks, ${slots.name.split(' ')[0]}.` : extractedKeys.length ? 'Got it.' : ''
+  if ((step === 'boat' || (step === 'service' && !extractedKeys.includes('svc'))) && extractedKeys.includes('boat')) {
     const b = describeBoat({ make: slots.boatMake, model: slots.boatModel, year: slots.boatYear, raw: slots.boat })
     return b === 'Not sure' ? 'No problem, we can sort that out when we see her.' : `A ${b}, nice.`
   }
-  if (step === 'damage' && extractedKeys.includes('damage')) return 'Understood.'
-  if (step === 'damageLocation' && extractedKeys.includes('damageLocation')) return slots.damageLocation === 'not sure' ? 'That is fine, the crew will find it.' : 'Noted.'
-  if (step === 'damageKind' && extractedKeys.includes('damageKind')) return 'Noted.'
+  if (step === 'service' && extractedKeys.includes('svc')) return svcDef(slots.svc)?.ack || 'Understood.'
   if (step === 'where' && extractedKeys.includes('where')) return 'Good to know.'
-  return ''
+  return extractedKeys.length ? 'Noted.' : ''
 }
 
 export function chipsForStep(step: Step, slots: Slots): Chip[] {
   const form = formChip(draftFor(slots))
+  const choices: Chip[] = choiceChips(step, slots)
+  if (choices.length) return choices
   switch (step) {
-    case 'boat': return [{ label: "I'm not sure", send: 'Not sure' }, { label: 'What do you need to know?', send: 'What do you need to know about the boat?' }, form]
-    case 'damage': return [{ label: "It's my transom", send: "It's my transom" }, { label: 'I have hull damage', send: 'I have hull damage' }, { label: "I'm not sure what's damaged", send: "I'm not sure what's damaged" }, form]
-    case 'damageLocation': return [{ label: 'Transom', send: 'Transom' }, { label: 'Hull', send: 'Hull' }, { label: 'Deck', send: 'Deck' }, { label: "I'm not sure", send: "I'm not sure" }]
-    case 'damageKind': return [{ label: 'Structural (soft or flexing)', send: 'Structural' }, { label: 'Cosmetic (chips, scratches)', send: 'Cosmetic' }, { label: 'Impact or collision', send: 'Impact' }, { label: 'Not sure', send: 'Not sure' }]
-    case 'where': return [{ label: 'In the water', send: 'In the water' }, { label: 'On a trailer', send: 'On a trailer' }, { label: 'At a marina or yard', send: 'At a marina' }, form]
-    case 'photos': return slots.photos
-      ? [{ label: 'Move on', send: 'Move on', primary: true }, { label: 'Can I send more photos?', send: 'Can I send photos?' }, form]
-      : [{ label: 'Can I send photos?', send: 'Can I send photos?' }, { label: 'Skip photos for now', send: 'Skip photos' }, form]
-    case 'name': case 'email': case 'phone': return [form, { label: 'Why do you need this?', send: 'Why do you need my contact details?' }]
-    case 'review': return [{ label: 'Send it', send: 'Send it', primary: true }, { label: 'Change something', send: 'Change something' }, form]
+    // job tiles, boat card and photo buttons carry their own "not sure" / "skip"; only the form way out goes below
+    case 'photos': return slots.photos ? [{ label: 'Move on', send: 'Move on', primary: true }, form] : [form]
+    case 'notes': return [{ label: "That's everything", answer: { step, value: 'none' }, primary: true }]
+    case 'contact': return [{ label: 'Why do you need this?', send: 'Why do you need my contact details?' }, form]
+    case 'review': return [{ label: 'Send it to the crew', send: 'Send it', primary: true }, { label: 'Change something', send: 'Change something' }, form]
+    default: return [form]
   }
 }
 
 export const CHANGE_CHIPS: Chip[] = [
-  { label: 'Boat', send: 'Change the boat' }, { label: 'Damage', send: 'Change the damage' },
-  { label: 'Where it is', send: 'Change where the boat is' }, { label: 'Contact info', send: 'Change my contact info' },
+  { label: 'The job', send: 'Change the job' }, { label: 'Boat', send: 'Change the boat' }, { label: 'Damage details', send: 'Change the damage' },
+  { label: 'Where she is', send: 'Change where the boat is' }, { label: 'Contact info', send: 'Change my contact info' },
 ]
 
 export function reviewCard(slots: Slots): [string, string][] {
-  const rows: [string, string][] = []
-  rows.push(['Boat', describeBoat({ make: slots.boatMake, model: slots.boatModel, year: slots.boatYear, raw: slots.boat }) || 'Not given'])
-  if (slots.boatType) rows.push(['Type', slots.boatType])
-  rows.push(['Damage', slots.damage || 'Not given'])
-  rows.push(['Area', slots.damageLocation || 'Not sure'])
-  rows.push(['Kind', slots.damageKind || 'Not sure'])
-  rows.push(['Where', slots.where || 'Not given'])
-  rows.push(['Photos', slots.photos ? `${slots.photos} added` : 'None'])
-  rows.push(['Service', serviceLabel(serviceFor(slots))])
-  rows.push(['Name', slots.name || ''])
-  rows.push(['Email', slots.email || ''])
-  rows.push(['Phone', slots.phone || ''])
-  return rows
+  return reviewRows(slots, describeBoat({ make: slots.boatMake, model: slots.boatModel, year: slots.boatYear, raw: slots.boat }))
 }
 
 export function hoursReply(): string {
@@ -132,10 +97,10 @@ export function hoursReply(): string {
 }
 
 export const LINES = {
-  quoteStart: "Let's get her sorted. I'll ask a few quick questions and a real crew member will follow up with the quote; nothing here is a price.",
+  quoteStart: "Let's get her sorted. A few quick taps and a real crew member puts your quote together; nothing here is a price.",
   quoteResume: "Welcome back. Let's pick up where we left off.",
   anotherQuestion: 'Sure thing. Ask me anything about fiberglass, gelcoat or the yard and I will do my best.',
-  photosHow: 'Tap the camera icon next to the message box and pick up to five JPEG, PNG or WebP photos (10 MB each). They stay attached to this conversation and go to the crew with your request.',
+  photosHow: 'Tap "Take photos" (or the camera icon next to the message box) and add up to five JPEG, PNG or WebP photos, 10 MB each. They stay with this conversation and go to the crew with your request.',
   photosOffline: 'Photo uploads are not available at the moment. You can still attach them on the quote form, or text them to the crew after they call.',
   whyContact: 'Only so a real crew member can reach you with the quote and any questions about the boat. We use your details for nothing else; the privacy policy is linked below the chat.',
   injection: "I'll stick to boats, if that's all right. Where were we?",

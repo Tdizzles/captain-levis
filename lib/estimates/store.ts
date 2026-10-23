@@ -5,6 +5,7 @@ import type { Db, Queryable } from '../db.js'
 import type { InquiryRow } from '../inquiries.js'
 import { listPhotos, signPhotoUrl, type PhotoRow } from '../photos.js'
 import { assessInquiry } from '../quote/missing.js'
+import { skeletonFor } from '../quote/skeleton.js'
 import { calcTotals, layoutLines, type LineLayout, type Totals } from './calc.js'
 import { newEstimate, newId, newLine, normalizeEstimate, todayISO, type Estimate } from './types.js'
 
@@ -45,9 +46,16 @@ export function draftFromInquiry(i: InquiryRow, photos: PhotoRow[]): Estimate {
     estimateDate: todayISO(),
     photos: photos.map((p, n) => ({ id: newId(), url: `${PHOTO_REF}${p.id}`, caption: `Customer photo ${n + 1} (${p.filename})` })),
   })
-  const section = { id: newId(), title: a.mentions.area ? `${capitalize(a.mentions.area)} repair` : 'Repair' }
-  e.sections = [section]
-  e.lines = [newLine(e, { sectionId: section.id, description: 'Inspect and grind back to sound laminate', hours: 0 })]
+  // chat inquiries carry the quote flow's answers: build the sections and named line items from them (unpriced)
+  const skeleton = i.details?.job ? skeletonFor(i.details) : []
+  if (skeleton.length) {
+    e.sections = skeleton.map((sk) => ({ id: newId(), title: sk.title }))
+    e.lines = skeleton.flatMap((sk, n) => sk.lines.map((description) => newLine(e, { sectionId: e.sections[n].id, description, hours: 0 })))
+  } else {
+    const section = { id: newId(), title: a.mentions.area ? `${capitalize(a.mentions.area)} repair` : 'Repair' }
+    e.sections = [section]
+    e.lines = [newLine(e, { sectionId: section.id, description: 'Inspect and grind back to sound laminate', hours: 0 })]
+  }
   if (!e.pricing.taxNote) e.pricing.taxNote = biz.address.state === 'FL' ? '6% Florida + 1% Pinellas County' : ''
   return e
 }

@@ -97,7 +97,9 @@ async function renderInquiry(id) {
       <span class="badge ${a.readiness}">${a.readiness === 'ready' ? 'Ready to quote' : a.readiness === 'nearly' ? 'Nearly ready' : 'Needs info'}</span>${a.insurance ? raw('<span class="badge ins">Insurance claim</span>') : ''}
       <div class="spacer"></div>
       <label class="qd-field" style="margin:0"><span>Status</span><select id="status">${raw(Object.entries(STATUS_LABEL).map(([v, l]) => `<option value="${v}" ${v === i.status ? 'selected' : ''}>${l}</option>`).join(''))}</select></label>
-      <a class="qd-btn navy" href="#/estimates/new?inquiry=${i.id}">Start estimate →</a>
+      ${r.estimates?.length
+        ? raw(`<a class="qd-btn navy" href="#/estimates/${esc(r.estimates[0].id)}">Open ${esc(r.estimates[0].number)}${r.estimates[0].created_by === 'Captain Levi (website chat)' && r.estimates[0].status === 'draft' ? ' (drafted from the chat)' : ''} →</a>`)
+        : raw(`<a class="qd-btn navy" href="#/estimates/new?inquiry=${esc(i.id)}">Start estimate →</a>`)}
     </div>
     <div class="qd-grid">
       <div>
@@ -107,6 +109,7 @@ async function renderInquiry(id) {
         <section class="card"><h2>Boat & request</h2><dl class="kv">
           <dt>Service</dt><dd>${serviceLabel(i.service)}</dd><dt>Boat</dt><dd>${boatOf(i) || '—'}</dd><dt>Where it is</dt><dd>${i.boat_location || '—'}</dd>
           <dt>Damage area</dt><dd>${i.damage_location || a.mentions.area || '—'}</dd><dt>Damage type</dt><dd>${i.damage_type || '—'}</dd></dl>
+          ${i.details?.rows?.length ? raw(`<h3 style="margin-top:14px">Answers from the chat</h3><dl class="kv">${i.details.rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`) : ''}
           <h3 style="margin-top:14px">Message</h3><div class="msg">${i.message}</div></section>
         <section class="card"><h2>Photos <span class="muted">${i.photos.length}</span></h2>
           ${i.photos.length ? raw(`<div class="photos">${i.photos.map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener"><img src="${esc(p.url)}" alt="${esc(p.filename)}" loading="lazy"></a>`).join('')}</div>`) : raw('<p class="muted">No photos attached. The reply asks for them first.</p>')}</section>

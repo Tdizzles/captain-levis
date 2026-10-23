@@ -5,6 +5,7 @@ import { callModel } from '../ai.js'
 import type { Queryable } from '../db.js'
 import { BOAT_MAKES, parseBoat } from '../boat.js'
 import { PERSONA } from './persona.js'
+import { guessService, SERVICES, type SvcKey } from './quoteflow.js'
 import type { DamageKind, DamageLocation, Extracted, Slots, Step, StoredMessage } from './types.js'
 
 export const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/
@@ -77,25 +78,15 @@ export function extractDeterministic(message: string, step: Step | undefined, sl
       if (loc) out.damageLocation = loc
       break
     }
-    case 'damage': {
-      if (!notSure) out.damage = text.slice(0, 500)
-      else out.damage = 'Not sure yet'
+    case 'service':
+    case 'notes': {
+      out.damage = notSure ? 'Not sure yet' : text.slice(0, 500)
+      const svc = guessService(text)
+      if (svc) out.svc = svc
       if (loc) out.damageLocation = loc
       if (kind) out.damageKind = kind
       if (where) out.where = where
-      break
-    }
-    case 'damageLocation': {
-      if (loc) out.damageLocation = loc
-      else if (notSure) out.damageLocation = 'not sure'
-      else if (/\b(other|something else|somewhere else)\b/i.test(text)) out.damageLocation = 'other'
-      if (kind) out.damageKind = kind
-      break
-    }
-    case 'damageKind': {
-      if (kind) out.damageKind = kind
-      else if (notSure) out.damageKind = 'not sure'
-      if (loc && !slots.damageLocation) out.damageLocation = loc
+      if (mentionsBoat) { out.boat = text.slice(0, 120); if (boat.make) out.boatMake = boat.make; if (boat.model) out.boatModel = boat.model; if (boat.year) out.boatYear = boat.year }
       break
     }
     case 'where': {
@@ -104,19 +95,20 @@ export function extractDeterministic(message: string, step: Step | undefined, sl
       else if (!email && !phone) out.where = text.slice(0, 160)
       break
     }
-    case 'name': {
-      const n = cleanName(text)
+    case 'contact': {
+      // "Tyler Salta, 727-555-0100, tyler@example.com" in one go: whatever is left after the email and phone is the name
+      const rest = text.replace(EMAIL_RE, ' ').replace(PHONE_RE, ' ').replace(/[,;|]+/g, ' ').replace(/\s+/g, ' ').trim()
+      const n = rest ? cleanName(rest) : undefined
       if (n) out.name = n
       break
     }
-    case 'email':
-    case 'phone':
-      break
     default: {
       if (mentionsBoat) { out.boat = text.slice(0, 120); if (boat.make) out.boatMake = boat.make; if (boat.model) out.boatModel = boat.model; if (boat.year) out.boatYear = boat.year }
       if (loc) out.damageLocation = loc
       if (kind) out.damageKind = kind
       if (where) out.where = where
+      const svc = guessService(text)
+      if (svc) out.svc = svc
     }
   }
   return out
@@ -132,6 +124,7 @@ const extractSchema = z.object({
     damage: z.string().nullable().describe('What is wrong with the boat, in the visitor\'s words, if they described damage'),
     damageLocation: z.enum(['hull', 'deck', 'transom', 'stringers', 'bulkheads', 'gelcoat', 'other', 'not sure']).nullable(),
     damageKind: z.enum(['structural', 'cosmetic', 'impact', 'not sure']).nullable(),
+    service: z.enum(SERVICES.map((v) => v.key) as [SvcKey, ...SvcKey[]]).nullable().describe(`Job type, only when the visitor clearly described it: ${SERVICES.map((v) => `${v.key} = ${v.label}`).join('; ')}`),
     where: z.string().nullable().describe('Where the boat is kept: in the water, on a trailer, at a yard, or a marina name'),
     name: z.string().nullable(),
     email: z.string().nullable(),
@@ -172,6 +165,7 @@ export async function extractWithModel(db: Queryable, args: {
   if (f.damage) fields.damage = f.damage.slice(0, 500)
   if (f.damageLocation) fields.damageLocation = f.damageLocation
   if (f.damageKind) fields.damageKind = f.damageKind
+  if (f.service) fields.svc = f.service
   if (f.where) fields.where = f.where.slice(0, 160)
   if (f.name) fields.name = f.name.slice(0, 80)
   if (f.email && EMAIL_RE.test(f.email)) fields.email = f.email.match(EMAIL_RE)![0].toLowerCase()
