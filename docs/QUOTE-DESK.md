@@ -3,7 +3,7 @@
 Replaces the retired estimater. Lives in this repo, deploys with the site, uses the same Neon database. Spec and
 owner decisions: `QUOTE-BACKEND-V2-SPEC.md`. Backend reference: `BACKEND.md` ("Quote Desk" section).
 
-## What exists (all pushed, 60 tests green, verified in Chrome on `npm run dev`)
+## What exists (all pushed, 61 tests green, verified in Chrome locally and live at https://captain-levis.vercel.app/app)
 
 | Piece | Where | Status |
 | --- | --- | --- |
@@ -36,6 +36,14 @@ tyler.salta@icloud.com or captainlevis@yahoo.com. `STAFF_EMAILS` on Vercel chang
 3. "Start estimate" creates E-NNNN pre-filled (customer, boat, insurance flag, photos, notes) and marks the inquiry
    quoted. Edit by hand (autosaves, totals from the server) or ask Captain Levi; every save is a restorable version.
 4. "Print / PDF" renders the Rev5 layout; use the browser's Save as PDF. Status: draft → sent → approved/declined.
+
+## Deploy gotchas (both hit on 2026-10-22, both fixed)
+- **12-function cap.** Vercel Hobby rejects a deployment with more than 12 files under `api/`
+  (`exceeded_serverless_functions_per_deployment`). Milestones 2–3 took it to 14, so every deploy from 71a1711 to
+  85893d8 failed while the site kept serving 7f66188. Fixed in f3edf0f (now 11); `test/function-budget.test.ts` guards it.
+  New endpoints go in as actions on an existing function.
+- **Trailing slash.** `trailingSlash:false` turns `/app/` into `/app`, so relative asset URLs resolved at the site
+  root and the app was blank in production only. Fixed in a61275c: `app/index.html` uses `/app/...` paths.
 
 ## Not built yet / known limits
 - No customer-facing approval link or e-signature (the old app's approval flow was dropped on purpose).
