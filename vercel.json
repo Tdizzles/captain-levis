@@ -29,6 +29,9 @@
       "headers": [{ "key": "Cache-Control", "value": "no-store" }]
     }
   ],
+  "rewrites": [
+    { "source": "/api/admin/inquiries/:id", "destination": "/api/admin/inquiries?id=:id" }
+  ],
   "redirects": [
     { "source": "/index", "destination": "/", "permanent": true },
     { "source": "/index.html", "destination": "/", "permanent": true },

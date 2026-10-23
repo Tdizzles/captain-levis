@@ -48,7 +48,7 @@ estimater           ──▶ /api/admin/*     Bearer ADMIN_API_TOKEN (stopgap u
 | GET | `/api/health` | — | `{ok, configured:{…}, missing[], database, migrations, email:{unsent}, ai:{monthSpendUsd}}` |
 | GET | `/api/photo?id&exp&sig` | — | image or `404` |
 | GET | `/api/admin/inquiries?status&limit&offset` | Bearer | `{ok, total, items[]}` with signed photo URLs (24 h) |
-| GET | `/api/admin/inquiries?id=` or `/api/admin/inquiries/<id>` | Bearer | `{ok, inquiry, deliveries, chat}` |
+| GET | `/api/admin/inquiries?id=` (or `/api/admin/inquiries/<id>` via a vercel.json rewrite) | Bearer | `{ok, inquiry, deliveries, chat}` |
 | PATCH | `/api/admin/inquiries?id=` | Bearer, JSON `{status}` | audited status change |
 | GET/POST | `/api/admin/retry-email?status=` / `?id=<delivery>` | Bearer | list unsent · resend one |
 
@@ -188,3 +188,8 @@ Static staff app (`app/index.html`, `app/app.js`, `app/app.css`, hash routes, no
 - The inquiry email (lib/email/render.ts) shows "What we still need to quote" and "Reply to send", with "Open in Quote
   Builder" → `<ADMIN_BASE_URL>/#/inquiries/<id>`. The Claude draft is off unless `AI_REPLY_DRAFT=true`.
 - Estimate model/math/print (ported from the retired estimater): `lib/estimates/` + `app/print/` (see lib/estimates/README.md).
+
+**Function budget:** Vercel Hobby deploys at most 12 serverless functions (one per file under `api/`). The 2026-10-22
+Quote Desk push hit 14 and every deploy failed with `exceeded_serverless_functions_per_deployment`. Auth is one
+`api/auth/[action].ts`, the inquiry-by-path alias is a rewrite, and `test/function-budget.test.ts` fails above 12.
+Add new endpoints as actions on an existing function, not new files.

@@ -2,7 +2,7 @@
 //   GET  ?status=&limit=&offset=      list (newest first) with signed photo URLs and delivery status
 //   GET  ?id=<uuid>                   one inquiry + photos + deliveries + chat transcript + missing-info assessment + templated reply
 //   PATCH ?id=<uuid>  {status}        update status (audited)
-// api/admin/inquiries/[id].ts maps /api/admin/inquiries/<id> onto the same handler.
+// /api/admin/inquiries/<id> is a vercel.json rewrite onto ?id= (kept out of api/ to stay under the Hobby 12-function cap).
 import { z } from 'zod'
 import { audit } from '../../lib/audit.js'
 import { requireAdmin } from '../../lib/admin.js'

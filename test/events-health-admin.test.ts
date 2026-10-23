@@ -53,7 +53,7 @@ describe('/api/admin/*', () => {
     expect(item.email_status).toBe('pending_config')
     expect(item.ip_hash).toBeUndefined()
 
-    const one: any = await (await fetch(`${srv.url}/api/admin/inquiries/${item.id}`, { headers: auth })).json()
+    const one: any = await (await fetch(`${srv.url}/api/admin/inquiries?id=${item.id}`, { headers: auth })).json()
     expect(one.inquiry.ref).toBe(created.json.ref)
     expect(one.deliveries).toHaveLength(1)
 
