@@ -316,6 +316,8 @@ a.ft-contact-strong:hover{color:var(--accent);}
   padding:0 37px 15px 44px;min-height:66.5px;
 }
 .ft-copyright{margin:0;font-size:.875rem;color:#a5bbd0;}
+/* The © is the staff sign-in (/app): no visual hint, it reads as plain text. */
+.ft-staff{color:inherit;text-decoration:none;cursor:text;}
 .ft-legal{display:flex;align-items:center;flex-wrap:wrap;margin-left:auto;margin-right:66px;}
 .ft-legal a,.ft-legal-btn{
   font-size:.78rem;color:#a3b7cc;padding:0 14px;line-height:1.5;
