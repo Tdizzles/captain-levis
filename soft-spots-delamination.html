@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="hull-subpage.css?v=ee34a208a8">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,7 +85,7 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="hs-hero" style="--hero-pos:55% center">
-  <img src="assets/hull-svc-delam.jpg" alt="Hull skin cut away to expose rotted, delaminated core" class="hs-hero-img" width="435" height="216" fetchpriority="high">
+  <img src="assets/hull-svc-delam.jpg?v=c4d123e5" alt="Rotted fiberglass along the base of a console" class="hs-hero-img" width="435" height="216" fetchpriority="high">
   <div class="hs-hero-scrim"></div>
   <div class="container hs-hero-inner">
     <div class="hs-hero-content">
@@ -145,58 +145,88 @@
     <h2 class="eyebrow eyebrow-left hs-eyebrow"><i></i><span>Soft Spot &amp; Delamination Repairs</span></h2>
   </div>
   <div class="container fg-grid hs-grid">
-    <article class="fg-card" id="hull-soft-spots">
-      <div class="fg-card-media"><img src="assets/deck-svc-soft-spot.jpg" alt="Soft section of fiberglass cut open for repair" width="228" height="93" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="hull-soft-spots" data-more>
+      <div class="fg-card-media"><img src="assets/deck-svc-soft-spot.jpg?v=be010b8a" alt="Console tipped back to expose rotted deck and foam beneath" width="228" height="93" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Soft Spots</h3>
         <p>Areas that flex or feel spongy, opened up and rebuilt solid.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-hull-soft-spots">
+          <div class="more-inner">
+            <p>A soft spot is a symptom, usually of water getting into the core through a fitting, crack or old repair, or of the skin letting go after an impact or years of flexing. We moisture-test and sound the area to map how far it runs, then remove the bad core and re-laminate from solid material to solid material.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-hull-soft-spots">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
-    <article class="fg-card" id="laminate-delamination">
-      <div class="fg-card-media"><img src="assets/hull-svc-delam.jpg" alt="Hull skin cut away to expose delaminated core" width="435" height="216" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="laminate-delamination" data-more>
+      <div class="fg-card-media"><img src="assets/hull-svc-delam.jpg?v=c4d123e5" alt="Rotted fiberglass along the base of a console" width="435" height="216" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Laminate Delamination</h3>
         <p>Separated fiberglass layers removed and re-laminated.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-laminate-delamination">
+          <div class="more-inner">
+            <p>Delamination is when layers of fiberglass separate from each other, so the hull no longer works as a single skin. It often sounds dull when tapped and can show up as cracking or bulging in the gelcoat. We cut away the separated layers back to a sound bond, lay up new structural glass, then fair and gelcoat to match.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-laminate-delamination">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
-    <article class="fg-card" id="wet-core">
-      <div class="fg-card-media"><img src="assets/deck-svc-core.jpg" alt="Rotted, wet core exposed under fiberglass" width="232" height="93" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="wet-core" data-more>
+      <div class="fg-card-media"><img src="assets/deck-svc-core.jpg?v=c2905c52" alt="Deck skin cut open to a wet, rotted balsa core" width="232" height="93" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Wet &amp; Rotted Core</h3>
         <p>Saturated balsa or plywood core cut out and replaced.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-wet-core">
+          <div class="more-inner">
+            <p>Once water reaches a balsa or plywood core, it wicks outward every season and the wood starts to rot, losing its grip on fasteners and fittings. Injecting resin over wet core only traps the moisture, so we open one skin, remove all wet material back to dry edges, bond in new marine-grade core and re-laminate.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-wet-core">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
-    <article class="fg-card" id="core-separation">
-      <div class="fg-card-media"><img src="assets/deck-svc-delam.jpg" alt="Fiberglass skin lifting away from the core" width="233" height="93" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="core-separation" data-more>
+      <div class="fg-card-media"><img src="assets/deck-svc-delam.jpg?v=96c1d20f" alt="Rotted deck core being dug out" width="233" height="93" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Skin-to-Core Separation</h3>
         <p>Skins re-bonded to a new, dry core for full stiffness.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-core-separation">
+          <div class="more-inner">
+            <p>Sometimes the core is still intact but the fiberglass skin has let go of it, often after an impact, an old repair or years of flexing, and the panel loses its stiffness. Small, dry separations can sometimes be injected and locally re-bonded. Larger or wet areas are opened up, the core replaced, and the skin re-laminated to it.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-core-separation">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
-    <article class="fg-card" id="hidden-moisture">
-      <div class="fg-card-media"><img src="assets/hull-inspect-2.jpg" alt="Opened laminate revealing moisture damage" width="213" height="138" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="hidden-moisture" data-more>
+      <div class="fg-card-media"><img src="assets/hull-inspect-2.jpg?v=535ec0c6" alt="Console tipped back to expose rotted deck and foam beneath" width="213" height="138" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Moisture Mapping</h3>
         <p>Meter testing and sounding to find the true edge of the damage.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-hidden-moisture">
+          <div class="more-inner">
+            <p>The spot you can feel is rarely the whole problem, because water spreads through the core well beyond it. Before any cutting, we take moisture meter readings and tap the area with a hammer: dry, bonded laminate rings, while wet or separated laminate sounds dull. That map shows the true size of the repair before you commit to it.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-hidden-moisture">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
     <article class="fg-card" id="stringer-bond">
-      <div class="fg-card-media"><img src="assets/hull-prob-2.jpg" alt="Rotted wood beneath fiberglass skin" width="453" height="138" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/hull-prob-2.jpg?v=c40dc888" alt="Deck skin cut open to show a wet, rotted balsa core" width="453" height="138" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Stringer &amp; Grid Bonds</h3>
         <p>Soft areas caused by failed bonds to the structure below.</p>
@@ -211,7 +241,7 @@
 
 <!-- ========================== PROCESS ========================== -->
 <section class="hs-process" id="process">
-  <div class="hs-process-photo"><img src="assets/deck-worker.jpg" alt="Technician repairing an opened section of fiberglass" width="250" height="150" loading="lazy" decoding="async"></div>
+  <div class="hs-process-photo"><img src="assets/deck-worker.jpg?v=137a6bc8" alt="Captain Levi&rsquo;s technician fitting a new plywood deck panel" width="250" height="150" loading="lazy" decoding="async"></div>
   <div class="hs-process-body">
     <div class="eyebrow eyebrow-light eyebrow-left hs-eyebrow" style="color:var(--accent)"><i style="background:var(--accent)"></i><span>Our Soft Spot Repair Process</span></div>
     <h2>Built Right. <span class="accent">Step by Step.</span></h2>
@@ -395,7 +425,7 @@
 
 <!-- ========================= SERVICE AREA ========================= -->
 <section class="hs-areas">
-  <img src="assets/results-marina.jpg" alt="" aria-hidden="true" class="hs-areas-bg" width="2200" height="1467" loading="lazy" decoding="async">
+  <img src="assets/results-marina.jpg?v=eabd65f4" alt="" aria-hidden="true" class="hs-areas-bg" width="2200" height="1467" loading="lazy" decoding="async">
   <img src="assets/areas-fl-map.png" alt="" aria-hidden="true" class="hs-areas-map" width="636" height="624" loading="lazy" decoding="async">
   <div class="container hs-areas-inner">
     <div>
@@ -460,7 +490,7 @@
 
 <!-- ========================= CLOSING CTA ========================= -->
 <section class="hs-cta">
-  <img src="assets/hcr-cta-boat.jpg" alt="" aria-hidden="true" class="hs-cta-boat" width="430" height="140" loading="lazy" decoding="async">
+  <img src="assets/hcr-cta-boat.jpg?v=86dc4442" alt="" aria-hidden="true" class="hs-cta-boat" width="430" height="140" loading="lazy" decoding="async">
   <div class="container hs-cta-inner">
     <div>
       <h2>Feel a Soft Spot in Your Hull?</h2>
@@ -800,6 +830,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

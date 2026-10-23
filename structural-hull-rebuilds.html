@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="hull-subpage.css?v=ee34a208a8">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,7 +85,7 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="hs-hero" style="--hero-pos:60% center">
-  <img src="assets/hull-worker.jpg" alt="Captain Levi&rsquo;s technician grinding fiberglass during a structural hull rebuild" class="hs-hero-img" width="884" height="382" fetchpriority="high">
+  <img src="assets/hull-worker.jpg?v=c4b6999c" alt="Captain Levi&rsquo;s crew sanding the lower hull of a boat on its trailer" class="hs-hero-img" width="884" height="382" fetchpriority="high">
   <div class="hs-hero-scrim"></div>
   <div class="container hs-hero-inner">
     <div class="hs-hero-content">
@@ -133,7 +133,7 @@
       <p>Years of water intrusion, a major impact or past repairs that failed can leave large areas of a hull and its internal structure compromised. A structural rebuild removes everything that&rsquo;s damaged and rebuilds the hull skin, stringers, bulkheads and bottom as one bonded structure &mdash; often stronger than the original.</p>
     </div>
     <div class="hs-diagram hs-diagram-photo">
-      <img src="assets/hull-svc-rebuild.jpg" alt="Hull interior stripped back to the stringer grid" width="435" height="216" loading="lazy" decoding="async">
+      <img src="assets/hull-svc-rebuild.jpg?v=916d5386" alt="New plywood going in over rebuilt stringers" width="435" height="216" loading="lazy" decoding="async">
       <span class="hs-dot" style="--x:30%;--y:32%" aria-hidden="true">1</span>
       <span class="hs-dot" style="--x:70%;--y:34%" aria-hidden="true">2</span>
       <span class="hs-dot" style="--x:50%;--y:64%" aria-hidden="true">3</span>
@@ -155,18 +155,24 @@
     <h2 class="eyebrow eyebrow-left hs-eyebrow"><i></i><span>Structural Rebuild Services</span></h2>
   </div>
   <div class="container fg-grid hs-grid">
-    <article class="fg-card" id="section-rebuild">
-      <div class="fg-card-media"><img src="assets/hull-svc-rebuild.jpg" alt="Hull stripped back for a structural rebuild" width="435" height="216" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="section-rebuild" data-more>
+      <div class="fg-card-media"><img src="assets/hull-svc-rebuild.jpg?v=916d5386" alt="New plywood going in over rebuilt stringers" width="435" height="216" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Hull Section Rebuilds</h3>
         <p>Large damaged areas cut out and rebuilt to full thickness.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-section-rebuild">
+          <div class="more-inner">
+            <p>When water intrusion, a major impact or failed past repairs have compromised a large area, spot repairs just move the problem around. We survey the hull to find where sound material starts, cut out everything wet, rotted or broken, and rebuild the section with new core and laminate bonded to the surrounding hull, then fair and gelcoat it.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-section-rebuild">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
     <article class="fg-card" id="stringer-grid">
-      <div class="fg-card-media"><img src="assets/stringer-damage.jpg" alt="Rotted stringers exposed inside a hull" width="355" height="161" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/stringer-damage.jpg?v=0e5d0bdf" alt="Cracked, water-stained stringer grid under a removed deck" width="355" height="161" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Stringer &amp; Grid Replacement</h3>
         <p>Rotted or broken stringers replaced and re-bonded to the hull.</p>
@@ -176,7 +182,7 @@
       </div>
     </article>
     <article class="fg-card" id="bulkhead-rebuild">
-      <div class="fg-card-media"><img src="assets/card-structural.jpg" alt="Plywood bulkheads inside a hull" width="305" height="90" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/card-structural.jpg?v=18aac7cb" alt="Crew glassing new bulkheads into a hull" width="305" height="90" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Bulkhead Rebuilds</h3>
         <p>New bulkheads tabbed in to restore stiffness and support.</p>
@@ -185,18 +191,24 @@
         </a>
       </div>
     </article>
-    <article class="fg-card" id="relamination">
-      <div class="fg-card-media"><img src="assets/svc-structural.jpg" alt="Technician wetting out new fiberglass laminate" width="451" height="170" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="relamination" data-more>
+      <div class="fg-card-media"><img src="assets/svc-structural.jpg?v=181b20c3" alt="Deck cut away, exposing the old stringers" width="451" height="170" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Structural Re-Lamination</h3>
         <p>New structural glass laid up to original or better spec.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-relamination">
+          <div class="more-inner">
+            <p>Once the damaged material is gone, the strength comes back in the layup. We grind the edges back to a wide taper, then build up new fiberglass layer by layer with the right resin system for the job, bonding and tabbing it to the stringers and bulkheads so the hull works as one structure again.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-relamination">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
     <article class="fg-card" id="core-replacement">
-      <div class="fg-card-media"><img src="assets/deck-svc-core.jpg" alt="Rotted core exposed under a fiberglass skin" width="232" height="93" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/deck-svc-core.jpg?v=c2905c52" alt="Deck skin cut open to a wet, rotted balsa core" width="232" height="93" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Core Replacement</h3>
         <p>Wet or rotted core replaced with rot-free structural core.</p>
@@ -206,7 +218,7 @@
       </div>
     </article>
     <article class="fg-card" id="major-damage">
-      <div class="fg-card-media"><img src="assets/hull-svc-impact.jpg" alt="Major impact damage on a hull" width="435" height="216" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/hull-svc-impact.jpg?v=842b4b0e" alt="Impact damage taped over on the bow of a white cruiser at the dock" width="435" height="216" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Major Damage Rebuilds</h3>
         <p>Severe collision and grounding damage rebuilt from the inside out.</p>
@@ -221,7 +233,7 @@
 
 <!-- ========================== PROCESS ========================== -->
 <section class="hs-process" id="process">
-  <div class="hs-process-photo"><img src="assets/stringer-worker.jpg" alt="Captain Levi&rsquo;s technician working inside a stripped hull" width="340" height="182" loading="lazy" decoding="async"></div>
+  <div class="hs-process-photo"><img src="assets/stringer-worker.jpg?v=38262634" alt="Technician grinding inside the hull between the stringers" width="340" height="182" loading="lazy" decoding="async"></div>
   <div class="hs-process-body">
     <div class="eyebrow eyebrow-light eyebrow-left hs-eyebrow" style="color:var(--accent)"><i style="background:var(--accent)"></i><span>Our Structural Rebuild Process</span></div>
     <h2>Built Right. <span class="accent">Step by Step.</span></h2>
@@ -307,8 +319,8 @@
     <!-- PLACEHOLDER PAIR: stock/comp photos, not the same boat. Swap for a real before/after. -->
     <figure class="hs-pair">
       <div class="hs-pair-media">
-        <img src="assets/transom-ba-1-before.jpg" alt="Before: rotted structure inside a hull" width="128" height="62" loading="lazy" decoding="async">
-        <img src="assets/transom-ba-1-after.jpg" alt="After: rebuilt structure" width="137" height="62" loading="lazy" decoding="async">
+        <img src="assets/transom-ba-1-before.jpg?v=4b0c24a3" alt="Before: rotted structure inside a hull" width="128" height="62" loading="lazy" decoding="async">
+        <img src="assets/transom-ba-1-after.jpg?v=83e7854d" alt="After: rebuilt structure" width="137" height="62" loading="lazy" decoding="async">
         <span class="hs-tag hs-tag-before" aria-hidden="true">BEFORE</span>
         <span class="hs-tag hs-tag-after" aria-hidden="true">AFTER</span>
       </div>
@@ -405,7 +417,7 @@
 
 <!-- ========================= SERVICE AREA ========================= -->
 <section class="hs-areas">
-  <img src="assets/results-marina.jpg" alt="" aria-hidden="true" class="hs-areas-bg" width="2200" height="1467" loading="lazy" decoding="async">
+  <img src="assets/results-marina.jpg?v=eabd65f4" alt="" aria-hidden="true" class="hs-areas-bg" width="2200" height="1467" loading="lazy" decoding="async">
   <img src="assets/areas-fl-map.png" alt="" aria-hidden="true" class="hs-areas-map" width="636" height="624" loading="lazy" decoding="async">
   <div class="container hs-areas-inner">
     <div>
@@ -470,7 +482,7 @@
 
 <!-- ========================= CLOSING CTA ========================= -->
 <section class="hs-cta">
-  <img src="assets/hcr-cta-boat.jpg" alt="" aria-hidden="true" class="hs-cta-boat" width="430" height="140" loading="lazy" decoding="async">
+  <img src="assets/hcr-cta-boat.jpg?v=86dc4442" alt="" aria-hidden="true" class="hs-cta-boat" width="430" height="140" loading="lazy" decoding="async">
   <div class="container hs-cta-inner">
     <div>
       <h2>Does Your Hull Need a Rebuild?</h2>
@@ -810,6 +822,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

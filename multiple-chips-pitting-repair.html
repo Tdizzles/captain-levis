@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="multiple-chips-pitting-repair.css?v=948415a6f9">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -87,7 +87,8 @@
 <!-- ============================= HERO ============================= -->
 <section class="mcp-hero">
   <!-- "Same Boats. New Beginnings." is baked into the right of the photo. -->
-  <img src="assets/mcp-hero.jpg" alt="Close-up of a white boat bow covered in scattered gelcoat chips and pitting. Tagline: Same Boats. New Beginnings." class="mcp-hero-img" width="1116" height="502" fetchpriority="high">
+  <img src="assets/mcp-hero.jpg?v=c5aafac1" alt="Bow of a white hull with dozens of chips and pits circled for repair" class="mcp-hero-img" width="1116" height="502" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="mcp-hero-scrim"></div>
   <div class="container mcp-hero-inner">
     <div class="mcp-hero-content">
@@ -173,41 +174,59 @@
   <div class="container">
     <div class="eyebrow eyebrow-left mcp-eyebrow"><i></i><span>Common Multiple Chip &amp; Pitting Repairs</span></div>
     <div class="mcp-grid">
-      <article class="fg-card" id="widespread-pitting">
-        <div class="fg-card-media"><img src="assets/mcp-svc-widespread.jpg" alt="Dozens of small chips and pits spread across white gelcoat" width="340" height="138" loading="lazy" decoding="async"></div>
+      <article class="fg-card" id="widespread-pitting" data-more>
+        <div class="fg-card-media"><img src="assets/mcp-svc-widespread.jpg?v=25766eb6" alt="White bow with dozens of chips and pits circled for repair" width="340" height="138" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Widespread Pitting</h3>
           <p>Multiple small chips and pits across large surface areas.</p>
-          <a href="#repairs" class="fg-card-link">Learn More
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="more-panel" id="more-widespread-pitting">
+            <div class="more-inner">
+              <p>Years of spray, debris and everyday knocks can leave dozens of small pits across a hull side or deck, each one a spot where water and UV can reach the laminate. Instead of chasing them one by one, we fill each pit slightly proud, sand the whole area flush, then color-match, wet sand and polish it as one surface.</p>
+              <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-widespread-pitting">Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </article>
 
-      <article class="fg-card" id="transom-pitting">
-        <div class="fg-card-media"><img src="assets/mcp-svc-transom.jpg" alt="Pitting in the gelcoat below a transom's moulded edge" width="340" height="138" loading="lazy" decoding="async"></div>
+      <article class="fg-card" id="transom-pitting" data-more>
+        <div class="fg-card-media"><img src="assets/mcp-svc-transom.jpg?v=ce4c09f0" alt="Transom of an older boat with its outboard bracket at the yard" width="340" height="138" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Transom Pitting</h3>
           <p>Common on older boats from sun exposure and saltwater.</p>
-          <a href="#repairs" class="fg-card-link">Learn More
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="more-panel" id="more-transom-pitting">
+            <div class="more-inner">
+              <p>The transom takes sun all day, spray off the wake and constant salt, so its gelcoat often turns chalky and pitted before the rest of the boat. We fill the pits and any chips around fittings and molded edges with marine-grade gelcoat, sand it smooth, match the color and polish the transom back to an even gloss.</p>
+              <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-transom-pitting">Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </article>
 
-      <article class="fg-card" id="hull-side-pitting">
-        <div class="fg-card-media"><img src="assets/mcp-svc-hullside.jpg" alt="Chips and pinholes scattered across an oxidized hull side" width="350" height="138" loading="lazy" decoding="async"></div>
+      <article class="fg-card" id="hull-side-pitting" data-more>
+        <div class="fg-card-media"><img src="assets/mcp-svc-hullside.jpg?v=14fe6306" alt="Chip and scratches on a seafoam-green hull" width="350" height="138" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Hull Side Pitting</h3>
           <p>Heavy oxidation with multiple chips and pinholes in the gelcoat.</p>
-          <a href="#repairs" class="fg-card-link">Learn More
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="more-panel" id="more-hull-side-pitting">
+            <div class="more-inner">
+              <p>Pinholes are tiny pits in the gelcoat that often stay hidden until oxidation dulls the surface around them, and then they show up across the whole side. We clean up the oxidized surface to see how far the pitting really goes, fill the pinholes and chips, sand and blend the area, then color-match and polish so it looks uniform again.</p>
+              <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-hull-side-pitting">Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </article>
 
       <article class="fg-card" id="waterline-pitting">
-        <div class="fg-card-media"><img src="assets/mcp-svc-waterline.jpg" alt="Chipped and pitted gelcoat along a hull's waterline stripe" width="348" height="138" loading="lazy" decoding="async"></div>
+        <div class="fg-card-media"><img src="assets/mcp-svc-waterline.jpg?v=7a765197" alt="Gelcoat repair taped off low on a white hull side" width="348" height="138" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Waterline Pitting</h3>
           <p>Repeated chips and pitting below or along the waterline from debris and bumpers.</p>
@@ -218,7 +237,7 @@
       </article>
 
       <article class="fg-card" id="high-wear-areas">
-        <div class="fg-card-media"><img src="assets/mcp-svc-highwear.jpg" alt="Chips and wear along a rail line in white gelcoat" width="330" height="138" loading="lazy" decoding="async"></div>
+        <div class="fg-card-media"><img src="assets/mcp-svc-highwear.jpg?v=256c9819" alt="Chip knocked out of a dark gelcoat stripe above a stained strake" width="330" height="138" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>High-Wear Areas</h3>
           <p>Chips and pitting around cleats, rails, corners and frequently used areas.</p>
@@ -234,7 +253,7 @@
 <!-- ========================== OUR PROCESS ========================= -->
 <section class="mcp-process" id="process">
   <div class="mcp-process-photo">
-    <img src="assets/mcp-worker.jpg" alt="Captain Levi's technician in a respirator buffing out a pitted area of gelcoat with a polisher" width="624" height="348" loading="lazy" decoding="async">
+    <img src="assets/mcp-worker.jpg?v=366b8b41" alt="Crew member machine-buffing a runabout hull on its trailer" width="624" height="348" loading="lazy" decoding="async">
   </div>
   <div class="mcp-process-body">
     <div class="mcp-process-copy">
@@ -342,7 +361,7 @@
     </div>
     <div class="mcp-related-grid">
       <a href="small-chip-repair.html" class="mcp-rel-card">
-        <img src="assets/mcp-rel-small.jpg" alt="Small chips and nicks along a strake in white gelcoat" width="206" height="82" loading="lazy" decoding="async">
+        <img src="assets/mcp-rel-small.jpg?v=9f92b0ad" alt="Finger pointing to a small chip in white gelcoat" width="206" height="82" loading="lazy" decoding="async">
         <span class="mcp-rel-body">
           <strong>Small Chips &amp; Nicks</strong>
           <small>Quick repairs for minor chips and everyday wear.</small>
@@ -350,7 +369,7 @@
         </span>
       </a>
       <a href="moderate-chip-repair.html" class="mcp-rel-card">
-        <img src="assets/mcp-rel-moderate.jpg" alt="A larger chip broken out of white gelcoat, exposing the laminate" width="224" height="82" loading="lazy" decoding="async">
+        <img src="assets/mcp-rel-moderate.jpg?v=9164130e" alt="Deep gouge torn through white gelcoat into the laminate" width="224" height="82" loading="lazy" decoding="async">
         <span class="mcp-rel-body">
           <strong>Moderate Gelcoat Chips</strong>
           <small>Larger chips with laminate exposure.</small>
@@ -358,7 +377,7 @@
         </span>
       </a>
       <a href="edge-rub-rail-repair.html" class="mcp-rel-card">
-        <img src="assets/mcp-rel-edge.jpg" alt="Chips in the gelcoat along a hull edge below the rail" width="250" height="82" loading="lazy" decoding="async">
+        <img src="assets/mcp-rel-edge.jpg?v=9d1342e5" alt="Chipped gelcoat along the edge of a red hull, filled for repair" width="250" height="82" loading="lazy" decoding="async">
         <span class="mcp-rel-body">
           <strong>Edge &amp; Rub Rail Damage</strong>
           <small>Repairs along edges, rub rails and high-contact areas.</small>
@@ -366,7 +385,7 @@
         </span>
       </a>
       <a href="waterline-chip-repair.html" class="mcp-rel-card">
-        <img src="assets/mcp-rel-waterline.jpg" alt="Chips and cracks in the gelcoat along a hull's waterline" width="238" height="82" loading="lazy" decoding="async">
+        <img src="assets/mcp-rel-waterline.jpg?v=017da3cb" alt="Gelcoat chip exposing the laminate above a hull stripe" width="238" height="82" loading="lazy" decoding="async">
         <span class="mcp-rel-body">
           <strong>Waterline Chips</strong>
           <small>Chips above or below the waterline.</small>
@@ -427,7 +446,7 @@
 
 <!-- ========================= CLOSING CTA ========================= -->
 <section class="mcp-cta">
-  <img src="assets/mcp-cta-boat.jpg" alt="" aria-hidden="true" class="mcp-cta-boat" width="564" height="166" loading="lazy" decoding="async">
+  <img src="assets/mcp-cta-boat.jpg?v=dc03737a" alt="" aria-hidden="true" class="mcp-cta-boat" width="564" height="166" loading="lazy" decoding="async">
   <div class="container mcp-cta-inner">
     <div class="mcp-cta-copy">
       <h2>Ready to Restore Your Boat&rsquo;s Finish?</h2>
@@ -767,6 +786,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

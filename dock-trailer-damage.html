@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="dock-trailer-damage.css?v=c9c58b4bf3">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,8 +85,9 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="dtd-hero">
-  <!-- "Same Boats. New Beginnings." is baked into the photo. -->
-  <img src="assets/dtd-hero.jpg" alt="Boat on its trailer at a dock with scrapes and gouges along the hull. Tagline: Same Boats. New Beginnings." class="dtd-hero-img" width="702" height="218" fetchpriority="high">
+  <!-- The tagline is live text (.hero-tagline in styles.css) over a real yard photo. -->
+  <img src="assets/dtd-hero.jpg?v=8407cc0d" alt="Gelcoat peeled away from a hull side just above its trailer" class="dtd-hero-img" width="702" height="218" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="dtd-hero-scrim"></div>
   <div class="container dtd-hero-inner">
     <div class="dtd-hero-content">
@@ -136,7 +137,7 @@
 
   <div class="container fg-grid dtd-grid">
     <article class="fg-card" id="dock-rash-repair">
-      <div class="fg-card-media"><img src="assets/dtd-svc-dock.jpg" alt="Dark scrapes and white gouges across a white hull side from rubbing a dock" width="217" height="90" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/dtd-svc-dock.jpg?v=aa36ea88" alt="Dock rash along the lower edge of a red-and-white hull" width="217" height="90" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Dock Rash Repair</h3>
         <p>Remove and repair scrapes, scuffs, and gouges from docks and pilings. Restore the finish and protect the fiberglass.</p>
@@ -147,7 +148,7 @@
     </article>
 
     <article class="fg-card" id="trailer-bunk-damage">
-      <div class="fg-card-media"><img src="assets/dtd-svc-bunk.jpg" alt="Hull resting on trailer bunks with long scratches worn into the gelcoat" width="217" height="90" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/dtd-svc-bunk.jpg?v=851746cd" alt="Hull bottom faired and patched where it sits on the bunks" width="217" height="90" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Trailer Bunk Damage</h3>
         <p>Repair wear, scratches, and deep gouges caused by trailer bunks and rollers from loading and transport.</p>
@@ -157,36 +158,54 @@
       </div>
     </article>
 
-    <article class="fg-card" id="loading-unloading-damage">
-      <div class="fg-card-media"><img src="assets/dtd-svc-loading.jpg" alt="Gouged and chipped gelcoat on the underside of a bow above a trailer roller" width="216" height="90" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="loading-unloading-damage" data-more>
+      <div class="fg-card-media"><img src="assets/dtd-svc-loading.jpg?v=f298d7d7" alt="Gelcoat peeled away from a hull just above its trailer" width="216" height="90" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Loading &amp; Unloading Damage</h3>
         <p>Fix impact marks and gelcoat damage from winches, bunks, and loading on and off the trailer or lift.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-loading-unloading-damage">
+          <div class="more-inner">
+            <p>Loading damage tends to show up on the bow, keel and lower hull, where the boat meets a trailer roller, winch post or lift arm, often after a crosswind or a crooked approach. We remove loose gelcoat, check the laminate beneath for cracks, rebuild the area, then color-match, sand and polish it smooth.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-loading-unloading-damage">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="corner-edge-repairs">
-      <div class="fg-card-media"><img src="assets/dtd-svc-edge.jpg" alt="Chipped gelcoat along a hull strake and rub rail edge" width="216" height="90" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="corner-edge-repairs" data-more>
+      <div class="fg-card-media"><img src="assets/dtd-svc-edge.jpg?v=bfd40055" alt="Broken rub rail and chipped hull-to-deck edge" width="216" height="90" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Corner &amp; Edge Repairs</h3>
         <p>Restore chipped or cracked gelcoat on rub rails, chines, keel edges, and high-contact areas.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-corner-edge-repairs">
+          <div class="more-inner">
+            <p>Edges and corners take the first hit from docks, pilings and trailers, and gelcoat on a sharp edge chips easily. Left open, those chips let water into the fiberglass underneath. We clean out the damage, build the edge back to its original profile, then color-match, sand and polish it so the line of the hull stays crisp.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-corner-edge-repairs">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="multiple-scratches-scuffs">
-      <div class="fg-card-media"><img src="assets/dtd-svc-scratches.jpg" alt="Many long diagonal scratches across a white gelcoat hull" width="216" height="90" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="multiple-scratches-scuffs" data-more>
+      <div class="fg-card-media"><img src="assets/dtd-svc-scratches.jpg?v=59a200a5" alt="Scrapes along the chine of a white performance hull" width="216" height="90" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Multiple Scratches &amp; Scuffs</h3>
         <p>Blend and repair multiple marks to restore a smooth, uniform finish with exact color matching.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-multiple-scratches-scuffs">
+          <div class="more-inner">
+            <p>A season of docking and trailering can leave a hull side covered in scratches, scuffs and small gouges that make the whole boat look tired. Rather than spot-fixing each one, we fill the deeper marks, sand the area so it reads as one surface, then color-match, compound and polish for an even gloss.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-multiple-scratches-scuffs">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
   </div>
@@ -219,7 +238,7 @@
       </li>
     </ul>
     <div class="dtd-why-photo">
-      <img src="assets/dtd-why.jpg" alt="Boat on a trailer with heavy scrapes and gouges along its navy and white hull" width="342" height="180" loading="lazy" decoding="async">
+      <img src="assets/dtd-why.jpg?v=278eb294" alt="Gelcoat damage on a hull resting on its trailer" width="342" height="180" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -234,22 +253,22 @@
     </div>
     <ol class="dtd-steps">
       <li class="dtd-step">
-        <div class="dtd-step-media"><img src="assets/dtd-step-1.jpg" alt="Gouged gelcoat around a hull fitting, ground back for repair" width="139" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">1</span></div>
+        <div class="dtd-step-media"><img src="assets/dtd-step-1.jpg?v=9eed4664" alt="Damaged gelcoat edge ground back for repair" width="139" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">1</span></div>
         <h3>Inspect &amp; Prep</h3>
         <p>Assess the damage, remove loose material, and properly prepare the surface.</p>
       </li>
       <li class="dtd-step">
-        <div class="dtd-step-media"><img src="assets/dtd-step-2.jpg" alt="Gloved hand spreading filler into a damaged area with a putty knife" width="148" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">2</span></div>
+        <div class="dtd-step-media"><img src="assets/dtd-step-2.jpg?v=01fd3af5" alt="Repair filled and faired" width="148" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">2</span></div>
         <h3>Repair &amp; Build</h3>
         <p>Fill and shape using marine-grade materials, restoring the damaged area.</p>
       </li>
       <li class="dtd-step">
-        <div class="dtd-step-media"><img src="assets/dtd-step-3.jpg" alt="Fan of gelcoat colour swatches in blues, whites, reds and creams" width="147" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">3</span></div>
+        <div class="dtd-step-media"><img src="assets/dtd-step-3.jpg?v=df5e20a2" alt="Spraying gelcoat over the repair" width="147" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">3</span></div>
         <h3>Color Match</h3>
         <p>We precisely match your boat&rsquo;s gelcoat color for a seamless blend.</p>
       </li>
       <li class="dtd-step">
-        <div class="dtd-step-media"><img src="assets/dtd-step-4.jpg" alt="Gloved hand polishing a gelcoat repair with a rotary buffer" width="147" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">4</span></div>
+        <div class="dtd-step-media"><img src="assets/dtd-step-4.jpg?v=876fd65f" alt="Polishing the finished hull" width="147" height="57" loading="lazy" decoding="async"><span class="dtd-step-num" aria-hidden="true">4</span></div>
         <h3>Finish &amp; Polish</h3>
         <p>Sand, compound, and polish for a smooth, glossy, like-new finish.</p>
       </li>
@@ -334,7 +353,7 @@
       </li>
     </ul>
     <div class="dtd-choose-photo">
-      <img src="assets/results-marina.jpg" alt="" aria-hidden="true" width="2200" height="1467" loading="lazy" decoding="async">
+      <img src="assets/results-marina.jpg?v=eabd65f4" alt="" aria-hidden="true" width="2200" height="1467" loading="lazy" decoding="async">
       <!-- Comp copy: "Captain Dave" — confirm the name with the owner (same open question as gelcoat-repair.html). -->
       <div class="dtd-cta-card">
         <h2>Ready to Repair Your Boat?</h2>
@@ -674,6 +693,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

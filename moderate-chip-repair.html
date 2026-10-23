@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="moderate-chip-repair.css?v=177af0e801">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -87,7 +87,8 @@
 <!-- ============================= HERO ============================= -->
 <section class="mcr-hero">
   <!-- "Same Boats. New Beginnings." is baked into the right of the photo. -->
-  <img src="assets/mcr-hero.jpg" alt="Close-up of a boat's bow with a large chip broken out of the white gelcoat. Tagline: Same Boats. New Beginnings." class="mcr-hero-img" width="1168" height="466" fetchpriority="high">
+  <img src="assets/mcr-hero.jpg?v=872028d3" alt="Chip knocked out of a dark gelcoat stripe above a stained strake" class="mcr-hero-img" width="1168" height="466" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="mcr-hero-scrim"></div>
   <div class="container mcr-hero-inner">
     <div class="mcr-hero-content">
@@ -173,19 +174,25 @@
   <div class="container">
     <div class="eyebrow eyebrow-left mcr-eyebrow"><i></i><span>Common Moderate Gelcoat Chips We Repair</span></div>
     <div class="mcr-grid">
-      <article class="fg-card" id="larger-chips">
-        <div class="fg-card-media"><img src="assets/mcr-svc-large.jpg" alt="Two large chips broken out of white gelcoat, exposing the laminate" width="336" height="140" loading="lazy" decoding="async"></div>
+      <article class="fg-card" id="larger-chips" data-more>
+        <div class="fg-card-media"><img src="assets/mcr-svc-large.jpg?v=47343c26" alt="Deep gouge torn through white gelcoat into the laminate" width="336" height="140" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Larger Gelcoat Chips</h3>
           <p>Chips bigger than a dime with exposed fiberglass laminate or multiple layers.</p>
-          <a href="#repairs" class="fg-card-link">Learn More
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
+          <div class="more-panel" id="more-larger-chips">
+            <div class="more-inner">
+              <p>Once a chip breaks through the gelcoat, the fiberglass underneath is open to water, and left alone it can lead to oxidation and delamination. We check the laminate for damage, rebuild the chip slightly proud with marine-grade materials, sand it flush with the surrounding surface, and finish with gelcoat tinted to your boat as it looks today.</p>
+              <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-larger-chips">Learn More
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </article>
 
       <article class="fg-card" id="edge-rub-rail">
-        <div class="fg-card-media"><img src="assets/mcr-svc-edge.jpg" alt="Chipped gelcoat along a hull edge beneath a stainless rub rail" width="340" height="140" loading="lazy" decoding="async"></div>
+        <div class="fg-card-media"><img src="assets/mcr-svc-edge.jpg?v=457a7947" alt="Broken rub rail and chipped hull-to-deck edge" width="340" height="140" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Edge &amp; Rub Rail Damage</h3>
           <p>Chips along edges, rub rails and high-contact areas caused by docks, trailers or bumpers.</p>
@@ -196,7 +203,7 @@
       </article>
 
       <article class="fg-card" id="waterline-chips">
-        <div class="fg-card-media"><img src="assets/mcr-svc-waterline.jpg" alt="A chip in white gelcoat just above a boat's waterline" width="340" height="140" loading="lazy" decoding="async"></div>
+        <div class="fg-card-media"><img src="assets/mcr-svc-waterline.jpg?v=7ef7f557" alt="Gelcoat chip exposing the laminate above a hull stripe" width="340" height="140" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Waterline Chips</h3>
           <p>Chips above or below the waterline that are exposed to constant moisture.</p>
@@ -207,7 +214,7 @@
       </article>
 
       <article class="fg-card" id="impact-chips">
-        <div class="fg-card-media"><img src="assets/mcr-svc-impact.jpg" alt="An impact chip with cracked gelcoat spreading out from it" width="340" height="140" loading="lazy" decoding="async"></div>
+        <div class="fg-card-media"><img src="assets/mcr-svc-impact.jpg?v=17d652be" alt="Impact damage taped over on the bow of a white cruiser at the dock" width="340" height="140" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Impact Damage Chips</h3>
           <p>Larger chips from collisions, hits or dropped equipment.</p>
@@ -218,7 +225,7 @@
       </article>
 
       <article class="fg-card" id="multiple-chips-pitting">
-        <div class="fg-card-media"><img src="assets/mcr-svc-pitting.jpg" alt="Widespread chips and pitting across white gelcoat" width="318" height="140" loading="lazy" decoding="async"></div>
+        <div class="fg-card-media"><img src="assets/mcr-svc-pitting.jpg?v=163b6af1" alt="Chip knocked out of a dark gelcoat stripe above a stained strake" width="318" height="140" loading="lazy" decoding="async"></div>
         <div class="fg-card-body">
           <h3>Multiple Chips &amp; Pitting</h3>
           <p>Areas with repeated larger chips or widespread pitting and surface damage.</p>
@@ -234,7 +241,7 @@
 <!-- ========================== OUR PROCESS ========================= -->
 <section class="mcr-process" id="process">
   <div class="mcr-process-photo">
-    <img src="assets/mcr-worker.jpg" alt="Captain Levi's technician in a respirator buffing a repaired area of gelcoat with a polisher" width="640" height="378" loading="lazy" decoding="async">
+    <img src="assets/mcr-worker.jpg?v=28fb20e7" alt="Technician spraying gelcoat on a fiberglass part in the yard" width="640" height="378" loading="lazy" decoding="async">
   </div>
   <div class="mcr-process-body">
     <div class="mcr-process-copy">
@@ -343,7 +350,7 @@
     </div>
     <div class="mcr-related-grid">
       <a href="surface-scratch-repair.html" class="mcr-rel-card">
-        <img src="assets/mcr-rel-surface.jpg" alt="Light scratches and a small chip in white gelcoat" width="222" height="92" loading="lazy" decoding="async">
+        <img src="assets/mcr-rel-surface.jpg?v=8f829b15" alt="Scraped area taped off on a bowrider hull side" width="222" height="92" loading="lazy" decoding="async">
         <span class="mcr-rel-body">
           <strong>Surface Scratches</strong>
           <small>Remove light scratches and scuffs from everyday use.</small>
@@ -351,7 +358,7 @@
         </span>
       </a>
       <a href="edge-rub-rail-repair.html" class="mcr-rel-card">
-        <img src="assets/mcr-rel-edge.jpg" alt="Chipped gelcoat along an edge beneath a rub rail" width="232" height="92" loading="lazy" decoding="async">
+        <img src="assets/mcr-rel-edge.jpg?v=afd832ce" alt="Chipped gelcoat along the edge of a red hull, filled for repair" width="232" height="92" loading="lazy" decoding="async">
         <span class="mcr-rel-body">
           <strong>Edge &amp; Rub Rail Damage</strong>
           <small>Fix chips and damage along edges, corners and rub rails.</small>
@@ -359,7 +366,7 @@
         </span>
       </a>
       <a href="waterline-chip-repair.html" class="mcr-rel-card">
-        <img src="assets/mcr-rel-waterline.jpg" alt="Chipped gelcoat along a hull just above the waterline" width="228" height="92" loading="lazy" decoding="async">
+        <img src="assets/mcr-rel-waterline.jpg?v=5a5ad96e" alt="Gelcoat repair taped off low on a white hull side" width="228" height="92" loading="lazy" decoding="async">
         <span class="mcr-rel-body">
           <strong>Waterline Chips</strong>
           <small>Repair chips above or below the waterline.</small>
@@ -367,7 +374,7 @@
         </span>
       </a>
       <a href="multiple-chips-pitting-repair.html" class="mcr-rel-card">
-        <img src="assets/mcr-rel-pitting.jpg" alt="Several chips and pits scattered across white gelcoat" width="228" height="92" loading="lazy" decoding="async">
+        <img src="assets/mcr-rel-pitting.jpg?v=30413cd6" alt="Chip and scratches on a seafoam-green hull" width="228" height="92" loading="lazy" decoding="async">
         <span class="mcr-rel-body">
           <strong>Multiple Chips &amp; Pitting</strong>
           <small>Restore areas with multiple chips or surface pitting.</small>
@@ -428,7 +435,7 @@
 
 <!-- ========================= CLOSING CTA ========================= -->
 <section class="mcr-cta">
-  <img src="assets/mcr-cta-boat.jpg" alt="" aria-hidden="true" class="mcr-cta-boat" width="544" height="152" loading="lazy" decoding="async">
+  <img src="assets/mcr-cta-boat.jpg?v=bce77dfc" alt="" aria-hidden="true" class="mcr-cta-boat" width="544" height="152" loading="lazy" decoding="async">
   <div class="container mcr-cta-inner">
     <div class="mcr-cta-copy">
       <h2>Ready to Repair Your Boat?</h2>
@@ -767,6 +774,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

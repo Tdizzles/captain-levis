@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="crack-repair.css?v=ab288128ab">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,8 +85,9 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="cr-hero">
-  <!-- "Same Boats. New Beginnings." is baked into the photo. -->
-  <img src="assets/crack-hero.jpg" alt="Close-up of a white fiberglass bow covered in spider cracks, docked in front of palm trees. Tagline: Same Boats. New Beginnings." class="cr-hero-img" width="922" height="214" fetchpriority="high">
+  <!-- The tagline is live text (.hero-tagline in styles.css) over a real yard photo. -->
+  <img src="assets/crack-hero.jpg?v=55ace900" alt="Cracked, flaking gelcoat on the corner of a fiberglass hull" class="cr-hero-img" width="922" height="214" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="cr-hero-scrim"></div>
   <div class="container cr-hero-inner">
     <div class="cr-hero-content">
@@ -135,19 +136,25 @@
   </div>
 
   <div class="container fg-grid cr-grid">
-    <article class="fg-card" id="spider-crack-repair">
-      <div class="fg-card-media"><img src="assets/crack-svc-spider.jpg" alt="Spider cracks spreading out from a fitting on a white gelcoat hull" width="267" height="74" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="spider-crack-repair" data-more>
+      <div class="fg-card-media"><img src="assets/crack-svc-spider.jpg?v=fa6a23e6" alt="Cracked, flaking gelcoat on the corner of a hull" width="267" height="74" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Spider Crack Repair</h3>
         <p>Repair surface spider cracks and stress fractures to restore a smooth, like-new finish.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-spider-crack-repair">
+          <div class="more-inner">
+            <p>Spider cracks are the web of fine lines that spreads out from a fitting, a corner or an old impact, usually because something underneath is flexing. We find the cause first, then grind the cracks out, reinforce the area if it needs it, and fair and gelcoat the repair to match so the cracks don&rsquo;t come straight back.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-spider-crack-repair">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
     <article class="fg-card" id="hull-crack-repair">
-      <div class="fg-card-media"><img src="assets/crack-svc-hull.jpg" alt="Long crack running along a fiberglass hull with gelcoat flaking away" width="266" height="74" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/crack-svc-hull.jpg?v=896fa6a4" alt="Crack running across a blue hull side" width="266" height="74" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Hull Crack Repair</h3>
         <p>Fix deeper cracks in the hull that compromise strength and allow water intrusion.</p>
@@ -158,7 +165,7 @@
     </article>
 
     <article class="fg-card" id="transom-crack-repair">
-      <div class="fg-card-media"><img src="assets/crack-svc-transom.jpg" alt="Vertical stress cracks on a white fiberglass transom" width="266" height="74" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/crack-svc-transom.jpg?v=8a79a05e" alt="Cracked laminate around a bolt hole inside a transom" width="266" height="74" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Transom Crack Repair</h3>
         <p>Reinforce and repair transom cracks caused by stress, impact, or engine load.</p>
@@ -169,7 +176,7 @@
     </article>
 
     <article class="fg-card" id="deck-crack-repair">
-      <div class="fg-card-media"><img src="assets/crack-svc-deck.jpg" alt="Cracks along a deck seam and hatch edge" width="269" height="74" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/crack-svc-deck.jpg?v=36ce4cdf" alt="Fiberglass panel cracked through" width="269" height="74" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Deck Crack Repair</h3>
         <p>Repair cracks in decks, hatches and high-stress areas with durable laminates.</p>
@@ -180,7 +187,7 @@
     </article>
 
     <article class="fg-card" id="stress-crack-repair">
-      <div class="fg-card-media"><img src="assets/crack-svc-stress.jpg" alt="Stress cracks at a fiberglass corner joint" width="267" height="74" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/crack-svc-stress.jpg?v=29137248" alt="Crack opened up through white gelcoat and laminate" width="267" height="74" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Stress Crack Repair</h3>
         <p>Fix structural stress cracks around corners, chines, and mounting points.</p>
@@ -223,7 +230,7 @@
       </li>
     </ul>
     <div class="cr-why-photo">
-      <img src="assets/crack-why.jpg" alt="Gloved technician grinding out spider cracks on a white fiberglass hull" width="352" height="143" loading="lazy" decoding="async">
+      <img src="assets/crack-why.jpg?v=5de1a5d9" alt="Stress cracks in white gelcoat on a gunwale" width="352" height="143" loading="lazy" decoding="async">
     </div>
   </div>
 </section>
@@ -238,22 +245,22 @@
     </div>
     <ol class="cr-steps">
       <li class="cr-step">
-        <div class="cr-step-media"><img src="assets/crack-step-1.jpg" alt="Close-up of a star crack in white gelcoat" width="195" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">1</span></div>
+        <div class="cr-step-media"><img src="assets/crack-step-1.jpg?v=aed37861" alt="Stress cracks in white gelcoat" width="195" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">1</span></div>
         <h3>Inspect &amp; Assess</h3>
         <p>We evaluate the crack, determine the cause, and identify the best repair method.</p>
       </li>
       <li class="cr-step">
-        <div class="cr-step-media"><img src="assets/crack-step-2.jpg" alt="Crack ground out and laminated with new fiberglass" width="194" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">2</span></div>
+        <div class="cr-step-media"><img src="assets/crack-step-2.jpg?v=7245b642" alt="Repair ground out, glassed and faired smooth" width="194" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">2</span></div>
         <h3>Repair &amp; Reinforce</h3>
         <p>We grind, laminate with marine-grade materials, and rebuild the structure.</p>
       </li>
       <li class="cr-step">
-        <div class="cr-step-media"><img src="assets/crack-step-3.jpg" alt="Random-orbit sander fairing a fiberglass repair" width="200" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">3</span></div>
+        <div class="cr-step-media"><img src="assets/crack-step-3.jpg?v=560e9e77" alt="Random-orbit sander fairing a fiberglass repair" width="200" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">3</span></div>
         <h3>Fair &amp; Finish</h3>
         <p>We fair the repair for a smooth, even surface.</p>
       </li>
       <li class="cr-step">
-        <div class="cr-step-media"><img src="assets/crack-step-4.jpg" alt="Glossy, colour-matched gelcoat on a finished hull" width="192" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">4</span></div>
+        <div class="cr-step-media"><img src="assets/crack-step-4.jpg?v=590f09ea" alt="Glossy, color-matched gelcoat on a finished hull" width="192" height="44" loading="lazy" decoding="async"><span class="cr-step-num" aria-hidden="true">4</span></div>
         <h3>Color Match (If Needed)</h3>
         <p>We match your gelcoat color and blend for a seamless, like-new appearance.</p>
       </li>
@@ -338,7 +345,7 @@
       </li>
     </ul>
     <div class="cr-cta">
-      <img src="assets/results-marina.jpg" alt="" aria-hidden="true" class="cr-cta-bg" width="2200" height="1467" loading="lazy" decoding="async">
+      <img src="assets/results-marina.jpg?v=eabd65f4" alt="" aria-hidden="true" class="cr-cta-bg" width="2200" height="1467" loading="lazy" decoding="async">
       <div class="cr-cta-card">
         <h2>Ready to Repair Your Boat?</h2>
         <p>Get a free quote or talk directly with Captain Dave.</p>
@@ -677,6 +684,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

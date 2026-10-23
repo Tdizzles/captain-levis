@@ -20,7 +20,7 @@
   const UPLOAD = { maxFiles: 5, maxBytes: 10 * 1024 * 1024, types: ['image/jpeg', 'image/png', 'image/webp'] }
 
   document.addEventListener('DOMContentLoaded', () => {
-    initNav(); initCarousel(); initSliders(); initTextSize(); initConsent(); initQuoteForm(); initChat(); initEvents()
+    initNav(); initCarousel(); initSliders(); initMore(); initTextSize(); initConsent(); initQuoteForm(); initChat(); initEvents()
   })
 
   // ---------------------------------------------------------------- nav
@@ -107,6 +107,42 @@
       })
       setPos(50)
     })
+  }
+
+  // ---------------------------------------------------------------- service card dropdowns
+  // Cards for services without their own page yet ([data-more]) open a short description in place.
+  // A link to page.html#card-id from elsewhere on the site lands with that card already open.
+  // While a card is open its neighbours keep their closed height, so only the opened card grows.
+  function initMore() {
+    const cards = $$('[data-more]')
+    if (!cards.length) return
+    const setOpen = (card, open) => {
+      const grid = card.parentElement
+      if (open && !grid.querySelector(':scope > .more-open')) {
+        Array.from(grid.children).forEach((c) => { c.style.minHeight = c.offsetHeight + 'px'; c.style.alignSelf = 'start' })
+      }
+      card.classList.toggle('more-open', open)
+      card.querySelector('.more-toggle')?.setAttribute('aria-expanded', String(open))
+      if (!open) {
+        setTimeout(() => {
+          if (grid.querySelector(':scope > .more-open')) return
+          Array.from(grid.children).forEach((c) => { c.style.minHeight = ''; c.style.alignSelf = '' })
+        }, 500)
+      }
+    }
+    cards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a, .more-panel')) return
+        setOpen(card, !card.classList.contains('more-open'))
+      })
+    })
+    const openFromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1))
+      const card = id && document.getElementById(id)
+      if (card && card.hasAttribute('data-more')) setOpen(card, true)
+    }
+    openFromHash()
+    window.addEventListener('hashchange', openFromHash)
   }
 
   // ---------------------------------------------------------------- text size

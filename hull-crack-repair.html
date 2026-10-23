@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="hull-subpage.css?v=ee34a208a8">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,7 +85,7 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="hs-hero" style="--hero-pos:70% center">
-  <img src="assets/hcr-hero.jpg" alt="Captain Levi&rsquo;s technician in a respirator grinding out a long crack on the bow of a white fiberglass boat" class="hs-hero-img" width="978" height="444" fetchpriority="high">
+  <img src="assets/hcr-hero.jpg?v=fcb26037" alt="Captain Levi&rsquo;s technician sanding marked repair spots on a hull at the Largo yard" class="hs-hero-img" width="978" height="444" fetchpriority="high">
   <div class="hs-hero-scrim"></div>
   <div class="container hs-hero-inner">
     <div class="hs-hero-content">
@@ -146,7 +146,7 @@
   </div>
   <div class="container fg-grid hs-grid">
     <article class="fg-card" id="stress-cracks">
-      <div class="fg-card-media"><img src="assets/hcr-svc-stress.jpg" alt="Fine stress cracks running across white hull gelcoat" width="244" height="126" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/hcr-svc-stress.jpg?v=931eb55d" alt="Crack running across a blue hull side" width="244" height="126" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Stress Cracks</h3>
         <p>Common from hull flexing and age. Often appear as fine cracks in the gelcoat.</p>
@@ -155,18 +155,27 @@
         </a>
       </div>
     </article>
-    <article class="fg-card" id="spider-cracks">
-      <div class="fg-card-media"><img src="assets/hcr-svc-spider.jpg" alt="Spider cracks radiating out from a single point in the gelcoat" width="244" height="126" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="spider-cracks" data-more>
+      <div class="fg-card-media"><img src="assets/hcr-svc-spider.jpg?v=1990faf1" alt="Hairline crack across a seafoam hull bottom near the trailer" width="244" height="126" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Spider Cracks</h3>
         <p>Web-like cracks in the gelcoat from impact or repeated stress.</p>
+        <div class="more-panel" id="more-spider-cracks">
+          <div class="more-inner">
+            <p>Spider cracks usually stay in the gelcoat, but they&rsquo;re a sign that something is flexing or took a hit, often around a fitting, a cleat or an old impact point. We sound the area to rule out laminate damage, grind the cracks out, add reinforcement where it flexes, then fair, color-match, wet sand and polish.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-spider-cracks">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
         <a href="crack-repair.html#spider-crack-repair" class="fg-card-link">Learn More
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
     </article>
     <article class="fg-card" id="impact-cracks">
-      <div class="fg-card-media"><img src="assets/hcr-svc-impact.jpg" alt="Broken fiberglass laminate exposed by an impact" width="244" height="126" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/hcr-svc-impact.jpg?v=7f4d6dc1" alt="Hole broken through a fiberglass transom" width="244" height="126" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Impact Cracks</h3>
         <p>Caused by collision, grounding or debris. Can damage multiple fiberglass layers.</p>
@@ -175,18 +184,24 @@
         </a>
       </div>
     </article>
-    <article class="fg-card" id="deep-hull-cracks">
-      <div class="fg-card-media"><img src="assets/hcr-svc-deep.jpg" alt="Long, deep crack through a fiberglass hull panel" width="244" height="126" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="deep-hull-cracks" data-more>
+      <div class="fg-card-media"><img src="assets/hcr-svc-deep.jpg?v=33ac175c" alt="Crack opened up through white gelcoat and laminate" width="244" height="126" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Deep Hull Cracks</h3>
         <p>Extend into the laminate and require structural repair to restore strength.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-deep-hull-cracks">
+          <div class="more-inner">
+            <p>A crack that flexes when pressed, weeps water or follows a stress line such as a chine, keel or bulkhead is usually more than skin deep. We grind and taper the area back to sound fiberglass, rebuild the laminate with marine-grade cloth and resin, then fair it, gelcoat it to your color, wet sand and polish.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-deep-hull-cracks">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
     <article class="fg-card" id="keel-bottom-cracks">
-      <div class="fg-card-media"><img src="assets/hcr-svc-keel.jpg" alt="Cracked and chipped fiberglass along a hull bottom" width="244" height="126" loading="lazy" decoding="async"></div>
+      <div class="fg-card-media"><img src="assets/hcr-svc-keel.jpg?v=e6139a60" alt="Performance hull on stands with damage along the keel and chine" width="244" height="126" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Keel &amp; Bottom Cracks</h3>
         <p>High-stress areas from groundings or trailer damage. Require proper laminate repair.</p>
@@ -195,14 +210,20 @@
         </a>
       </div>
     </article>
-    <article class="fg-card" id="fitting-cracks">
-      <div class="fg-card-media"><img src="assets/hcr-svc-fittings.jpg" alt="Cracked, broken-out fiberglass around a hull opening" width="244" height="126" loading="lazy" decoding="async"></div>
+    <article class="fg-card" id="fitting-cracks" data-more>
+      <div class="fg-card-media"><img src="assets/hcr-svc-fittings.jpg?v=97825d79" alt="Cracked laminate around a bolt hole inside a transom" width="244" height="126" loading="lazy" decoding="async"></div>
       <div class="fg-card-body">
         <h3>Cracks Around Fittings &amp; Through-Hull Areas</h3>
         <p>Common from loose fittings, movement or stress. We repair and reinforce the area.</p>
-        <a href="#quote" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-fitting-cracks">
+          <div class="more-inner">
+            <p>Through-hulls, cleats and other fittings concentrate load in a small spot, and once a fitting works loose, the fiberglass around it cracks and water can follow the fastener holes into the laminate or core. We remove the fitting, grind out the cracked glass, add reinforcement around the opening, and re-bed the fitting before finishing.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-fitting-cracks">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
   </div>
@@ -211,7 +232,7 @@
 
 <!-- ========================== PROCESS ========================== -->
 <section class="hs-process" id="process" style="--worker-pos:20% center">
-  <div class="hs-process-photo"><img src="assets/hcr-worker.jpg" alt="Captain Levi&rsquo;s technician grinding a fiberglass hull repair" width="400" height="332" loading="lazy" decoding="async"></div>
+  <div class="hs-process-photo"><img src="assets/hcr-worker.jpg?v=1664c348" alt="Sanding back a damaged chine before it is glassed" width="400" height="332" loading="lazy" decoding="async"></div>
   <div class="hs-process-body">
     <div class="eyebrow eyebrow-light eyebrow-left hs-eyebrow" style="color:var(--accent)"><i style="background:var(--accent)"></i><span>Our Hull Crack Repair Process</span></div>
     <h2>Built Right. <span class="accent">Step by Step.</span></h2>
@@ -395,7 +416,7 @@
 
 <!-- ========================= SERVICE AREA ========================= -->
 <section class="hs-areas">
-  <img src="assets/results-marina.jpg" alt="" aria-hidden="true" class="hs-areas-bg" width="2200" height="1467" loading="lazy" decoding="async">
+  <img src="assets/results-marina.jpg?v=eabd65f4" alt="" aria-hidden="true" class="hs-areas-bg" width="2200" height="1467" loading="lazy" decoding="async">
   <img src="assets/areas-fl-map.png" alt="" aria-hidden="true" class="hs-areas-map" width="636" height="624" loading="lazy" decoding="async">
   <div class="container hs-areas-inner">
     <div>
@@ -460,7 +481,7 @@
 
 <!-- ========================= CLOSING CTA ========================= -->
 <section class="hs-cta">
-  <img src="assets/hcr-cta-boat.jpg" alt="" aria-hidden="true" class="hs-cta-boat" width="430" height="140" loading="lazy" decoding="async">
+  <img src="assets/hcr-cta-boat.jpg?v=86dc4442" alt="" aria-hidden="true" class="hs-cta-boat" width="430" height="140" loading="lazy" decoding="async">
   <div class="container hs-cta-inner">
     <div>
       <h2>Have a Crack in Your Boat Hull?</h2>
@@ -800,6 +821,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="stringer-repairs.css?v=7e68e5891f">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,7 +85,8 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="sr-hero">
-  <img src="assets/stringer-hero.jpg" alt="Centre console with its deck removed, exposing weathered, water-damaged fiberglass stringers" class="sr-hero-img" width="574" height="187" fetchpriority="high">
+  <img src="assets/stringer-hero.jpg?v=680fe1c4" alt="Deck cut away on a boat at Captain Levi&rsquo;s, exposing the old stringers and floor beneath" class="sr-hero-img" width="574" height="187" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="sr-hero-scrim"></div>
   <div class="container sr-hero-inner">
     <div class="sr-hero-content">
@@ -107,7 +108,6 @@
         <li>Mobile &amp; Boatyard Service</li>
       </ul>
     </div>
-    <!-- "Same Boats. New Beginnings." is baked into stringer-hero.jpg, so there is no HTML tagline here. -->
   </div>
 </section>
 
@@ -115,7 +115,7 @@
 <section class="sr-backbone">
   <div class="sr-wide sr-backbone-inner">
     <figure class="sr-backbone-photo">
-      <img src="assets/stringer-damage.jpg" alt="Rotted, water-stained stringers exposed in an open hull" width="355" height="161" loading="lazy" decoding="async">
+      <img src="assets/stringer-damage.jpg?v=0e5d0bdf" alt="Cracked, water-stained stringer grid under a removed deck" width="355" height="161" loading="lazy" decoding="async">
       <figcaption class="sr-chip">Damaged Stringers</figcaption>
     </figure>
 
@@ -192,87 +192,123 @@
   </div>
 
   <div class="container fg-grid">
-    <article class="fg-card" id="stringer-inspection">
+    <article class="fg-card" id="stringer-inspection" data-more>
       <div class="fg-card-media">
-        <img src="assets/stringer-svc-inspect.jpg" alt="Stringer grid exposed for inspection with rot and moisture staining" width="134" height="51" loading="lazy" decoding="async">
+        <img src="assets/stringer-svc-inspect.jpg?v=99915920" alt="Technician grinding between the stringers of a stripped hull" width="134" height="51" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></span>
       </div>
       <div class="fg-card-body">
         <h3>Stringer Inspection</h3>
         <p>Thorough inspection to identify damage, moisture and structural concerns.</p>
-        <a href="#diagnostics" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-stringer-inspection">
+          <div class="more-inner">
+            <p>Most of a stringer is hidden under the deck, so we inspect by sound and feel as much as by sight. We tap along the hull and the stringer tops, take moisture readings, check for flex and stress cracks along the stringer lines and look into every accessible area, then explain what we found and the repair we recommend.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-stringer-inspection">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="partial-stringer-repair">
+    <article class="fg-card" id="partial-stringer-repair" data-more>
       <div class="fg-card-media">
-        <img src="assets/stringer-svc-partial.jpg" alt="A section of stringer with localised rot cut back for repair" width="141" height="51" loading="lazy" decoding="async">
+        <img src="assets/stringer-svc-partial.jpg?v=3e387f64" alt="New plywood going in over rebuilt stringers" width="141" height="51" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></span>
       </div>
       <div class="fg-card-body">
         <h3>Partial Stringer Repair</h3>
         <p>Repair localized damage and restore strength.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-partial-stringer-repair">
+          <div class="more-inner">
+            <p>When the damage is limited to one section and the core on either side is dry and sound, the whole stringer doesn&rsquo;t need to come out. We open only as much deck as the repair needs, cut out the bad section, scarf in new core, and relaminate it so it ties back into the existing stringer and the hull.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-partial-stringer-repair">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="full-stringer-replacement">
+    <article class="fg-card" id="full-stringer-replacement" data-more>
       <div class="fg-card-media">
-        <img src="assets/stringer-svc-full.jpg" alt="Hull with brand-new stringers installed along its length" width="146" height="51" loading="lazy" decoding="async">
+        <img src="assets/stringer-svc-full.jpg?v=1d7d075c" alt="Cracked, water-stained stringer grid" width="146" height="51" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></span>
       </div>
       <div class="fg-card-body">
         <h3>Full Stringer Replacement</h3>
         <p>Complete removal and replacement of damaged stringers.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-full-stringer-replacement">
+          <div class="more-inner">
+            <p>When rot has spread along the length of a stringer, replacing it is the stronger and more cost-effective repair. We remove the deck and the old stringer, grind and prepare the hull, then bond in new core and glass it to the hull with marine-grade fiberglass and resin. Major rebuilds like this are usually done at our Largo yard.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-full-stringer-replacement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="engine-support-stringers">
+    <article class="fg-card" id="engine-support-stringers" data-more>
       <div class="fg-card-media">
-        <img src="assets/stringer-svc-engine.jpg" alt="Inboard engine sitting on its engine-bed stringers during a rebuild" width="146" height="51" loading="lazy" decoding="async">
+        <img src="assets/stringer-svc-engine.jpg?v=dfabe24b" alt="Stringer grid under a removed deck" width="146" height="51" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></span>
       </div>
       <div class="fg-card-body">
         <h3>Engine-Support Stringers</h3>
         <p>Rebuild stringers that support engine and transmission loads.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-engine-support-stringers">
+          <div class="more-inner">
+            <p>On inboard boats the engines sit right on the stringers, so a rotted or cracked engine bed shows up as mounts that won&rsquo;t stay aligned, extra vibration or flex. We support or remove the engine as needed, cut out the failed sections, and rebuild the beds with new core and laminate sized for the engine and transmission loads they carry.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-engine-support-stringers">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="stringer-core-replacement">
+    <article class="fg-card" id="stringer-core-replacement" data-more>
       <div class="fg-card-media">
-        <img src="assets/stringer-svc-core.jpg" alt="Stringer opened up to replace its rotted core" width="145" height="51" loading="lazy" decoding="async">
+        <img src="assets/stringer-svc-core.jpg?v=0e2607eb" alt="Deck cut away, exposing the old stringers" width="145" height="51" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></span>
       </div>
       <div class="fg-card-body">
         <h3>Core Replacement</h3>
         <p>Replace rotted wood core or foam with marine-grade materials.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-stringer-core-replacement">
+          <div class="more-inner">
+            <p>A stringer is a core wrapped in fiberglass, and the core is what fails first once water gets in. We open the glass, remove the rotted wood or failed foam, and replace it with marine-grade core, or upgrade to a rot-proof option such as high-density polyurethane board or a pourable structural compound, before glassing it back in.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-stringer-core-replacement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="fiberglass-relamination">
+    <article class="fg-card" id="fiberglass-relamination" data-more>
       <div class="fg-card-media">
-        <img src="assets/stringer-svc-relam.jpg" alt="Fiberglass cloth being rolled out with resin over a new stringer" width="135" height="51" loading="lazy" decoding="async">
+        <img src="assets/stringer-svc-relam.jpg?v=694b87de" alt="Technician grinding inside a stripped hull" width="135" height="51" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg></span>
       </div>
       <div class="fg-card-body">
         <h3>Fiberglass Relamination</h3>
         <p>Rebuild and laminate with high-strength fiberglass and marine resin.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-fiberglass-relamination">
+          <div class="more-inner">
+            <p>The fiberglass wrapped around a stringer is what ties it to the hull and carries the load, so it has to be laid up properly. We grind and clean the hull for a strong bond, then build up layers of fiberglass over the new core and onto the hull, matched to the load the stringer carries, before sealing the bay.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-fiberglass-relamination">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
   </div>
@@ -282,7 +318,7 @@
 <section class="sr-diag" id="diagnostics">
   <div class="sr-diag-photo">
     <!-- The Captain Levi's shirt print is part of the photo. -->
-    <img src="assets/stringer-worker.jpg" alt="Captain Levi's technician inspecting the stringers inside an open hull" width="340" height="182" loading="lazy" decoding="async">
+    <img src="assets/stringer-worker.jpg?v=38262634" alt="Technician grinding inside the hull between the stringers" width="340" height="182" loading="lazy" decoding="async">
   </div>
 
   <div class="sr-diag-body">
@@ -339,22 +375,22 @@
     <ol class="sr-steps">
       <li class="sr-step">
         <div class="sr-step-head"><span class="sr-step-num">01</span><h3>Access &amp; Remove <br>Damaged Material</h3></div>
-        <img src="assets/stringer-step-1.jpg" alt="Deck cut away and rotten stringer material being removed" width="127" height="39" loading="lazy" decoding="async">
+        <img src="assets/stringer-step-1.jpg?v=01acb46c" alt="Deck cut away and rotten stringers exposed" width="127" height="39" loading="lazy" decoding="async">
         <p>Remove the deck and damaged stringer material to expose solid structure.</p>
       </li>
       <li class="sr-step">
         <div class="sr-step-head"><span class="sr-step-num">02</span><h3>Prepare the Hull &amp; Core</h3></div>
-        <img src="assets/stringer-step-2.jpg" alt="Hull ground back and cleaned, ready for new stringers" width="129" height="39" loading="lazy" decoding="async">
+        <img src="assets/stringer-step-2.jpg?v=e7d10b30" alt="Hull ground back and cleaned between the stringers" width="129" height="39" loading="lazy" decoding="async">
         <p>Grind, clean and prepare the surface. Replace wood or foam core as needed.</p>
       </li>
       <li class="sr-step">
         <div class="sr-step-head"><span class="sr-step-num">03</span><h3>Laminate &amp; Bond <br>New Structure</h3></div>
-        <img src="assets/stringer-step-3.jpg" alt="New stringer core bonded into the hull and being glassed in" width="131" height="39" loading="lazy" decoding="async">
+        <img src="assets/stringer-step-3.jpg?v=e23c2c25" alt="New plywood fitted over the rebuilt stringer boxes" width="131" height="39" loading="lazy" decoding="async">
         <p>Apply marine-grade fiberglass, resin and core materials to rebuild the stringer.</p>
       </li>
       <li class="sr-step">
         <div class="sr-step-head"><span class="sr-step-num">04</span><h3>Fair, Seal &amp; Finish</h3></div>
-        <img src="assets/stringer-step-4.jpg" alt="Finished stringer bay faired and sealed in clean white" width="146" height="39" loading="lazy" decoding="async">
+        <img src="assets/stringer-step-4.jpg?v=99990d48" alt="New deck panel glassed and sealed" width="146" height="39" loading="lazy" decoding="async">
         <p>Fair the repair, seal the surfaces and prepare for reassembly.</p>
       </li>
     </ol>
@@ -411,10 +447,10 @@
       <!-- Four stages of stringer work from the comp. They read as one job but
            are not confirmed to be the same boat; swap in a real job series. -->
       <ul class="sr-track" id="sr-track" tabindex="0" aria-label="Stringer repair photos, before to after">
-        <li><img src="assets/stringer-result-1.jpg" alt="Before: rotted stringers under a removed deck" width="149" height="52" loading="lazy" decoding="async"><span class="sr-chip">Before</span></li>
-        <li><img src="assets/stringer-result-2.jpg" alt="During repair: stringers cut back to sound material" width="161" height="52" loading="lazy" decoding="async"><span class="sr-chip">During Repair</span></li>
-        <li><img src="assets/stringer-result-3.jpg" alt="New stringers bonded into the hull" width="177" height="52" loading="lazy" decoding="async"><span class="sr-chip">New Stringers</span></li>
-        <li><img src="assets/stringer-result-4.jpg" alt="After: stringer bay glassed and finished in white" width="166" height="52" loading="lazy" decoding="async"><span class="sr-chip">After</span></li>
+        <li><img src="assets/stringer-result-1.jpg?v=f1e4193d" alt="Before: rotted stringers under a removed deck" width="149" height="52" loading="lazy" decoding="async"><span class="sr-chip">Before</span></li>
+        <li><img src="assets/stringer-result-2.jpg?v=5c9c2d4f" alt="During repair: grinding between the stringers and bulkheads" width="161" height="52" loading="lazy" decoding="async"><span class="sr-chip">During Repair</span></li>
+        <li><img src="assets/stringer-result-3.jpg?v=c6e372f2" alt="New stringer boxes and plywood going in" width="177" height="52" loading="lazy" decoding="async"><span class="sr-chip">New Stringers</span></li>
+        <li><img src="assets/stringer-result-4.jpg?v=8226088d" alt="After: deck rebuilt and finished in white" width="166" height="52" loading="lazy" decoding="async"><span class="sr-chip">After</span></li>
       </ul>
       <button type="button" class="sr-gallery-btn sr-gallery-next" aria-label="Next photos" aria-controls="sr-track">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -495,32 +531,32 @@
       <h2>Other Fiberglass Repair Services</h2>
       <ul class="sr-related-grid">
         <li><a href="hull-repairs.html">
-          <img src="assets/hull-svc-crack.jpg" alt="" aria-hidden="true" width="435" height="216" loading="lazy" decoding="async">
+          <img src="assets/hull-svc-crack.jpg?v=2e3cf202" alt="" aria-hidden="true" width="435" height="216" loading="lazy" decoding="async">
           <span><strong>Fiberglass Hull Repair</strong><small>Repair cracks, impact damage and more.</small></span>
           <i aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
         </a></li>
         <li><a href="deck-repairs.html">
-          <img src="assets/deck-svc-rebuild.jpg" alt="" aria-hidden="true" width="232" height="93" loading="lazy" decoding="async">
+          <img src="assets/deck-svc-rebuild.jpg?v=2541b1db" alt="" aria-hidden="true" width="232" height="93" loading="lazy" decoding="async">
           <span><strong>Boat Deck Repair</strong><small>Fix soft, spongy or damaged decks.</small></span>
           <i aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
         </a></li>
         <li><a href="bulkhead-repairs.html">
-          <img src="assets/card-structural.jpg" alt="" aria-hidden="true" width="305" height="90" loading="lazy" decoding="async">
+          <img src="assets/card-structural.jpg?v=18aac7cb" alt="" aria-hidden="true" width="305" height="90" loading="lazy" decoding="async">
           <span><strong>Bulkhead Repair</strong><small>Rebuild or reinforce bulkheads.</small></span>
           <i aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
         </a></li>
         <li><a href="transom-replacement.html">
-          <img src="assets/svc-transom.jpg" alt="" aria-hidden="true" width="451" height="170" loading="lazy" decoding="async">
+          <img src="assets/svc-transom.jpg?v=7a16e952" alt="" aria-hidden="true" width="451" height="170" loading="lazy" decoding="async">
           <span><strong>Transom Repair &amp; Replacement</strong><small>Structural transom repairs and rebuilds.</small></span>
           <i aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
         </a></li>
         <li><a href="hull-repairs.html#impact-collision-damage">
-          <img src="assets/svc-collision.jpg" alt="" aria-hidden="true" width="451" height="170" loading="lazy" decoding="async">
+          <img src="assets/svc-collision.jpg?v=8ad4b62e" alt="" aria-hidden="true" width="451" height="170" loading="lazy" decoding="async">
           <span><strong>Collision Damage Repair</strong><small>Restore your boat after impact damage.</small></span>
           <i aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
         </a></li>
         <li><a href="custom-fabrication.html">
-          <img src="assets/svc-custom.jpg" alt="" aria-hidden="true" width="451" height="170" loading="lazy" decoding="async">
+          <img src="assets/svc-custom.jpg?v=45ca4ceb" alt="" aria-hidden="true" width="451" height="170" loading="lazy" decoding="async">
           <span><strong>Custom Fiberglass Fabrication</strong><small>Custom modifications and one-off projects.</small></span>
           <i aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
         </a></li>
@@ -569,7 +605,7 @@
       </a>
     </div>
   </div>
-  <div class="sr-cta-photo sr-cta-boat"><img src="assets/stringer-cta-boat.jpg" alt="" aria-hidden="true" width="337" height="98" loading="lazy" decoding="async"></div>
+  <div class="sr-cta-photo sr-cta-boat"><img src="assets/stringer-cta-boat.jpg?v=441e2282" alt="" aria-hidden="true" width="337" height="98" loading="lazy" decoding="async"></div>
 </section>
 
 
@@ -894,7 +930,7 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 <script src="stringer-repairs.js?v=20260923-stringer"></script>
 </body>
 </html>

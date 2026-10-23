@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="transom.css?v=aacc5e7e2e">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -86,7 +86,8 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="tr-hero">
-  <img src="assets/transom-hero.jpg" alt="Captain Levi's technician working on a boat transom stripped back to rotten core" class="tr-hero-img" width="821" height="197" fetchpriority="high">
+  <img src="assets/transom-hero.jpg?v=fb76b916" alt="Transom of the Grady-White &ldquo;No Regrets&rdquo; at Captain Levi&rsquo;s yard with the outer skin cut away, showing the rotted core" class="tr-hero-img" width="821" height="197" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="tr-hero-scrim"></div>
   <div class="tr-hero-inner">
     <div class="tr-hero-content">
@@ -108,7 +109,6 @@
         <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8l8 3.4v5.5c0 4.7-3.3 8.6-8 10.2-4.7-1.6-8-5.5-8-10.2V6.2l8-3.4z"/><circle cx="12" cy="11" r="2.4" fill="currentColor"/></svg>Tampa Bay</li>
       </ul>
     </div>
-    <!-- "Same Boats. New Beginnings." is baked into transom-hero.jpg, so there is no HTML tagline here. -->
   </div>
 </section>
 
@@ -163,81 +163,117 @@
   </div>
 
   <div class="container fg-grid">
-    <article class="fg-card" id="complete-transom-replacement">
+    <article class="fg-card" id="complete-transom-replacement" data-more>
       <div class="fg-card-media">
-        <img src="assets/transom-svc-replace.jpg" alt="Transom cut out and rebuilt with a new marine-grade core panel" width="188" height="51" loading="lazy" decoding="async">
+        <img src="assets/transom-svc-replace.jpg?v=c5eab62f" alt="Transom rebuilt with a new plywood core" width="188" height="51" loading="lazy" decoding="async">
       </div>
       <div class="fg-card-body">
         <h3>Complete Transom Replacement</h3>
         <p>Remove and replace the entire transom with marine-grade materials.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-complete-transom-replacement">
+          <div class="more-inner">
+            <p>Once water has soaked the core across the transom and the wood has gone soft, a new core is the only lasting fix. We grind out the old core down to a clean, solid surface, fit a new marine plywood or composite core snug against the hull, bond it to the outer skin, and relaminate the inside face.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-complete-transom-replacement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="partial-transom-repair">
+    <article class="fg-card" id="partial-transom-repair" data-more>
       <div class="fg-card-media">
-        <img src="assets/transom-svc-partial.jpg" alt="Localized transom damage ground back around the engine mount" width="187" height="51" loading="lazy" decoding="async">
+        <img src="assets/transom-svc-partial.jpg?v=bedd93ed" alt="Transom ready for glass with its new plywood core in place" width="187" height="51" loading="lazy" decoding="async">
       </div>
       <div class="fg-card-body">
         <h3>Partial Transom Repair</h3>
         <p>Repair localized damage while restoring strength and integrity.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-partial-transom-repair">
+          <div class="more-inner">
+            <p>If testing shows the damage is limited to one area, such as around a fitting or a mounting point, and the rest of the transom is solid, a partial repair can be the right call. We cut back to dry, sound material, rebuild the core and laminate in that area, and tie the new work into the existing structure.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-partial-transom-repair">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="rotten-core">
+    <article class="fg-card" id="rotten-core" data-more>
       <div class="fg-card-media">
-        <img src="assets/transom-svc-core.jpg" alt="Transom opened up to expose rotten, water-damaged wood core" width="187" height="51" loading="lazy" decoding="async">
+        <img src="assets/transom-svc-core.jpg?v=63056d31" alt="Transom opened up to its rotted wood core" width="187" height="51" loading="lazy" decoding="async">
       </div>
       <div class="fg-card-body">
         <h3>Rotten / Water-Damaged Core</h3>
         <p>Replace wet, rotted, or delaminated core materials.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-rotten-core">
+          <div class="more-inner">
+            <p>Water gets into a transom core through engine bolt holes, drain tubes and other fittings, and once it&rsquo;s in, the wood rots and the transom starts to flex under engine load. We open the skin, remove all compromised core down to solid structure, and install new marine-grade core with the proper resin system before relaminating.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-rotten-core">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="cracked-delaminated">
+    <article class="fg-card" id="cracked-delaminated" data-more>
       <div class="fg-card-media">
-        <img src="assets/transom-svc-crack.jpg" alt="Structural cracks running through a fiberglass transom" width="187" height="51" loading="lazy" decoding="async">
+        <img src="assets/transom-svc-crack.jpg?v=52891ac2" alt="Cracked laminate around a bolt hole inside a transom" width="187" height="51" loading="lazy" decoding="async">
       </div>
       <div class="fg-card-body">
         <h3>Cracked or Delaminated Fiberglass</h3>
         <p>Repair structural cracks and separate laminates.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-cracked-delaminated">
+          <div class="more-inner">
+            <p>Cracks around the engine area or across the transom, or inner and outer layers pulling apart, usually mean the transom is flexing under engine load. We check whether the core behind is still sound, grind out the cracked and separated fiberglass, and rebuild it with marine-grade fabrics before fairing and finishing to match.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-cracked-delaminated">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="engine-mounting-area">
+    <article class="fg-card" id="engine-mounting-area" data-more>
       <div class="fg-card-media">
-        <img src="assets/transom-svc-mount.jpg" alt="Outboard engine mounting area with worn and elongated bolt holes" width="188" height="51" loading="lazy" decoding="async">
+        <img src="assets/transom-svc-mount.jpg?v=916e9330" alt="Outboard bracket bolted through a transom" width="188" height="51" loading="lazy" decoding="async">
       </div>
       <div class="fg-card-body">
         <h3>Engine Mounting Area Repair</h3>
         <p>Rebuild damaged or crushed engine mounting areas.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-engine-mounting-area">
+          <div class="more-inner">
+            <p>Engine thrust and vibration can crush the core under the mounting bolts and stretch the holes out of round, which lets the engine shift and lets water in. We remove the damaged material, rebuild the mounting area solid with new core and laminate, and re-drill and seal the bolt holes so the engine sits tight.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-engine-mounting-area">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="transom-reinforcement">
+    <article class="fg-card" id="transom-reinforcement" data-more>
       <div class="fg-card-media">
-        <img src="assets/transom-svc-reinforce.jpg" alt="Transom being reinforced for a higher-horsepower outboard" width="188" height="51" loading="lazy" decoding="async">
+        <img src="assets/transom-svc-reinforce.jpg?v=aca4d99f" alt="Transom of an older boat with its outboard bracket at the yard" width="188" height="51" loading="lazy" decoding="async">
       </div>
       <div class="fg-card-body">
         <h3>Transom Reinforcement</h3>
         <p>Additional reinforcement for high-horsepower or repowered boats.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-transom-reinforcement">
+          <div class="more-inner">
+            <p>A heavier or more powerful engine puts more load and thrust through the transom than the boat may have been built for. Before you repower, we inspect the transom and the structure it ties into, then add core and fiberglass reinforcement where it&rsquo;s needed so the transom can handle the new engine without flexing.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-transom-reinforcement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
   </div>
@@ -303,7 +339,7 @@
     <ol class="tr-steps">
       <li class="tr-step">
         <div class="tr-step-photo">
-          <img src="assets/transom-step-1.jpg" alt="Grinder working across a transom to find the extent of the damage" width="162" height="53" loading="lazy" decoding="async">
+          <img src="assets/transom-step-1.jpg?v=a813fab3" alt="Transom outer skin cut along the outline of the damaged area" width="162" height="53" loading="lazy" decoding="async">
           <span class="tr-step-num">01</span>
         </div>
         <h3>Inspect &amp; Diagnose</h3>
@@ -311,7 +347,7 @@
       </li>
       <li class="tr-step">
         <div class="tr-step-photo">
-          <img src="assets/transom-step-2.jpg" alt="Transom skin cut open with the rotten core being removed" width="159" height="53" loading="lazy" decoding="async">
+          <img src="assets/transom-step-2.jpg?v=6a8e07a3" alt="Transom skin removed, exposing the rotted core" width="159" height="53" loading="lazy" decoding="async">
           <span class="tr-step-num">02</span>
         </div>
         <h3>Remove Damaged Material</h3>
@@ -319,7 +355,7 @@
       </li>
       <li class="tr-step">
         <div class="tr-step-photo">
-          <img src="assets/transom-step-3.jpg" alt="New core grid bonded into the transom ready for laminate" width="159" height="53" loading="lazy" decoding="async">
+          <img src="assets/transom-step-3.jpg?v=fc3a2e57" alt="New plywood core fitted into the transom" width="159" height="53" loading="lazy" decoding="async">
           <span class="tr-step-num">03</span>
         </div>
         <h3>Rebuild Core &amp; Laminate</h3>
@@ -327,7 +363,7 @@
       </li>
       <li class="tr-step">
         <div class="tr-step-photo">
-          <img src="assets/transom-step-4.jpg" alt="Finished white transom with the outboard bracket refitted" width="171" height="53" loading="lazy" decoding="async">
+          <img src="assets/transom-step-4.jpg?v=d94b402e" alt="Transom glassed back over the new core" width="171" height="53" loading="lazy" decoding="async">
           <span class="tr-step-num">04</span>
         </div>
         <h3>Fair, Finish &amp; Protect</h3>
@@ -387,10 +423,10 @@
       </a>
     </div>
 
-    <!-- MOCKUP PAIR: cropped from the design comp. Swap for a real before/after of one boat. -->
-    <div class="sfr-ba" role="slider" tabindex="0" aria-label="Drag to compare a rotten transom before and after replacement" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-      <div class="sfr-ba-img sfr-ba-before" style="background-image:url('assets/transom-ba-1-before.jpg')" role="img" aria-label="Before: transom skin removed exposing rotten core"></div>
-      <div class="sfr-ba-img sfr-ba-after" style="background-image:url('assets/transom-ba-1-after.jpg')" role="img" aria-label="After: rebuilt, smooth white transom"></div>
+    <!-- REAL PAIR: the "If'n I'da" transom at the yard, before and after its new core (flash drive photos, after aligned to before). -->
+    <div class="sfr-ba" role="slider" tabindex="0" aria-label="Drag to compare a rotten transom before and after its new core went in" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <div class="sfr-ba-img sfr-ba-before" style="background-image:url('assets/transom-ba-1-before.jpg?v=4b0c24a3')" role="img" aria-label="Before: the outer skin cut off a customer&rsquo;s transom, exposing the rotted wood core"></div>
+      <div class="sfr-ba-img sfr-ba-after" style="background-image:url('assets/transom-ba-1-after.jpg?v=83e7854d')" role="img" aria-label="After: the same transom with its new marine plywood core fitted, ready for glass"></div>
       <span class="sfr-ba-line"></span>
       <span class="sfr-ba-handle">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l6 6-6 6M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -451,7 +487,7 @@
     </div>
 
     <div class="tr-why-photo">
-      <img src="assets/transom-worker.jpg" alt="Captain Levi's technician rebuilding a transom at the Largo boat yard" width="301" height="84" loading="lazy" decoding="async">
+      <img src="assets/transom-worker.jpg?v=037f34cb" alt="Captain Levi&rsquo;s technician laminating the inside of a new transom" width="301" height="84" loading="lazy" decoding="async">
     </div>
 
     <figure class="tr-quote">
@@ -496,7 +532,7 @@
 
 <!-- ========================= SERVICE AREA ========================= -->
 <section class="tr-areas">
-  <img src="assets/results-marina.jpg" alt="" class="tr-areas-bg" aria-hidden="true" width="2200" height="1467" loading="lazy" decoding="async">
+  <img src="assets/results-marina.jpg?v=eabd65f4" alt="" class="tr-areas-bg" aria-hidden="true" width="2200" height="1467" loading="lazy" decoding="async">
   <img src="assets/transom-areas-palms.jpg" alt="" class="tr-areas-palms" aria-hidden="true" width="178" height="100" loading="lazy" decoding="async">
   <div class="tr-areas-inner">
     <div class="tr-areas-copy">
@@ -862,6 +898,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

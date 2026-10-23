@@ -257,6 +257,28 @@ h1{
   transform:rotate(-6deg);
 }
 .script-tagline-accent::after{width:70%;margin-left:auto;}
+
+/* "Same Boats. New Beginnings." over the photo side of a service-page hero. The comps had it
+   painted into the image; the real yard photos don't, so it is live text. Desktop only:
+   below 1025px the hero copy sits on top of the photo. */
+.hero-tagline{
+  position:absolute;
+  right:clamp(28px,5.5vw,104px);
+  top:46%;
+  z-index:2;
+  margin:0;
+  color:#fff;
+  font-size:clamp(2rem,3vw,3.25rem);
+  line-height:1.02;
+  text-align:center;
+  transform:translateY(-50%) rotate(-8deg);
+  text-shadow:0 2px 18px rgba(0,22,46,.85), 0 1px 4px rgba(0,22,46,.75);
+  pointer-events:none;
+}
+.hero-tagline::after{width:78%;height:9px;margin:2px auto 0;}
+@media (max-width:1024px){
+  .hero-tagline{display:none;}
+}
 .fg-head-script{margin-top:4px;}
 
 .fg-grid{
@@ -322,6 +344,66 @@ h1{
 }
 .fg-card-link svg{transition:transform .15s ease;}
 .fg-card:hover .fg-card-link svg{transform:translateX(3px);}
+
+/* "Learn More" dropdown on cards for services that don't have their own page yet (script.js initMore).
+   The panel opens by animating grid rows 0fr -> 1fr; the copy slides down into place as it opens. */
+.fg-card[data-more]{cursor:pointer;}
+button.fg-card-link{
+  -webkit-appearance:none;appearance:none;
+  background:none;border:0;padding:0;
+  line-height:inherit;text-align:left;
+  cursor:pointer;
+}
+button.fg-card-link:focus-visible{outline:2px solid var(--icon-blue);outline-offset:4px;border-radius:4px;}
+.fg-card .more-toggle svg{transition:transform .3s ease;}
+.fg-card:hover .more-toggle svg{transform:translateY(2px);}
+.fg-card.more-open .more-toggle svg{transform:rotate(180deg);}
+.more-panel{
+  display:grid;
+  grid-template-rows:0fr;
+  width:100%;
+  margin-top:auto;
+  transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1);
+}
+.more-panel + .more-toggle{margin-top:0;}
+.more-inner{
+  overflow:hidden;
+  visibility:hidden;
+  transition:visibility 0s linear .45s;
+}
+.more-open .more-panel{grid-template-rows:1fr;}
+.more-open .more-inner{visibility:visible;transition-delay:0s;}
+.more-inner > *{
+  opacity:0;
+  transform:translateY(-14px);
+  transition:opacity .25s ease, transform .3s ease;
+}
+.more-open .more-inner > *{
+  opacity:1;
+  transform:none;
+  transition:opacity .4s ease .12s, transform .5s cubic-bezier(.2,.7,.2,1) .08s;
+}
+.more-open .more-inner > * + *{transition-delay:.22s, .18s;}
+.fg-card-body .more-inner p{
+  margin:0 0 10px;
+  padding-top:14px;
+  border-top:1px solid rgba(0,38,75,.12);
+  font-size:0.875rem;
+  line-height:1.6;
+  color:var(--gray-text);
+}
+.more-quote{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-bottom:16px;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:0.8125rem;
+  color:var(--navy);
+}
+.more-quote:hover{color:var(--icon-blue);}
+@media (max-width:600px){
+  .fg-card.more-open{grid-column:1/-1;}
+}
 
 .fg-feature{
   display:grid;

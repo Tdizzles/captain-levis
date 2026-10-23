@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="deck-repairs.css?v=a9427be19e">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,7 +85,8 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="dr-hero">
-  <img src="assets/deck-hero.jpg" alt="Fiberglass foredeck and hatch on a centre console, restored and gleaming on Tampa Bay" class="dr-hero-img" width="747" height="224" fetchpriority="high">
+  <img src="assets/deck-hero.jpg?v=b5ad492d" alt="Center console deck stripped back around the console for repair at Captain Levi&rsquo;s" class="dr-hero-img" width="747" height="224" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="dr-hero-scrim"></div>
   <div class="container dr-hero-inner">
     <div class="dr-hero-content">
@@ -102,7 +103,6 @@
         </a>
       </div>
     </div>
-    <!-- "Same Boats. New Beginnings." is baked into deck-hero.jpg, so there is no HTML tagline here. -->
   </div>
 </section>
 
@@ -115,9 +115,9 @@
   </div>
 
   <div class="container fg-grid">
-    <article class="fg-card" id="soft-spot-repair">
+    <article class="fg-card" id="soft-spot-repair" data-more>
       <div class="fg-card-media">
-        <img src="assets/deck-svc-soft-spot.jpg" alt="Soft section of a fiberglass deck cut open to expose the damaged core" width="228" height="93" loading="lazy" decoding="async">
+        <img src="assets/deck-svc-soft-spot.jpg?v=be010b8a" alt="Console tipped back to expose rotted deck and foam beneath" width="228" height="93" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5c1.5 0 1.5-1.2 3-1.2s1.5 1.2 3 1.2 1.5-1.2 3-1.2 1.5 1.2 3 1.2 1.5-1.2 3-1.2 1.5 1.2 3 1.2"/><path d="M3 15c1.5 0 1.5-1.2 3-1.2s1.5 1.2 3 1.2 1.5-1.2 3-1.2 1.5 1.2 3 1.2 1.5-1.2 3-1.2 1.5 1.2 3 1.2"/><path d="M3 19.5c1.5 0 1.5-1.2 3-1.2s1.5 1.2 3 1.2 1.5-1.2 3-1.2 1.5 1.2 3 1.2 1.5-1.2 3-1.2 1.5 1.2 3 1.2"/><path d="M8.5 7L12 3.5 15.5 7"/></svg>
         </span>
@@ -125,15 +125,21 @@
       <div class="fg-card-body">
         <h3>Soft Spot Repair</h3>
         <p>Find and repair soft or spongy areas caused by water intrusion or damaged core.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-soft-spot-repair">
+          <div class="more-inner">
+            <p>A soft spot usually starts where water got in around a hatch, cleat or fitting and soaked the core beneath the deck skin. We test the area to see how far the damage runs, open the top skin, remove the wet core back to dry material, and rebuild with new core and fiberglass before refinishing the surface.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-soft-spot-repair">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="deck-delamination">
+    <article class="fg-card" id="deck-delamination" data-more>
       <div class="fg-card-media">
-        <img src="assets/deck-svc-delam.jpg" alt="Delaminated fiberglass skin peeling away from a boat deck" width="233" height="93" loading="lazy" decoding="async">
+        <img src="assets/deck-svc-delam.jpg?v=96c1d20f" alt="Rotted deck core being dug out" width="233" height="93" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.8l9.2 4.6L12 12 2.8 7.4 12 2.8z"/><path d="M2.8 12L12 16.6 21.2 12"/><path d="M2.8 16.6L12 21.2l9.2-4.6"/></svg>
         </span>
@@ -141,15 +147,21 @@
       <div class="fg-card-body">
         <h3>Deck Delamination</h3>
         <p>Repair delaminated fiberglass laminates and restore structural integrity.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-deck-delamination">
+          <div class="more-inner">
+            <p>Delamination is when the fiberglass layers, or the skin and the core, pull apart, often from impact, flexing or water working in. You may see the deck lifting or hear it sound hollow when tapped. We cut away the separated laminate, check the core underneath, and re-laminate with marine fiberglass fabrics and epoxy or vinyl ester resin.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-deck-delamination">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="wet-rotten-core">
+    <article class="fg-card" id="wet-rotten-core" data-more>
       <div class="fg-card-media">
-        <img src="assets/deck-svc-core.jpg" alt="Deck opened up to reveal wet, rotten wood core beneath the fiberglass" width="232" height="93" loading="lazy" decoding="async">
+        <img src="assets/deck-svc-core.jpg?v=c2905c52" alt="Deck skin cut open to a wet, rotted balsa core" width="232" height="93" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.8s6.4 7 6.4 11.4a6.4 6.4 0 0 1-12.8 0C5.6 9.8 12 2.8 12 2.8z"/></svg>
         </span>
@@ -157,15 +169,21 @@
       <div class="fg-card-body">
         <h3>Wet / Rotten Core</h3>
         <p>Remove and replace wet or deteriorated core with marine grade materials.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-wet-rotten-core">
+          <div class="more-inner">
+            <p>Deck cores are usually wood or foam, and once water reaches them through an unsealed fitting or crack, wood rots and foam can lose its bond to the skins. We open the deck, remove all wet or deteriorated core back to dry, sound edges, and bond in new marine-grade core before re-laminating the skin.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-wet-rotten-core">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="fiberglass-deck-rebuild">
+    <article class="fg-card" id="fiberglass-deck-rebuild" data-more>
       <div class="fg-card-media">
-        <img src="assets/deck-svc-rebuild.jpg" alt="Deck stripped back to its framing grid ready for new core and laminate" width="232" height="93" loading="lazy" decoding="async">
+        <img src="assets/deck-svc-rebuild.jpg?v=2541b1db" alt="Rotted fiberglass along the base of a console" width="232" height="93" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 14.6a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.84 2.84l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 8.9 19.3a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.84-2.84l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.7 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.84-2.84l.06.06a1.7 1.7 0 0 0 1.87.34H9.1A1.7 1.7 0 0 0 10.13 3V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.84 2.84l-.06.06a1.7 1.7 0 0 0-.34 1.87v.08a1.7 1.7 0 0 0 1.56 1.03H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1.03z"/></svg>
         </span>
@@ -173,15 +191,21 @@
       <div class="fg-card-body">
         <h3>Fiberglass Deck Rebuild</h3>
         <p>Rebuild damaged decks with new core, fiberglass laminates and proper bonding.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-fiberglass-deck-rebuild">
+          <div class="more-inner">
+            <p>When damage covers a larger section of deck, spot repairs no longer make sense. We remove the failed area down to the framing, install new core, laminate it with marine fiberglass fabrics and bond it properly to the structure beneath, then fair it and finish with gelcoat or non-skid to match the rest of the deck.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-fiberglass-deck-rebuild">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="deck-replacement">
+    <article class="fg-card" id="deck-replacement" data-more>
       <div class="fg-card-media">
-        <img src="assets/deck-svc-replace.jpg" alt="Newly replaced fiberglass deck and hatches on a centre console" width="227" height="93" loading="lazy" decoding="async">
+        <img src="assets/deck-svc-replace.jpg?v=224ba7cd" alt="Rebuilt deck finished in white" width="227" height="93" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 1 0-4.4 5.9L4 18.5 5.5 20l6.2-6.3a4 4 0 0 0 5.9-4.4l-2.3 2.3-2-2 2.3-2.3z"/></svg>
         </span>
@@ -189,9 +213,15 @@
       <div class="fg-card-body">
         <h3>Deck Replacement</h3>
         <p>Full deck replacement for severely damaged or unsafe decks.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-deck-replacement">
+          <div class="more-inner">
+            <p>If the core is rotten across most of the deck, or the deck flexes enough to be unsafe underfoot, replacing it is usually the lasting fix. We remove the old deck, inspect the stringers and supports underneath, build a new deck with fresh core and laminate, and finish it with gelcoat, non-skid and refitted hatches.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-deck-replacement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
   </div>
@@ -200,7 +230,7 @@
 <!-- ========================== OUR PROCESS ========================= -->
 <section class="dr-process" id="process">
   <div class="dr-process-photo">
-    <img src="assets/deck-worker.jpg" alt="Captain Levi's technician in a respirator grinding back a damaged deck section" width="250" height="150" loading="lazy" decoding="async">
+    <img src="assets/deck-worker.jpg?v=137a6bc8" alt="Captain Levi&rsquo;s technician fitting a new plywood deck panel" width="250" height="150" loading="lazy" decoding="async">
   </div>
 
   <div class="dr-process-body">
@@ -347,7 +377,7 @@
 <!-- ============================ CTA BAND =========================== -->
 <section class="dr-cta">
   <div class="dr-cta-photo">
-    <img src="assets/deck-cta-boat.jpg" alt="" aria-hidden="true" width="350" height="102" loading="lazy" decoding="async">
+    <img src="assets/deck-cta-boat.jpg?v=20655b4a" alt="" aria-hidden="true" width="350" height="102" loading="lazy" decoding="async">
   </div>
   <div class="dr-cta-copy">
     <div class="eyebrow eyebrow-light eyebrow-left"><i></i><span>Get Back on the Water</span></div>
@@ -694,6 +724,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>

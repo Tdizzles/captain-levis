@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=f24a63f229">
+<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
 <link rel="stylesheet" href="bulkhead.css?v=257f07f7de">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
@@ -85,7 +85,8 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="bh-hero">
-  <img src="assets/bulkhead-hero.jpg" alt="Boat interior stripped back to its damaged plywood bulkheads, ready for fiberglass repair" class="bh-hero-img" width="832" height="191" fetchpriority="high">
+  <img src="assets/bulkhead-hero.jpg?v=9e555d4a" alt="Captain Levi&rsquo;s technician grinding inside a stripped hull between the bulkheads" class="bh-hero-img" width="832" height="191" fetchpriority="high">
+  <p class="script-tagline hero-tagline" aria-hidden="true">Same Boats.<br>New Beginnings.</p>
   <div class="bh-hero-scrim"></div>
   <div class="container bh-hero-inner">
     <div class="bh-hero-content">
@@ -106,7 +107,6 @@
         Largo, FL &bull; Serving Tampa Bay &amp; Pinellas County
       </p>
     </div>
-    <!-- "Same Boats. New Beginnings." is baked into bulkhead-hero.jpg, so there is no HTML tagline here. -->
   </div>
 </section>
 
@@ -114,7 +114,7 @@
 <section class="bh-matter">
   <div class="bh-wide bh-matter-inner">
     <div class="bh-matter-photo">
-      <img src="assets/bulkhead-damage.jpg" alt="Water-damaged plywood bulkheads exposed inside a fiberglass boat" width="409" height="127" loading="lazy" decoding="async">
+      <img src="assets/bulkhead-damage.jpg?v=1e2fb7b6" alt="Stripped bilge with rotted bulkhead and stringer wood exposed" width="409" height="127" loading="lazy" decoding="async">
     </div>
     <div class="bh-matter-copy">
       <div class="eyebrow bh-eyebrow"><i></i><span>The Importance of Bulkheads</span></div>
@@ -142,9 +142,9 @@
   </div>
 
   <div class="container fg-grid">
-    <article class="fg-card" id="damaged-bulkheads">
+    <article class="fg-card" id="damaged-bulkheads" data-more>
       <div class="fg-card-media">
-        <img src="assets/bulkhead-svc-damaged.jpg" alt="Cracked and stained plywood bulkhead panel inside a hull" width="190" height="48" loading="lazy" decoding="async">
+        <img src="assets/bulkhead-svc-damaged.jpg?v=53634e76" alt="Stripped bilge with rotted bulkhead wood exposed" width="190" height="48" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M9 4l2 5-3 3 4 3-1 5"/></svg>
         </span>
@@ -152,15 +152,21 @@
       <div class="fg-card-body">
         <h3>Damaged Bulkheads</h3>
         <p>Repair cracks, impact damage and soft spots in fiberglass bulkheads.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-damaged-bulkheads">
+          <div class="more-inner">
+            <p>A bulkhead that&rsquo;s cracked, dented by a heavy hit or soft when you push on it isn&rsquo;t carrying its share of the load, so the hull around it has to work harder. We sound the panel and its tabbing to find where the damage really ends, grind back to solid glass, and rebuild with new core and laminate where needed.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-damaged-bulkheads">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="rot-water-intrusion">
+    <article class="fg-card" id="rot-water-intrusion" data-more>
       <div class="fg-card-media">
-        <img src="assets/bulkhead-svc-rot.jpg" alt="Rotted wood along the base of a bulkhead where water has soaked in" width="190" height="48" loading="lazy" decoding="async">
+        <img src="assets/bulkhead-svc-rot.jpg?v=c2c027dd" alt="Bulkhead tabbed into the hull with new fiberglass" width="190" height="48" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.8s6.4 7 6.4 11.4a6.4 6.4 0 0 1-12.8 0C5.6 9.8 12 2.8 12 2.8z"/><path d="M9.3 14.5a2.8 2.8 0 0 0 2.7 2.6" stroke-linecap="round"/></svg>
         </span>
@@ -168,15 +174,21 @@
       <div class="fg-card-body">
         <h3>Rot &amp; Water Intrusion</h3>
         <p>Remove damaged material and rebuild with marine-grade fiberglass.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-rot-water-intrusion">
+          <div class="more-inner">
+            <p>Bulkheads on many older boats are plywood, and once bilge water or a leaking fitting reaches the wood, it can rot behind a skin that still looks fine. Dark staining or crumbling wood along the base is a common clue. We cut out everything wet or rotted back to solid structure before the new core and laminate go in.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-rot-water-intrusion">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="delaminated-fiberglass">
+    <article class="fg-card" id="delaminated-fiberglass" data-more>
       <div class="fg-card-media">
-        <img src="assets/bulkhead-svc-delam.jpg" alt="Fiberglass skin lifting away from a bulkhead edge" width="190" height="48" loading="lazy" decoding="async">
+        <img src="assets/bulkhead-svc-delam.jpg?v=cde9a69e" alt="Crew member fitting a plywood bulkhead template" width="190" height="48" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.8l9.2 4.6L12 12 2.8 7.4 12 2.8z"/><path d="M2.8 12L12 16.6 21.2 12"/><path d="M2.8 16.6L12 21.2l9.2-4.6"/></svg>
         </span>
@@ -184,15 +196,21 @@
       <div class="fg-card-body">
         <h3>Delaminated Fiberglass</h3>
         <p>Rebuild areas where the fiberglass has separated or lost its bond.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-delaminated-fiberglass">
+          <div class="more-inner">
+            <p>Years of flexing, engine vibration and bilge moisture can let the fiberglass skin pull away from the plywood underneath, leaving a lifted edge or a panel that sounds hollow when tapped. We remove the loose laminate back to a sound bond, check the core behind it, and lay up new fiberglass so skin and core work together again.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-delaminated-fiberglass">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="failed-bonding">
+    <article class="fg-card" id="failed-bonding" data-more>
       <div class="fg-card-media">
-        <img src="assets/bulkhead-svc-bonding.jpg" alt="Failed tabbing where a bulkhead meets the hull" width="190" height="48" loading="lazy" decoding="async">
+        <img src="assets/bulkhead-svc-bonding.jpg?v=f7f56656" alt="Crew glassing new bulkheads into a hull" width="190" height="48" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M9.5 14.5l5-5"/><path d="M11 6.5l1.8-1.8a4.2 4.2 0 0 1 6 6L17 12.5"/><path d="M13 17.5l-1.8 1.8a4.2 4.2 0 0 1-6-6L7 11.5"/></svg>
         </span>
@@ -200,15 +218,21 @@
       <div class="fg-card-body">
         <h3>Cracked or Failed Bonding</h3>
         <p>Address stress cracks and failed bonding between the bulkhead and hull or deck.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-failed-bonding">
+          <div class="more-inner">
+            <p>A bulkhead is held to the hull and deck by tabbing, strips of fiberglass laminated across the joint. When that tabbing cracks or lets go, you may see a gap along the seam or hear creaking underway. We grind off the failed tabbing, prep both surfaces and re-tab the joint so the bulkhead and hull act as one structure again.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-failed-bonding">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="bulkhead-replacement">
+    <article class="fg-card" id="bulkhead-replacement" data-more>
       <div class="fg-card-media">
-        <img src="assets/bulkhead-svc-replace.jpg" alt="New fiberglass bulkhead panel glassed into a stripped hull" width="190" height="48" loading="lazy" decoding="async">
+        <img src="assets/bulkhead-svc-replace.jpg?v=3b53c87a" alt="New plywood bulkhead glassed into a bilge compartment" width="190" height="48" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M14.7 6.3a4 4 0 1 0-4.4 5.9L4 18.5 5.5 20l6.2-6.3a4 4 0 0 0 5.9-4.4l-2.3 2.3-2-2 2.3-2.3z"/></svg>
         </span>
@@ -216,15 +240,21 @@
       <div class="fg-card-body">
         <h3>Bulkhead Replacement</h3>
         <p>Complete or partial bulkhead replacement using proper materials and techniques.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-bulkhead-replacement">
+          <div class="more-inner">
+            <p>When a bulkhead is too rotted or broken to save, patching it only buys time. We cut the old panel out, fit a new one to the opening, skin it in fiberglass, bed it with a radiused fillet and tab it into the hull. If only part has failed, we replace just that section and tie it into sound material.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-bulkhead-replacement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
 
-    <article class="fg-card" id="reinforcement">
+    <article class="fg-card" id="reinforcement" data-more>
       <div class="fg-card-media">
-        <img src="assets/bulkhead-svc-reinforce.jpg" alt="Bulkhead ground back and prepared for additional reinforcing laminate" width="190" height="48" loading="lazy" decoding="async">
+        <img src="assets/bulkhead-svc-reinforce.jpg?v=d5ad6b94" alt="Technician laminating new core inside a hull" width="190" height="48" loading="lazy" decoding="async">
         <span class="fg-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2.8l8 3.4v5.5c0 4.7-3.3 8.6-8 10.2-4.7-1.6-8-5.5-8-10.2V6.2l8-3.4z"/><path d="M9 12.1l2 2 4-4.2" stroke-linecap="round"/></svg>
         </span>
@@ -232,9 +262,15 @@
       <div class="fg-card-body">
         <h3>Reinforcement &amp; Re-Lamination</h3>
         <p>Add strength and additional laminates when needed for long-term durability.</p>
-        <a href="#process" class="fg-card-link">Learn More
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
+        <div class="more-panel" id="more-reinforcement">
+          <div class="more-inner">
+            <p>Some bulkheads are sound but were lightly glassed at the factory, or they sit where the hull works hardest, like the engine room or under a console. We grind back the existing tabbing and add wider, tapered layers of fiberglass so the load spreads over a bigger area and the joint is less likely to crack again.</p>
+            <a href="#quote" class="more-quote">Get a Free Quote <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+<button type="button" class="fg-card-link more-toggle" aria-expanded="false" aria-controls="more-reinforcement">Learn More
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </article>
   </div>
@@ -282,7 +318,7 @@
 <section class="bh-process" id="process">
   <div class="bh-process-photo">
     <!-- The "Quality repairs keep good boats on the water." quote is baked into the photo. -->
-    <img src="assets/bulkhead-worker.jpg" alt="Captain Levi's technician in a respirator grinding back a damaged bulkhead. Quote: Quality repairs keep good boats on the water." width="394" height="124" loading="lazy" decoding="async">
+    <img src="assets/bulkhead-worker.jpg?v=018a1322" alt="Crew glassing new bulkheads into a workboat hull" width="394" height="124" loading="lazy" decoding="async">
   </div>
 
   <div class="bh-process-body">
@@ -480,7 +516,7 @@
 
 <!-- ============================ CTA BAND =========================== -->
 <section class="bh-cta">
-  <img src="assets/bulkhead-cta-boat.jpg" alt="" aria-hidden="true" class="bh-cta-boat" width="470" height="79" loading="lazy" decoding="async">
+  <img src="assets/bulkhead-cta-boat.jpg?v=a74a63c3" alt="" aria-hidden="true" class="bh-cta-boat" width="470" height="79" loading="lazy" decoding="async">
   <img src="assets/bulkhead-cta-palms.jpg" alt="" aria-hidden="true" class="bh-cta-palms" width="172" height="79" loading="lazy" decoding="async">
   <div class="bh-cta-inner">
     <div class="bh-cta-copy">
@@ -821,6 +857,6 @@
 </div>
 <!-- /build:consent -->
 
-<script src="script.js?v=f2b9488d68"></script>
+<script src="script.js?v=64860bb019"></script>
 </body>
 </html>
