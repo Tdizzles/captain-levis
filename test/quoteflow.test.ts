@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyAnswer, detailsFor, guessService, matchOption, nextQuoteStep, plan, setService, sizeFromText, WHERE_STATUS } from '../lib/chat/quoteflow.js'
+import { applyAnswer, boatFromSentence, detailsFor, guessService, matchOption, nextQuoteStep, plan, prefillFromText, setService, sizeFromText, WHERE_STATUS } from '../lib/chat/quoteflow.js'
 import type { Slots } from '../lib/chat/types.js'
 import { assessInquiry } from '../lib/quote/missing.js'
 import { skeletonFor } from '../lib/quote/skeleton.js'
@@ -58,6 +58,29 @@ describe('quote flow plan', () => {
     expect(sizeFromText('about the size of my palm')).toBe('palm')
     expect(sizeFromText('maybe 4 feet long')).toBe('bigger')
     expect(matchOption(WHERE_STATUS, 'she is on a lift')).toBe('lift')
+  })
+})
+
+describe('reading a whole sentence', () => {
+  it('takes only the boat out of a story', () => {
+    expect(boatFromSentence('backed into a piling and cracked the stern on my 2018 Robalo')).toEqual({ make: 'Robalo', model: undefined, year: 2018 })
+    expect(boatFromSentence('my 2004 Boston Whaler Outrage 24 transom is soft')).toEqual({ make: 'Boston Whaler', model: 'Outrage 24', year: 2004 })
+    expect(boatFromSentence('the gelcoat is chipped')).toEqual({})
+  })
+
+  it('pre-fills the follow-ups the visitor already answered', () => {
+    const s: Slots = {}; setService(s, 'impact')
+    expect(prefillFromText(s, 'backed into a piling and cracked the stern, insurance is involved')).toEqual(['fu:how', 'fu:insurance', 'zones'])
+    expect(s.answers).toEqual({ how: ['dock'], insurance: ['yes'] })
+    expect(s.zones).toEqual(['stern'])
+    expect(nextQuoteStep(s)).toBe('boat')
+    const t: Slots = {}; setService(t, 'transom')
+    prefillFromText(t, 'twin outboards and the transom flexes')
+    expect(t.answers).toEqual({ engine: ['twins'] })
+    // "I left it at the dock" is not the port side
+    const u: Slots = {}; setService(u, 'chips')
+    prefillFromText(u, 'I left it at the dock and found scratches')
+    expect(u.zones).toBeUndefined()
   })
 })
 

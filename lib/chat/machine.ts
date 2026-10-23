@@ -16,7 +16,7 @@ import { EMAIL_RE, extractDeterministic, extractWithModel, inferWhere } from './
 import { pageBySlug, routeFor, searchPages, TOPIC_ANSWERS } from './knowledge.js'
 import { PERSONA } from './persona.js'
 import {
-  applyAnswer, cityFromText, detailsFor, followUp, guessService, matchOption, nextQuoteStep, progress, setService,
+  applyAnswer, boatFromSentence, cityFromText, detailsFor, followUp, guessService, matchOption, nextQuoteStep, prefillFromText, progress, setService,
   SIZES, sizeFromText, TIMELINES, WHERE_STATUS, widgetFor, zonesFromText, type AnswerValue, type QStep,
 } from './quoteflow.js'
 import { CHANGE_CHIPS, chipsForStep, draftFor, formChip, hoursReply, LINES, question, reviewCard, serviceFor, composeMessage, START_CHIPS, ackForStep } from './script.js'
@@ -78,11 +78,13 @@ function merge(slots: Slots, ex: Extracted, step: Step | undefined): string[] {
   const keys: string[] = []
   const set = <K extends keyof Slots>(k: K, v: Slots[K] | undefined) => { if (v !== undefined && v !== null && v !== '') { slots[k] = v; keys.push(k) } }
   if (ex.boat && !(step !== 'boat' && slots.boat)) {
-    set('boat', ex.boat)
-    const parsed = parseBoat(ex.boat)
-    set('boatMake', ex.boatMake ?? parsed.make ?? undefined)
-    set('boatModel', ex.boatModel ?? parsed.model ?? undefined)
-    set('boatYear', ex.boatYear ?? parsed.year ?? undefined)
+    // outside the boat question the text is a story, not a boat name: keep only make, year and model
+    const parsed = step === 'boat' ? parseBoat(ex.boat) : boatFromSentence(ex.boat)
+    const make = ex.boatMake ?? parsed.make ?? undefined, model = ex.boatModel ?? parsed.model ?? undefined, year = ex.boatYear ?? parsed.year ?? undefined
+    set('boat', step === 'boat' ? ex.boat : [year, make, model].filter(Boolean).join(' ') || ex.boat.slice(0, 60))
+    set('boatMake', make)
+    set('boatModel', model)
+    set('boatYear', year)
   }
   if (ex.boatType && !slots.boatType) set('boatType', ex.boatType)
   if (ex.svc && (!slots.svc || step === 'service')) { setService(slots, ex.svc); keys.push('svc') }
@@ -395,6 +397,7 @@ export async function runTurn(db: Db, s: ChatSessionRow, input: TurnInput): Prom
       const ex = extractDeterministic(said, undefined, slots)
       if (ex.svc && said.split(/\s+/).length >= 3) ex.damage = said.slice(0, 500)
       const keys = merge(slots, ex, undefined)
+      prefillFromText(slots, said) // "backed into a piling and cracked the stern" answers how-it-happened and where-on-the-boat too
       const ack = keys.includes('svc') ? `${LINES.quoteStart} Sounds like ${'aeiou'.includes((slots.svc || 'x')[0]) ? 'an' : 'a'} ${(SERVICE_NAME[slots.svc!] || 'repair')} job.` : LINES.quoteStart
       return finish(stepResponse(s, ack, { event: 'quote_start', links: linkFor(text, input.page) }))
     }
@@ -478,6 +481,7 @@ export async function runTurn(db: Db, s: ChatSessionRow, input: TurnInput): Prom
     }
   }
   const keys = merge(slots, ex, step)
+  if (step === 'service') prefillFromText(slots, text)
 
   // validation nudges for the typed contact details
   if (step === 'contact' && !(slots.name && slots.email && slots.phone)) {

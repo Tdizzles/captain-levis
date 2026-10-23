@@ -5,7 +5,7 @@ import { callModel } from '../ai.js'
 import type { Queryable } from '../db.js'
 import { BOAT_MAKES, parseBoat } from '../boat.js'
 import { PERSONA } from './persona.js'
-import { guessService, SERVICES, type SvcKey } from './quoteflow.js'
+import { boatFromSentence, guessService, SERVICES, type SvcKey } from './quoteflow.js'
 import type { DamageKind, DamageLocation, Extracted, Slots, Step, StoredMessage } from './types.js'
 
 export const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/
@@ -52,6 +52,18 @@ function cleanName(text: string): string | undefined {
   return s
 }
 
+/** A boat mentioned inside a longer message: only the make, year and the model words right after the make. */
+function sentenceBoat(text: string): Extracted {
+  const b = boatFromSentence(text)
+  const said = [b.year, b.make, b.model].filter(Boolean).join(' ')
+  const out: Extracted = {}
+  if (said) out.boat = said
+  if (b.make) out.boatMake = b.make
+  if (b.model) out.boatModel = b.model
+  if (b.year) out.boatYear = b.year
+  return out
+}
+
 /** Deterministic extraction. `step` tells us which free-text slot the message most likely answers. */
 export function extractDeterministic(message: string, step: Step | undefined, slots: Slots): Extracted {
   const out: Extracted = {}
@@ -86,7 +98,7 @@ export function extractDeterministic(message: string, step: Step | undefined, sl
       if (loc) out.damageLocation = loc
       if (kind) out.damageKind = kind
       if (where) out.where = where
-      if (mentionsBoat) { out.boat = text.slice(0, 120); if (boat.make) out.boatMake = boat.make; if (boat.model) out.boatModel = boat.model; if (boat.year) out.boatYear = boat.year }
+      if (mentionsBoat) Object.assign(out, sentenceBoat(text))
       break
     }
     case 'where': {
@@ -103,7 +115,7 @@ export function extractDeterministic(message: string, step: Step | undefined, sl
       break
     }
     default: {
-      if (mentionsBoat) { out.boat = text.slice(0, 120); if (boat.make) out.boatMake = boat.make; if (boat.model) out.boatModel = boat.model; if (boat.year) out.boatYear = boat.year }
+      if (mentionsBoat) Object.assign(out, sentenceBoat(text))
       if (loc) out.damageLocation = loc
       if (kind) out.damageKind = kind
       if (where) out.where = where

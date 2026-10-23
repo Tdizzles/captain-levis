@@ -5,7 +5,7 @@
 // Order: job → boat → the job's own follow-ups → where on the boat → how big → photos → where she is
 // (+ "can you bring her in?" for trailer boats) → timing → anything else → contact → review.
 // A step is skipped once its slot is filled, so whatever the visitor already typed is never asked again.
-import { BOAT_MAKES } from '../boat.js'
+import { BOAT_MAKES, parseBoat } from '../boat.js'
 import type { DamageKind, DamageLocation, Slots } from './types.js'
 
 export type SvcKey = 'impact' | 'cracks' | 'chips' | 'soft' | 'transom' | 'stringers' | 'blisters' | 'oxidation' | 'detailing' | 'fabrication' | 'pwc' | 'other'
@@ -381,6 +381,67 @@ const SIZE_WORDS: [RegExp, string][] = [
 export function sizeFromText(text: string): string | undefined {
   return SIZE_WORDS.find(([re]) => re.test(text))?.[1]
 }
+/**
+ * The boat inside a sentence ("backed into a piling and cracked the stern on my 2018 Robalo"): make and year from
+ * parseBoat, but the model only from the few words right after the make, so the rest of the story never becomes
+ * the model name.
+ */
+const MODEL_STOP = /^(is|was|were|are|the|and|or|my|a|an|on|with|into|in|at|has|have|had|got|it|its|it's|that|this|but|so|to|for|of|from|needs?|hit|cracked|broke|broken|transom|hull|deck|stern|bow|side|bottom|soft|damage|damaged|chips?|cracks?|which|when|where|there|after|before|while|because|again|too|also|feet|foot|ft|boat|got)$/i
+export function boatFromSentence(text: string): { make?: string; model?: string; year?: number } {
+  const b = parseBoat(text)
+  if (!b.make && !b.year) return {}
+  let model: string | undefined
+  if (b.make) {
+    const at = text.toLowerCase().replace(/-/g, ' ').indexOf(b.make.toLowerCase().replace(/-/g, ' '))
+    if (at >= 0) {
+      const toks: string[] = []
+      for (const t of text.slice(at + b.make.length).trim().split(/\s+/)) {
+        const w = t.replace(/[^\w'-]/g, '')
+        if (!w || MODEL_STOP.test(w) || toks.length >= 3) break
+        toks.push(w)
+      }
+      model = toks.join(' ') || undefined
+    }
+  }
+  return { make: b.make || undefined, model, year: b.year || undefined }
+}
+
+/** Follow-up answers a visitor often gives up front, so those questions are skipped. Only fills what is empty. */
+const PREFILL: Record<string, [RegExp, string][]> = {
+  'impact.how': [[/\b(dock|piling|pier|sea ?wall|fuel dock|slip)\b/i, 'dock'], [/\b(another|other) boat\b|\bhit by a boat\b|\bt-?boned\b/i, 'boat'], [/\btrailer\b|\blift\b/i, 'trailer'], [/\baground\b|\bsand ?bar\b|\brocks?\b|\boyster|\bsubmerged\b|\bhit something\b/i, 'ground'], [/\bstorm\b|\bhurricane\b/i, 'storm']],
+  'impact.insurance': [[/\binsurance\b|\bclaim\b|\badjuster\b/i, 'yes']],
+  'impact.water': [[/\btaking on water\b|\bleak(s|ing)?\b|\bwater (is )?coming in\b/i, 'yes']],
+  'cracks.pattern': [[/\bspider|\bstar cracks?\b/i, 'spider'], [/\bcleat|\bhardware|\bfitting|\brail\b|\bscrews?\b/i, 'fittings'], [/\blong crack\b|\bstress crack\b/i, 'line']],
+  'chips.depth': [[/\bgouge|\bdeep\b|\bdown to (the )?(glass|fiberglass)\b/i, 'glass'], [/\bchips?\b|\bchipped\b/i, 'gelcoat'], [/\bscratch|\bscuff/i, 'surface']],
+  'transom.engine': [[/\btwin\b|\btwins\b/i, 'twins'], [/\boutboard\b/i, 'outboard'], [/\bi\/o\b|\bsterndrive\b|\bstern drive\b/i, 'io'], [/\binboard\b/i, 'inboard']],
+  'blisters.paint': [[/\bbottom paint\b/i, 'yes']],
+  'pwc.craft': [[/\bkayak|\bcanoe/i, 'kayak'], [/\bjet ?ski|\bpwc\b|\bwave ?runner|\bsea-?doo/i, 'pwc']],
+  'fabrication.what': [[/\bconsole|\bdash\b/i, 'console'], [/\bhatch|\blid\b/i, 'hatch'], [/\blivewell|\bfish ?box/i, 'livewell'], [/\bleaning post|\bseat/i, 'seat']],
+}
+const STRICT_ZONES: [RegExp, string][] = [
+  [/\bbow\b/i, 'bow'], [/\bport side\b/i, 'port'], [/\bstarboard\b/i, 'starboard'], [/\bdeck\b|\bcockpit\b/i, 'deck'],
+  [/\bconsole\b|\bhelm\b/i, 'console'], [/\bstern\b|\btransom\b/i, 'stern'], [/\bkeel\b|\bbelow the waterline\b|\bbottom of the (hull|boat)\b/i, 'bottom'], [/\bbilge\b/i, 'inside'],
+]
+export function prefillFromText(s: Slots, text: string): string[] {
+  const d = svcDef(s.svc)
+  if (!d || !text) return []
+  const filled: string[] = []
+  for (const f of FOLLOWUPS[d.key]) {
+    if (s.answers?.[f.id]?.length) continue
+    const v = PREFILL[`${d.key}.${f.id}`]?.find(([re]) => re.test(text))?.[1]
+    if (v) { (s.answers ||= {})[f.id] = [v]; filled.push(`fu:${f.id}`) }
+  }
+  if (d.zones && !s.zones?.length) {
+    const z = STRICT_ZONES.filter(([re]) => re.test(text)).map(([, k]) => k)
+    if (z.length) { s.zones = Array.from(new Set(z)); filled.push('zones') }
+  }
+  if (d.size && !s.size) {
+    const v = sizeFromText(text)
+    if (v) { s.size = v; filled.push('size') }
+  }
+  return filled
+}
+
 export function cityFromText(text: string): string | undefined {
   if (/\bst\.? ?pete(rsburg)?\b|\bsaint petersburg\b/i.test(text)) return 'St. Petersburg'
   return CITIES.find((c) => new RegExp(`\\b${c}\\b`, 'i').test(text))

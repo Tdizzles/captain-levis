@@ -143,6 +143,17 @@ describe('POST /api/chat (no API key: scripted state machine)', () => {
     expect(est.doc.lines.map((l: any) => l.description)).toContain('Remove the engine, rigging and transom hardware')
   })
 
+  it('a story typed up front fills the job, the boat and the follow-ups it answers', async () => {
+    const jar = new Jar()
+    await say(jar, 'I need a quote')
+    const r = await say(jar, 'backed into a piling and cracked the stern on my 2018 Robalo')
+    expect(r.json.reply).toMatch(/going through insurance/i) // not "how did it happen?" again
+    const d = await db()
+    const s = (await d.query<any>('SELECT slots FROM chat_sessions WHERE id = $1', [r.json.sessionId])).rows[0].slots
+    expect(s).toMatchObject({ svc: 'impact', boat: '2018 Robalo', boatMake: 'Robalo', boatYear: 2018, zones: ['stern'], answers: { how: ['dock'] } })
+    expect(s.boatModel).toBeUndefined()
+  })
+
   it('takes a boat typed at the job question and asks the job again', async () => {
     const jar = new Jar()
     await say(jar, 'I need a quote')
