@@ -15,7 +15,7 @@ owner decisions: `QUOTE-BACKEND-V2-SPEC.md`. Backend reference: `BACKEND.md` ("Q
 | Estimates API: create blank / from inquiry, autosave with versions, restore, delete | `api/admin/estimates.ts`, `lib/estimates/store.ts`, migration 002 | done |
 | Builder UI: document, owner/insured, vessel, insurance, lettered sections + lines, notes, photos, totals, history | `app/estimates.js` | done |
 | Print / Save as PDF view | `app/estimates.js` → `app/print/estimate-print.js` | done (browser print dialog) |
-| Captain Levi assistant (Opus 5.5, tools that edit the estimate, versioned, chat kept) | `lib/estimates/assistant.ts`, `api/admin/assistant.ts`, `app/levi.js` | done; **live model loop not yet exercised (needs `ANTHROPIC_API_KEY`)** |
+| Captain Levi assistant (Opus 5.5, tools that edit the estimate, versioned, chat kept) | `lib/estimates/assistant.ts`, `api/admin/assistant.ts`, `app/levi.js` | done; `ANTHROPIC_API_KEY` set on Vercel 2026-10-23 (owner ran the script) |
 | Seed knowledge for Captain Levi | `lib/estimates/knowledge/*.md` | seed only; **owner's rules replace it** |
 
 ## Turning it on in production (owner, from Git Bash)
