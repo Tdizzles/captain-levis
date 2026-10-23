@@ -1,5 +1,6 @@
 // What a proper quote still needs. Deterministic rules over the inquiry row + its photos; no AI.
-// Each gap carries the question the crew would ask, in the order the templated reply asks them.
+// Priority 1 is the basics (photos, the boat, where it is) and is all the first reply asks for. A long first
+// email loses the customer; everything else (year, size, insurance paperwork, timing) gets picked up later.
 import type { InquiryRow } from '../inquiries.js'
 
 export type GapKey = 'photos' | 'boat' | 'boat_year' | 'size' | 'area' | 'location' | 'in_water' | 'insurance' | 'timeline'
@@ -8,8 +9,8 @@ export interface Gap {
   key: GapKey
   label: string          // short label for the inbox checklist
   why: string            // why the crew needs it (shown to staff only)
-  question: string       // the sentence asked of the customer, in Captain Levi's voice
-  priority: 1 | 2 | 3    // 1 = cannot quote without it
+  question: string       // priority 1: the short list line the first reply asks; otherwise how to ask it later
+  priority: 1 | 2 | 3    // 1 = the basics, asked in the first reply; 2 = changes the job; 3 = nice to have
 }
 
 export interface Assessment {
@@ -45,12 +46,12 @@ export function assessInquiry(i: InquiryRow, photoCount: number): Assessment {
   const urgency = URGENCY_RE.test(text)
 
   if (photoCount === 0) gaps.push({ key: 'photos', priority: 1, label: 'No photos', why: 'Every quote starts from photos of the damage; without them the crew cannot judge size, depth or whether the laminate is involved.',
-    question: 'Send me three or four photos: one from a few feet back so I can see where on the boat it is, and a couple up close with something for scale, like a quarter or a tape measure.' })
+    question: 'A few photos of the damage (one up close, one from a few feet back)' })
   else have.push('photos')
 
   const hasBoat = !!(i.boat_make || i.boat_model || (i.boat_raw && i.boat_raw.length >= 4))
   if (!hasBoat) gaps.push({ key: 'boat', priority: 1, label: 'Boat make / model', why: 'Hull construction, core material and gelcoat type depend on the builder and model.',
-    question: 'What is the boat: make, model and length?' })
+    question: 'The boat’s make, model and length' })
   else {
     have.push('boat')
     if (!i.boat_year) gaps.push({ key: 'boat_year', priority: 3, label: 'Model year', why: 'Year tells the crew what layup schedule and gelcoat to expect (and matters for insurance paperwork).',
@@ -66,8 +67,8 @@ export function assessInquiry(i: InquiryRow, photoCount: number): Assessment {
     question: 'About how big is it? A rough measurement is plenty, or compare it to a coin, a hand, a dinner plate.' })
   else have.push('size')
 
-  if (!i.boat_location) gaps.push({ key: 'location', priority: 2, label: 'Where the boat is kept', why: 'Decides mobile versus yard, and travel time for a look.',
-    question: 'Where is the boat right now, and what city? That tells me whether we come to you or you bring her to the yard in Largo.' })
+  if (!i.boat_location) gaps.push({ key: 'location', priority: 1, label: 'Where the boat is kept', why: 'Decides mobile versus yard, and travel time for a look.',
+    question: 'The city the boat is in' })
   else have.push('location')
 
   if (inWater === null) gaps.push({ key: 'in_water', priority: 2, label: 'In or out of the water', why: 'Below-waterline work and most structural work need the boat out; it also changes the schedule.',
@@ -91,9 +92,7 @@ export function assessInquiry(i: InquiryRow, photoCount: number): Assessment {
   return { gaps, have, readiness, insurance, mentions: { inWater, size, area, insurance, urgency } }
 }
 
-/** The questions actually asked in the reply: all priority-1/2 gaps plus at most one priority-3, capped at 4. */
-export function questionsToAsk(a: Assessment, max = 4): Gap[] {
-  const main = a.gaps.filter((g) => g.priority <= 2)
-  const extra = a.gaps.filter((g) => g.priority === 3).slice(0, 1)
-  return [...main, ...extra].slice(0, max)
+/** What the first reply asks for: the basics (priority 1) only. Never more than three lines. */
+export function questionsToAsk(a: Assessment): Gap[] {
+  return a.gaps.filter((g) => g.priority === 1)
 }

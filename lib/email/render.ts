@@ -86,8 +86,8 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
 
   const gaps = reply?.assessment.gaps || []
   const needHtml = reply ? section(gaps.length ? 'What we still need to quote' : 'Ready to quote', gaps.length
-    ? `<tr><td style="padding:4px 0;"><ul style="margin:0;padding-left:18px;font:400 14px/1.6 ${FONT};color:#1a2633;">${gaps.map((g) => `<li><strong>${esc(g.label)}</strong> <span class="muted" style="color:#5a6b7d;">— ${esc(g.why)}</span></li>`).join('')}</ul>
-      <p class="muted" style="margin:8px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Readiness: ${esc(reply.assessment.readiness.replace('_', ' '))}${reply.assessment.insurance ? ' · insurance claim' : ''}</p></td></tr>`
+    ? `<tr><td style="padding:4px 0;"><ul style="margin:0;padding-left:18px;font:400 14px/1.6 ${FONT};color:#1a2633;">${gaps.map((g) => `<li><strong>${esc(g.label)}</strong>${g.priority === 1 ? ' (asked in the reply)' : ''} <span class="muted" style="color:#5a6b7d;">— ${esc(g.why)}</span></li>`).join('')}</ul>
+      <p class="muted" style="margin:8px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Readiness: ${esc(reply.assessment.readiness.replace('_', ' '))}${reply.assessment.insurance ? ' · insurance claim' : ''} · the reply asks only for the basics; the rest can wait for the call or the inspection.</p></td></tr>`
     : `<tr><td style="padding:4px 0;font:400 14px/1.5 ${FONT};color:#1a2633;">The customer gave everything the crew needs for a first estimate.${reply.assessment.insurance ? ' Insurance claim: write it as a supplement.' : ''}</td></tr>`) : ''
   const replyHtml = reply
     ? `<tr><td style="padding:0 28px 22px 28px;">
@@ -95,7 +95,7 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
       <tr><td style="padding:14px 16px;">
         <p style="margin:0 0 6px 0;font:700 12px/1.3 ${FONT};letter-spacing:.12em;text-transform:uppercase;color:${NAVY};">Reply to send (Captain Levi’s words — edit as you like)</p>
         <p style="margin:0;font:400 14px/1.55 ${FONT};color:#1a2633;">${nl2br(reply.body)}</p>
-        <p class="muted" style="margin:10px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Written by the site from fixed rules, not AI. Asks only for what is missing; no prices, dates or promises. Hit “Reply to customer” and paste it.</p>
+        <p class="muted" style="margin:10px 0 0 0;font:400 12px/1.4 ${FONT};color:#5a6b7d;">Written by the site from fixed rules, not AI. Kept short: asks only for the basics that are missing (photos, boat, city); no prices, dates or promises. Hit “Reply to customer” and paste it.</p>
       </td></tr>
     </table></td></tr>`
     : ''
@@ -191,7 +191,7 @@ export function renderInquiryEmail(input: RenderInput): { html: string; text: st
     'PHOTOS',
     ...(photoUrls.length ? photoUrls.map(({ url }) => `  ${url}`) : ['  No photos attached']),
     ...(chat ? ['', 'CHAT', `  Collected through the website chat (${chat.turns} turns). Transcript: ${adminUrl}`] : []),
-    ...(reply ? ['', gaps.length ? 'WHAT WE STILL NEED TO QUOTE' : 'READY TO QUOTE', ...(gaps.length ? gaps.map((g) => `  - ${g.label}: ${g.why}`) : ['  The customer gave everything the crew needs for a first estimate.']), '', 'REPLY TO SEND (Captain Levi\'s words — edit as you like)', ...reply.body.split(/\r?\n/).map((l) => `  ${l}`)] : []),
+    ...(reply ? ['', gaps.length ? 'WHAT WE STILL NEED TO QUOTE' : 'READY TO QUOTE', ...(gaps.length ? gaps.map((g) => `  - ${g.label}${g.priority === 1 ? ' (asked in the reply)' : ''}: ${g.why}`) : ['  The customer gave everything the crew needs for a first estimate.']), '', 'REPLY TO SEND (Captain Levi\'s words — edit as you like)', ...reply.body.split(/\r?\n/).map((l) => `  ${l}`)] : []),
     ...(draftReply ? ['', 'AI SUGGESTED REPLY (DRAFT — review before sending)', ...draftReply.split(/\r?\n/).map((l) => `  ${l}`)] : []),
     '',
     `Open in Quote Builder: ${adminUrl}`,

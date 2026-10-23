@@ -12,16 +12,13 @@ const base: InquiryRow = {
 }
 
 describe('assessInquiry', () => {
-  it('flags everything on a sparse inquiry and asks at most four questions, photos first', () => {
+  it('flags everything on a sparse inquiry but asks only the basics: photos, boat, city', () => {
     const a = assessInquiry(base, 0)
     const keys = a.gaps.map((g) => g.key)
     expect(keys).toEqual(expect.arrayContaining(['photos', 'boat', 'area', 'size', 'location', 'in_water', 'timeline']))
     expect(a.readiness).toBe('needs_info')
     expect(a.insurance).toBe(false)
-    const asked = questionsToAsk(a)
-    expect(asked.length).toBe(4)
-    expect(asked[0].key).toBe('photos')
-    expect(asked.every((g) => g.question.length > 20)).toBe(true)
+    expect(questionsToAsk(a).map((g) => g.key)).toEqual(['photos', 'boat', 'location'])
   })
 
   it('reads size, area, in/out of water and insurance from the text and the structured fields', () => {
@@ -40,30 +37,40 @@ describe('assessInquiry', () => {
     expect(a.gaps.map((g) => g.key)).toContain('insurance')
     expect(a.gaps.map((g) => g.key)).not.toContain('size')
     expect(a.mentions.inWater).toBe(true)
+    expect(questionsToAsk(a).map((g) => g.key)).toEqual(['location']) // claim details wait until later
   })
 })
 
 describe('templatedReply', () => {
-  it('writes a first reply in Captain Levi\'s voice with numbered questions and no prices or dates', () => {
+  it('writes a short first reply in Captain Levi\'s voice that asks only for the basics', () => {
     const r = templatedReply(base, 0)
     expect(r.subject).toContain('CL-2026-0042')
     expect(r.body.startsWith('Hi Maria,')).toBe(true)
     expect(r.body).toContain('Captain Levi here')
-    expect(r.body).toContain('CL-2026-0042')
-    expect(r.body).toMatch(/\n1\. .+\n2\. .+\n3\. .+\n4\. .+/)
+    expect(r.body).toMatch(/\n- A few photos.+\n- The boat’s make, model and length\n- The city the boat is in/)
     expect(r.body).not.toMatch(/\$\d/)
+    expect(r.body).not.toMatch(/how big|year|claim|adjuster|in the water|timing|\bHIN\b/i)
     expect(r.body).toContain('727-391-7639')
     expect(r.body).toContain('Fair winds')
-    expect(r.asked[0]).toBe('photos')
+    expect(r.body.split(/\s+/).length).toBeLessThanOrEqual(80)
+    expect(r.asked).toEqual(['photos', 'boat', 'location'])
   })
 
-  it('skips the questions when nothing is missing and mentions the supplement for insurance jobs', () => {
+  it('asks a single missing basic inline and holds insurance paperwork for later', () => {
+    const r = templatedReply({ ...base, service: 'insurance-claim', boat_make: 'Grady-White', boat_model: '230', boat_year: 2015, message: 'Hit a piling, insurance is involved.' }, 2)
+    expect(r.body).toContain('I just need the city the boat is in.')
+    expect(r.body).toContain('and for the photos')
+    expect(r.body).toContain('claim details later')
+    expect(r.body).not.toMatch(/claim number|adjuster|carrier/i)
+    expect(r.body).not.toMatch(/\n- /)
+  })
+
+  it('skips the questions when nothing is missing', () => {
     const rich: InquiryRow = { ...base, service: 'transom-replacement', boat_make: 'Boston Whaler', boat_model: 'Outrage 24', boat_year: 2004, boat_location: 'Trailer in Largo',
       message: 'Transom soft about 2 ft wide around the drain, boat is on the trailer, insurance claim 26-123456789 with BoatUS, adjuster assigned. Trip in three weeks.' }
     const r = templatedReply(rich, 4)
-    expect(r.body).not.toMatch(/\n1\. /)
+    expect(r.body).not.toMatch(/\n- /)
     expect(r.body).toContain('everything I need')
-    expect(r.body).toContain('supplement')
     expect(r.body).toContain('2004 Boston Whaler Outrage 24')
   })
 })

@@ -32,7 +32,9 @@ tyler.salta@icloud.com or captainlevis@yahoo.com. `STAFF_EMAILS` on Vercel chang
 1. Website form/chat → `POST /api/inquiries` → row + photos → email to captainlevis@yahoo.com with the gaps and
    the drafted reply → the inbox shows it with a readiness badge.
 2. Staff opens the inquiry, edits/copies the reply, "Open in email" (mailto) sends it from their own mail. Nothing is
-   auto-sent to customers.
+   auto-sent to customers. The reply is deliberately SHORT (~50–65 words) and asks only for the basics: photos, the
+   boat (make/model/length) and the city it's in (priority-1 gaps). Owner, 2026-10-23: a long email full of questions
+   loses the customer; year, size, insurance claim details, HIN and the rest get collected later. Don't grow it back.
 3. "Start estimate" creates E-NNNN pre-filled (customer, boat, insurance flag, photos, notes) and marks the inquiry
    quoted. Edit by hand (autosaves, totals from the server) or ask Captain Levi; every save is a restorable version.
 4. "Print / PDF" renders the Rev5 layout; use the browser's Save as PDF. Status: draft → sent → approved/declined.

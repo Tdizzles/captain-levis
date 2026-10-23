@@ -115,9 +115,9 @@ async function renderInquiry(id) {
       <div>
         <section class="card"><h2>What we still need</h2>
           ${a.gaps.length ? raw(`<ul class="gaps">${a.gaps.map((g) => `<li><span class="dot p${g.priority}"></span><div><strong>${esc(g.label)}</strong><span class="why">${esc(g.why)}</span></div></li>`).join('')}</ul>`) : raw('<p>Everything needed for a first estimate is here. Go straight to the builder.</p>')}
-          <p class="muted" style="margin:10px 0 0">Red = cannot quote without it · amber = changes the job · grey = nice to have.</p></section>
+          <p class="muted" style="margin:10px 0 0">Red = the basics, asked in the reply · amber and grey = get them later, on the call or at the inspection.</p></section>
         <section class="card"><h2>Reply to send</h2>
-          <p class="muted" style="margin-top:-6px">Captain Levi's words, built from the gaps above. Edit anything, then copy or open it in your mail app. Nothing is sent from here.</p>
+          <p class="muted" style="margin-top:-6px">Captain Levi's words, kept short: it asks only for the red items. Edit anything, then copy or open it in your mail app. Nothing is sent from here.</p>
           <label class="qd-field"><span>Subject</span><input id="reply-subject" value="${reply.subject}"></label>
           <label class="qd-field"><span>Message</span><textarea id="reply-body">${reply.body}</textarea></label>
           <div class="actions"><button type="button" class="qd-btn" id="copy">Copy message</button><a class="qd-btn navy" id="mailto" href="${mailto}">Open in email</a><button type="button" class="qd-btn ghost" id="mark-contacted">Mark contacted</button></div></section>
