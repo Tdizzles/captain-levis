@@ -700,6 +700,24 @@ button.fg-card-link:focus-visible{outline:2px solid var(--icon-blue);outline-off
 }
 .ba-handle svg{display:block;width:15px;height:15px;}
 
+/* stand-in for the slider while the gallery is off (see the gallery switch in chrome.css) */
+.results-soon{
+  width:min(520px,40vw);
+  aspect-ratio:443/179;
+  min-height:150px;
+  border-radius:16px;
+  border:3px solid rgba(255,255,255,.25);
+  background:rgba(0,28,59,.62);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  box-shadow:0 24px 48px -24px rgba(0,0,0,.45);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:20px;
+  color:#fff;text-align:center;
+}
+.results-soon svg{display:block;color:var(--accent);margin-bottom:2px;}
+.results-soon strong{font-family:var(--font-head);font-weight:700;font-size:clamp(1.125rem,1.6vw,1.375rem);}
+.results-soon span{font-size:0.875rem;line-height:1.5;color:rgba(255,255,255,.8);}
+
 .testimonial-card{
   position:relative;z-index:2;
   background:#fff;border-radius:20px;
@@ -1135,7 +1153,7 @@ cite{font-style:normal;font-size:0.8125rem;color:var(--gray-text);}
   .areas-bar-btn{align-self:center;}
 
   .results-top-inner{gap:28px;}
-  .before-after{width:100%;max-width:300px;}
+  .before-after,.results-soon{width:100%;max-width:300px;}
 
 }
 
@@ -1476,7 +1494,7 @@ select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
   .areas-bar-item{padding:0;}
   .areas-bar-btn{grid-column:1 / -1;justify-self:center;}
 
-  .before-after{width:100%;max-width:none;}
+  .before-after,.results-soon{width:100%;max-width:none;}
 
   .areas-card{padding:60px 16px 20px;}
   .areas-list{gap:9px;}

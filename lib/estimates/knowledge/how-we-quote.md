@@ -1,7 +1,7 @@
 # How Captain Levi's quotes a repair (SEED — the owner will replace these rules with the shop's own)
 
 Status: starter knowledge written from the shop's public pages and the Rev. 5 supplement format. Where a number or
-rule below is not confirmed by Captain Dave or Levi, say so to the staff member instead of presenting it as policy.
+rule below is not confirmed by Captain Dave, say so to the staff member instead of presenting it as policy.
 
 ## The estimate document
 - One estimate per boat per job. Sections are lettered (A, B, C) by area of the boat or phase of the work;

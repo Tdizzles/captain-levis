@@ -9,9 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=5bdec4d6ab">
+<link rel="stylesheet" href="styles.css?v=3151f4c2a6">
 <!-- build:head -->
-<link rel="stylesheet" href="chrome.css?v=5f788d6a1c">
+<link rel="stylesheet" href="chrome.css?v=c27e24bbf4">
 <link rel="canonical" href="https://www.captainlevis.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Captain Levi's">
@@ -366,7 +366,22 @@
     <div class="results-scrim"></div>
     <div class="results-diagonal"></div>
     <div class="container results-top-inner">
-      <div class="results-copy">
+      <div class="results-copy" data-gallery-soon>
+        <div class="eyebrow eyebrow-light"><i></i><span>PROJECT GALLERY</span><i></i></div>
+        <h2>Gallery<br><span class="accent">Coming Soon</span></h2>
+        <p>Our new website just launched. Real before and after photos from boats we&rsquo;ve repaired are on the way.</p>
+        <a href="reviews.html" class="btn btn-outline-light">Read Our Reviews
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div class="results-soon" data-gallery-soon>
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="currentColor" stroke-width="1.8"/></svg>
+        <strong>Before &amp; After Photos</strong>
+        <span>Coming soon to the new Captain Levi&rsquo;s website.</span>
+      </div>
+
+      <div class="results-copy" data-gallery>
         <div class="eyebrow eyebrow-light"><i></i><span>REAL RESULTS</span><i></i></div>
         <h2>From Damaged to<br><span class="accent">Showroom Ready</span></h2>
         <p>See the difference expert fiberglass and gelcoat repair can make.</p>
@@ -375,7 +390,7 @@
         </a>
       </div>
 
-      <div class="before-after" id="before-after" role="slider" tabindex="0" aria-label="Drag to compare before and after fiberglass repair" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <div class="before-after" id="before-after" data-gallery role="slider" tabindex="0" aria-label="Drag to compare before and after fiberglass repair" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
         <div class="ba-img ba-before" role="img" aria-label="Before: damaged, scratched hull"></div>
         <div class="ba-img ba-after" role="img" aria-label="After: repaired, glossy hull"></div>
         <div class="ba-line"></div>

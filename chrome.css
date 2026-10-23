@@ -25,6 +25,15 @@ html[data-text-scale]{scroll-behavior:auto;}
 /* styles.css resets list-style on ul only; every page that styles an <ol> as cards otherwise shows stray numbers */
 ol[class]{list-style:none;}
 
+/* ---- gallery switch ----
+   2026-10-23: every before & after gallery is OFF until real photos replace the AI comps. Gallery markup carries
+   data-gallery; the home page's "Gallery Coming Soon" stand-ins carry data-gallery-soon. To turn galleries back on,
+   change this selector to [data-gallery-soon] and delete the deck-repairs rule under it. */
+[data-gallery]{display:none!important;}
+/* deck-repairs shares its #repairs band with the deck-layers diagram: center the diagram while its gallery is off */
+.dr-results-inner:has(> [data-gallery]){grid-template-columns:minmax(0,1fr);justify-items:center;}
+.dr-results-inner:has(> [data-gallery]) .dr-layers{padding-right:0;width:100%;max-width:1120px;}
+
 /* ---- breadcrumb ---- */
 .breadcrumb{background:var(--navy-2);color:#fff;font-size:.8125rem;font-family:var(--font-head);border-bottom:1px solid rgba(255,255,255,.08);}
 .breadcrumb ol{list-style:none;margin:0;padding:10px 0;display:flex;flex-wrap:wrap;gap:4px 0;align-items:center;}

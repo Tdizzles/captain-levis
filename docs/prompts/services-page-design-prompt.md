@@ -13,7 +13,7 @@ boat-shop photography feel, no placeholder boxes.
 
 ## The business (use these facts exactly)
 
-- Name: **Captain Levi's** (Boat Yard Captain Levi's LLC). Family owned, run by Captain Dave and Levi with an
+- Name: **Captain Levi's** (Boat Yard Captain Levi's LLC). Family owned, run by Captain Dave and his crew with an
   experienced crew. **50+ Years Experience.**
 - Shop and boat yard: 11600 66th St N, Largo, FL 33773. **Fully mobile service** across Pinellas County and Tampa Bay
   ("at our yard or at your dock").
