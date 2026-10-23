@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Quote Desk · Captain Levi's</title>
-<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
-<link rel="stylesheet" href="app.css">
+<!-- Absolute paths: the site strips trailing slashes (/app/ → /app), so relative URLs would resolve at the root. -->
+<link rel="stylesheet" href="/app/app.css">
 </head>
 <body>
 <header class="qd-top" id="top" hidden>
-  <a class="qd-brand" href="#/inquiries"><img src="../assets/favicon.svg" alt="" width="28" height="28"><span>Captain Levi's</span><em>Quote Desk</em></a>
+  <a class="qd-brand" href="#/inquiries"><img src="/assets/favicon.svg" alt="" width="28" height="28"><span>Captain Levi's</span><em>Quote Desk</em></a>
   <nav class="qd-nav" aria-label="Sections">
     <a href="#/inquiries" data-nav="inquiries">Inquiries</a>
     <a href="#/estimates" data-nav="estimates">Estimates</a>
@@ -21,6 +22,6 @@
 </header>
 <main id="view" class="qd-main" aria-live="polite"></main>
 <div id="toast" class="qd-toast" role="status" aria-live="polite" hidden></div>
-<script type="module" src="app.js"></script>
+<script type="module" src="/app/app.js"></script>
 </body>
 </html>

@@ -211,7 +211,7 @@ export async function renderEstimateEditor(id) {
 
 // ---------- print ----------
 export async function renderEstimatePrint(id) {
-  if (!document.getElementById('print-css')) { const l = document.createElement('link'); l.id = 'print-css'; l.rel = 'stylesheet'; l.href = 'print/estimate-print.css'; document.head.appendChild(l) }
+  if (!document.getElementById('print-css')) { const l = document.createElement('link'); l.id = 'print-css'; l.rel = 'stylesheet'; l.href = '/app/print/estimate-print.css'; document.head.appendChild(l) }
   document.body.classList.add('printing')
   view().innerHTML = '<div class="qd-empty">Loading…</div>'
   try {
