@@ -2,15 +2,19 @@
 # One-shot Vercel configuration for the captain-levis project (handover §4a as a script).
 # Run from Git Bash on the machine that is logged in as `tdizzles`:
 #
-#   bash scripts/vercel-setup.sh            # secrets + git connect + domains + redeploy + health check
+#   bash scripts/vercel-setup.sh            # secrets + git connect + domains + redeploy (of the live commit) + health
 #   bash scripts/vercel-setup.sh --no-deploy
 #
-# Owner keys can be passed as env vars whenever they arrive; each one is added only if set and not already present:
+# Owner keys can be passed as env vars whenever they arrive. A key you pass REPLACES the one on Vercel (that is how
+# you rotate it); keys you don't pass are left alone:
 #
 #   TURNSTILE_SECRET_KEY=... RESEND_API_KEY=... ANTHROPIC_API_KEY=... bash scripts/vercel-setup.sh
 #   STAFF_PASSWORD='...' bash scripts/vercel-setup.sh      # Quote Desk sign-in: hashed here, only the hash goes to Vercel
+#   EMAIL_TO='captainlevis@yahoo.com,you@example.com' bash scripts/vercel-setup.sh   # who gets the quote emails
 #
-# Safe to re-run: existing variables are never overwritten, git connect / domains add are skipped when already done.
+# RESEND_API_KEY also runs scripts/resend-domain.mjs --apply (sending domain + Vercel DNS records + verification).
+#
+# Safe to re-run: minted secrets are never overwritten, git connect / domains add are skipped when already done.
 # DATABASE_URL is NOT created here (Vercel dashboard → Storage → Create → Neon → connect to captain-levis).
 # If it exists when this runs, migrations are applied to it.
 set -euo pipefail
@@ -30,12 +34,19 @@ grep -q prj_a3q1YKeo5FfTW8OE1IxJi0IOviW3 .vercel/project.json || echo "WARN: .ve
 ENV_LIST="$($V env ls 2>/dev/null || true)"
 has_env() { printf '%s\n' "$ENV_LIST" | grep -qE "^[[:space:]]*$1[[:space:]]"; }
 
-# add_env NAME ENVIRONMENT VALUE  — sensitive, skipped when NAME already exists in any environment
-add_env() {
-  local name="$1" target="$2" value="$3"
-  if has_env "$name"; then echo "   $name already set, leaving it alone"; return 0; fi
-  printf '%s' "$value" | $V env add "$name" "$target" --sensitive
-  echo "   added $name ($target)"
+# set_env NAME ENVIRONMENT VALUE [plain] — the owner passed this value on purpose, so it replaces what is there
+# (sensitive unless the 4th arg is "plain"; Vercel can't edit a sensitive value in place, so rm + add)
+set_env() {
+  local name="$1" target="$2" value="$3" flag="--sensitive"
+  [ "${4:-}" = plain ] && flag=""
+  if has_env "$name"; then
+    $V env rm "$name" "$target" --yes >/dev/null 2>&1 || true
+    printf '%s' "$value" | $V env add "$name" "$target" $flag >/dev/null
+    echo "   replaced $name ($target)"
+  else
+    printf '%s' "$value" | $V env add "$name" "$target" $flag >/dev/null
+    echo "   added $name ($target)"
+  fi
 }
 
 log "1. Secrets we mint ourselves"
@@ -57,11 +68,18 @@ fi
 ENV_LIST="$($V env ls 2>/dev/null || true)"
 
 log "2. Owner-supplied keys (only those passed in the environment)"
-[ -n "${TURNSTILE_SECRET_KEY:-}" ] && add_env TURNSTILE_SECRET_KEY production "$TURNSTILE_SECRET_KEY" \
-  && echo "   remember: put the matching SITE key in site/business.json (turnstileSiteKey), run node scripts/build.mjs, commit"
-[ -n "${RESEND_API_KEY:-}" ] && add_env RESEND_API_KEY production "$RESEND_API_KEY" \
-  && echo "   remember: SPF/DKIM for inquiries@captainlevis.com in the Resend dashboard"
-[ -n "${ANTHROPIC_API_KEY:-}" ] && add_env ANTHROPIC_API_KEY production "$ANTHROPIC_API_KEY"
+if [ -n "${TURNSTILE_SECRET_KEY:-}" ]; then
+  set_env TURNSTILE_SECRET_KEY production "$TURNSTILE_SECRET_KEY"
+  echo "   remember: put the matching SITE key in site/business.json (turnstileSiteKey), run node scripts/build.mjs, commit"
+fi
+if [ -n "${RESEND_API_KEY:-}" ]; then
+  echo "   Resend sending domain first (adds the SPF/DKIM/DMARC records to Vercel DNS and waits for verification):"
+  RESEND_API_KEY="$RESEND_API_KEY" node scripts/resend-domain.mjs --apply \
+    || echo "   domain not verified yet: re-run 'RESEND_API_KEY=... node scripts/resend-domain.mjs --apply' in a few minutes"
+  set_env RESEND_API_KEY production "$RESEND_API_KEY"
+fi
+[ -n "${ANTHROPIC_API_KEY:-}" ] && set_env ANTHROPIC_API_KEY production "$ANTHROPIC_API_KEY"
+[ -n "${EMAIL_TO:-}" ] && set_env EMAIL_TO production "$EMAIL_TO" plain
 if [ -n "${STAFF_PASSWORD:-}" ]; then
   HASH="$(STAFF_PASSWORD="$STAFF_PASSWORD" node scripts/hash-password.mjs)"
   if has_env STAFF_PASSWORD_HASH; then
@@ -96,26 +114,45 @@ printf '%s
 ' "$OUT" | grep -v '^Vercel CLI'
 printf '%s' "$OUT" | grep -qiE 'already connected|Connected GitHub' || echo "   git connect failed — do it in the dashboard: Settings → Git → Connect"
 
-log "5. Domains (harmless before DNS moves; prints the records the registrar needs)"
+log "5. Domains, checked against the PROJECT ('domains inspect' only checks the account, which hid a missing www)"
+PROJECT_ID=prj_a3q1YKeo5FfTW8OE1IxJi0IOviW3
+TEAM_ID=team_iYFz6LJgsbrPkRbTuIBDnaLE
+DOMAIN_MISSING=0
+project_domain() { MSYS_NO_PATHCONV=1 $V api "/v9/projects/$PROJECT_ID/domains/$1?teamId=$TEAM_ID" 2>/dev/null || true; }
+# the apex serves the site (canonical https://captainlevis.com); www 308-redirects to it
 for d in captainlevis.com www.captainlevis.com; do
-  if $V domains inspect "$d" >/dev/null 2>&1; then echo "   $d already on the account"; else $V domains add "$d" captain-levis || echo "   $d: add failed (see above)"; fi
+  J="$(project_domain "$d")"
+  if ! printf '%s' "$J" | grep -q "\"name\":\"$d\""; then
+    echo "   $d is NOT attached to the project; adding it"
+    $V domains add "$d" captain-levis || true
+    J="$(project_domain "$d")"
+  fi
+  if printf '%s' "$J" | grep -q "\"name\":\"$d\""; then
+    R="$(printf '%s' "$J" | node -e "let s='';process.stdin.on('data',c=>s+=c).on('end',()=>{try{const j=JSON.parse(s);process.stdout.write((j.redirect?'redirects to '+j.redirect+' ('+(j.redirectStatusCode||'')+')':'serves the site')+(j.verified===false?', NOT verified':''))}catch{process.stdout.write('?')}})")"
+    echo "   $d attached: $R"
+  else
+    echo "   $d still missing: add it in the dashboard (Settings, Domains)"; DOMAIN_MISSING=1
+  fi
 done
 
 if [ "$DEPLOY" = 1 ]; then
   log "6. Redeploy production so the new env vars take effect"
-  $V --prod --yes
+  # Rebuild what production already runs (the pushed commit). Never '$V --prod' here: that uploads this working
+  # tree, and parallel sessions keep unfinished edits in it.
+  PROD_URL="$(MSYS_NO_PATHCONV=1 $V api "/v6/deployments?projectId=$PROJECT_ID&teamId=$TEAM_ID&target=production&state=READY&limit=1" 2>/dev/null \
+    | node -e "let s='';process.stdin.on('data',c=>s+=c).on('end',()=>{try{process.stdout.write(JSON.parse(s).deployments[0].url)}catch{}})")"
+  if [ -n "$PROD_URL" ]; then $V redeploy "$PROD_URL" --environment production; else echo "   could not find the production deployment; push any commit to redeploy"; fi
 fi
 
 log "7. Health (the alias can lag the deploy by ~20 s, so retry a few times)"
 for i in 1 2 3 4 5 6; do
-  H="$(curl -s https://captain-levis.vercel.app/api/health)"
+  H="$(curl -s https://captainlevis.com/api/health)"
   printf '%s
 ' "$H" | grep -q '"ok":true' && break
   [ "$i" = 6 ] || sleep 10
 done
 printf '%s
 ' "$H"
-echo "Expect configured.session_secret:true and admin_token:true now; database:true once Neon is connected."
-echo "DNS is NOT changed by this script. When ready to launch, at the registrar (Network Solutions / worldnic) set:"
-echo "   A     @    64.29.17.1          CNAME  www  cname.vercel-dns.com."
-echo "then: npx vercel domains verify captainlevis.com"
+echo "Expect ok:true and missing:[]; version should equal the commit you just pushed or deployed."
+echo "DNS lives on Vercel's nameservers (ns1/ns2.vercel-dns.com) since 2026-11-04: change records with 'npx vercel dns' or the dashboard."
+[ "$DOMAIN_MISSING" = 0 ] || { echo "A domain is not attached to the project (see step 5)." >&2; exit 1; }

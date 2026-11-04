@@ -33,6 +33,7 @@
     { "source": "/api/admin/inquiries/:id", "destination": "/api/admin/inquiries?id=:id" }
   ],
   "redirects": [
+    { "source": "/:path((?!api/).*)", "has": [{ "type": "host", "value": "captain-levis.vercel.app" }], "destination": "https://captainlevis.com/:path", "permanent": true },
     { "source": "/index", "destination": "/", "permanent": true },
     { "source": "/index.html", "destination": "/", "permanent": true },
 

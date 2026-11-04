@@ -2,6 +2,8 @@
   "name": "Captain Levi's",
   "legalName": "Boat Yard Captain Levi's LLC",
   "tagline": "Tampa Bay Fiberglass Boat Repair",
+  "description": "Family-owned fiberglass boat repair shop and boat yard in Largo, Florida, with mobile service for boat owners across Pinellas County and Tampa Bay.",
+  "geoNote": "lat/lng = the Census / Google Business Profile point for 11600 66th St N (audit 2026-11-04); the old 27.8869,-82.7285 was ~1 km north.",
   "phone": "727-391-7639",
   "phoneHref": "tel:7273917639",
   "email": "captainlevis@yahoo.com",
@@ -12,8 +14,8 @@
     "zip": "33773",
     "mapsUrl": "https://www.google.com/maps/search/?api=1&query=11600+66th+St+N,+Largo,+FL+33773",
     "mapsEmbed": "https://www.google.com/maps?q=11600+66th+St+N,+Largo,+FL+33773&output=embed",
-    "lat": 27.8869,
-    "lng": -82.7285
+    "lat": 27.8778,
+    "lng": -82.7292
   },
   "hours": {
     "display": "Mon – Sat: 7:30 AM – 3:30 PM",

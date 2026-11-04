@@ -13,6 +13,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import crypto from 'node:crypto'
+import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -181,26 +182,8 @@ function renderHead(slug, meta, title, desc) {
   const robots = meta.noindex ? '<meta name="robots" content="noindex, nofollow">' : ''
   const trail = chain(slug)
   const items = ['index', ...trail.filter((s) => s !== 'index')]
-  const ld = []
-  if (slug === 'index') {
-    const oh = biz.hours.schema.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes }))
-    ld.push({
-      '@context': 'https://schema.org', '@type': 'LocalBusiness', '@id': `${SITE}/#business`,
-      name: biz.name, legalName: biz.legalName, url: `${SITE}/`, telephone: '+1-' + biz.phone, email: biz.email,
-      image: `${SITE}/assets/logo.png`,
-      address: { '@type': 'PostalAddress', streetAddress: biz.address.street, addressLocality: biz.address.city, addressRegion: biz.address.state, postalCode: biz.address.zip, addressCountry: 'US' },
-      geo: { '@type': 'GeoCoordinates', latitude: biz.address.lat, longitude: biz.address.lng },
-      openingHoursSpecification: oh,
-      areaServed: biz.serviceArea.map((n) => ({ '@type': 'City', name: n })),
-      priceRange: '$$',
-    })
-  } else if (items.length > 1) {
-    ld.push({
-      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-      itemListElement: items.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: PAGES[s]?.label || labelFromTitle(titleOf(s)), item: cleanUrl(s) })),
-    })
-  }
-  const ldTags = ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')
+  const ld = [{ '@context': 'https://schema.org', '@graph': buildGraph(slug, meta, title, desc, items) }]
+  const ldTags = ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`).join('\n')
   return [
     `<link rel="stylesheet" href="chrome.css?v=${hashOf('chrome.css')}">`,
     `<link rel="canonical" href="${url}">`,
@@ -217,6 +200,134 @@ function renderHead(slug, meta, title, desc) {
     `<script>try{var s=localStorage.getItem('cl-text-scale');if(s)document.documentElement.style.setProperty('--text-scale',s)}catch(e){}</script>`,
     ldTags,
   ].filter(Boolean).join('\n')
+}
+
+
+// ---------- structured data: one @graph per page (audit 2026-11-04, findings/schema.md) ----------
+// Stable ids: #business and #website are the same on every page; each page defines what it references.
+// No aggregateRating/Review (self-serving), no FAQPage/HowTo, no dates (the build stamp is not an editorial date).
+const FL = 'https://www.wikidata.org/entity/Q812'
+const BIZ_ID = `${SITE}/#business`
+const SITE_ID = `${SITE}/#website`
+const phoneIntl = '+1-' + biz.phone
+const areaServed = () => biz.serviceArea.map((n) => ({ '@type': 'City', name: n, containedInPlace: { '@id': FL } }))
+const isService = (slug) => slug !== 'fiberglass-boat-repair' && chain(slug).includes('fiberglass-boat-repair')
+function businessNode(full) {
+  const node = {
+    '@type': 'LocalBusiness', '@id': BIZ_ID, name: biz.name, url: `${SITE}/`, telephone: phoneIntl,
+    image: [`${SITE}/assets/og-default.jpg`],
+    logo: { '@type': 'ImageObject', url: `${SITE}/assets/apple-touch-icon.png`, width: 180, height: 180 },
+    address: { '@type': 'PostalAddress', streetAddress: biz.address.street, addressLocality: biz.address.city, addressRegion: biz.address.state, postalCode: biz.address.zip, addressCountry: 'US' },
+    geo: { '@type': 'GeoCoordinates', latitude: biz.address.lat, longitude: biz.address.lng },
+    priceRange: '$$',
+    sameAs: Object.values(biz.social || {}).filter(Boolean),
+  }
+  if (!full) return node
+  return {
+    ...node,
+    additionalType: biz.additionalType || undefined,
+    legalName: biz.legalName, description: biz.description || undefined, email: biz.email,
+    hasMap: biz.address.mapsUrl,
+    openingHoursSpecification: biz.hours.schema.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer service', telephone: phoneIntl, email: biz.email, availableLanguage: 'English', areaServed: 'US-FL' },
+    areaServed: areaServed(),
+  }
+}
+function pageType(slug) {
+  if (slug === 'contact') return 'ContactPage'
+  if (slug === 'about') return 'AboutPage'
+  if (slug === 'fiberglass-boat-repair' || slug === 'sitemap') return 'CollectionPage'
+  return 'WebPage'
+}
+function buildGraph(slug, meta, title, desc, items) {
+  const url = cleanUrl(slug)
+  const name = unesc(title)
+  const description = unesc(desc)
+  const fullBiz = slug === 'index' || slug === 'contact' || slug === 'about'
+  const g = [
+    businessNode(fullBiz),
+    { '@type': 'State', '@id': FL, name: 'Florida', sameAs: 'https://en.wikipedia.org/wiki/Florida' },
+    { '@type': 'WebSite', '@id': SITE_ID, url: `${SITE}/`, name: biz.name, publisher: { '@id': BIZ_ID }, inLanguage: 'en-US' },
+  ]
+  const page = { '@type': pageType(slug), '@id': `${url}#webpage`, url, name, description, isPartOf: { '@id': SITE_ID }, about: { '@id': BIZ_ID }, inLanguage: 'en-US' }
+  if (slug === 'contact' || slug === 'about' || slug === 'index') page.mainEntity = { '@id': BIZ_ID }
+  if (items.length > 1) page.breadcrumb = { '@id': `${url}#breadcrumb` }
+  if (isService(slug)) page.mainEntity = { '@id': `${url}#service` }
+  page.primaryImageOfPage = { '@type': 'ImageObject', url: `${SITE}/assets/og-default.jpg` }
+  g.push(page)
+  if (items.length > 1) {
+    g.push({ '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: items.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: PAGES[s]?.label || labelFromTitle(titleOf(s)), item: cleanUrl(s) })) })
+  }
+  if (isService(slug)) {
+    const label = meta.label || labelFromTitle(title)
+    const parent = meta.parent && meta.parent !== 'fiberglass-boat-repair' ? cleanUrl(meta.parent) : null
+    g.push({
+      '@type': 'Service', '@id': `${url}#service`, name: label, serviceType: meta.serviceType || label,
+      description, url, provider: { '@id': BIZ_ID },
+      areaServed: [{ '@type': 'AdministrativeArea', name: 'Pinellas County, Florida' }, { '@type': 'City', name: 'Tampa', containedInPlace: { '@id': FL } }, { '@id': FL }],
+      ...(parent ? { isRelatedTo: { '@type': 'Service', '@id': `${parent}#service` } } : {}),
+      mainEntityOfPage: { '@id': `${url}#webpage` },
+    })
+  }
+  return JSON.parse(JSON.stringify(g))
+}
+
+// ---------- internal links: extensionless (each .html href cost a 308 on Vercel) + descriptive "Learn More" ----------
+const variantsPath = path.join(ROOT, 'site', 'image-variants.json')
+const IMAGE_VARIANTS = fs.existsSync(variantsPath) ? JSON.parse(fs.readFileSync(variantsPath, 'utf8')) : {}
+const knownSlugs = new Set(fs.readdirSync(ROOT).filter((f) => f.endsWith('.html')).map((f) => f.slice(0, -5)))
+function polishLinks(src) {
+  // only href attributes that point at one of our own root pages (root-absolute, so the 404 page works at any
+  // depth); external links and assets are untouched
+  src = src.replace(/href="([a-z0-9-]+)\.html(#[^"]*)?"/g, (m, s, frag = '') => {
+    if (!knownSlugs.has(s)) return m
+    return `href="/${s === 'index' ? '' : s}${frag}"`
+  })
+  // "Learn More" cards: add the target's name for search engines and screen readers, visually unchanged
+  src = src.replace(/(<a href="\/([a-z0-9-]+)"[^>]*>\s*Learn [Mm]ore)(?!<span class="sr-only">)/g, (m, head, s) => {
+    const label = PAGES[s]?.label
+    return label ? `${head}<span class="sr-only"> about ${esc(unesc(label))}</span>` : m
+  })
+  // responsive WebP from scripts/optimize-images.mjs (site/image-variants.json); src stays the JPEG/PNG fallback
+  src = src.replace(/<img\s[^>]*>/g, (tag) => {
+    const m = tag.match(/\ssrc="(assets\/[^"?]+)(?:\?[^"]*)?"/)
+    const set = m && !/data-no-opt/.test(tag) && !/srcset="(?!assets\/opt\/)/.test(tag) && IMAGE_VARIANTS[m[1]]
+    if (!set) return tag
+    return tag.replace(/\s(srcset|sizes)="[^"]*"/g, '').replace(/\ssrc="[^"]*"/, (a) => `${a} srcset="${set}" sizes="100vw"`)
+  })
+  return src
+}
+
+// ---------- sitemap lastmod: date the page's own content last changed (build blocks excluded) ----------
+const lastmodPath = path.join(ROOT, 'site', 'lastmod.json')
+const LASTMOD = fs.existsSync(lastmodPath) ? JSON.parse(fs.readFileSync(lastmodPath, 'utf8')) : {}
+let lastmodChanged = false
+const contentHash = (src) => crypto.createHash('sha1').update(
+  src.replace(/<!-- build:(\w+) -->[\s\S]*?<!-- \/build:\1 -->/g, '').replace(/\?v=[0-9a-f]{10}/g, '')
+    .replace(/<title>[\s\S]*?<\/title>|<meta name="description"[^>]*>/g, '').replace(/href="([a-z0-9-]+)\.html/g, 'href="$1').replace(/href="\/([a-z0-9-]*)/g, 'href="$1').replace(/href="index([#"])/g, 'href="$1').replace(/<span class="sr-only"> about [^<]*<\/span>/g, '').replace(/\s(srcset|sizes)="[^"]*"/g, '').replace(/\s+/g, ' '),
+).digest('hex').slice(0, 12)
+// First sighting of a page: walk its git history back while the content hash stays the same, so chrome-only
+// rebuilds (header, canonicals, cache-bust hashes) don't count as content changes.
+function seedDate(file, h) {
+  const git = (a) => execFileSync('git', a, { cwd: ROOT, encoding: 'utf8', maxBuffer: 64 << 20 })
+  let date = null
+  try {
+    const log = git(['log', '--format=%H %cs', '--', file]).trim().split('\n').filter(Boolean)
+    for (const line of log) {
+      const [sha, d] = line.split(' ')
+      if (contentHash(git(['show', `${sha}:${file}`]).replace(/\r\n/g, '\n')) !== h) break
+      date = d
+    }
+  } catch { /* not in git yet */ }
+  return date
+}
+function trackLastmod(slug, src) {
+  const h = contentHash(src)
+  const cur = LASTMOD[slug]
+  if (cur && cur.hash === h) return
+  const date = (!cur && seedDate(slug + '.html', h)) || new Date().toISOString().slice(0, 10)
+  LASTMOD[slug] = { hash: h, date }
+  lastmodChanged = true
 }
 
 const titleCache = {}
@@ -265,7 +376,7 @@ function buildPage(file) {
   const vars = { ...base, slug, pageTitle: esc(unesc(title)), context: topAncestor(slug), quoteHref: hasForm ? '#quote' : 'contact.html#quote' }
 
   // 1. head block (before </head>)
-  src = replaceBlock(src, 'head', null, renderHead(slug, meta, title, desc), (s, b) => s.replace(/\n?<\/head>/, `\n${b}</head>`))
+  src = replaceBlock(src, 'head', null, renderHead(slug, meta, title, desc), (s, b) => s.replace(/\n?<\/head>/, () => `\n${b}</head>`)) // function: a "$$" in the JSON-LD must survive
   // cache-bust stylesheets and script
   src = src.replace(/href="([a-z0-9-]+\.css)(\?v=[^"]*)?"/g, (m, f) => { const h = hashOf(f); return h ? `href="${f}?v=${h}"` : m })
   src = src.replace(/src="script\.js(\?v=[^"]*)?"/g, () => `src="script.js?v=${hashOf('script.js')}"`)
@@ -300,6 +411,10 @@ function buildPage(file) {
   // 8. page-level attributes
   src = src.replace(/<html lang="en"[^>]*>/, `<html lang="en" data-page="${slug}">`)
 
+  // 9. extensionless internal links + descriptive Learn More anchors, then note real content changes
+  src = polishLinks(src)
+  if (slug !== 'sitemap') trackLastmod(slug, src)
+
   if (src !== original) {
     if (CHECK) { console.log(`  would change: ${path.basename(file)}`); return { changed: true, registryChanged } }
     fs.writeFileSync(file, src)
@@ -310,7 +425,8 @@ function buildPage(file) {
 function writeSitemaps(slugs) {
   const indexable = slugs.filter((s) => !PAGES[s]?.noindex && !PAGES[s]?.legal || ['privacy-policy', 'terms', 'cookie-policy'].includes(s))
   const today = new Date().toISOString().slice(0, 10)
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((s) => `  <url><loc>${cleanUrl(s)}</loc><lastmod>${today}</lastmod></url>`).join('\n')}\n</urlset>\n`
+  const lm = (s) => LASTMOD[s]?.date || today
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexable.map((s) => `  <url><loc>${cleanUrl(s)}</loc><lastmod>${lm(s)}</lastmod></url>`).join('\n')}\n</urlset>\n`
   const robots = `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${SITE}/sitemap.xml\n`
   const groups = {}
   for (const s of indexable) {
@@ -353,7 +469,41 @@ function writeSitemaps(slugs) {
     fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml)
     fs.writeFileSync(path.join(ROOT, 'robots.txt'), robots)
     fs.writeFileSync(path.join(ROOT, 'sitemap.html'), html)
+    fs.writeFileSync(path.join(ROOT, 'llms.txt'), renderLlms(indexable))
   }
+}
+
+
+// llms.txt (llmstxt.org): a plain summary for AI assistants, generated from the same registry as the sitemap
+function renderLlms(indexable) {
+  const d = (s) => { const m = fs.existsSync(path.join(ROOT, s + '.html')) && fs.readFileSync(path.join(ROOT, s + '.html'), 'utf8').match(/<meta name="description" content="([^"]*)"/); return m ? unesc(m[1]) : '' }
+  const line = (s) => `- [${unesc(PAGES[s]?.label || labelFromTitle(titleOf(s)))}](${cleanUrl(s)}): ${d(s)}`
+  const services = indexable.filter((s) => isService(s)).sort((a, b) => chain(a).length - chain(b).length || (PAGES[a]?.order ?? 99) - (PAGES[b]?.order ?? 99))
+  const company = ['index', 'about', 'reviews', 'contact', 'fiberglass-boat-repair'].filter((s) => indexable.includes(s))
+  return `# ${biz.name}
+
+> ${biz.description || biz.tagline}
+
+- Address: ${biz.address.street}, ${biz.address.city}, ${biz.address.state} ${biz.address.zip}
+- Phone: ${biz.phone}
+- Email: ${biz.email}
+- Hours: ${biz.hours.display.replace(/–/g, '-')} (${biz.hours.note})
+- Service area: ${biz.serviceArea.join(', ')}
+- Quotes: send photos through ${cleanUrl('contact')} or call. Prices depend on the damage, so the shop quotes after seeing photos or the boat.
+- The website chat assistant ("Captain Levi") is an AI; it does not give binding prices.
+
+## Company
+
+${company.map(line).join('\n')}
+
+## Services
+
+${services.map(line).join('\n')}
+
+## Optional
+
+${['privacy-policy', 'terms', 'cookie-policy', 'sitemap'].filter((s) => indexable.includes(s)).map(line).join('\n')}
+`
 }
 
 // ---------- main ----------
@@ -370,5 +520,6 @@ if (only.length === 0) {
   if (!CHECK) { const r = buildPage(path.join(ROOT, 'sitemap.html')); if (r.changed) changed++ }
 }
 if (regChanged && !CHECK) fs.writeFileSync(regPath, JSON.stringify(reg, null, 2) + '\n')
+if (lastmodChanged && !CHECK && only.length === 0) fs.writeFileSync(lastmodPath, JSON.stringify(Object.fromEntries(Object.entries(LASTMOD).sort()), null, 2) + '\n')
 console.log(`${CHECK ? 'check' : 'build'}: ${files.length} pages, ${changed} ${CHECK ? 'would change' : 'written'}`)
 if (CHECK && changed) process.exit(1)
