@@ -13,32 +13,84 @@ html[data-text-scale]{scroll-behavior:auto;}
 .btn:focus-visible,.chat-chip:focus-visible,.text-size-btn:focus-visible{outline-offset:2px;}
 /* the header is a compact bar: let it grow with the text-size control up to 112.5%, then hold,
    so the navigation never wraps into two rows on desktop (body copy keeps scaling to 137.5%) */
-.site-header .header-inner,.topbar-inner{zoom:calc(min(var(--text-scale,1),1.125) / var(--text-scale,1));}
-@media (max-width:1100px){.site-header .header-inner,.topbar-inner{zoom:calc(1 / var(--text-scale,1));}}
+.site-header .header-inner{zoom:calc(min(var(--text-scale,1),1.125) / var(--text-scale,1));}
+@media (max-width:1100px){.site-header .header-inner{zoom:calc(1 / var(--text-scale,1));}}
 
-/* ---- top bar above the header: Google "Add to Preferred Sources" pill + the real Google rating (2026-11-04).
-   It scrolls away; only .site-header is sticky. ---- */
-.topbar{background:#F3F6F9;border-bottom:1px solid #E4EAF0;}
-.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:38px;padding-block:5px;}
-/* "Boaters' Preferred Service": Google-coloured, but no Google logo and no claim that Google awarded it;
-   it links to the real reviews that back it up */
-.pref-badge{position:relative;display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #DADCE0;border-radius:999px;padding:4px 12px 4px 7px;font-family:var(--font-body);font-size:.75rem;font-weight:600;line-height:1.1;letter-spacing:.01em;color:#202124;white-space:nowrap;overflow:hidden;transition:border-color .15s ease,box-shadow .15s ease;}
-.pref-badge::before{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,#4285F4 0 25%,#EA4335 25% 50%,#FBBC05 50% 75%,#34A853 75%);opacity:.9;}
-.pref-badge:hover{border-color:#BDC1C6;box-shadow:0 1px 3px rgba(60,64,67,.18);}
-.pref-badge:focus-visible{border-radius:999px;}
-.pref-badge-icon{display:block;flex-shrink:0;}
-.topbar-rating{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-head);font-size:.8125rem;font-weight:600;color:var(--navy);white-space:nowrap;}
-.topbar-rating strong{font-weight:800;}
-.topbar-stars{color:#F3BF27;letter-spacing:1px;}
-.topbar-count{color:var(--gray-text);}
-.topbar-rating:hover .topbar-count{color:var(--icon-blue);text-decoration:underline;}
-@media (max-width:640px){
-  .topbar-inner{min-height:36px;padding-block:4px;}
-  .pref-badge{font-size:.71875rem;padding:4px 10px 4px 6px;gap:6px;}
-  .pref-badge-icon{width:15px;height:15px;}
-  .topbar-count{display:none;}
+/* ---- header extras (2026-11-04): "Boaters' Preferred Service" by the logo and the real Google rating at the far
+   right, both inside the sticky header so they stay on screen as the page scrolls. The badge is Google-coloured but
+   carries no Google logo and claims no Google award; it links to the real reviews that back it up. It sits under the logo,
+   tucked under it as a tagline: the header container caps at 1536px, so the bar never has room beside the logo. ---- */
+.header-brand{flex-shrink:0;}
+.brand-stack{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;}
+.brand-stack .logo{min-height:0;}
+.brand-stack .logo img{height:36px;}
+.pref-badge{display:inline-flex;align-items:center;gap:5px;color:var(--navy);white-space:nowrap;line-height:1.1;}
+.pref-badge-icon{display:block;flex-shrink:0;width:13px;height:13px;}
+.pref-badge-text{font-family:var(--font-head);font-size:.6875rem;font-weight:700;letter-spacing:.01em;}
+.pref-badge-text small{font-size:inherit;font-weight:600;color:#5F6B7A;}
+.pref-badge-text span{background:linear-gradient(90deg,#4285F4 0 25%,#EA4335 25% 50%,#FBBC05 50% 75%,#34A853 75%) left bottom/100% 1.5px no-repeat;padding-bottom:1px;}
+.pref-badge:hover .pref-badge-text span{background-size:100% 2.5px;}
+
+
+.g-rating{display:inline-flex;align-items:center;gap:7px;color:var(--navy);white-space:nowrap;flex-shrink:0;}
+.g-rating-logo{display:block;flex-shrink:0;}
+.g-rating-body{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:5px;line-height:1.1;}
+.g-rating-body strong{font-family:var(--font-head);font-weight:800;font-size:.9375rem;}
+.g-rating-stars{color:#F5B400;font-size:.6875rem;letter-spacing:1px;}
+.g-rating-body small{grid-column:1/-1;font-size:.65625rem;font-weight:600;color:var(--gray-text);}
+.g-rating:hover small{color:var(--icon-blue);text-decoration:underline;}
+.cta-get{display:inline;}
+
+@media (min-width:1025px){
+  .main-nav{gap:clamp(16px,1.7vw,34px);}
+  .header-actions{gap:16px;}
 }
-@media (max-width:359px){.topbar-stars{display:none;}}
+@media (max-width:1439px){
+  .cta-get{display:none;}                                    /* "Free Quote" */
+}
+@media (max-width:1359px){
+  .header-actions .phone{width:44px;height:44px;justify-content:center;gap:0;border-radius:50%;background:var(--icon-bg);}
+  .header-actions .phone span{display:none;}
+  .g-rating-body small{display:none;}
+  .g-rating-stars{display:inline-block;width:.95em;overflow:hidden;letter-spacing:0;}   /* one star */
+}
+@media (max-width:1179px){
+  .main-nav{gap:16px;}
+  .header-actions{gap:12px;}
+  .header-captain-avatar{width:36px;height:36px;}
+  .header-brand{gap:8px;}
+  .brand-stack .logo img{height:30px;}
+  .pref-badge-text{font-size:.625rem;}
+  .header-actions .btn-navy{padding:12px 18px;}
+}
+@media (max-width:1100px) and (min-width:1025px){
+  .main-nav{gap:12px;}
+  .header-actions{gap:8px;}
+  .header-actions .btn-navy{padding:10px 14px;gap:6px;}
+}
+@media (max-width:1024px){
+  .header-actions{gap:10px;}
+  .brand-stack .logo img{height:34px;}
+}
+@media (max-width:640px){
+  .header-actions{gap:4px;}
+  .header-brand{gap:6px;}
+  .header-captain-avatar{width:32px;height:32px;}
+  .brand-stack .logo img{height:28px;}
+  .pref-badge{gap:4px;}
+  .pref-badge-icon{width:10px;height:10px;}
+  .pref-badge-text{font-size:.5625rem;}
+  .g-rating{gap:4px;padding:0 4px;}
+  .g-rating-logo{width:16px;height:16px;}
+  .g-rating-body strong{font-size:.875rem;}
+}
+@media (max-width:400px){
+  .g-rating{padding:0;}
+  .g-rating-logo{display:none;}
+}
+@media (max-width:350px){
+  .header-captain-avatar{display:none;}
+}
 .main-nav > a,.main-nav .nav-dropdown,.header-actions .phone,.header-actions .btn{white-space:nowrap;}
 .main-nav a.is-ancestor{color:var(--icon-blue);}
 .main-nav a[aria-current="page"]{color:var(--icon-blue);}

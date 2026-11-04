@@ -1,6 +1,6 @@
 /* home.js — homepage only: the live Google reviews.
    1. "Boaters Say It Best" band: a looping carousel of real five-star Google reviews (shuffled every visit,
-      auto-advancing, swipeable, arrows + dots + pause).
+      drifting constantly, swipeable, arrows + dots + pause; each card drops down to the full review).
    2. The "Trusted by Boaters" card further down, which rotates through more of them every 6 s.
    Every review shown comes from site/reviews.json, the verbatim pull of the Google listing; nothing is
    written or edited here. The site-wide motion (reveals, count-ups, hero entrance) lives in script.js. */
@@ -32,7 +32,6 @@
   }
 
   const ROTATE_MS = 6000 // testimonial card
-  const SLIDE_MS = 3400 // carousel auto-advance
   const G_PATHS = [
     ['#EA4335', 'M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'],
     ['#4285F4', 'M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'],
@@ -105,12 +104,18 @@
   }
 
   // ---------------------------------------------------------------- reviews carousel
-  function reviewCard(r, i, total) {
+  // Drifts constantly to the left (pauses on hover, focus, an open review, the Pause button, or off screen).
+  // Click a card, or its "Read full review" button, and it drops down to show the whole review.
+  let uid = 0
+  const CHEVRON = 'M6 9l6 6 6-6'
+  function reviewCard(r, i, total, clone) {
     const card = document.createElement('div')
     card.className = 'gr-card'
-    card.setAttribute('role', 'group')
-    card.setAttribute('aria-roledescription', 'slide')
-    card.setAttribute('aria-label', `Review ${i + 1} of ${total}`)
+    if (!clone) {
+      card.setAttribute('role', 'group')
+      card.setAttribute('aria-roledescription', 'slide')
+      card.setAttribute('aria-label', `Review ${i + 1} of ${total}`)
+    }
     const top = document.createElement('div')
     top.className = 'gr-card-top'
     const av = document.createElement('span')
@@ -126,6 +131,8 @@
     small.textContent = 'Google Review'
     who.append(strong, small)
     top.append(av, who, gLogo('gr-g'))
+    const meta = document.createElement('div')
+    meta.className = 'gr-meta'
     const stars = document.createElement('span')
     stars.className = 'gr-stars'
     stars.setAttribute('role', 'img')
@@ -134,7 +141,31 @@
     const text = document.createElement('p')
     text.className = 'gr-text'
     text.textContent = r.text
-    card.append(top, stars, text)
+    const more = document.createElement('button')
+    more.type = 'button'
+    more.className = 'gr-more'
+    more.hidden = true
+    more.setAttribute('aria-expanded', 'false')
+    if (clone) more.tabIndex = -1
+    else { text.id = 'gr-text-' + (++uid); more.setAttribute('aria-controls', text.id) }
+    const label = document.createElement('span')
+    label.textContent = 'Read full review'
+    const chev = document.createElementNS(NS, 'svg')
+    chev.setAttribute('viewBox', '0 0 24 24')
+    chev.setAttribute('width', '12')
+    chev.setAttribute('height', '12')
+    chev.setAttribute('aria-hidden', 'true')
+    const cp = document.createElementNS(NS, 'path')
+    cp.setAttribute('d', CHEVRON)
+    cp.setAttribute('fill', 'none')
+    cp.setAttribute('stroke', 'currentColor')
+    cp.setAttribute('stroke-width', '2.4')
+    cp.setAttribute('stroke-linecap', 'round')
+    cp.setAttribute('stroke-linejoin', 'round')
+    chev.appendChild(cp)
+    more.append(label, chev)
+    meta.append(stars, more)
+    card.append(top, meta, text)
     return card
   }
 
@@ -151,21 +182,20 @@
     const nextBtn = $('[data-gr-next]', root)
     if (!track || !viewport) return used
 
-    const picks = all.slice(0, 25)
+    const picks = all.filter((r) => r.text.length <= 1400).slice(0, 25)
     if (picks.length < 6) return used
     picks.forEach((r) => used.add(r))
     const n = picks.length
     const CLONES = 6 // copies of the first cards at the end make the loop seamless
     track.textContent = ''
-    picks.forEach((r, i) => track.appendChild(reviewCard(r, i, n)))
+    picks.forEach((r, i) => track.appendChild(reviewCard(r, i, n, false)))
     for (let i = 0; i < CLONES; i++) {
-      const c = reviewCard(picks[i % n], i, n)
+      const c = reviewCard(picks[i % n], i, n, true)
       c.classList.add('is-clone')
       c.setAttribute('aria-hidden', 'true')
-      c.removeAttribute('role')
-      c.inert = true
       track.appendChild(c)
     }
+    const cards = Array.from(track.children)
 
     // five dots, each one a group of reviews (25 reviews = 5 per dot, as in the design)
     const groups = Math.min(5, n)
@@ -176,102 +206,210 @@
       b.type = 'button'
       b.className = 'gr-dot'
       b.setAttribute('aria-label', `Reviews ${g * per + 1} to ${Math.min(n, (g + 1) * per)}`)
-      b.addEventListener('click', () => { go(g * per); restart() })
+      b.addEventListener('click', () => glideTo(g * per * step))
       dotsWrap.appendChild(b)
       dots.push(b)
     }
 
-    let idx = 0
+    let x = 0 // how far the track has moved left, in px
     let step = 0
-    const gapPx = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 11
+    let loopW = 0
+    let tween = null
+    let openCard = null
+    let hover = false
+    let focus = false
+    let offscreen = false
+    let userPaused = false
+    let dragging = false
+    let moved = 0
+    const gapPx = () => parseFloat(getComputedStyle(track).columnGap) || 11
+
+    function apply() { track.style.transform = `translate3d(${(-x).toFixed(2)}px,0,0)` }
+    function paintDots() {
+      const real = ((Math.round(x / step) % n) + n) % n
+      const g = Math.min(groups - 1, Math.floor(real / per))
+      dots.forEach((d, k) => d.setAttribute('aria-current', k === g ? 'true' : 'false'))
+    }
+    // keep x inside one loop; an open card hands over to its twin so it stays where the reader is looking
+    function wrap() {
+      let shift = 0
+      if (x >= loopW) shift = -n
+      else if (x < 0) shift = n
+      if (!shift) return 0
+      x += shift * step
+      if (tween) { tween.from += shift * step; tween.to += shift * step }
+      if (openCard) {
+        const twin = cards[cards.indexOf(openCard) + shift]
+        if (twin) { setOpen(openCard, false, true); setOpen(twin, true, true) }
+      }
+      return shift * step
+    }
     function layout() {
       const w = viewport.clientWidth
       const count = w >= 1180 ? 5 : w >= 920 ? 4 : w >= 680 ? 3 : w >= 440 ? 2 : 1
       const gap = gapPx()
       const peek = count === 1 ? Math.min(56, w * 0.14) : 0 // phones: the next card peeks in
       const cardW = (w - gap * (count - 1) - peek) / count
+      const ratio = step ? x / step : 0
       track.style.setProperty('--gr-card', cardW.toFixed(2) + 'px')
       step = cardW + gap
-      jump(idx)
-    }
-    function setX(i) { track.style.transform = `translate3d(${(-i * step).toFixed(2)}px,0,0)` }
-    function paintDots() {
-      const real = ((idx % n) + n) % n
-      const g = Math.min(groups - 1, Math.floor(real / per))
-      dots.forEach((d, k) => d.setAttribute('aria-current', k === g ? 'true' : 'false'))
-    }
-    function jump(i) { // no animation
-      idx = i
-      track.style.transition = 'none'
-      setX(idx)
-      void track.offsetWidth
-      track.style.transition = ''
+      loopW = n * step
+      x = ratio * step
+      wrap()
+      apply()
       paintDots()
+      requestAnimationFrame(markOverflow)
     }
-    function go(i) {
-      if (reduced()) { jump(((i % n) + n) % n); return }
-      idx = i
-      setX(idx)
+    // only reviews that don't fit in two lines get the "Read full review" button
+    function markOverflow() {
+      cards.forEach((c) => {
+        if (c.classList.contains('is-open')) return
+        const t = $('.gr-text', c)
+        $('.gr-more', c).hidden = !(t.scrollHeight > t.clientHeight + 2)
+      })
+    }
+
+    // smooth moves for the arrows, the dots, and opening a card that is half out of view
+    function glideTo(target) {
+      if (reduced()) { x = target; wrap(); apply(); paintDots(); return }
+      tween = { from: x, to: target, t0: performance.now(), dur: 520 }
+      ensureLoop()
+    }
+    const nextCard = () => glideTo((Math.floor(x / step + 1e-3) + 1) * step)
+    const prevCard = () => {
+      let t = (Math.ceil(x / step - 1e-3) - 1) * step
+      if (t < 0) { x += loopW; t += loopW }
+      glideTo(t)
+    }
+
+    // the drift itself
+    const SPEED = 32 // px per second
+    const drifting = () => !reduced() && !userPaused && !hover && !focus && !dragging && !openCard && !document.hidden
+    let raf = 0
+    let last = 0
+    function frame(t) {
+      raf = 0
+      const dt = last ? Math.min(64, t - last) : 16
+      last = t
+      if (tween) {
+        const p = Math.min(1, (t - tween.t0) / tween.dur)
+        const e = 1 - Math.pow(1 - p, 3)
+        x = tween.from + (tween.to - tween.from) * e
+        if (p >= 1) tween = null
+      } else if (drifting()) {
+        x += SPEED * dt / 1000
+      }
+      wrap()
+      apply()
       paintDots()
+      ensureLoop()
     }
-    function next() {
-      if (idx >= n) jump(idx - n)
-      go(idx + 1)
+    function ensureLoop() {
+      if (raf || offscreen) return
+      if (!tween && !drifting()) { last = 0; return }
+      raf = requestAnimationFrame(frame)
     }
-    function prev() {
-      if (idx <= 0) jump(idx + n)
-      go(idx - 1)
+
+    // the drop-down
+    function setOpen(card, open, silent) {
+      const btn = $('.gr-more', card)
+      const label = btn && btn.firstChild
+      card.classList.toggle('is-open', open)
+      if (btn) {
+        btn.setAttribute('aria-expanded', String(open))
+        if (label) label.textContent = open ? 'Show less' : 'Read full review'
+        if (open) btn.hidden = false
+      }
+      if (!open) { const t = $('.gr-text', card); if (t) t.scrollTop = 0 }
+      if (silent) { if (open) openCard = card; return }
+      openCard = open ? card : null
+      if (!open) { markOverflow(); ensureLoop() }
     }
-    track.addEventListener('transitionend', (e) => {
-      if (e.target === track && e.propertyName === 'transform' && idx >= n) jump(idx - n)
+    function openReview(card) {
+      if (openCard && openCard !== card) setOpen(openCard, false)
+      setOpen(card, true)
+      // slide it fully into view if it was half off the edge
+      const vr = viewport.getBoundingClientRect()
+      const cr = card.getBoundingClientRect()
+      if (cr.left < vr.left) glideTo(x - (vr.left - cr.left))
+      else if (cr.right > vr.right) glideTo(x + (cr.right - vr.right))
+    }
+    track.addEventListener('click', (e) => {
+      if (moved > 6) return // that was a drag, not a click
+      const card = e.target.closest('.gr-card')
+      if (!card) return
+      const btn = e.target.closest('.gr-more')
+      if (btn) {
+        if (card.classList.contains('is-open')) setOpen(card, false)
+        else openReview(card)
+        return
+      }
+      if (!card.classList.contains('is-open') && !$('.gr-more', card).hidden) openReview(card)
     })
-
-    // auto-advance: stops while hovered, focused, dragged, off screen, in a hidden tab, or paused
-    let timer = 0
-    let hover = false
-    let focus = false
-    let offscreen = false
-    let userPaused = false
-    let dragging = false
-    const canRun = () => !reduced() && !userPaused && !hover && !focus && !offscreen && !dragging && !document.hidden
-    function restart() {
-      clearTimeout(timer)
-      if (canRun()) timer = setTimeout(() => { next(); restart() }, SLIDE_MS)
-    }
-    const section = root.closest('section') || root
-    section.addEventListener('mouseenter', () => { hover = true; restart() })
-    section.addEventListener('mouseleave', () => { hover = false; restart() })
-    root.addEventListener('focusin', () => { focus = true; restart() })
-    root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) { focus = false; restart() } })
-    document.addEventListener('visibilitychange', restart)
-    if (hasIO) new IntersectionObserver((es) => es.forEach((e) => { offscreen = !e.isIntersecting; restart() }), { threshold: 0.2 }).observe(root)
-
-    prevBtn?.addEventListener('click', () => { prev(); restart() })
-    nextBtn?.addEventListener('click', () => { next(); restart() })
+    document.addEventListener('click', (e) => { if (openCard && !track.contains(e.target)) setOpen(openCard, false) })
     root.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') { e.preventDefault(); next(); restart() }
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); restart() }
+      if (e.key === 'Escape' && openCard) {
+        const c = openCard
+        setOpen(c, false)
+        const b = $('.gr-more', c)
+        if (b) b.focus()
+        return
+      }
+      if (e.target.closest('.gr-text')) return
+      if (e.key === 'ArrowRight') { e.preventDefault(); nextCard() }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevCard() }
     })
+
+    // pausing
+    root.addEventListener('mouseenter', () => { hover = true })
+    root.addEventListener('mouseleave', () => { hover = false; ensureLoop() })
+    root.addEventListener('focusin', (e) => {
+      focus = true
+      const card = e.target.closest('.gr-card')
+      if (card && !card.classList.contains('is-clone')) {
+        const vr = viewport.getBoundingClientRect()
+        const cr = card.getBoundingClientRect()
+        if (cr.left < vr.left || cr.right > vr.right) glideTo(cards.indexOf(card) * step)
+      }
+    })
+    root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) { focus = false; ensureLoop() } })
+    document.addEventListener('visibilitychange', ensureLoop)
+    if (hasIO) {
+      new IntersectionObserver((es) => es.forEach((e) => {
+        offscreen = !e.isIntersecting
+        if (offscreen && raf) { cancelAnimationFrame(raf); raf = 0 }
+        last = 0
+        ensureLoop()
+      })).observe(root)
+    }
+    if (prevBtn) prevBtn.addEventListener('click', prevCard)
+    if (nextBtn) nextBtn.addEventListener('click', nextCard)
     if (pauseBtn) {
       if (reduced()) pauseBtn.hidden = true
       pauseBtn.addEventListener('click', () => {
         userPaused = !userPaused
         pauseBtn.setAttribute('aria-pressed', String(userPaused))
         pauseBtn.setAttribute('aria-label', userPaused ? 'Play reviews' : 'Pause reviews')
-        restart()
+        last = 0
+        ensureLoop()
       })
     }
 
     // swipe / drag
     let x0 = 0
     let y0 = 0
-    let dx = 0
+    let startX = 0
     let pid = null
     let horizontal = null
     viewport.addEventListener('pointerdown', (e) => {
       if (e.pointerType === 'mouse' && e.button !== 0) return
-      pid = e.pointerId; x0 = e.clientX; y0 = e.clientY; dx = 0; horizontal = null
-      if (idx >= n) jump(idx - n)
+      if (e.target.closest('.gr-card.is-open .gr-text')) return // let people scroll and select inside an open review
+      pid = e.pointerId
+      x0 = e.clientX
+      y0 = e.clientY
+      startX = x
+      moved = 0
+      horizontal = null
     })
     viewport.addEventListener('pointermove', (e) => {
       if (e.pointerId !== pid) return
@@ -279,27 +417,32 @@
       const my = e.clientY - y0
       if (horizontal === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) {
         horizontal = Math.abs(mx) > Math.abs(my)
-        if (horizontal) { dragging = true; restart(); track.classList.add('is-dragging'); viewport.setPointerCapture(pid) }
+        if (horizontal) {
+          dragging = true
+          tween = null
+          track.classList.add('is-dragging')
+          viewport.setPointerCapture(pid)
+        }
       }
       if (!horizontal) return
-      dx = mx
-      if (idx <= 0 && dx > 0) jump(idx + n) // pulling right from the start: slide in from the clones
-      track.style.transform = `translate3d(${(-idx * step + dx).toFixed(2)}px,0,0)`
+      moved = Math.abs(mx)
+      x = startX - mx
+      startX += wrap() // follow a wrap so the drag stays continuous
+      apply()
+      paintDots()
     })
     const endDrag = (e) => {
       if (e.pointerId !== pid) return
       pid = null
-      if (!horizontal) return
+      if (!horizontal) { moved = 0; return }
       track.classList.remove('is-dragging')
       dragging = false
-      const moved = Math.round(-dx / step)
-      const target = Math.abs(dx) > 40 ? idx + (moved === 0 ? (dx < 0 ? 1 : -1) : moved) : idx
-      go(Math.max(0, Math.min(n + CLONES - 1, target)))
-      restart()
+      last = 0
+      ensureLoop()
+      setTimeout(() => { moved = 0 }, 0) // the click that ends a drag is ignored above, then reset
     }
     viewport.addEventListener('pointerup', endDrag)
     viewport.addEventListener('pointercancel', endDrag)
-    viewport.addEventListener('click', (e) => { if (Math.abs(dx) > 6) { e.preventDefault(); e.stopPropagation() } }, true)
 
     let rt
     window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 150) })
@@ -308,7 +451,7 @@
     if (prevBtn) prevBtn.hidden = false
     if (nextBtn) nextBtn.hidden = false
     if (nav) nav.hidden = false
-    restart()
+    ensureLoop()
     return used
   }
 

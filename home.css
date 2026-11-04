@@ -62,9 +62,9 @@
 
 /* carousel */
 .gr-carousel{position:relative;margin-top:42px;padding-inline:clamp(16px,5.5vw,85px) clamp(16px,5.1vw,78px);}
-.gr-viewport{overflow:hidden;padding:10px 0 30px;margin:-10px 0 -30px;touch-action:pan-y;}
-.gr-track{display:flex;gap:11px;will-change:transform;transition:transform .7s cubic-bezier(.22,.8,.24,1);}
-.gr-track.is-dragging{transition:none;cursor:grabbing;}
+.gr-viewport{overflow:hidden;padding:10px 0 30px;margin:-10px 0 -30px;touch-action:pan-y;} /* card shadows must stay inside this 30px */
+.gr-track{display:flex;align-items:flex-start;gap:11px;will-change:transform;}
+.gr-track.is-dragging{cursor:grabbing;}
 .gr-card{
   flex:0 0 var(--gr-card,266px);min-width:0;
   display:flex;flex-direction:column;
@@ -72,9 +72,11 @@
   padding:12px 15px 10px 19px;
   box-shadow:0 12px 26px -18px rgba(0,38,75,.45),0 1px 2px rgba(0,38,75,.05);
   transition:transform .3s ease,box-shadow .3s ease;
-  user-select:none;
+  user-select:none;cursor:pointer;
 }
-.gr-card:hover{transform:translateY(-4px);box-shadow:0 22px 36px -22px rgba(0,38,75,.55),0 1px 2px rgba(0,38,75,.05);}
+.gr-card.is-open{cursor:default;user-select:text;box-shadow:0 16px 28px -18px rgba(0,38,75,.55),0 0 0 2px rgba(34,181,236,.45);}
+.gr-card.is-open:hover{transform:none;}
+.gr-card:hover{transform:translateY(-4px);box-shadow:0 16px 28px -18px rgba(0,38,75,.55),0 1px 2px rgba(0,38,75,.05);}
 .gr-card-top{display:flex;align-items:center;gap:16px;}
 .gr-avatar{
   width:41px;height:41px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;
@@ -85,11 +87,22 @@
 .gr-who strong{font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .gr-who small{font-size:.84375rem;color:#5D6B7B;}
 .gr-g{display:block;flex-shrink:0;width:22px;height:22px;align-self:flex-start;margin-top:6px;}
-.gr-stars{margin-top:7px;color:#F5B400;font-size:.9375rem;letter-spacing:2px;line-height:1;}
+.gr-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px;min-height:18px;}
+.gr-stars{color:#F5B400;font-size:.9375rem;letter-spacing:2px;line-height:1;}
+.gr-more{display:inline-flex;align-items:center;gap:4px;padding:2px 0;border:0;background:none;cursor:pointer;font-family:var(--font-head);font-weight:700;font-size:.78125rem;color:#1A80CF;white-space:nowrap;}
+.gr-more:hover{color:var(--navy);text-decoration:underline;}
+.gr-more svg{transition:transform .25s ease;}
+.gr-more[aria-expanded="true"] svg{transform:rotate(180deg);}
+.gr-more[hidden]{display:none;}
 .gr-text{
-  margin:9px 0 0;font-size:1.03125rem;line-height:1.25;color:#1D2633;
+  margin:9px 0 0;font-size:1.03125rem;line-height:1.25;color:#1D2633;min-height:2.5em;
   display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
 }
+/* "Read full review": the card drops down to show the whole review (long ones scroll inside the card) */
+.gr-card.is-open .gr-text{display:block;-webkit-line-clamp:unset;line-clamp:none;max-height:min(320px,52vh);overflow-y:auto;padding-right:4px;overscroll-behavior:contain;animation:gr-drop .3s ease both;}
+@keyframes gr-drop{from{opacity:.4;}to{opacity:1;}}
+.gr-card.is-open .gr-text::-webkit-scrollbar{width:5px;}
+.gr-card.is-open .gr-text::-webkit-scrollbar-thumb{background:#C5D3E1;border-radius:4px;}
 .gr-arrow{
   position:absolute;top:50%;z-index:2;width:42px;height:42px;margin-top:-21px;border-radius:50%;
   display:grid;place-items:center;cursor:pointer;
@@ -160,5 +173,4 @@
 
 @media (prefers-reduced-motion:reduce){
   .results-soon svg{animation:none;}
-  .gr-track{transition:none;}
 }
