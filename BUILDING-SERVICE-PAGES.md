@@ -981,9 +981,10 @@ node --check script.js
   `ab-cta.jpg` is the comp's CTA band with its copy painted out. The three
   credential photos start past the comp's baked descriptions, and the map
   (`ab-map.jpg`, baked labels and pins kept) starts past the comp's
-  paragraph; both fade in with CSS masks. Captain Dave's and Levi's photos
-  are the comp's (the live site's originals are 344x282 and show a
-  different detailing photo for Levi). The comp's slim footer is not used;
+  paragraph; both fade in with CSS masks. Captain Dave's photo is the
+  comp's (the live site's original is 344x282). The comp's band after the
+  leader was cut on 2026-11-03 down to the local community copy, pins and
+  map. The comp's slim footer is not used;
   the page keeps the shared footer and quote form. Copy follows the comp,
   which condenses the live site's story; "fifty years", "forty-three
   years" and the city list are the live site's claims. Check with the
