@@ -4,17 +4,21 @@
 //   GET  /api/auth/me                     → {ok, staff:{email, expiresAt} | null, loginConfigured}
 import { audit } from '../../lib/audit.js'
 import { getDb } from '../../lib/db.js'
-import { HttpError, query, readJson, requireMethod, route, sendJson, type Req, type Res } from '../../lib/http.js'
+import { HttpError, query, readJson, requireMethod, requireSameOrigin, route, sendJson, type Req, type Res } from '../../lib/http.js'
 import { ipHash } from '../../lib/ip.js'
 import { enforce } from '../../lib/ratelimit.js'
 import { checkLogin, clearStaffCookie, setStaffCookie, staffFromRequest, staffLoginConfigured } from '../../lib/staff.js'
 
 const LOGIN_RULE = { name: 'login:ip', limit: 10, windowMs: 15 * 60_000 }
+// one shared password: also cap attempts across ALL addresses, so guessing from rotating IPs stays slow
+const LOGIN_GLOBAL_RULE = { name: 'login:all', limit: 40, windowMs: 15 * 60_000 }
 
 async function login(req: Req, res: Res): Promise<void> {
   requireMethod(req, 'POST')
+  requireSameOrigin(req)
   const db = await getDb()
   await enforce(db, LOGIN_RULE, ipHash(req), 'Too many sign-in attempts. Wait 15 minutes and try again.')
+  await enforce(db, LOGIN_GLOBAL_RULE, 'all', 'Sign-in is paused for a few minutes after too many attempts. Try again shortly.')
   const body = (await readJson(req)) as { email?: unknown; password?: unknown }
   let email: string
   try {

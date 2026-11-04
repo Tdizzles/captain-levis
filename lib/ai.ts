@@ -16,6 +16,10 @@ let clientKey = ''
 
 export function aiConfigured(): boolean { return !!env.anthropicKey }
 
+/** Last provider result seen by this instance, so /api/health can say "key set but rejected" instead of a bare true. */
+export const aiStatus: { lastOkAt: string | null; lastError: { status: number | null; message: string; at: string } | null } = { lastOkAt: null, lastError: null }
+function noteAiError(status: number | null, message: string) { aiStatus.lastError = { status, message: message.slice(0, 200), at: new Date().toISOString() } }
+
 export function getAnthropic(): Anthropic | null {
   const key = env.anthropicKey
   if (!key) return null
@@ -31,10 +35,21 @@ export async function monthSpend(db: Queryable, now = new Date()): Promise<numbe
 
 export interface BudgetState { ok: boolean; spent: number; budget: number }
 
+export async function daySpend(db: Queryable, now = new Date()): Promise<number> {
+  const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString()
+  const r = await db.query<{ spent: number | string | null }>('SELECT coalesce(sum(cost_usd), 0)::float8 AS spent FROM ai_usage WHERE created_at >= $1', [start])
+  return Number(r.rows[0]?.spent || 0)
+}
+
+/**
+ * Monthly ceiling plus a daily one (AI_DAILY_BUDGET_USD, default a fifth of the month) so a bot hammering the
+ * public chat cannot burn the whole month's budget in one afternoon. Over either → scripted mode.
+ */
 export async function budget(db: Queryable): Promise<BudgetState> {
   const b = env.aiMonthlyBudgetUsd
   const spent = await monthSpend(db)
-  return { ok: spent < b, spent, budget: b }
+  if (spent >= b) return { ok: false, spent, budget: b }
+  return { ok: (await daySpend(db)) < env.aiDailyBudgetUsd, spent, budget: b }
 }
 
 export async function logUsage(db: Queryable, kind: AiKind, model: string, usage: Anthropic.Usage): Promise<number> {
@@ -80,13 +95,14 @@ export async function callModel<S extends z.ZodType>(db: Queryable, kind: AiKind
       output_config: { ...(tuning(model).output_config || {}), format: zodOutputFormat(opts.schema) },
       ...(tuning(model).thinking ? { thinking: tuning(model).thinking } : {}),
     }, { signal: ctrl.signal, timeout: TIMEOUT_MS })
+    aiStatus.lastOkAt = new Date().toISOString(); aiStatus.lastError = null
     const cost = await logUsage(db, kind, model, res.usage)
     const text = res.content.filter((c): c is Anthropic.TextBlock => c.type === 'text').map((c) => c.text).join('')
     if (res.stop_reason === 'refusal') return { parsed: null, text: '', usage: res.usage, cost, stopReason: res.stop_reason, model }
     return { parsed: (res.parsed_output as z.infer<S> | null) ?? null, text, usage: res.usage, cost, stopReason: res.stop_reason, model }
   } catch (err) {
-    if (err instanceof Anthropic.APIError) console.warn(`[ai] ${kind} ${err.status} ${err.message}`)
-    else console.warn(`[ai] ${kind} failed:`, (err as Error)?.message || err)
+    if (err instanceof Anthropic.APIError) { console.warn(`[ai] ${kind} ${err.status} ${err.message}`); noteAiError(err.status ?? null, err.message) }
+    else { console.warn(`[ai] ${kind} failed:`, (err as Error)?.message || err); noteAiError(null, String((err as Error)?.message || err)) }
     return null
   } finally {
     clearTimeout(timer)

@@ -24,6 +24,7 @@ export const env = {
   get anthropicModel() { return process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5' },
   get anthropicAssistantModel() { return process.env.ANTHROPIC_ASSISTANT_MODEL || 'claude-opus-5-5' },
   get aiMonthlyBudgetUsd() { return num(process.env.AI_MONTHLY_BUDGET_USD, 25) },
+  get aiDailyBudgetUsd() { return num(process.env.AI_DAILY_BUDGET_USD, this.aiMonthlyBudgetUsd / 5) },
   get maxPhotos() { return Math.max(1, Math.floor(num(process.env.MAX_PHOTOS, 5))) },
   get maxPhotoBytes() { return Math.max(1, num(process.env.MAX_PHOTO_MB, 10)) * 1024 * 1024 },
   get maxRequestBytes() { return 30 * 1024 * 1024 },

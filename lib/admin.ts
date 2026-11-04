@@ -2,7 +2,7 @@
 // ADMIN_API_TOKEN bearer. Returns who is acting so audit rows can name them.
 import { timingSafeEqual } from 'node:crypto'
 import { env } from './env.js'
-import { header, HttpError, type Req } from './http.js'
+import { header, HttpError, requireSameOrigin, type Req } from './http.js'
 import { staffFromRequest } from './staff.js'
 
 export interface Actor { kind: 'staff' | 'token'; email: string | null; label: string }
@@ -24,7 +24,10 @@ export function actorFor(req: Req): Actor | null {
 
 export function requireAdmin(req: Req): Actor {
   const actor = actorFor(req)
-  if (actor) return actor
+  if (actor) {
+    if (actor.kind === 'staff') requireSameOrigin(req) // the cookie rides along cross-site; the bearer never does
+    return actor
+  }
   const anyWay = !!env.adminToken || !!process.env.STAFF_PASSWORD_HASH
   if (!anyWay) throw new HttpError(503, 'Admin access is not configured (set STAFF_PASSWORD_HASH or ADMIN_API_TOKEN).')
   throw new HttpError(401, 'Unauthorized.', {}, { 'WWW-Authenticate': 'Bearer' })

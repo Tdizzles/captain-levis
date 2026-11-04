@@ -101,6 +101,21 @@ export async function readJson(req: Req, limit = 64 * 1024): Promise<unknown> {
   try { return JSON.parse(text) } catch { throw new HttpError(400, 'Invalid JSON body.') }
 }
 
+/**
+ * CSRF guard for cookie-authenticated writes: the browser's Origin (or Referer) must be this host. Requests with
+ * neither header (curl, server-to-server with the bearer token) pass; browsers always send Origin on POST/PATCH/DELETE.
+ */
+export function requireSameOrigin(req: Req): void {
+  const m = (req.method || 'GET').toUpperCase()
+  if (m === 'GET' || m === 'HEAD' || m === 'OPTIONS') return
+  const src = header(req, 'origin') || header(req, 'referer')
+  if (!src) return
+  const host = (header(req, 'x-forwarded-host') || header(req, 'host')).toLowerCase()
+  let from = ''
+  try { from = new URL(src).host.toLowerCase() } catch { /* "null" origin and junk fall through to the refusal */ }
+  if (!from || from !== host) throw new HttpError(403, 'Cross-site request refused.')
+}
+
 export function requireMethod(req: Req, ...methods: string[]): void {
   if (!methods.includes((req.method || 'GET').toUpperCase())) throw new HttpError(405, 'Method not allowed.', {}, { Allow: methods.join(', ') })
 }

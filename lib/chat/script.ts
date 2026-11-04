@@ -119,5 +119,8 @@ export const LINES = {
   submitFailed: `I could not save your request just now, so nothing was sent. Please try again in a moment, use the quote form, or call [${biz.phone}](tel:${phoneDigits()}).`,
   processAnswer: 'Here is how it usually goes: you send the details (and photos if you have them), a crew member looks them over and gets back to you, then they see the boat, either at the yard or where she sits, before giving you a real quote. Repairs are scheduled once you approve it.',
   startFallback: 'Good question. I can get you started on a quote, give you our hours and location, or point you to the right page.',
+  greetingReply: "Ahoy! I'm Captain Levi. I can start a quote for your boat, give you our hours and location, or answer a repair question. What can I do for you?",
+  thanksReply: 'Anytime. Anything else I can help with, a quote, our hours, or a repair question?',
+  thanksAfterQuote: `You're welcome. The crew has your request and will be in touch. Need them sooner? Call or text [${biz.phone}](tel:${phoneDigits()}).`,
   questionNoMatch: `I don't have a good answer for that one. The quickest route is a call or text to [${biz.phone}](tel:${phoneDigits()}), or I can get your details for a quote.`,
 }

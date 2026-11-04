@@ -58,6 +58,9 @@ const NOT_SURE_RE = /^(not sure|unsure|i'?m not sure|no idea|don'?t know|dont kn
 const URGENT_RE = /\b(asap|urgent|right away|as soon as|this week|tomorrow|today)\b/i
 const QUESTION_RE = /\?\s*$/
 const START_QUOTE_RE = /^i need a quote\b|\b(get|need|want|like|start)\b.{0,12}\b(quote|estimate)\b|\bquote\b/i
+// small talk on its own ("hi", "hey there!", "good morning captain"); anything longer is a real message
+const GREETING_RE = /^(hi+|hey+|hello+|howdy|hiya|yo|ahoy|sup|what'?s up|good (morning|afternoon|evening)|greetings)( there| captain( levi)?| guys| y'?all| levi)?[\s!.,?]*$/i
+const THANKS_RE = /^(thanks?( you)?|thank you( so much| very much)?|thx|ty|ok(ay)?( thanks?)?|cool|great|awesome|perfect|sounds good|got it)[\s!.,]*$/i
 
 function nextStep(slots: Slots): Step {
   return nextQuoteStep(slots)
@@ -377,12 +380,15 @@ export async function runTurn(db: Db, s: ChatSessionRow, input: TurnInput): Prom
       return finish(stepResponse(s, LINES.quoteStart, { event: 'quote_start' }))
     }
     if (QUESTION_CHIP_RE.test(text)) { state.asking = true; return finish({ reply: LINES.anotherQuestion, chips: questionChips() }) }
+    if (THANKS_RE.test(text) || GREETING_RE.test(text)) return finish({ reply: LINES.thanksAfterQuote, chips: [{ label: 'I need another quote', send: 'I need another quote' }, ...START_CHIPS.slice(1)] })
     const a = await answerQuestion(db, s, input, mode); addTally(tally, a)
     return finish({ reply: a.reply, links: a.links, chips: [{ label: 'I need another quote', send: 'I need another quote' }, ...START_CHIPS.slice(1)] })
   }
 
   // --- start: route by intent -----------------------------------------------------------------------
   if (state.mode === 'start') {
+    if (GREETING_RE.test(text)) return finish({ reply: LINES.greetingReply, chips: START_CHIPS })
+    if (THANKS_RE.test(text)) return finish({ reply: LINES.thanksReply, chips: START_CHIPS })
     if (QUESTION_CHIP_RE.test(text)) { state.asking = true; return finish({ reply: LINES.anotherQuestion, chips: questionChips() }) }
     if (PROCESS_RE.test(text)) { state.asking = false; return finish({ reply: LINES.processAnswer, links: input.page !== 'structural-fiberglass-repair' ? [{ label: 'How our repairs work', href: 'structural-fiberglass-repair.html' }] : undefined, chips: START_CHIPS }) }
     if (START_QUOTE_RE.test(text) && !state.asking) {

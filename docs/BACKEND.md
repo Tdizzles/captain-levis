@@ -82,6 +82,7 @@ state; the model only sees the visitor's words in user turns and only ever retur
 | `ANTHROPIC_API_KEY` | chat language + reply drafts | scripted chat, no drafts |
 | `ANTHROPIC_MODEL` | model id | `claude-sonnet-5-5` |
 | `AI_MONTHLY_BUDGET_USD` | hard monthly AI ceiling | `25` |
+| `AI_DAILY_BUDGET_USD` | daily AI ceiling (stops a bot draining the month in a day); health `ai.lastError.keyRejected` flags a dead key | monthly ÷ 5 |
 | `MAX_PHOTOS` / `MAX_PHOTO_MB` | upload limits | `5` / `10` (30 MB per request/session) |
 | `SITE_URL` | public origin for absolute links in emails | `siteUrl` from `site/business.json` |
 | `VERCEL_ENV` | set by Vercel; `production` turns on Secure cookies + Turnstile requirement | `development` |

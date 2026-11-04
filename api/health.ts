@@ -5,7 +5,7 @@ import { effectiveSecret, env } from '../lib/env.js'
 import { requireMethod, route, sendJson } from '../lib/http.js'
 import { knowledgePages } from '../lib/chat/knowledge.js'
 import { migrationStatus } from '../lib/migrate.js'
-import { monthSpend } from '../lib/ai.js'
+import { aiStatus, monthSpend } from '../lib/ai.js'
 import { staffLoginConfigured } from '../lib/staff.js'
 
 export default route(async (req, res) => {
@@ -36,7 +36,9 @@ export default route(async (req, res) => {
       out.migrations = await migrationStatus(db)
       const failed = await db.query<{ n: string | number }>(`SELECT count(*) AS n FROM email_deliveries WHERE status IN ('failed','pending_config')`)
       out.email = { unsent: Number(failed.rows[0]?.n || 0) }
-      out.ai = { monthSpendUsd: Math.round((await monthSpend(db)) * 1e4) / 1e4, budgetUsd: env.aiMonthlyBudgetUsd, model: env.anthropicModel }
+      out.ai = { monthSpendUsd: Math.round((await monthSpend(db)) * 1e4) / 1e4, budgetUsd: env.aiMonthlyBudgetUsd, dailyBudgetUsd: env.aiDailyBudgetUsd, model: env.anthropicModel,
+        // per warm instance: keyRejected means the key is set but Anthropic answers 401 (revoked or mistyped)
+        lastOkAt: aiStatus.lastOkAt, lastError: aiStatus.lastError ? { status: aiStatus.lastError.status, at: aiStatus.lastError.at, keyRejected: aiStatus.lastError.status === 401 } : null }
     } catch (e) { out.warning = (e as Error).message }
   }
   sendJson(res, dbOk ? 200 : 503, out)
