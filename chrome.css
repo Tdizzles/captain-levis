@@ -32,6 +32,9 @@ ol[class]{list-style:none;}
 [data-gallery]{display:none!important;}
 /* deck-repairs shares its #repairs band with the deck-layers diagram: center the diagram while its gallery is off */
 .dr-results-inner:has(> [data-gallery]){grid-template-columns:minmax(0,1fr);justify-items:center;}
+/* Intros whose media column is a hidden comp before/after collapse to one centred column. */
+:is(.bgr-intro-inner,.bd-intro-inner,.dg-intro-inner,.drs-intro-inner,.err-intro-inner,.imr-intro-inner,.mcr-intro-inner,.mcp-intro-inner,.scn-intro-inner,.ss-intro-inner,.wcr-intro-inner,.gc-match-inner):has(> [data-gallery]){grid-template-columns:minmax(0,1fr);justify-items:center;}
+:is(.bgr-intro-inner,.bd-intro-inner,.dg-intro-inner,.drs-intro-inner,.err-intro-inner,.imr-intro-inner,.mcr-intro-inner,.mcp-intro-inner,.scn-intro-inner,.ss-intro-inner,.wcr-intro-inner,.gc-match-inner):has(> [data-gallery]) > :not([data-gallery]){width:100%;max-width:920px;}
 .dr-results-inner:has(> [data-gallery]) .dr-layers{padding-right:0;width:100%;max-width:1120px;}
 
 /* ---- breadcrumb ---- */

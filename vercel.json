@@ -48,11 +48,14 @@
     { "source": "/detailing", "destination": "/boat-detailing", "permanent": true },
     { "source": "/services", "destination": "/fiberglass-boat-repair", "permanent": true },
 
+    { "source": "/blog/structural-repairs-you-can-trust", "destination": "/structural-fiberglass-repair", "permanent": true },
+    { "source": "/blog/cosmetic-repairs-that-shine", "destination": "/gelcoat-repair", "permanent": true },
+    { "source": "/blog/comprehensive-repair-solutions", "destination": "/fiberglass-boat-repair", "permanent": true },
     { "source": "/blog/:slug", "destination": "/about", "permanent": true },
     { "source": "/pages/cookie-policy", "destination": "/cookie-policy", "permanent": true },
 
     { "source": "/resources", "destination": "/fiberglass-boat-repair", "permanent": true },
     { "source": "/resources-:topic", "destination": "/fiberglass-boat-repair", "permanent": true },
-    { "source": "/boatfueltankreplacement", "destination": "/boat-yard", "permanent": true }
+    { "source": "/boatfueltankreplacement", "destination": "/structural-fiberglass-repair", "permanent": true }
   ]
 }

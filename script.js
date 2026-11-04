@@ -744,8 +744,8 @@
       const b = await business()
       const hours = b ? `We’re open **${b.hours.display}** (${b.hours.note.toLowerCase()}). The yard is at [${b.address.street}, ${b.address.city}, ${b.address.state} ${b.address.zip}](${b.address.mapsUrl}) and you can call or text [${b.phone}](${b.phoneHref}).` : `Call or text [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}) for hours and directions.`
       if (/(hour|open|close|location|address|where|direction|map)/.test(q)) return { reply: hours, chips: START_CHIPS }
-      if (/(quote|estimate|price|cost|repair|damage|fix)/.test(q)) return { reply: 'I can’t take quote details through chat right now, but the quote form works and goes straight to the crew. Tell us the boat, where she is and what happened, and add photos if you have them.', chips: [{ label: 'Open the quote form', href: 'contact.html#quote' }, { label: 'Hours & Location', send: 'Hours and location' }] }
-      return { reply: `Good question. Chat is in limited mode at the moment, so the quickest answer is a call or text to [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}), or send the quote form and we’ll reply by email.`, chips: [{ label: 'Open the quote form', href: 'contact.html#quote' }, { label: 'Hours & Location', send: 'Hours and location' }] }
+      if (/(quote|estimate|price|cost|repair|damage|fix)/.test(q)) return { reply: `I can’t take quote details through chat right now. The quickest way to the crew is a call or text to [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}), or email [captainlevis@yahoo.com](mailto:captainlevis@yahoo.com). Tell us the boat, where she is and what happened, and send photos if you have them.`, chips: [{ label: `Call ${phoneText()}`, href: `tel:${phoneText().replace(/\D/g, '')}` }, { label: 'Hours & Location', send: 'Hours and location' }] }
+      return { reply: `Good question. Chat is in limited mode at the moment, so the quickest answer is a call or text to [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}), or email [captainlevis@yahoo.com](mailto:captainlevis@yahoo.com).`, chips: [{ label: `Call ${phoneText()}`, href: `tel:${phoneText().replace(/\D/g, '')}` }, { label: 'Hours & Location', send: 'Hours and location' }] }
     }
     const send = async (text, extra = {}) => {
       text = (text || '').trim()
@@ -774,8 +774,8 @@
         const r = await offlineReply(text)
         addMsg({ from: 'bot', text: r.reply }); setChips(r.chips)
       } else if (data?.error && !data.reply) {
-        const msg = data.status === 429 ? 'Easy there, matey — too many messages at once. Give it a minute and try again, or call us.' : 'I hit a snag on my end and couldn’t answer that. Try again in a moment, or use the quote form and the crew will follow up.'
-        addMsg({ from: 'error', text: msg }); setChips([{ label: 'Try again', send: text, answer: extra.answer }, { label: 'Open the quote form', href: 'contact.html#quote' }])
+        const msg = data.status === 429 ? 'Easy there, matey — too many messages at once. Give it a minute and try again, or call us.' : `I hit a snag on my end and couldn’t answer that. Try again in a moment, or call or text the crew at [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}).`
+        addMsg({ from: 'error', text: msg }); setChips([{ label: 'Try again', send: text, answer: extra.answer }, { label: `Call ${phoneText()}`, href: `tel:${phoneText().replace(/\D/g, '')}` }])
       } else {
         if (data.sessionId) state.sessionId = data.sessionId
         if (data.reply) addMsg({ from: 'bot', text: data.reply })
@@ -810,12 +810,12 @@
         const res = await fetch(API + '/uploads', { method: 'POST', body: fd })
         const data = await res.json().catch(() => null)
         hideTyping()
-        if (!res.ok || !data?.ok) { addMsg({ from: 'error', text: data?.error || 'I couldn’t save those photos. You can attach them on the quote form instead.' }); setChips([{ label: 'Open the quote form', href: 'contact.html#quote' }]); return }
+        if (!res.ok || !data?.ok) { addMsg({ from: 'error', text: data?.error || `I couldn’t save those photos. You can text them to [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}) or email them to [captainlevis@yahoo.com](mailto:captainlevis@yahoo.com) instead.` }); setChips([{ label: `Call ${phoneText()}`, href: `tel:${phoneText().replace(/\D/g, '')}` }]); return }
         await send('', { photoIds: data.files.map((f) => f.id), note: `${data.files.length} photo(s) added` })
       } catch {
         hideTyping()
-        addMsg({ from: 'error', text: 'Photo uploads need our server, which isn’t reachable right now. Attach them on the quote form instead.' })
-        setChips([{ label: 'Open the quote form', href: 'contact.html#quote' }])
+        addMsg({ from: 'error', text: `Photo uploads need our server, which isn’t reachable right now. Text them to [${phoneText()}](tel:${phoneText().replace(/\D/g, '')}) or email them to [captainlevis@yahoo.com](mailto:captainlevis@yahoo.com) instead.` })
+        setChips([{ label: `Call ${phoneText()}`, href: `tel:${phoneText().replace(/\D/g, '')}` }])
       }
     }
     upload?.addEventListener('change', () => {
