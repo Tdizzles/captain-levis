@@ -38,6 +38,8 @@ const mark = (name, html) => `<!-- build:${name} -->\n${html}\n<!-- /build:${nam
 const markedRe = (name) => new RegExp(`<!-- build:${name} -->[\\s\\S]*?<!-- /build:${name} -->\\n?`)
 
 const UPLOAD = { maxPhotos: 5, maxPhotoMb: 10 }
+// header top bar: the live Google rating, read from the same real-review file reviews.html uses
+const googleReviews = JSON.parse(fs.readFileSync(path.join(ROOT, 'site', 'reviews.json'), 'utf8'))
 const SITE = biz.siteUrl.replace(/\/$/, '')
 
 const base = {
@@ -57,6 +59,8 @@ const base = {
   turnstileSiteKey: biz.turnstileSiteKey,
   maxPhotos: String(UPLOAD.maxPhotos),
   maxPhotoMb: String(UPLOAD.maxPhotoMb),
+  googleRating: String(googleReviews.rating),
+  googleCount: String(googleReviews.count),
   socialLinks: renderSocial(biz.social || {}),
 }
 
