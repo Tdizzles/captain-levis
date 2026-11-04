@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://www.captainlevis.com/sitemap.xml
+Sitemap: https://captainlevis.com/sitemap.xml

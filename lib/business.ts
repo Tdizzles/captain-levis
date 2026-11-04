@@ -43,7 +43,7 @@ export function business(): Business {
       phone: '727-391-7639', phoneHref: 'tel:7273917639', email: 'captainlevis@yahoo.com',
       address: { street: '11600 66th St N', city: 'Largo', state: 'FL', zip: '33773', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=11600+66th+St+N,+Largo,+FL+33773' },
       hours: { display: 'Mon – Sat: 7:30 AM – 3:30 PM', short: 'Mon–Sat 7:30am–3:30pm', note: 'Closed Sunday', timezone: 'America/New_York' },
-      yearsClaim: '50+ Years', serviceArea: ['Largo', 'Tampa Bay'], siteUrl: 'https://www.captainlevis.com',
+      yearsClaim: '50+ Years', serviceArea: ['Largo', 'Tampa Bay'], siteUrl: 'https://captainlevis.com',
     }
   }
   return biz
