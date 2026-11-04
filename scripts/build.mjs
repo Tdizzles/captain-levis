@@ -33,7 +33,9 @@ const unesc = (s) => String(s).replace(/&rsquo;/g, 'â€™').replace(/&lsquo;/g, 'â
 const hashOf = (file) => {
   const p = path.join(ROOT, file)
   if (!fs.existsSync(p)) return null
-  return crypto.createHash('sha1').update(fs.readFileSync(p)).digest('hex').slice(0, 10)
+  // hash the text as git stores it (LF): Windows checkouts are CRLF, and hashing raw bytes made ?v= differ
+  // between a working-tree build and the LF tree Vercel deploys
+  return crypto.createHash('sha1').update(fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n')).digest('hex').slice(0, 10)
 }
 const mark = (name, html) => `<!-- build:${name} -->\n${html}\n<!-- /build:${name} -->`
 const markedRe = (name) => new RegExp(`<!-- build:${name} -->[\\s\\S]*?<!-- /build:${name} -->\\n?`)
