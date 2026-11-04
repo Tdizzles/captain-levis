@@ -20,8 +20,117 @@
   const UPLOAD = { maxFiles: 5, maxBytes: 10 * 1024 * 1024, types: ['image/jpeg', 'image/png', 'image/webp'] }
 
   document.addEventListener('DOMContentLoaded', () => {
-    initNav(); initCarousel(); initSliders(); initMore(); initTextSize(); initConsent(); initQuoteForm(); initChat(); initEvents()
+    initNav(); initCarousel(); initSliders(); initMore(); initTextSize(); initConsent(); initQuoteForm(); initChat(); initEvents(); initMotion()
   })
+
+  // ---------------------------------------------------------------- motion (site-wide, 2026-11-04)
+  // The header gains a shadow once the page scrolls; below the fold, card grids, section headings,
+  // standalone images and stat numbers animate in as they scroll into view. The hero entrance is pure
+  // CSS (chrome.css). Uses the `translate`/`scale` properties, never `transform`, so components keep
+  // their own transforms and hover lifts. Nothing moves under prefers-reduced-motion.
+  function initMotion() {
+    const header = $('.site-header')
+    if (header) {
+      const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8)
+      onScroll()
+      window.addEventListener('scroll', onScroll, { passive: true })
+    }
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const main = $('main')
+    if (reduce || !main || !('IntersectionObserver' in window) || !('translate' in document.documentElement.style)) return
+    const run = () => {
+      const fold = window.innerHeight
+      const picked = new Set()
+      const OFF = '.chat-widget,.consent,.site-header,.ft,footer,.breadcrumb,.pager,[data-no-motion],[hidden],.before-after,.sfr-ba,[role="slider"],.g-reviews'
+      const usable = (el) => {
+        if (picked.has(el) || el.closest(OFF)) return false
+        for (const p of picked) if (p.contains(el) || el.contains(p)) return false
+        const r = el.getBoundingClientRect()
+        if (r.height < 24 || r.width < 24 || r.top < fold * 0.92) return false // tiny, hidden, or already on screen
+        const cs = getComputedStyle(el)
+        return cs.position !== 'absolute' && cs.position !== 'fixed' && cs.animationName === 'none' && parseFloat(cs.opacity) === 1 && cs.visibility !== 'hidden'
+      }
+      const add = (el, delay, zoom) => {
+        picked.add(el)
+        el.style.setProperty('--cl-d', Math.round(delay) + 'ms')
+        el.classList.add('cl-reveal')
+        if (zoom) el.classList.add('cl-zoom')
+      }
+      // 1. card grids: children of grid / wrapping-flex / 3+ item flex rows, staggered along each row
+      $$('div,ul,ol,section', main).forEach((box) => {
+        const kids = Array.from(box.children).filter((k) => k.offsetHeight >= 40)
+        if (kids.length < 2 || kids.length > 24) return
+        const cs = getComputedStyle(box)
+        const isGrid = cs.display.includes('grid')
+        const isRow = cs.display.includes('flex') && cs.flexDirection.startsWith('row') && (cs.flexWrap === 'wrap' || kids.length >= 3)
+        if (!isGrid && !isRow) return
+        const bw = box.getBoundingClientRect().width
+        if (kids.some((k) => k.getBoundingClientRect().width > bw * 0.9)) return
+        const rowTop = kids[0].offsetTop
+        const cols = Math.max(1, kids.filter((k) => Math.abs(k.offsetTop - rowTop) < 4).length)
+        kids.forEach((k, i) => { if (usable(k)) add(k, (i % cols) * 90) })
+      })
+      // 2. section headings: the eyebrow above, the heading, and the copy right under it
+      $$('h2', main).forEach((h) => {
+        const group = [h.previousElementSibling, h, h.nextElementSibling, h.nextElementSibling && h.nextElementSibling.nextElementSibling]
+        let n = 0
+        group.forEach((el) => {
+          if (!el || (el !== h && el.offsetHeight > 220)) return
+          if (usable(el)) add(el, n++ * 90)
+        })
+      })
+      // 3. standalone photos ease in with a slight zoom
+      $$('img,picture,video', main).forEach((m) => {
+        if (m.getBoundingClientRect().width >= 260 && usable(m)) add(m, 0, true)
+      })
+      if (!picked.size) return
+      const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (!e.isIntersecting) return
+        const el = e.target
+        io.unobserve(el)
+        el.classList.add('cl-in')
+        const delay = parseInt(el.style.getPropertyValue('--cl-d'), 10) || 0
+        setTimeout(() => { el.classList.remove('cl-reveal', 'cl-zoom', 'cl-in'); el.style.removeProperty('--cl-d') }, 1000 + delay)
+      }), { rootMargin: '0px 0px -6% 0px', threshold: 0.04 })
+      picked.forEach((el) => io.observe(el))
+      // a jump link or "back to top" can skip past things: show anything already above the viewport
+      window.addEventListener('hashchange', () => picked.forEach((el) => { if (el.getBoundingClientRect().bottom < window.innerHeight) el.classList.add('cl-in') }))
+    }
+    // 4. stat numbers ("50+ Years", "4.7") count up the first time they're seen
+    const counters = $$('[class*="stat"] strong,[class*="stat"] b,[class*="num"],[class*="count"]', main).filter((el) => {
+      if (el.children.length || el.closest('.chat-widget,form,a.phone,.pager')) return false
+      const m = el.textContent.trim().match(/^(\d{1,4}(?:\.\d)?)([+%]?)(\s.*)?$/)
+      if (!m || /^\s*of\b/i.test(m[3] || '')) return false // "10 of 13" is a position, not a stat
+      const v = parseFloat(m[1])
+      return !(m[1].length > 1 && m[1][0] === '0') && (v >= 10 || m[1].includes('.'))
+    })
+    counters.forEach((el) => {
+      const text = el.textContent.trim()
+      const m = text.match(/^(\d{1,4}(?:\.\d)?)([+%]?)(\s.*)?$/)
+      const to = parseFloat(m[1])
+      const dec = m[1].includes('.') ? 1 : 0
+      const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = text
+      const num = document.createElement('span'); num.className = 'cl-num'; num.setAttribute('aria-hidden', 'true'); num.textContent = (0).toFixed(dec)
+      const rest = document.createElement('span'); rest.setAttribute('aria-hidden', 'true'); rest.textContent = (m[2] || '') + (m[3] || '')
+      el.textContent = ''
+      el.append(sr, num, rest)
+      const io = new IntersectionObserver((es) => {
+        if (!es.some((e) => e.isIntersecting)) return
+        io.disconnect()
+        const t0 = performance.now()
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / 1400)
+          num.textContent = (to * (1 - Math.pow(1 - p, 3))).toFixed(dec)
+          if (p < 1) requestAnimationFrame(tick)
+          else num.textContent = m[1]
+        }
+        requestAnimationFrame(tick)
+      }, { threshold: 0.4 })
+      io.observe(el)
+    })
+    if (document.readyState === 'complete') run()
+    else window.addEventListener('load', run, { once: true })
+  }
 
   // ---------------------------------------------------------------- nav
   function initNav() {

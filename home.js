@@ -1,7 +1,9 @@
-/* home.js — homepage only (2026-11-04): scroll reveals, count-ups, and the live Google reviews
-   (the two-row marquee and the rotating "Trusted by Boaters" card).
-   Every review shown comes from site/reviews.json, the verbatim pull of the Google listing; only
-   five-star reviews with text are used, shuffled on every visit. Nothing is written or edited here. */
+/* home.js — homepage only: the live Google reviews.
+   1. "Boaters Say It Best" band: a looping carousel of real five-star Google reviews (shuffled every visit,
+      auto-advancing, swipeable, arrows + dots + pause).
+   2. The "Trusted by Boaters" card further down, which rotates through more of them every 6 s.
+   Every review shown comes from site/reviews.json, the verbatim pull of the Google listing; nothing is
+   written or edited here. The site-wide motion (reveals, count-ups, hero entrance) lives in script.js. */
 (function () {
   'use strict'
   const $ = (s, r) => (r || document).querySelector(s)
@@ -10,110 +12,27 @@
   const reduced = () => mq.matches
   const hasIO = 'IntersectionObserver' in window
 
-  const ROTATE_MS = 6000
+  const ROTATE_MS = 6000 // testimonial card
+  const SLIDE_MS = 3400 // carousel auto-advance
   const G_PATHS = [
     ['#EA4335', 'M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z'],
     ['#4285F4', 'M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z'],
     ['#FBBC05', 'M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z'],
     ['#34A853', 'M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z'],
   ]
-  const AVATAR_COLORS = ['#1A73E8', '#D93025', '#188038', '#E37400', '#9334E6', '#007B83', '#C5221F', '#1967D2', '#B06000', '#0B8043']
+  const AVATAR_COLORS = ['#1A73E8', '#9334E6', '#B4530F', '#C77C0E', '#E37400', '#188038', '#D93025', '#007B83', '#1967D2', '#C5221F']
   const NS = 'http://www.w3.org/2000/svg'
 
   let started = false
   function init() {
     if (started) return
     started = true
-    initReveal()
-    initCounts()
     loadReviews()
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init)
   else init()
 
-  // ---------------------------------------------------------------- scroll reveal
-  function initReveal() {
-    if (reduced() || !hasIO) return
-    // [selector, stagger step in ms, items per row (stagger restarts each row)]
-    const groups = [
-      ['.fg-head-main, .fg-kicker, .fg-head-script', 120],
-      ['.fg-card', 90, 3],
-      ['.fg-feature-photo, .fg-feature-copy', 150],
-      ['.stats-bar .stat-item', 100, 4],
-      ['.g-reviews-copy, .g-score', 150],
-      ['.areas-copy > *', 90],
-      ['.areas-mini-stat', 90, 4],
-      ['.results-copy, .results-soon, .testimonial-card', 150],
-    ]
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return
-        const el = e.target
-        io.unobserve(el)
-        el.classList.add('hm-in')
-        // hand the element back to its own styles (hover lifts, transitions) once it has arrived
-        const delay = parseInt(el.style.getPropertyValue('--hm-d'), 10) || 0
-        const done = () => { el.classList.remove('hm-reveal', 'hm-in'); el.style.removeProperty('--hm-d') }
-        setTimeout(done, 800 + delay + 100)
-      })
-    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 })
-    const fold = window.innerHeight
-    groups.forEach(([sel, step, per]) => {
-      let n = 0
-      $$(sel).forEach((el) => {
-        const r = el.getBoundingClientRect()
-        if (r.height === 0 || r.top < fold * 0.95) return // hidden, or already on screen: leave it alone
-        el.style.setProperty('--hm-d', ((per ? n % per : n) * step) + 'ms')
-        n++
-        el.classList.add('hm-reveal')
-        io.observe(el)
-      })
-    })
-  }
-
-  // ---------------------------------------------------------------- count-ups
-  function countUp(el, to, decimals, ms) {
-    if (reduced()) { el.textContent = to.toFixed(decimals); return }
-    const t0 = performance.now()
-    const step = (t) => {
-      const p = Math.min(1, (t - t0) / ms)
-      const eased = 1 - Math.pow(1 - p, 3)
-      el.textContent = (to * eased).toFixed(decimals)
-      if (p < 1) requestAnimationFrame(step)
-    }
-    requestAnimationFrame(step)
-  }
-  function whenVisible(el, fn) {
-    if (!hasIO) { fn(); return }
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) { io.disconnect(); fn() }
-    }, { threshold: 0.4 })
-    io.observe(el)
-  }
-  // "50+ Years Experience" in the stat bars: the number counts up the first time it scrolls into view
-  function initCounts() {
-    if (reduced()) return
-    $$('.stat-text strong').forEach((strong) => {
-      const node = strong.firstChild
-      if (!node || node.nodeType !== 3) return
-      const m = node.nodeValue.match(/^(\d+)(\+?)(.*)$/)
-      if (!m) return
-      const to = parseInt(m[1], 10)
-      const sr = document.createElement('span')
-      sr.className = 'sr-only'
-      sr.textContent = m[1]
-      const num = document.createElement('span')
-      num.className = 'hm-num'
-      num.setAttribute('aria-hidden', 'true')
-      num.textContent = '0'
-      strong.replaceChild(document.createTextNode(m[2] + m[3]), node)
-      strong.insertBefore(num, strong.firstChild)
-      strong.insertBefore(sr, num)
-      whenVisible(strong, () => countUp(num, to, 0, 1400))
-    })
-  }
-
-  // ---------------------------------------------------------------- reviews data
+  // ---------------------------------------------------------------- helpers
   function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
@@ -150,114 +69,227 @@
   }
 
   function loadReviews() {
-    const marquee = $('[data-g-marquee]')
-    const rotator = $('[data-g-rotator]')
-    if (!marquee && !rotator) return
-    fetch('site/reviews.json')
+    if (!$('[data-gr-carousel]') && !$('[data-g-rotator]')) return
+    fetch('/site/reviews.json')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('reviews ' + r.status))))
       .then((data) => {
         const all = (data.reviews || []).filter((r) => r.rating === 5 && r.text && r.text.trim() && !r.hide)
         if (!all.length) return
-        all.forEach((r) => { r.text = r.text.trim() })
+        all.forEach((r) => { r.text = r.text.trim().replace(/\s+/g, ' ') })
         shuffle(all)
-        fillScore(data)
-        const used = buildMarquee(all)
+        const cnt = $('[data-g-count]')
+        if (cnt && data.count) cnt.textContent = String(data.count)
+        const used = buildCarousel(all)
         buildRotator(all, used)
       })
-      .catch(() => { /* the static fallback (one real review, no controls) stays in place */ })
+      .catch(() => { /* the static real reviews in the HTML stay in place */ })
   }
 
-  function fillScore(data) {
-    const rating = Number(data.rating)
-    const count = Number(data.count)
-    const score = $('.g-score')
-    if (!score || !rating) return
-    const num = $('[data-g-rating]', score)
-    const cnt = $('[data-g-count]', score)
-    if (cnt && count) cnt.textContent = String(count)
-    score.setAttribute('aria-label', `Rated ${rating.toFixed(1)} out of 5 from ${count} Google reviews. Read all reviews`)
-    if (num) {
-      if (reduced()) num.textContent = rating.toFixed(1)
-      else { num.textContent = '0.0'; whenVisible(score, () => countUp(num, rating, 1, 1300)) }
-    }
-  }
-
-  // ---------------------------------------------------------------- marquee
-  function reviewCard(r) {
+  // ---------------------------------------------------------------- reviews carousel
+  function reviewCard(r, i, total) {
     const card = document.createElement('div')
-    card.className = 'g-card'
-    card.setAttribute('role', 'listitem')
+    card.className = 'gr-card'
+    card.setAttribute('role', 'group')
+    card.setAttribute('aria-roledescription', 'slide')
+    card.setAttribute('aria-label', `Review ${i + 1} of ${total}`)
     const top = document.createElement('div')
-    top.className = 'g-card-top'
+    top.className = 'gr-card-top'
     const av = document.createElement('span')
-    av.className = 'g-avatar'
+    av.className = 'gr-avatar'
     av.setAttribute('aria-hidden', 'true')
-    av.style.background = colorFor(r.name)
+    av.style.setProperty('--a', colorFor(r.name))
     av.textContent = (String(r.name || '?').trim().charAt(0) || '?').toUpperCase()
     const who = document.createElement('span')
-    who.className = 'g-who'
+    who.className = 'gr-who'
     const strong = document.createElement('strong')
     strong.textContent = shortName(r.name)
     const small = document.createElement('small')
-    small.textContent = 'Google review'
+    small.textContent = 'Google Review'
     who.append(strong, small)
-    top.append(av, who, gLogo('g-mini'))
+    top.append(av, who, gLogo('gr-g'))
     const stars = document.createElement('span')
-    stars.className = 'g-stars'
+    stars.className = 'gr-stars'
     stars.setAttribute('role', 'img')
     stars.setAttribute('aria-label', '5 out of 5 stars')
     stars.textContent = '★★★★★'
     const text = document.createElement('p')
-    text.className = 'g-text'
+    text.className = 'gr-text'
     text.textContent = r.text
     card.append(top, stars, text)
     return card
   }
 
-  function buildMarquee(all) {
+  function buildCarousel(all) {
     const used = new Set()
-    const wrap = $('[data-g-marquee]')
-    if (!wrap) return used
-    const tracks = $$('.g-track', wrap)
-    const picks = all.filter((r) => r.text.length >= 50 && r.text.length <= 520).slice(0, 24)
-    if (picks.length < 4) return used
+    const root = $('[data-gr-carousel]')
+    if (!root) return used
+    const track = $('[data-gr-track]', root)
+    const viewport = track && track.parentElement
+    const nav = $('[data-gr-nav]')
+    const dotsWrap = $('[data-gr-dots]')
+    const pauseBtn = $('[data-gr-pause]')
+    const prevBtn = $('[data-gr-prev]', root)
+    const nextBtn = $('[data-gr-next]', root)
+    if (!track || !viewport) return used
+
+    const picks = all.slice(0, 25)
+    if (picks.length < 6) return used
     picks.forEach((r) => used.add(r))
-    const half = Math.ceil(picks.length / 2)
-    const sets = [picks.slice(0, half), picks.slice(half)]
-    tracks.forEach((track, i) => {
-      sets[i].forEach((r) => track.appendChild(reviewCard(r)))
-      // a second, hidden copy makes the loop seamless (the track slides exactly half its width)
-      if (!reduced()) {
-        sets[i].forEach((r) => {
-          const c = reviewCard(r)
-          c.setAttribute('aria-hidden', 'true')
-          c.removeAttribute('role')
-          track.appendChild(c)
-        })
-      }
-    })
-    wrap.hidden = false
-
-    const setSpeed = () => tracks.forEach((t) => t.style.setProperty('--g-dur', Math.max(30, t.scrollWidth / 2 / 38).toFixed(1) + 's'))
-    requestAnimationFrame(setSpeed)
-    let rt
-    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(setSpeed, 200) })
-
-    if (!reduced()) {
-      if (hasIO) {
-        new IntersectionObserver((entries) => entries.forEach((e) => wrap.classList.toggle('is-off', !e.isIntersecting))).observe(wrap)
-      }
-      const btn = $('[data-g-pause]')
-      if (btn) {
-        btn.hidden = false
-        const label = $('span', btn)
-        btn.addEventListener('click', () => {
-          const paused = wrap.classList.toggle('is-paused')
-          btn.setAttribute('aria-pressed', String(paused))
-          if (label) label.textContent = paused ? 'Play reviews' : 'Pause reviews'
-        })
-      }
+    const n = picks.length
+    const CLONES = 6 // copies of the first cards at the end make the loop seamless
+    track.textContent = ''
+    picks.forEach((r, i) => track.appendChild(reviewCard(r, i, n)))
+    for (let i = 0; i < CLONES; i++) {
+      const c = reviewCard(picks[i % n], i, n)
+      c.classList.add('is-clone')
+      c.setAttribute('aria-hidden', 'true')
+      c.removeAttribute('role')
+      c.inert = true
+      track.appendChild(c)
     }
+
+    // five dots, each one a group of reviews (25 reviews = 5 per dot, as in the design)
+    const groups = Math.min(5, n)
+    const per = Math.ceil(n / groups)
+    const dots = []
+    for (let g = 0; g < groups; g++) {
+      const b = document.createElement('button')
+      b.type = 'button'
+      b.className = 'gr-dot'
+      b.setAttribute('aria-label', `Reviews ${g * per + 1} to ${Math.min(n, (g + 1) * per)}`)
+      b.addEventListener('click', () => { go(g * per); restart() })
+      dotsWrap.appendChild(b)
+      dots.push(b)
+    }
+
+    let idx = 0
+    let step = 0
+    const gapPx = () => parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 11
+    function layout() {
+      const w = viewport.clientWidth
+      const count = w >= 1180 ? 5 : w >= 920 ? 4 : w >= 680 ? 3 : w >= 440 ? 2 : 1
+      const gap = gapPx()
+      const peek = count === 1 ? Math.min(56, w * 0.14) : 0 // phones: the next card peeks in
+      const cardW = (w - gap * (count - 1) - peek) / count
+      track.style.setProperty('--gr-card', cardW.toFixed(2) + 'px')
+      step = cardW + gap
+      jump(idx)
+    }
+    function setX(i) { track.style.transform = `translate3d(${(-i * step).toFixed(2)}px,0,0)` }
+    function paintDots() {
+      const real = ((idx % n) + n) % n
+      const g = Math.min(groups - 1, Math.floor(real / per))
+      dots.forEach((d, k) => d.setAttribute('aria-current', k === g ? 'true' : 'false'))
+    }
+    function jump(i) { // no animation
+      idx = i
+      track.style.transition = 'none'
+      setX(idx)
+      void track.offsetWidth
+      track.style.transition = ''
+      paintDots()
+    }
+    function go(i) {
+      if (reduced()) { jump(((i % n) + n) % n); return }
+      idx = i
+      setX(idx)
+      paintDots()
+    }
+    function next() {
+      if (idx >= n) jump(idx - n)
+      go(idx + 1)
+    }
+    function prev() {
+      if (idx <= 0) jump(idx + n)
+      go(idx - 1)
+    }
+    track.addEventListener('transitionend', (e) => {
+      if (e.target === track && e.propertyName === 'transform' && idx >= n) jump(idx - n)
+    })
+
+    // auto-advance: stops while hovered, focused, dragged, off screen, in a hidden tab, or paused
+    let timer = 0
+    let hover = false
+    let focus = false
+    let offscreen = false
+    let userPaused = false
+    let dragging = false
+    const canRun = () => !reduced() && !userPaused && !hover && !focus && !offscreen && !dragging && !document.hidden
+    function restart() {
+      clearTimeout(timer)
+      if (canRun()) timer = setTimeout(() => { next(); restart() }, SLIDE_MS)
+    }
+    const section = root.closest('section') || root
+    section.addEventListener('mouseenter', () => { hover = true; restart() })
+    section.addEventListener('mouseleave', () => { hover = false; restart() })
+    root.addEventListener('focusin', () => { focus = true; restart() })
+    root.addEventListener('focusout', (e) => { if (!root.contains(e.relatedTarget)) { focus = false; restart() } })
+    document.addEventListener('visibilitychange', restart)
+    if (hasIO) new IntersectionObserver((es) => es.forEach((e) => { offscreen = !e.isIntersecting; restart() }), { threshold: 0.2 }).observe(root)
+
+    prevBtn?.addEventListener('click', () => { prev(); restart() })
+    nextBtn?.addEventListener('click', () => { next(); restart() })
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); next(); restart() }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); restart() }
+    })
+    if (pauseBtn) {
+      if (reduced()) pauseBtn.hidden = true
+      pauseBtn.addEventListener('click', () => {
+        userPaused = !userPaused
+        pauseBtn.setAttribute('aria-pressed', String(userPaused))
+        pauseBtn.setAttribute('aria-label', userPaused ? 'Play reviews' : 'Pause reviews')
+        restart()
+      })
+    }
+
+    // swipe / drag
+    let x0 = 0
+    let y0 = 0
+    let dx = 0
+    let pid = null
+    let horizontal = null
+    viewport.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return
+      pid = e.pointerId; x0 = e.clientX; y0 = e.clientY; dx = 0; horizontal = null
+      if (idx >= n) jump(idx - n)
+    })
+    viewport.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== pid) return
+      const mx = e.clientX - x0
+      const my = e.clientY - y0
+      if (horizontal === null && (Math.abs(mx) > 6 || Math.abs(my) > 6)) {
+        horizontal = Math.abs(mx) > Math.abs(my)
+        if (horizontal) { dragging = true; restart(); track.classList.add('is-dragging'); viewport.setPointerCapture(pid) }
+      }
+      if (!horizontal) return
+      dx = mx
+      if (idx <= 0 && dx > 0) jump(idx + n) // pulling right from the start: slide in from the clones
+      track.style.transform = `translate3d(${(-idx * step + dx).toFixed(2)}px,0,0)`
+    })
+    const endDrag = (e) => {
+      if (e.pointerId !== pid) return
+      pid = null
+      if (!horizontal) return
+      track.classList.remove('is-dragging')
+      dragging = false
+      const moved = Math.round(-dx / step)
+      const target = Math.abs(dx) > 40 ? idx + (moved === 0 ? (dx < 0 ? 1 : -1) : moved) : idx
+      go(Math.max(0, Math.min(n + CLONES - 1, target)))
+      restart()
+    }
+    viewport.addEventListener('pointerup', endDrag)
+    viewport.addEventListener('pointercancel', endDrag)
+    viewport.addEventListener('click', (e) => { if (Math.abs(dx) > 6) { e.preventDefault(); e.stopPropagation() } }, true)
+
+    let rt
+    window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(layout, 150) })
+    $$('.text-size-btn').forEach((b) => b.addEventListener('click', () => setTimeout(layout, 60)))
+    layout()
+    if (prevBtn) prevBtn.hidden = false
+    if (nextBtn) nextBtn.hidden = false
+    if (nav) nav.hidden = false
+    restart()
     return used
   }
 
@@ -327,7 +359,6 @@
     $('[data-g-next]', card)?.addEventListener('click', () => show(idx + 1, true))
 
     if (reduced() || !bar) {
-      // no auto-advance: arrows only
       if (bar) bar.hidden = true
       if (toggle) toggle.hidden = true
       return

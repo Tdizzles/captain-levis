@@ -19,20 +19,23 @@ html[data-text-scale]{scroll-behavior:auto;}
 /* ---- top bar above the header: Google "Add to Preferred Sources" pill + the real Google rating (2026-11-04).
    It scrolls away; only .site-header is sticky. ---- */
 .topbar{background:#F3F6F9;border-bottom:1px solid #E4EAF0;}
-.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding-block:6px;}
-.g-pref{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid #C4C7C5;border-radius:999px;padding:6px 16px 6px 11px;font-family:var(--font-body);font-size:.84375rem;font-weight:500;line-height:1.1;color:#1F1F1F;white-space:nowrap;transition:background .15s ease,border-color .15s ease,box-shadow .15s ease;}
-.g-pref:hover{background:#F8FAFD;border-color:#9AA0A6;box-shadow:0 1px 3px rgba(60,64,67,.2);}
-.g-pref:focus-visible{border-radius:999px;}
-.g-pref .g-logo{display:block;flex-shrink:0;}
+.topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:38px;padding-block:5px;}
+/* "Boaters' Preferred Service": Google-coloured, but no Google logo and no claim that Google awarded it;
+   it links to the real reviews that back it up */
+.pref-badge{position:relative;display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #DADCE0;border-radius:999px;padding:4px 12px 4px 7px;font-family:var(--font-body);font-size:.75rem;font-weight:600;line-height:1.1;letter-spacing:.01em;color:#202124;white-space:nowrap;overflow:hidden;transition:border-color .15s ease,box-shadow .15s ease;}
+.pref-badge::before{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,#4285F4 0 25%,#EA4335 25% 50%,#FBBC05 50% 75%,#34A853 75%);opacity:.9;}
+.pref-badge:hover{border-color:#BDC1C6;box-shadow:0 1px 3px rgba(60,64,67,.18);}
+.pref-badge:focus-visible{border-radius:999px;}
+.pref-badge-icon{display:block;flex-shrink:0;}
 .topbar-rating{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-head);font-size:.8125rem;font-weight:600;color:var(--navy);white-space:nowrap;}
 .topbar-rating strong{font-weight:800;}
 .topbar-stars{color:#F3BF27;letter-spacing:1px;}
 .topbar-count{color:var(--gray-text);}
 .topbar-rating:hover .topbar-count{color:var(--icon-blue);text-decoration:underline;}
 @media (max-width:640px){
-  .topbar-inner{min-height:40px;padding-block:5px;}
-  .g-pref{font-size:.78125rem;gap:7px;padding:5px 12px 5px 9px;}
-  .g-pref .g-logo{width:16px;height:16px;}
+  .topbar-inner{min-height:36px;padding-block:4px;}
+  .pref-badge{font-size:.71875rem;padding:4px 10px 4px 6px;gap:6px;}
+  .pref-badge-icon{width:15px;height:15px;}
   .topbar-count{display:none;}
 }
 @media (max-width:359px){.topbar-stars{display:none;}}
@@ -42,6 +45,36 @@ html[data-text-scale]{scroll-behavior:auto;}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important;}
 }
+
+/* ---- site-wide motion (2026-11-04). script.js adds .cl-reveal/.cl-in below the fold; the hero entrance is
+   CSS only (no flash before scripts run). Only `opacity`, `translate` and `scale` are animated, never
+   `transform`, so components keep their own transforms and hover lifts. ---- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes cl-rise{from{opacity:0;translate:0 26px;}to{opacity:1;translate:none;}}
+  main :has(> h1) > *{animation:cl-rise .85s cubic-bezier(.2,.7,.2,1) backwards;}
+  main :has(> h1) > :nth-child(2){animation-delay:.1s;}
+  main :has(> h1) > :nth-child(3){animation-delay:.2s;}
+  main :has(> h1) > :nth-child(4){animation-delay:.3s;}
+  main :has(> h1) > :nth-child(n+5){animation-delay:.4s;}
+
+  .cl-reveal{opacity:0;translate:0 28px;transition:opacity .75s cubic-bezier(.2,.7,.2,1) var(--cl-d,0ms),translate .75s cubic-bezier(.2,.7,.2,1) var(--cl-d,0ms);}
+  .cl-reveal.cl-zoom{translate:none;scale:.96;transition:opacity .9s ease var(--cl-d,0ms),scale 1.1s cubic-bezier(.2,.7,.2,1) var(--cl-d,0ms);}
+  .cl-reveal.cl-in{opacity:1;translate:none;scale:none;}
+
+  /* a light sweep across the main calls to action every few seconds */
+  .btn-accent,.header-actions .btn-navy{position:relative;overflow:hidden;isolation:isolate;}
+  .btn-accent::after,.header-actions .btn-navy::after{
+    content:"";position:absolute;top:-2px;bottom:-2px;left:-60%;width:45%;z-index:-1;pointer-events:none;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent);
+    translate:0 0;transform:skewX(-20deg);
+    animation:cl-shine 6s ease-in-out 2s infinite;
+  }
+  .header-actions .btn-navy::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);animation-delay:3.5s;}
+  @keyframes cl-shine{0%{translate:0 0;}26%,100%{translate:430% 0;}}
+}
+.site-header{transition:box-shadow .3s ease;}
+.site-header.is-scrolled{box-shadow:0 10px 28px -18px rgba(0,38,75,.38);}
+.cl-num{font-variant-numeric:tabular-nums;}
 
 /* styles.css resets list-style on ul only; every page that styles an <ol> as cards otherwise shows stray numbers */
 ol[class]{list-style:none;}
