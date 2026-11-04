@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=3151f4c2a6">
-<link rel="stylesheet" href="home.css?v=d1efddcff2">
+<link rel="stylesheet" href="home.css?v=7a2c3254a0">
 <!-- build:head -->
 <link rel="stylesheet" href="chrome.css?v=9a1ea3f2e4">
 <link rel="canonical" href="https://captainlevis.com/">
@@ -94,18 +94,11 @@
 <main id="main" data-build>
 
 <section class="hero">
-  <video class="hero-img" autoplay muted loop playsinline preload="auto" poster="assets/home-hero.jpg" aria-hidden="true" tabindex="-1">
+  <video class="hero-img" data-hero-video muted loop playsinline preload="none" poster="assets/home-hero.jpg" aria-hidden="true" tabindex="-1">
     <source src="assets/home-hero.mp4" type="video/mp4">
     <img src="assets/home-hero.jpg" srcset="assets/opt/home-hero.ee1d3ac6-480.webp 480w, assets/opt/home-hero.ee1d3ac6-960.webp 960w, assets/opt/home-hero.ee1d3ac6-2000.webp 2000w" sizes="100vw" alt="" width="2171" height="724">
   </video>
-  <script>
-    (function(){
-      var v=document.querySelector('.hero video.hero-img');if(!v)return;
-      var mq=window.matchMedia('(prefers-reduced-motion: reduce)');
-      var apply=function(){ if(mq.matches){v.pause();v.removeAttribute('autoplay');} else { v.play().catch(function(){}); } };
-      apply(); if(mq.addEventListener) mq.addEventListener('change',apply);
-    })();
-  </script>
+  <!-- playback is gated in home.js (desktop width, no Save-Data/2G, no reduced motion) -->
   <div class="hero-scrim"></div>
   <div class="container hero-inner">
     <div class="hero-content">
@@ -932,6 +925,6 @@
 <!-- /build:consent -->
 
 <script src="script.js?v=546d76267c"></script>
-<script src="home.js?v=2" defer></script>
+<script src="home.js?v=3" defer></script>
 </body>
 </html>

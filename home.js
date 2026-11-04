@@ -12,6 +12,25 @@
   const reduced = () => mq.matches
   const hasIO = 'IntersectionObserver' in window
 
+  // Hero video (9 MB MP4): only desktop-width screens on a normal connection play it. Phones, Save-Data, 2G and
+  // reduced-motion visitors keep the poster photo and never download the file (index.html: preload="none", no
+  // autoplay attribute). Audit 2026-11-04: the clip was ~96% of a first mobile visit.
+  const hero = $('video[data-hero-video]')
+  if (hero) {
+    const conn = navigator.connection || {}
+    const wide = window.matchMedia ? window.matchMedia('(min-width: 769px)') : null
+    const allowed = () => !!(wide && wide.matches) && !conn.saveData && !/(^|-)2g$/.test(conn.effectiveType || '') && !reduced()
+    const start = () => {
+      if (!allowed() || !hero.paused) return
+      hero.preload = 'auto'
+      const p = hero.play()
+      if (p && p.catch) p.catch(() => {})
+    }
+    start()
+    if (wide && wide.addEventListener) wide.addEventListener('change', start)
+    if (mq.addEventListener) mq.addEventListener('change', () => { if (reduced()) hero.pause(); else start() })
+  }
+
   const ROTATE_MS = 6000 // testimonial card
   const SLIDE_MS = 3400 // carousel auto-advance
   const G_PATHS = [
