@@ -16,20 +16,30 @@ html[data-text-scale]{scroll-behavior:auto;}
 .site-header .header-inner{zoom:calc(min(var(--text-scale,1),1.125) / var(--text-scale,1));}
 @media (max-width:1100px){.site-header .header-inner{zoom:calc(1 / var(--text-scale,1));}}
 
-/* ---- header extras (2026-11-04): "Boaters' Preferred Service" by the logo and the real Google rating at the far
-   right, both inside the sticky header so they stay on screen as the page scrolls. The badge is Google-coloured but
-   carries no Google logo and claims no Google award; it links to the real reviews that back it up. It sits under the logo,
-   tucked under it as a tagline: the header container caps at 1536px, so the bar never has room beside the logo. ---- */
+/* ---- header extras (2026-11-04): the "Boaters Preferred Service" pill (owner's comp: ~/Downloads/Google Service Pill
+   Button.png) sits LEFT of the captain avatar, and the real Google rating sits at the header's far right. On wide screens
+   (>=1880px) the pill hangs in the empty gutter outside the 1536px container; narrower desktops keep it in the row, a size
+   smaller; below 1280px there is no room in the bar, so it is hidden. ---- */
+.header-inner{position:relative;}
 .header-brand{flex-shrink:0;}
-.brand-stack{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0;}
-.brand-stack .logo{min-height:0;}
-.brand-stack .logo img{height:36px;}
-.pref-badge{display:inline-flex;align-items:center;gap:5px;color:var(--navy);white-space:nowrap;line-height:1.1;}
-.pref-badge-icon{display:block;flex-shrink:0;width:13px;height:13px;}
-.pref-badge-text{font-family:var(--font-head);font-size:.6875rem;font-weight:700;letter-spacing:.01em;}
-.pref-badge-text small{font-size:inherit;font-weight:600;color:#5F6B7A;}
-.pref-badge-text span{background:linear-gradient(90deg,#4285F4 0 25%,#EA4335 25% 50%,#FBBC05 50% 75%,#34A853 75%) left bottom/100% 1.5px no-repeat;padding-bottom:1px;}
-.pref-badge:hover .pref-badge-text span{background-size:100% 2.5px;}
+.pref-pill{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 11px;margin-right:10px;border:1.5px solid #CFD2D6;border-radius:999px;background:#fff;color:#111;font-family:var(--font-body);font-weight:500;font-size:13px;letter-spacing:-.005em;line-height:1;white-space:nowrap;flex-shrink:0;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:border-color .2s ease,box-shadow .2s ease;}
+.pref-pill:hover{border-color:#AEB3B9;box-shadow:0 2px 8px rgba(0,0,0,.08);}
+.pref-pill-g{display:block;flex-shrink:0;width:17px;height:17px;}
+@media (min-width:1880px){
+  .pref-pill{position:absolute;top:50%;right:calc(100% - var(--pad) + 22px);transform:translateY(-50%);margin:0;height:40px;gap:9px;padding:0 18px 0 13px;font-size:15px;}
+  .pref-pill-g{width:20px;height:20px;}
+}
+/* 1280-1879px: no gutter big enough, so the pill rides in the row: the bar's left padding shrinks to 20px (the pill
+   takes that empty space), and, below 1500px, the phone goes icon-only so nothing overflows */
+@media (min-width:1280px) and (max-width:1879px){
+  .site-header .header-inner{padding-left:20px;}
+}
+@media (min-width:1180px){.header-brand .logo img{height:36px;}}
+@media (min-width:1280px) and (max-width:1499px){
+  .header-actions .phone{width:44px;height:44px;justify-content:center;gap:0;border-radius:50%;background:var(--icon-bg);}
+  .header-actions .phone span{display:none;}
+}
+@media (max-width:1279px){.pref-pill{display:none;}}
 
 
 .g-rating{display:inline-flex;align-items:center;gap:7px;color:var(--navy);white-space:nowrap;flex-shrink:0;}
@@ -59,8 +69,7 @@ html[data-text-scale]{scroll-behavior:auto;}
   .header-actions{gap:12px;}
   .header-captain-avatar{width:36px;height:36px;}
   .header-brand{gap:8px;}
-  .brand-stack .logo img{height:30px;}
-  .pref-badge-text{font-size:.625rem;}
+  .header-brand .logo img{height:30px;}
   .header-actions .btn-navy{padding:12px 18px;}
 }
 @media (max-width:1100px) and (min-width:1025px){
@@ -70,16 +79,13 @@ html[data-text-scale]{scroll-behavior:auto;}
 }
 @media (max-width:1024px){
   .header-actions{gap:10px;}
-  .brand-stack .logo img{height:34px;}
+  .header-brand .logo img{height:34px;}
 }
 @media (max-width:640px){
   .header-actions{gap:4px;}
   .header-brand{gap:6px;}
   .header-captain-avatar{width:32px;height:32px;}
-  .brand-stack .logo img{height:28px;}
-  .pref-badge{gap:4px;}
-  .pref-badge-icon{width:10px;height:10px;}
-  .pref-badge-text{font-size:.5625rem;}
+  .header-brand .logo img{height:28px;}
   .g-rating{gap:4px;padding:0 4px;}
   .g-rating-logo{width:16px;height:16px;}
   .g-rating-body strong{font-size:.875rem;}
