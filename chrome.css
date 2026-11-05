@@ -34,12 +34,31 @@ html[data-text-scale]{scroll-behavior:auto;}
 @media (min-width:1280px) and (max-width:1879px){
   .site-header .header-inner{padding-left:20px;}
 }
-@media (min-width:1180px){.header-brand .logo img{height:36px;}}
+@media (min-width:1180px){.header-brand .logo img{height:40px;}}
 @media (min-width:1280px) and (max-width:1499px){
   .header-actions .phone{width:44px;height:44px;justify-content:center;gap:0;border-radius:50%;background:var(--icon-bg);}
   .header-actions .phone span{display:none;}
 }
-@media (max-width:1279px){.pref-pill{display:none;}}
+/* the pill shares the row here, so the logo holds at 36px and the gaps tighten */
+@media (min-width:1280px) and (max-width:1879px){
+  .site-header .header-brand .logo img{height:36px;}
+  .site-header .main-nav{gap:14px;}
+  .site-header .header-actions{gap:12px;}
+}
+@media (min-width:1280px) and (max-width:1359px){
+  .site-header .main-nav{gap:10px;}
+  .site-header .header-actions{gap:8px;}
+}
+/* <1280px: the bar has no room, so a second copy of the pill sits in a slim row under it, on the left; the row folds
+   away once the page scrolls (.is-scrolled) so it never eats phone screen */
+.pref-row{display:none;}
+@media (max-width:1279px){
+  .header-inner .pref-pill{display:none;}
+  .pref-row{display:block;max-width:var(--container);margin:0 auto;padding:0 var(--pad);max-height:44px;overflow:hidden;transition:max-height .25s ease,opacity .2s ease;}
+  .pref-row .pref-pill{display:inline-flex;margin:0 0 8px;height:30px;gap:7px;padding:0 13px 0 10px;font-size:12.5px;}
+  .pref-row .pref-pill-g{width:15px;height:15px;}
+  .site-header.is-scrolled .pref-row{max-height:0;opacity:0;}
+}
 
 
 .g-rating{display:inline-flex;align-items:center;gap:7px;color:var(--navy);white-space:nowrap;flex-shrink:0;}
@@ -69,7 +88,7 @@ html[data-text-scale]{scroll-behavior:auto;}
   .header-actions{gap:12px;}
   .header-captain-avatar{width:36px;height:36px;}
   .header-brand{gap:8px;}
-  .header-brand .logo img{height:30px;}
+  .header-brand .logo img{height:33px;}
   .header-actions .btn-navy{padding:12px 18px;}
 }
 @media (max-width:1100px) and (min-width:1025px){
@@ -79,13 +98,13 @@ html[data-text-scale]{scroll-behavior:auto;}
 }
 @media (max-width:1024px){
   .header-actions{gap:10px;}
-  .header-brand .logo img{height:34px;}
+  .header-brand .logo img{height:37px;}
 }
 @media (max-width:640px){
   .header-actions{gap:4px;}
   .header-brand{gap:6px;}
   .header-captain-avatar{width:32px;height:32px;}
-  .header-brand .logo img{height:28px;}
+  .header-brand .logo img{height:30px;}
   .g-rating{gap:4px;padding:0 4px;}
   .g-rating-logo{width:16px;height:16px;}
   .g-rating-body strong{font-size:.875rem;}
